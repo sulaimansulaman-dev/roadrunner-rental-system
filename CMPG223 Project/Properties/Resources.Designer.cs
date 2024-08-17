@@ -59,5 +59,15 @@ namespace CMPG223_Project.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap e1aab579_d2ed_4896_8ccf_1b708d71abc9 {
+            get {
+                object obj = ResourceManager.GetObject("e1aab579-d2ed-4896-8ccf-1b708d71abc9", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

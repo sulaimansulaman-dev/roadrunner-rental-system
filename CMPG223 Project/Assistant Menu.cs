@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace CMPG223_Project
 {
-    public partial class Form2 : Form
+    public partial class Assistant_Menu : Form
     {
-        public Form2()
+        public Assistant_Menu()
         {
             InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void comboBoxUsers_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

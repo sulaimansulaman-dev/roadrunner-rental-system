@@ -29,36 +29,37 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            button1 = new Button();
-            button2 = new Button();
+            buttonAdmin = new Button();
+            buttonAssistant = new Button();
             label1 = new Label();
             label2 = new Label();
             SuspendLayout();
             // 
-            // button1
+            // buttonAdmin
             // 
-            button1.BackColor = Color.LightSteelBlue;
-            button1.FlatAppearance.BorderColor = Color.Black;
-            button1.FlatStyle = FlatStyle.Popup;
-            button1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.Location = new Point(88, 233);
-            button1.Name = "button1";
-            button1.Size = new Size(258, 83);
-            button1.TabIndex = 0;
-            button1.Text = "Admin";
-            button1.UseVisualStyleBackColor = false;
+            buttonAdmin.BackColor = Color.LightSteelBlue;
+            buttonAdmin.FlatAppearance.BorderColor = Color.Black;
+            buttonAdmin.FlatStyle = FlatStyle.Popup;
+            buttonAdmin.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            buttonAdmin.Location = new Point(88, 233);
+            buttonAdmin.Name = "buttonAdmin";
+            buttonAdmin.Size = new Size(258, 83);
+            buttonAdmin.TabIndex = 0;
+            buttonAdmin.Text = "Admin";
+            buttonAdmin.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // buttonAssistant
             // 
-            button2.BackColor = Color.FromArgb(68, 138, 163);
-            button2.FlatStyle = FlatStyle.Popup;
-            button2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.Location = new Point(612, 233);
-            button2.Name = "button2";
-            button2.Size = new Size(258, 82);
-            button2.TabIndex = 1;
-            button2.Text = "Assistant";
-            button2.UseVisualStyleBackColor = false;
+            buttonAssistant.BackColor = Color.FromArgb(68, 138, 163);
+            buttonAssistant.FlatStyle = FlatStyle.Popup;
+            buttonAssistant.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            buttonAssistant.Location = new Point(612, 233);
+            buttonAssistant.Name = "buttonAssistant";
+            buttonAssistant.Size = new Size(258, 82);
+            buttonAssistant.TabIndex = 1;
+            buttonAssistant.Text = "Assistant";
+            buttonAssistant.UseVisualStyleBackColor = false;
+            buttonAssistant.Click += button2_Click;
             // 
             // label1
             // 
@@ -92,8 +93,8 @@
             ClientSize = new Size(964, 571);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(buttonAssistant);
+            Controls.Add(buttonAdmin);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
@@ -102,8 +103,8 @@
 
         #endregion
 
-        private Button button1;
-        private Button button2;
+        private Button buttonAdmin;
+        private Button buttonAssistant;
         private Label label1;
         private Label label2;
     }
