@@ -77,7 +77,7 @@
             buttonClient.TabIndex = 3;
             buttonClient.Text = "Maintain Clients";
             buttonClient.UseVisualStyleBackColor = true;
-            buttonClient.Visible = false;
+            buttonClient.Click += buttonClient_Click;
             // 
             // buttonPayment
             // 
@@ -88,6 +88,7 @@
             buttonPayment.Text = "Recieve Payment";
             buttonPayment.UseVisualStyleBackColor = true;
             buttonPayment.Visible = false;
+            buttonPayment.Click += buttonPayment_Click;
             // 
             // buttonOrder
             // 
@@ -98,6 +99,7 @@
             buttonOrder.Text = "Make a Rental Order";
             buttonOrder.UseVisualStyleBackColor = true;
             buttonOrder.Visible = false;
+            buttonOrder.Click += buttonOrder_Click;
             // 
             // buttonReturn
             // 
@@ -108,6 +110,7 @@
             buttonReturn.Text = "Return vehicle";
             buttonReturn.UseVisualStyleBackColor = true;
             buttonReturn.Visible = false;
+            buttonReturn.Click += buttonReturn_Click;
             // 
             // Assistant_Menu
             // 

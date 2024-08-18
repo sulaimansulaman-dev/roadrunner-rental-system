@@ -9,16 +9,18 @@ namespace CMPG223_Project
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Assistant_Menu assistant_Menu = new Assistant_Menu();
-            assistant_Menu.ShowDialog();
             this.Hide();
+            Assistant_Menu assistant_Menu = new Assistant_Menu(this);
+            assistant_Menu.Closed += (s, args) => Application.Exit();
+            assistant_Menu.ShowDialog();
         }
 
         private void buttonAdmin_Click(object sender, EventArgs e)
         {
-            Admin_Menu admin_Menu = new Admin_Menu();
-            admin_Menu.Show();
             this.Hide();
+            Admin_Menu admin_Menu = new Admin_Menu();
+            admin_Menu.Closed += (s, args) => Application.Exit();
+            admin_Menu.ShowDialog();   
         }
     }
 }

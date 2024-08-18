@@ -12,9 +12,11 @@ namespace CMPG223_Project
 {
     public partial class Assistant_Menu : Form
     {
-        public Assistant_Menu()
+        private Form form1;
+        public Assistant_Menu(Form previous)
         {
             InitializeComponent();
+            form1 = previous;
         }
 
         private void comboBoxUsers_SelectedIndexChanged(object sender, EventArgs e)
@@ -23,6 +25,26 @@ namespace CMPG223_Project
         }
 
         private void Assistant_Menu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
+
+        private void buttonClient_Click(object sender, EventArgs e)
+        {
+            form1.Show();
+        }
+
+        private void buttonOrder_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonPayment_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonReturn_Click(object sender, EventArgs e)
         {
 
         }
