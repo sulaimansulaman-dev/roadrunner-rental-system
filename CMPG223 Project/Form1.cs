@@ -10,7 +10,7 @@ namespace CMPG223_Project
         private void button2_Click(object sender, EventArgs e)
         {
             Assistant_Menu assistant_Menu = new Assistant_Menu();
-            assistant_Menu.Show();
+            assistant_Menu.ShowDialog();
             this.Hide();
         }
 

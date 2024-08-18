@@ -21,5 +21,10 @@ namespace CMPG223_Project
         {
 
         }
+
+        private void Assistant_Menu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
     }
 }

@@ -126,6 +126,7 @@
             Controls.Add(label1);
             Name = "Assistant_Menu";
             Text = "Assistant_Menu";
+            FormClosing += Assistant_Menu_FormClosing;
             ResumeLayout(false);
             PerformLayout();
         }
