@@ -47,6 +47,7 @@
             buttonAdmin.TabIndex = 0;
             buttonAdmin.Text = "Admin";
             buttonAdmin.UseVisualStyleBackColor = false;
+            buttonAdmin.Click += buttonAdmin_Click;
             // 
             // buttonAssistant
             // 

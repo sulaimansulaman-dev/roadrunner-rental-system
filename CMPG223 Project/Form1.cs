@@ -13,5 +13,12 @@ namespace CMPG223_Project
             assistant_Menu.Show();
             this.Hide();
         }
+
+        private void buttonAdmin_Click(object sender, EventArgs e)
+        {
+            Admin_Menu admin_Menu = new Admin_Menu();
+            admin_Menu.Show();
+            this.Hide();
+        }
     }
 }
