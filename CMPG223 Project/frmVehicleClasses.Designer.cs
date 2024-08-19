@@ -204,6 +204,7 @@
             // 
             // cmbClassID_Update
             // 
+            cmbClassID_Update.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbClassID_Update.FormattingEnabled = true;
             cmbClassID_Update.Location = new Point(179, 42);
             cmbClassID_Update.Margin = new Padding(3, 2, 3, 2);
