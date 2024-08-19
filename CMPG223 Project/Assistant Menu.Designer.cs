@@ -98,7 +98,6 @@
             buttonOrder.TabIndex = 5;
             buttonOrder.Text = "Make a Rental Order";
             buttonOrder.UseVisualStyleBackColor = true;
-            buttonOrder.Visible = false;
             buttonOrder.Click += buttonOrder_Click;
             // 
             // buttonReturn

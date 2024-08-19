@@ -28,12 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "rentalOrder";
+            dateTimePicker1 = new DateTimePicker();
+            SuspendLayout();
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(122, 142);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(152, 23);
+            dateTimePicker1.TabIndex = 0;
+            // 
+            // rentalOrder
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(188, 170, 146);
+            BackgroundImage = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
+            BackgroundImageLayout = ImageLayout.Zoom;
+            ClientSize = new Size(821, 496);
+            Controls.Add(dateTimePicker1);
+            Name = "rentalOrder";
+            Text = "rentalOrder";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private DateTimePicker dateTimePicker1;
     }
 }

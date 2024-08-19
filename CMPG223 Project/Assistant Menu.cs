@@ -36,6 +36,8 @@ namespace CMPG223_Project
 
         private void buttonOrder_Click(object sender, EventArgs e)
         {
+            rentalOrder rentalOrder = new rentalOrder();
+            rentalOrder.Show();
 
         }
 
