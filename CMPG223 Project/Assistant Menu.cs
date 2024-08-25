@@ -13,7 +13,6 @@ namespace CMPG223_Project
     public partial class Assistant_Menu : Form
     {
         private Form form1;
-
         public Assistant_Menu(Form previous)
         {
             InitializeComponent();
@@ -32,13 +31,11 @@ namespace CMPG223_Project
 
         private void buttonClient_Click(object sender, EventArgs e)
         {
-
+            form1.Show();
         }
 
         private void buttonOrder_Click(object sender, EventArgs e)
         {
-            rentalOrder rentalOrder = new rentalOrder(this);
-            rentalOrder.Show();
 
         }
 
@@ -48,11 +45,6 @@ namespace CMPG223_Project
         }
 
         private void buttonReturn_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Assistant_Menu_Load(object sender, EventArgs e)
         {
 
         }

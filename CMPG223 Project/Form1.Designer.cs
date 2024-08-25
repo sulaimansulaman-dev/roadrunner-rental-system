@@ -37,7 +37,6 @@
             // 
             // buttonAdmin
             // 
-            buttonAdmin.Anchor = AnchorStyles.None;
             buttonAdmin.BackColor = Color.LightSteelBlue;
             buttonAdmin.FlatAppearance.BorderColor = Color.Black;
             buttonAdmin.FlatStyle = FlatStyle.Popup;
@@ -52,7 +51,6 @@
             // 
             // buttonAssistant
             // 
-            buttonAssistant.Anchor = AnchorStyles.None;
             buttonAssistant.BackColor = Color.FromArgb(68, 138, 163);
             buttonAssistant.FlatStyle = FlatStyle.Popup;
             buttonAssistant.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -66,7 +64,6 @@
             // 
             // label1
             // 
-            label1.Anchor = AnchorStyles.Top;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Matura MT Script Capitals", 36F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             label1.Location = new Point(232, 11);
@@ -77,7 +74,6 @@
             // 
             // label2
             // 
-            label2.Anchor = AnchorStyles.Bottom;
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
