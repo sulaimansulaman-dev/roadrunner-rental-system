@@ -205,7 +205,6 @@
             // 
             // cmbClassID_Update
             // 
-            cmbClassID_Update.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbClassID_Update.FormattingEnabled = true;
             cmbClassID_Update.Location = new Point(214, 105);
             cmbClassID_Update.Name = "cmbClassID_Update";
@@ -436,7 +435,6 @@
             Controls.Add(tabControlVehicleClasses);
             Name = "frmVehicleClasses";
             Text = "frmVehicleClasses";
-            FormClosed += frmVehicleClasses_FormClosed;
             tabControlVehicleClasses.ResumeLayout(false);
             tabAdd.ResumeLayout(false);
             tabAdd.PerformLayout();
