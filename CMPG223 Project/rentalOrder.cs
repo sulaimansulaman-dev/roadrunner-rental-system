@@ -10,18 +10,15 @@ using System.Windows.Forms;
 
 namespace CMPG223_Project
 {
-    public partial class frmVehicleClasses : Form
+    public partial class rentalOrder : Form
     {
-        Form form;
-        public frmVehicleClasses(Form form)
+        Form form1;
+        public rentalOrder(Form form1)
         {
             InitializeComponent();
-            this.form = form;
+            this.form1 = form1;
         }
 
-        private void frmVehicleClasses_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            form.Show();
-        }
+    
     }
 }

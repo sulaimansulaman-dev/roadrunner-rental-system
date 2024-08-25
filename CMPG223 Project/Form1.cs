@@ -20,7 +20,8 @@ namespace CMPG223_Project
             this.Hide();
             Admin_Menu admin_Menu = new Admin_Menu();
             admin_Menu.Closed += (s, args) => Application.Exit();
-            admin_Menu.ShowDialog();   
+            admin_Menu.ShowDialog();
         }
+
     }
 }

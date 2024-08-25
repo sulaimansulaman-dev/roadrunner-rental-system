@@ -39,6 +39,7 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -51,6 +52,7 @@
             // 
             // comboBoxUsers
             // 
+            comboBoxUsers.Anchor = AnchorStyles.Top;
             comboBoxUsers.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxUsers.FormattingEnabled = true;
             comboBoxUsers.Location = new Point(409, 62);
@@ -61,6 +63,7 @@
             // 
             // labelWelcome
             // 
+            labelWelcome.Anchor = AnchorStyles.Bottom;
             labelWelcome.AutoSize = true;
             labelWelcome.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelWelcome.Location = new Point(400, 508);
@@ -68,19 +71,23 @@
             labelWelcome.Size = new Size(169, 32);
             labelWelcome.TabIndex = 2;
             labelWelcome.Text = "LabelWelcome";
+            labelWelcome.Visible = false;
             // 
             // buttonClient
             // 
+            buttonClient.Anchor = AnchorStyles.None;
             buttonClient.Location = new Point(134, 170);
             buttonClient.Name = "buttonClient";
             buttonClient.Size = new Size(214, 66);
             buttonClient.TabIndex = 3;
             buttonClient.Text = "Maintain Clients";
             buttonClient.UseVisualStyleBackColor = true;
+            buttonClient.Visible = false;
             buttonClient.Click += buttonClient_Click;
             // 
             // buttonPayment
             // 
+            buttonPayment.Anchor = AnchorStyles.None;
             buttonPayment.Location = new Point(134, 325);
             buttonPayment.Name = "buttonPayment";
             buttonPayment.Size = new Size(214, 66);
@@ -92,17 +99,19 @@
             // 
             // buttonOrder
             // 
+            buttonOrder.Anchor = AnchorStyles.None;
             buttonOrder.Location = new Point(617, 170);
             buttonOrder.Name = "buttonOrder";
             buttonOrder.Size = new Size(214, 66);
             buttonOrder.TabIndex = 5;
-            buttonOrder.Text = "Make a Rental Order";
+            buttonOrder.Text = "Rental Orders";
             buttonOrder.UseVisualStyleBackColor = true;
             buttonOrder.Visible = false;
             buttonOrder.Click += buttonOrder_Click;
             // 
             // buttonReturn
             // 
+            buttonReturn.Anchor = AnchorStyles.None;
             buttonReturn.Location = new Point(617, 325);
             buttonReturn.Name = "buttonReturn";
             buttonReturn.Size = new Size(214, 66);
@@ -130,6 +139,7 @@
             Name = "Assistant_Menu";
             Text = "Assistant_Menu";
             FormClosing += Assistant_Menu_FormClosing;
+            Load += Assistant_Menu_Load;
             ResumeLayout(false);
             PerformLayout();
         }
