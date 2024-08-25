@@ -388,6 +388,7 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "frmVehicleClasses";
             Text = "frmVehicleClasses";
+            FormClosed += frmVehicleClasses_FormClosed;
             tabControlVehicleClasses.ResumeLayout(false);
             tabAdd.ResumeLayout(false);
             tabAdd.PerformLayout();

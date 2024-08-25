@@ -12,9 +12,13 @@ namespace CMPG223_Project
 {
     public partial class rentalOrder : Form
     {
-        public rentalOrder()
+        Form form1;
+        public rentalOrder(Form form1)
         {
             InitializeComponent();
+            this.form1 = form1;
         }
+
+    
     }
 }
