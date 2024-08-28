@@ -16,5 +16,11 @@ namespace CMPG223_Project
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frmVehicleClasses vehicleClassesForm = new frmVehicleClasses();
+            vehicleClassesForm.Show(); 
+        }
     }
 }

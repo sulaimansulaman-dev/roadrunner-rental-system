@@ -28,8 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             tabControlVehicleClasses = new TabControl();
             tabAdd = new TabPage();
+            txtSearch_Add = new TextBox();
+            label8 = new Label();
+            label3 = new Label();
+            pictureBox1 = new PictureBox();
             dgvVehicleClasses_Add = new DataGridView();
             btnClear_Add = new Button();
             btnAdd_Add = new Button();
@@ -39,7 +44,11 @@
             txtClassName_Add = new TextBox();
             lblClassName_Add = new Label();
             tabUpdate = new TabPage();
-            cmbClassID_Update = new ComboBox();
+            txtSearch_Update = new TextBox();
+            label6 = new Label();
+            txtClassID_Update = new TextBox();
+            label4 = new Label();
+            pictureBox2 = new PictureBox();
             lblClassID_Update = new Label();
             dgvVehicleClasses_Update = new DataGridView();
             btnClear_Update = new Button();
@@ -50,28 +59,28 @@
             txtClassName_Update = new TextBox();
             label2 = new Label();
             tabDelete = new TabPage();
+            txtSearch_Delete = new TextBox();
+            label7 = new Label();
+            txtClassName_Delete = new TextBox();
+            label5 = new Label();
+            pictureBox3 = new PictureBox();
             btnClear_Delete = new Button();
             btnDelete_Delete = new Button();
             btnBack_Delete = new Button();
             dgvVehicleClasses_Delete = new DataGridView();
-            cmbClassID_Delete = new ComboBox();
             lblClassID_Delete = new Label();
-            pictureBox1 = new PictureBox();
-            label3 = new Label();
-            pictureBox2 = new PictureBox();
-            pictureBox3 = new PictureBox();
-            label4 = new Label();
-            label5 = new Label();
+            errorProvider1 = new ErrorProvider(components);
             tabControlVehicleClasses.SuspendLayout();
             tabAdd.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvVehicleClasses_Add).BeginInit();
             tabUpdate.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvVehicleClasses_Update).BeginInit();
             tabDelete.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvVehicleClasses_Delete).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvVehicleClasses_Delete).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // tabControlVehicleClasses
@@ -90,6 +99,8 @@
             // 
             tabAdd.BackColor = Color.FromArgb(188, 170, 146);
             tabAdd.BackgroundImageLayout = ImageLayout.Zoom;
+            tabAdd.Controls.Add(txtSearch_Add);
+            tabAdd.Controls.Add(label8);
             tabAdd.Controls.Add(label3);
             tabAdd.Controls.Add(pictureBox1);
             tabAdd.Controls.Add(dgvVehicleClasses_Add);
@@ -102,19 +113,59 @@
             tabAdd.Controls.Add(lblClassName_Add);
             tabAdd.Location = new Point(4, 29);
             tabAdd.Name = "tabAdd";
-            tabAdd.Padding = new Padding(3, 3, 3, 3);
+            tabAdd.Padding = new Padding(3);
             tabAdd.Size = new Size(1019, 551);
             tabAdd.TabIndex = 0;
             tabAdd.Text = "Add";
             // 
+            // txtSearch_Add
+            // 
+            txtSearch_Add.Location = new Point(743, 82);
+            txtSearch_Add.MaxLength = 15;
+            txtSearch_Add.Name = "txtSearch_Add";
+            txtSearch_Add.Size = new Size(206, 27);
+            txtSearch_Add.TabIndex = 28;
+            txtSearch_Add.TextChanged += txtSearch_Add_TextChanged;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            label8.Location = new Point(626, 68);
+            label8.Name = "label8";
+            label8.Size = new Size(127, 41);
+            label8.TabIndex = 22;
+            label8.Text = "Search: ";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(327, 22);
+            label3.Name = "label3";
+            label3.Size = new Size(338, 46);
+            label3.TabIndex = 9;
+            label3.Text = "Add Vehicle Classes ";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
+            pictureBox1.Location = new Point(19, 431);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(125, 103);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 8;
+            pictureBox1.TabStop = false;
+            // 
             // dgvVehicleClasses_Add
             // 
             dgvVehicleClasses_Add.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvVehicleClasses_Add.Location = new Point(488, 96);
+            dgvVehicleClasses_Add.Location = new Point(538, 119);
             dgvVehicleClasses_Add.Name = "dgvVehicleClasses_Add";
             dgvVehicleClasses_Add.RowHeadersWidth = 51;
             dgvVehicleClasses_Add.Size = new Size(473, 293);
             dgvVehicleClasses_Add.TabIndex = 7;
+            dgvVehicleClasses_Add.CellClick += dgvVehicleClasses_Add_CellClick;
             // 
             // btnClear_Add
             // 
@@ -124,6 +175,7 @@
             btnClear_Add.TabIndex = 6;
             btnClear_Add.Text = "Clear";
             btnClear_Add.UseVisualStyleBackColor = true;
+            btnClear_Add.Click += btnClear_Add_Click;
             // 
             // btnAdd_Add
             // 
@@ -133,6 +185,7 @@
             btnAdd_Add.TabIndex = 5;
             btnAdd_Add.Text = "Add";
             btnAdd_Add.UseVisualStyleBackColor = true;
+            btnAdd_Add.Click += btnAdd_Add_Click;
             // 
             // btnBack_Add
             // 
@@ -142,6 +195,7 @@
             btnBack_Add.TabIndex = 4;
             btnBack_Add.Text = "Back";
             btnBack_Add.UseVisualStyleBackColor = true;
+            btnBack_Add.Click += btnBack_Add_Click;
             // 
             // txtDescription_Add
             // 
@@ -179,14 +233,17 @@
             lblClassName_Add.Size = new Size(195, 41);
             lblClassName_Add.TabIndex = 0;
             lblClassName_Add.Text = "Class Name: ";
+            lblClassName_Add.Click += lblClassName_Add_Click;
             // 
             // tabUpdate
             // 
             tabUpdate.BackColor = Color.FromArgb(188, 170, 146);
             tabUpdate.BackgroundImageLayout = ImageLayout.Zoom;
+            tabUpdate.Controls.Add(txtSearch_Update);
+            tabUpdate.Controls.Add(label6);
+            tabUpdate.Controls.Add(txtClassID_Update);
             tabUpdate.Controls.Add(label4);
             tabUpdate.Controls.Add(pictureBox2);
-            tabUpdate.Controls.Add(cmbClassID_Update);
             tabUpdate.Controls.Add(lblClassID_Update);
             tabUpdate.Controls.Add(dgvVehicleClasses_Update);
             tabUpdate.Controls.Add(btnClear_Update);
@@ -198,18 +255,58 @@
             tabUpdate.Controls.Add(label2);
             tabUpdate.Location = new Point(4, 29);
             tabUpdate.Name = "tabUpdate";
-            tabUpdate.Padding = new Padding(3, 3, 3, 3);
+            tabUpdate.Padding = new Padding(3);
             tabUpdate.Size = new Size(1019, 551);
             tabUpdate.TabIndex = 1;
             tabUpdate.Text = "Update";
             // 
-            // cmbClassID_Update
+            // txtSearch_Update
             // 
-            cmbClassID_Update.FormattingEnabled = true;
-            cmbClassID_Update.Location = new Point(214, 105);
-            cmbClassID_Update.Name = "cmbClassID_Update";
-            cmbClassID_Update.Size = new Size(209, 28);
-            cmbClassID_Update.TabIndex = 17;
+            txtSearch_Update.Location = new Point(651, 82);
+            txtSearch_Update.MaxLength = 15;
+            txtSearch_Update.Name = "txtSearch_Update";
+            txtSearch_Update.Size = new Size(206, 27);
+            txtSearch_Update.TabIndex = 22;
+            txtSearch_Update.TextChanged += txtSearch_Update_TextChanged;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            label6.Location = new Point(518, 66);
+            label6.Name = "label6";
+            label6.Size = new Size(127, 41);
+            label6.TabIndex = 21;
+            label6.Text = "Search: ";
+            // 
+            // txtClassID_Update
+            // 
+            txtClassID_Update.Enabled = false;
+            txtClassID_Update.Location = new Point(217, 104);
+            txtClassID_Update.MaxLength = 15;
+            txtClassID_Update.Name = "txtClassID_Update";
+            txtClassID_Update.Size = new Size(206, 27);
+            txtClassID_Update.TabIndex = 20;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(272, 20);
+            label4.Name = "label4";
+            label4.Size = new Size(388, 46);
+            label4.TabIndex = 19;
+            label4.Text = "Update Vehicle Classes ";
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
+            pictureBox2.Location = new Point(17, 436);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(125, 103);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 18;
+            pictureBox2.TabStop = false;
             // 
             // lblClassID_Update
             // 
@@ -224,11 +321,13 @@
             // dgvVehicleClasses_Update
             // 
             dgvVehicleClasses_Update.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvVehicleClasses_Update.Location = new Point(471, 90);
+            dgvVehicleClasses_Update.Location = new Point(495, 118);
             dgvVehicleClasses_Update.Name = "dgvVehicleClasses_Update";
             dgvVehicleClasses_Update.RowHeadersWidth = 51;
             dgvVehicleClasses_Update.Size = new Size(473, 293);
             dgvVehicleClasses_Update.TabIndex = 15;
+            dgvVehicleClasses_Update.CellClick += dgvVehicleClasses_Update_CellClick;
+            dgvVehicleClasses_Update.CellContentClick += dgvVehicleClasses_Update_CellContentClick;
             // 
             // btnClear_Update
             // 
@@ -238,6 +337,7 @@
             btnClear_Update.TabIndex = 14;
             btnClear_Update.Text = "Clear";
             btnClear_Update.UseVisualStyleBackColor = true;
+            btnClear_Update.Click += btnClear_Update_Click;
             // 
             // btnUpdate_Update
             // 
@@ -247,6 +347,7 @@
             btnUpdate_Update.TabIndex = 13;
             btnUpdate_Update.Text = "Update";
             btnUpdate_Update.UseVisualStyleBackColor = true;
+            btnUpdate_Update.Click += btnUpdate_Update_Click;
             // 
             // btnBack_Update
             // 
@@ -256,6 +357,7 @@
             btnBack_Update.TabIndex = 12;
             btnBack_Update.Text = "Back";
             btnBack_Update.UseVisualStyleBackColor = true;
+            btnBack_Update.Click += btnBack_Update_Click;
             // 
             // txtDescription_Update
             // 
@@ -298,13 +400,15 @@
             // 
             tabDelete.BackColor = Color.FromArgb(188, 170, 146);
             tabDelete.BackgroundImageLayout = ImageLayout.Zoom;
+            tabDelete.Controls.Add(txtSearch_Delete);
+            tabDelete.Controls.Add(label7);
+            tabDelete.Controls.Add(txtClassName_Delete);
             tabDelete.Controls.Add(label5);
             tabDelete.Controls.Add(pictureBox3);
             tabDelete.Controls.Add(btnClear_Delete);
             tabDelete.Controls.Add(btnDelete_Delete);
             tabDelete.Controls.Add(btnBack_Delete);
             tabDelete.Controls.Add(dgvVehicleClasses_Delete);
-            tabDelete.Controls.Add(cmbClassID_Delete);
             tabDelete.Controls.Add(lblClassID_Delete);
             tabDelete.Location = new Point(4, 29);
             tabDelete.Name = "tabDelete";
@@ -312,110 +416,33 @@
             tabDelete.TabIndex = 2;
             tabDelete.Text = "Delete";
             // 
-            // btnClear_Delete
+            // txtSearch_Delete
             // 
-            btnClear_Delete.Location = new Point(475, 444);
-            btnClear_Delete.Name = "btnClear_Delete";
-            btnClear_Delete.Size = new Size(94, 29);
-            btnClear_Delete.TabIndex = 22;
-            btnClear_Delete.Text = "Clear";
-            btnClear_Delete.UseVisualStyleBackColor = true;
+            txtSearch_Delete.Location = new Point(440, 86);
+            txtSearch_Delete.MaxLength = 15;
+            txtSearch_Delete.Name = "txtSearch_Delete";
+            txtSearch_Delete.Size = new Size(206, 27);
+            txtSearch_Delete.TabIndex = 27;
+            txtSearch_Delete.TextChanged += txtSearch_Delete_TextChanged;
             // 
-            // btnDelete_Delete
+            // label7
             // 
-            btnDelete_Delete.Location = new Point(363, 444);
-            btnDelete_Delete.Name = "btnDelete_Delete";
-            btnDelete_Delete.Size = new Size(94, 29);
-            btnDelete_Delete.TabIndex = 21;
-            btnDelete_Delete.Text = "Delete";
-            btnDelete_Delete.UseVisualStyleBackColor = true;
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            label7.Location = new Point(316, 72);
+            label7.Name = "label7";
+            label7.Size = new Size(127, 41);
+            label7.TabIndex = 26;
+            label7.Text = "Search: ";
             // 
-            // btnBack_Delete
+            // txtClassName_Delete
             // 
-            btnBack_Delete.Location = new Point(419, 500);
-            btnBack_Delete.Name = "btnBack_Delete";
-            btnBack_Delete.Size = new Size(94, 29);
-            btnBack_Delete.TabIndex = 20;
-            btnBack_Delete.Text = "Back";
-            btnBack_Delete.UseVisualStyleBackColor = true;
-            // 
-            // dgvVehicleClasses_Delete
-            // 
-            dgvVehicleClasses_Delete.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvVehicleClasses_Delete.Location = new Point(238, 78);
-            dgvVehicleClasses_Delete.Name = "dgvVehicleClasses_Delete";
-            dgvVehicleClasses_Delete.RowHeadersWidth = 51;
-            dgvVehicleClasses_Delete.Size = new Size(473, 293);
-            dgvVehicleClasses_Delete.TabIndex = 19;
-            // 
-            // cmbClassID_Delete
-            // 
-            cmbClassID_Delete.FormattingEnabled = true;
-            cmbClassID_Delete.Location = new Point(451, 398);
-            cmbClassID_Delete.Name = "cmbClassID_Delete";
-            cmbClassID_Delete.Size = new Size(209, 28);
-            cmbClassID_Delete.TabIndex = 18;
-            // 
-            // lblClassID_Delete
-            // 
-            lblClassID_Delete.AutoSize = true;
-            lblClassID_Delete.BackColor = Color.Transparent;
-            lblClassID_Delete.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblClassID_Delete.Location = new Point(311, 387);
-            lblClassID_Delete.Name = "lblClassID_Delete";
-            lblClassID_Delete.Size = new Size(135, 38);
-            lblClassID_Delete.TabIndex = 17;
-            lblClassID_Delete.Text = "Class ID: ";
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
-            pictureBox1.Location = new Point(19, 431);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(125, 103);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 8;
-            pictureBox1.TabStop = false;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(327, 22);
-            label3.Name = "label3";
-            label3.Size = new Size(338, 46);
-            label3.TabIndex = 9;
-            label3.Text = "Add Vehicle Classes ";
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
-            pictureBox2.Location = new Point(17, 436);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(125, 103);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 18;
-            pictureBox2.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Image = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
-            pictureBox3.Location = new Point(19, 429);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(125, 103);
-            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox3.TabIndex = 23;
-            pictureBox3.TabStop = false;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(272, 20);
-            label4.Name = "label4";
-            label4.Size = new Size(388, 46);
-            label4.TabIndex = 19;
-            label4.Text = "Update Vehicle Classes ";
+            txtClassName_Delete.Enabled = false;
+            txtClassName_Delete.Location = new Point(440, 429);
+            txtClassName_Delete.MaxLength = 15;
+            txtClassName_Delete.Name = "txtClassName_Delete";
+            txtClassName_Delete.Size = new Size(206, 27);
+            txtClassName_Delete.TabIndex = 25;
             // 
             // label5
             // 
@@ -427,6 +454,72 @@
             label5.TabIndex = 24;
             label5.Text = "Delete Vehicle Classes ";
             // 
+            // pictureBox3
+            // 
+            pictureBox3.Image = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
+            pictureBox3.Location = new Point(19, 429);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(125, 103);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 23;
+            pictureBox3.TabStop = false;
+            // 
+            // btnClear_Delete
+            // 
+            btnClear_Delete.Location = new Point(473, 465);
+            btnClear_Delete.Name = "btnClear_Delete";
+            btnClear_Delete.Size = new Size(94, 29);
+            btnClear_Delete.TabIndex = 22;
+            btnClear_Delete.Text = "Clear";
+            btnClear_Delete.UseVisualStyleBackColor = true;
+            btnClear_Delete.Click += btnClear_Delete_Click;
+            // 
+            // btnDelete_Delete
+            // 
+            btnDelete_Delete.Location = new Point(363, 465);
+            btnDelete_Delete.Name = "btnDelete_Delete";
+            btnDelete_Delete.Size = new Size(94, 29);
+            btnDelete_Delete.TabIndex = 21;
+            btnDelete_Delete.Text = "Delete";
+            btnDelete_Delete.UseVisualStyleBackColor = true;
+            btnDelete_Delete.Click += btnDelete_Delete_Click;
+            // 
+            // btnBack_Delete
+            // 
+            btnBack_Delete.Location = new Point(419, 500);
+            btnBack_Delete.Name = "btnBack_Delete";
+            btnBack_Delete.Size = new Size(94, 29);
+            btnBack_Delete.TabIndex = 20;
+            btnBack_Delete.Text = "Back";
+            btnBack_Delete.UseVisualStyleBackColor = true;
+            btnBack_Delete.Click += btnBack_Delete_Click;
+            // 
+            // dgvVehicleClasses_Delete
+            // 
+            dgvVehicleClasses_Delete.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvVehicleClasses_Delete.Location = new Point(239, 128);
+            dgvVehicleClasses_Delete.Name = "dgvVehicleClasses_Delete";
+            dgvVehicleClasses_Delete.RowHeadersWidth = 51;
+            dgvVehicleClasses_Delete.Size = new Size(473, 293);
+            dgvVehicleClasses_Delete.TabIndex = 19;
+            dgvVehicleClasses_Delete.CellClick += dgvVehicleClasses_Delete_CellClick;
+            dgvVehicleClasses_Delete.CellContentClick += dgvVehicleClasses_Delete_CellContentClick;
+            // 
+            // lblClassID_Delete
+            // 
+            lblClassID_Delete.AutoSize = true;
+            lblClassID_Delete.BackColor = Color.Transparent;
+            lblClassID_Delete.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblClassID_Delete.Location = new Point(308, 424);
+            lblClassID_Delete.Name = "lblClassID_Delete";
+            lblClassID_Delete.Size = new Size(135, 38);
+            lblClassID_Delete.TabIndex = 17;
+            lblClassID_Delete.Text = "Class ID: ";
+            // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
             // frmVehicleClasses
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -435,19 +528,21 @@
             Controls.Add(tabControlVehicleClasses);
             Name = "frmVehicleClasses";
             Text = "frmVehicleClasses";
+            Load += frmVehicleClasses_Load;
             tabControlVehicleClasses.ResumeLayout(false);
             tabAdd.ResumeLayout(false);
             tabAdd.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvVehicleClasses_Add).EndInit();
             tabUpdate.ResumeLayout(false);
             tabUpdate.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvVehicleClasses_Update).EndInit();
             tabDelete.ResumeLayout(false);
             tabDelete.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvVehicleClasses_Delete).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvVehicleClasses_Delete).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
         }
 
@@ -465,7 +560,6 @@
         private TextBox txtClassName_Add;
         private Label lblClassName_Add;
         private DataGridView dgvVehicleClasses_Add;
-        private ComboBox cmbClassID_Update;
         private Label lblClassID_Update;
         private DataGridView dgvVehicleClasses_Update;
         private Button btnClear_Update;
@@ -479,7 +573,6 @@
         private Button btnDelete_Delete;
         private Button btnBack_Delete;
         private DataGridView dgvVehicleClasses_Delete;
-        private ComboBox cmbClassID_Delete;
         private Label lblClassID_Delete;
         private Label label3;
         private PictureBox pictureBox1;
@@ -487,5 +580,14 @@
         private PictureBox pictureBox2;
         private Label label5;
         private PictureBox pictureBox3;
+        private ErrorProvider errorProvider1;
+        private TextBox txtClassID_Update;
+        private TextBox txtClassName_Delete;
+        private Label label6;
+        private TextBox txtSearch_Update;
+        private Label label7;
+        private TextBox txtSearch_Delete;
+        private TextBox txtSearch_Add;
+        private Label label8;
     }
 }
