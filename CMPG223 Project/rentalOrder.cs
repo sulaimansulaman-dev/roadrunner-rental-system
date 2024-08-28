@@ -8,6 +8,7 @@ namespace CMPG223_Project
         Form form1;
         SqlConnection con = new SqlConnection("Data Source=MOMO;Initial Catalog=\"Roadrunner Rentals\";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
         decimal cost;
+        int days;
         public rentalOrder(Form form1)
         {
             InitializeComponent();
@@ -16,6 +17,24 @@ namespace CMPG223_Project
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
+            if (comboBox1.SelectedValue != null)
+            {
+                int Client_ID = (int)comboBox1.SelectedValue;
+            }
+            if (textBox2.Text != null)
+            {
+                int Vehicle_Id = int.Parse(textBox2.Text);
+            }
+            if (checkBox1.Checked)
+            {
+                bool paid = true;
+            }
+
+
+
+
+
+            string insert = "INSERT INTO RentalOrder (Client_ID, User_ID, Vehicle_ID, Time, OrderCost, TimeRented, Paid, VehicleReturned, Date)";
 
         }
 
@@ -23,7 +42,9 @@ namespace CMPG223_Project
         {
             populateClients();
             populateDataGridView();
-
+            dateTimePicker1.MinDate = DateTime.Today;
+            dateTimePicker2.MinDate = DateTime.Today;
+           
         }
         private void populateDataGridView()
         {
@@ -94,6 +115,7 @@ namespace CMPG223_Project
             if ((date2.DayOfYear - date1.DayOfYear) >= 0 && cost != 0)
             {
                 result = (date2.DayOfYear - date1.DayOfYear) * cost;
+                days = (date2.DayOfYear - date1.DayOfYear);
                 label7.Visible = false;
                 textBox1.Text = result.ToString();
                 return result;
@@ -104,6 +126,18 @@ namespace CMPG223_Project
                 return result;
             }
 
+        }
+
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            textBox1.Clear();
+            textBox2.Clear();
+            comboBox1.SelectedIndex = -1;
+            dateTimePicker1.Value = dateTimePicker1.MinDate;
+            dateTimePicker2.Value = dateTimePicker2.MinDate;
+            checkBox1.Checked = false;
+            textBox1.Clear();
+            label7.Visible = false;
         }
     }
 }

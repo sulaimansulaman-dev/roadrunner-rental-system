@@ -30,6 +30,8 @@
         {
             tabPage2 = new TabPage();
             tabPage1 = new TabPage();
+            label8 = new Label();
+            checkBox1 = new CheckBox();
             label7 = new Label();
             textBox2 = new TextBox();
             dataGridView1 = new DataGridView();
@@ -65,6 +67,8 @@
             // tabPage1
             // 
             tabPage1.BackColor = Color.FromArgb(188, 170, 146);
+            tabPage1.Controls.Add(label8);
+            tabPage1.Controls.Add(checkBox1);
             tabPage1.Controls.Add(label7);
             tabPage1.Controls.Add(textBox2);
             tabPage1.Controls.Add(dataGridView1);
@@ -87,6 +91,27 @@
             tabPage1.Size = new Size(1001, 464);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Create Order";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label8.Location = new Point(0, 215);
+            label8.Name = "label8";
+            label8.Size = new Size(143, 32);
+            label8.TabIndex = 19;
+            label8.Text = "Order Paid:";
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            checkBox1.Location = new Point(156, 214);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(77, 36);
+            checkBox1.TabIndex = 5;
+            checkBox1.Text = "Paid";
+            checkBox1.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
@@ -115,7 +140,7 @@
             dataGridView1.Location = new Point(525, 3);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(463, 319);
-            dataGridView1.TabIndex = 16;
+            dataGridView1.TabIndex = 2;
             dataGridView1.CellClick += dataGridView1_CellClick;
             // 
             // buttonBack
@@ -123,7 +148,7 @@
             buttonBack.Location = new Point(415, 399);
             buttonBack.Name = "buttonBack";
             buttonBack.Size = new Size(104, 43);
-            buttonBack.TabIndex = 15;
+            buttonBack.TabIndex = 8;
             buttonBack.Text = "Back";
             buttonBack.UseVisualStyleBackColor = true;
             // 
@@ -132,16 +157,17 @@
             buttonClear.Location = new Point(512, 332);
             buttonClear.Name = "buttonClear";
             buttonClear.Size = new Size(104, 43);
-            buttonClear.TabIndex = 14;
+            buttonClear.TabIndex = 7;
             buttonClear.Text = "Clear";
             buttonClear.UseVisualStyleBackColor = true;
+            buttonClear.Click += buttonClear_Click;
             // 
             // buttonCreate
             // 
             buttonCreate.Location = new Point(323, 332);
             buttonCreate.Name = "buttonCreate";
             buttonCreate.Size = new Size(104, 43);
-            buttonCreate.TabIndex = 13;
+            buttonCreate.TabIndex = 6;
             buttonCreate.Text = "Create";
             buttonCreate.UseVisualStyleBackColor = true;
             buttonCreate.Click += buttonCreate_Click;
@@ -218,17 +244,17 @@
             // dateTimePicker2
             // 
             dateTimePicker2.Location = new Point(370, 143);
-            dateTimePicker2.MinDate = new DateTime(2024, 8, 26, 4, 36, 40, 0);
+            dateTimePicker2.MinDate = new DateTime(2024, 8, 28, 16, 38, 32, 0);
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(149, 23);
             dateTimePicker2.TabIndex = 4;
-            dateTimePicker2.Value = new DateTime(2024, 8, 26, 4, 36, 40, 0);
+            dateTimePicker2.Value = new DateTime(2024, 8, 28, 16, 38, 32, 0);
             dateTimePicker2.ValueChanged += dateTimePicker2_ValueChanged;
             // 
             // dateTimePicker1
             // 
             dateTimePicker1.Location = new Point(142, 143);
-            dateTimePicker1.MinDate = new DateTime(2024, 8, 26, 0, 0, 0, 0);
+            dateTimePicker1.MinDate = new DateTime(2024, 8, 27, 0, 0, 0, 0);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(149, 23);
             dateTimePicker1.TabIndex = 3;
@@ -293,5 +319,7 @@
         private DataGridView dataGridView1;
         private TextBox textBox2;
         private Label label7;
+        private Label label8;
+        private CheckBox checkBox1;
     }
 }
