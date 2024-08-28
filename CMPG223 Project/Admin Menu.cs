@@ -16,5 +16,14 @@ namespace CMPG223_Project
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Delete When Done Testing
+            frmVehicles frmVehicles = new frmVehicles();
+            this.Hide();
+            
+            frmVehicles.ShowDialog();
+        }
     }
 }

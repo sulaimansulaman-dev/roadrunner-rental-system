@@ -28,10 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "frmRequestReports";
+            SuspendLayout();
+            // 
+            // frmRequestReports
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
+            BackgroundImageLayout = ImageLayout.Zoom;
+            ClientSize = new Size(1102, 761);
+            Name = "frmRequestReports";
+            Text = "frmRequestReports";
+            ResumeLayout(false);
         }
 
         #endregion
