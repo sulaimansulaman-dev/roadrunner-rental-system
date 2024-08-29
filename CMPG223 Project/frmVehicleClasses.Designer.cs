@@ -141,7 +141,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(327, 22);
+            label3.Location = new Point(0, 3);
             label3.Name = "label3";
             label3.Size = new Size(338, 46);
             label3.TabIndex = 9;
@@ -160,7 +160,7 @@
             // dgvVehicleClasses_Add
             // 
             dgvVehicleClasses_Add.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvVehicleClasses_Add.Location = new Point(538, 119);
+            dgvVehicleClasses_Add.Location = new Point(526, 115);
             dgvVehicleClasses_Add.Name = "dgvVehicleClasses_Add";
             dgvVehicleClasses_Add.RowHeadersWidth = 51;
             dgvVehicleClasses_Add.Size = new Size(473, 293);
@@ -169,9 +169,9 @@
             // 
             // btnClear_Add
             // 
-            btnClear_Add.Location = new Point(483, 418);
+            btnClear_Add.Location = new Point(708, 440);
             btnClear_Add.Name = "btnClear_Add";
-            btnClear_Add.Size = new Size(94, 29);
+            btnClear_Add.Size = new Size(104, 52);
             btnClear_Add.TabIndex = 6;
             btnClear_Add.Text = "Clear";
             btnClear_Add.UseVisualStyleBackColor = true;
@@ -179,9 +179,9 @@
             // 
             // btnAdd_Add
             // 
-            btnAdd_Add.Location = new Point(371, 418);
+            btnAdd_Add.Location = new Point(526, 440);
             btnAdd_Add.Name = "btnAdd_Add";
-            btnAdd_Add.Size = new Size(94, 29);
+            btnAdd_Add.Size = new Size(104, 52);
             btnAdd_Add.TabIndex = 5;
             btnAdd_Add.Text = "Add";
             btnAdd_Add.UseVisualStyleBackColor = true;
@@ -189,9 +189,9 @@
             // 
             // btnBack_Add
             // 
-            btnBack_Add.Location = new Point(427, 474);
+            btnBack_Add.Location = new Point(895, 440);
             btnBack_Add.Name = "btnBack_Add";
-            btnBack_Add.Size = new Size(94, 29);
+            btnBack_Add.Size = new Size(104, 52);
             btnBack_Add.TabIndex = 4;
             btnBack_Add.Text = "Back";
             btnBack_Add.UseVisualStyleBackColor = true;
@@ -292,7 +292,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(272, 20);
+            label4.Location = new Point(0, 0);
             label4.Name = "label4";
             label4.Size = new Size(388, 46);
             label4.TabIndex = 19;
@@ -331,9 +331,9 @@
             // 
             // btnClear_Update
             // 
-            btnClear_Update.Location = new Point(471, 429);
+            btnClear_Update.Location = new Point(864, 458);
             btnClear_Update.Name = "btnClear_Update";
-            btnClear_Update.Size = new Size(94, 29);
+            btnClear_Update.Size = new Size(104, 52);
             btnClear_Update.TabIndex = 14;
             btnClear_Update.Text = "Clear";
             btnClear_Update.UseVisualStyleBackColor = true;
@@ -341,9 +341,9 @@
             // 
             // btnUpdate_Update
             // 
-            btnUpdate_Update.Location = new Point(359, 429);
+            btnUpdate_Update.Location = new Point(679, 458);
             btnUpdate_Update.Name = "btnUpdate_Update";
-            btnUpdate_Update.Size = new Size(94, 29);
+            btnUpdate_Update.Size = new Size(104, 52);
             btnUpdate_Update.TabIndex = 13;
             btnUpdate_Update.Text = "Update";
             btnUpdate_Update.UseVisualStyleBackColor = true;
@@ -351,9 +351,9 @@
             // 
             // btnBack_Update
             // 
-            btnBack_Update.Location = new Point(411, 470);
+            btnBack_Update.Location = new Point(495, 458);
             btnBack_Update.Name = "btnBack_Update";
-            btnBack_Update.Size = new Size(94, 29);
+            btnBack_Update.Size = new Size(104, 52);
             btnBack_Update.TabIndex = 12;
             btnBack_Update.Text = "Back";
             btnBack_Update.UseVisualStyleBackColor = true;
@@ -448,7 +448,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(272, 12);
+            label5.Location = new Point(0, 0);
             label5.Name = "label5";
             label5.Size = new Size(374, 46);
             label5.TabIndex = 24;
@@ -466,9 +466,9 @@
             // 
             // btnClear_Delete
             // 
-            btnClear_Delete.Location = new Point(473, 465);
+            btnClear_Delete.Location = new Point(440, 480);
             btnClear_Delete.Name = "btnClear_Delete";
-            btnClear_Delete.Size = new Size(94, 29);
+            btnClear_Delete.Size = new Size(104, 52);
             btnClear_Delete.TabIndex = 22;
             btnClear_Delete.Text = "Clear";
             btnClear_Delete.UseVisualStyleBackColor = true;
@@ -476,9 +476,9 @@
             // 
             // btnDelete_Delete
             // 
-            btnDelete_Delete.Location = new Point(363, 465);
+            btnDelete_Delete.Location = new Point(239, 480);
             btnDelete_Delete.Name = "btnDelete_Delete";
-            btnDelete_Delete.Size = new Size(94, 29);
+            btnDelete_Delete.Size = new Size(104, 52);
             btnDelete_Delete.TabIndex = 21;
             btnDelete_Delete.Text = "Delete";
             btnDelete_Delete.UseVisualStyleBackColor = true;
@@ -486,9 +486,9 @@
             // 
             // btnBack_Delete
             // 
-            btnBack_Delete.Location = new Point(419, 500);
+            btnBack_Delete.Location = new Point(608, 480);
             btnBack_Delete.Name = "btnBack_Delete";
-            btnBack_Delete.Size = new Size(94, 29);
+            btnBack_Delete.Size = new Size(104, 52);
             btnBack_Delete.TabIndex = 20;
             btnBack_Delete.Text = "Back";
             btnBack_Delete.UseVisualStyleBackColor = true;

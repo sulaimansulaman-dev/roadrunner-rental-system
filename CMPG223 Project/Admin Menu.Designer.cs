@@ -130,6 +130,7 @@
             button8.TabIndex = 8;
             button8.Text = "button8";
             button8.UseVisualStyleBackColor = true;
+            button8.Click += button8_Click;
             // 
             // Admin_Menu
             // 
