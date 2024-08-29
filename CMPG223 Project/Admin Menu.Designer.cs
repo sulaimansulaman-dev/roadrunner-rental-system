@@ -1,4 +1,4 @@
-﻿namespace CMPG223_Project
+namespace CMPG223_Project
 {
     partial class Admin_Menu
     {
@@ -29,129 +29,136 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
-            button6 = new Button();
-            button7 = new Button();
-            button8 = new Button();
+            buttonClient = new Button();
+            buttonVehicleClass = new Button();
+            buttonVehicle = new Button();
+            buttonUsers = new Button();
+            buttonRentalOrder = new Button();
+            buttonPayment = new Button();
+            buttonReturn = new Button();
+            buttonReports = new Button();
             SuspendLayout();
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Top;
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(325, 27);
+            label1.Location = new Point(291, 9);
             label1.Name = "label1";
-            label1.Size = new Size(516, 62);
+            label1.Size = new Size(410, 50);
             label1.TabIndex = 0;
             label1.Text = "Welcome Administrator";
             // 
-            // button1
+            // buttonClient
             // 
-            button1.Location = new Point(200, 176);
-            button1.Margin = new Padding(3, 4, 3, 4);
-            button1.Name = "button1";
-            button1.Size = new Size(195, 71);
-            button1.TabIndex = 1;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            buttonClient.Anchor = AnchorStyles.None;
+            buttonClient.Location = new Point(175, 132);
+            buttonClient.Name = "buttonClient";
+            buttonClient.Size = new Size(171, 53);
+            buttonClient.TabIndex = 1;
+            buttonClient.Text = "Maintain Clients";
+            buttonClient.UseVisualStyleBackColor = true;
+            buttonClient.Click += button1_Click;
             // 
-            // button2
+            // buttonVehicleClass
             // 
-            button2.Location = new Point(200, 277);
-            button2.Margin = new Padding(3, 4, 3, 4);
-            button2.Name = "button2";
-            button2.Size = new Size(195, 71);
-            button2.TabIndex = 2;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            buttonVehicleClass.Anchor = AnchorStyles.None;
+            buttonVehicleClass.Location = new Point(175, 208);
+            buttonVehicleClass.Name = "buttonVehicleClass";
+            buttonVehicleClass.Size = new Size(171, 53);
+            buttonVehicleClass.TabIndex = 2;
+            buttonVehicleClass.Text = "Maintain Vehicle Classes";
+            buttonVehicleClass.UseVisualStyleBackColor = true;
+            buttonVehicleClass.Click += button2_Click;
             // 
-            // button3
+            // buttonVehicle
             // 
-            button3.Location = new Point(200, 379);
-            button3.Margin = new Padding(3, 4, 3, 4);
-            button3.Name = "button3";
-            button3.Size = new Size(195, 71);
-            button3.TabIndex = 3;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            buttonVehicle.Anchor = AnchorStyles.None;
+            buttonVehicle.Location = new Point(175, 284);
+            buttonVehicle.Name = "buttonVehicle";
+            buttonVehicle.Size = new Size(171, 53);
+            buttonVehicle.TabIndex = 3;
+            buttonVehicle.Text = "Maintain Vehicles";
+            buttonVehicle.UseVisualStyleBackColor = true;
+            buttonVehicle.Click += button3_Click;
             // 
-            // button4
+            // buttonUsers
             // 
-            button4.Location = new Point(200, 483);
-            button4.Margin = new Padding(3, 4, 3, 4);
-            button4.Name = "button4";
-            button4.Size = new Size(195, 71);
-            button4.TabIndex = 4;
-            button4.Text = "button4";
-            button4.UseVisualStyleBackColor = true;
+            buttonUsers.Anchor = AnchorStyles.None;
+            buttonUsers.Location = new Point(175, 362);
+            buttonUsers.Name = "buttonUsers";
+            buttonUsers.Size = new Size(171, 53);
+            buttonUsers.TabIndex = 4;
+            buttonUsers.Text = "Maintain Users";
+            buttonUsers.UseVisualStyleBackColor = true;
+            buttonUsers.Click += button4_Click;
             // 
-            // button5
+            // buttonRentalOrder
             // 
-            button5.Location = new Point(712, 176);
-            button5.Margin = new Padding(3, 4, 3, 4);
-            button5.Name = "button5";
-            button5.Size = new Size(195, 71);
-            button5.TabIndex = 5;
-            button5.Text = "button5";
-            button5.UseVisualStyleBackColor = true;
+            buttonRentalOrder.Anchor = AnchorStyles.None;
+            buttonRentalOrder.Location = new Point(623, 132);
+            buttonRentalOrder.Name = "buttonRentalOrder";
+            buttonRentalOrder.Size = new Size(171, 53);
+            buttonRentalOrder.TabIndex = 5;
+            buttonRentalOrder.Text = "Rental Orders";
+            buttonRentalOrder.UseVisualStyleBackColor = true;
+            buttonRentalOrder.Click += button5_Click;
             // 
-            // button6
+            // buttonPayment
             // 
-            button6.Location = new Point(712, 277);
-            button6.Margin = new Padding(3, 4, 3, 4);
-            button6.Name = "button6";
-            button6.Size = new Size(195, 71);
-            button6.TabIndex = 6;
-            button6.Text = "button6";
-            button6.UseVisualStyleBackColor = true;
+            buttonPayment.Anchor = AnchorStyles.None;
+            buttonPayment.Location = new Point(623, 208);
+            buttonPayment.Name = "buttonPayment";
+            buttonPayment.Size = new Size(171, 53);
+            buttonPayment.TabIndex = 6;
+            buttonPayment.Text = "Recieve a Payment";
+            buttonPayment.UseVisualStyleBackColor = true;
+            buttonPayment.Click += button6_Click;
             // 
-            // button7
+            // buttonReturn
             // 
-            button7.Location = new Point(712, 379);
-            button7.Margin = new Padding(3, 4, 3, 4);
-            button7.Name = "button7";
-            button7.Size = new Size(195, 71);
-            button7.TabIndex = 7;
-            button7.Text = "button7";
-            button7.UseVisualStyleBackColor = true;
+            buttonReturn.Anchor = AnchorStyles.None;
+            buttonReturn.Location = new Point(623, 284);
+            buttonReturn.Name = "buttonReturn";
+            buttonReturn.Size = new Size(171, 53);
+            buttonReturn.TabIndex = 7;
+            buttonReturn.Text = "Return Vehicle";
+            buttonReturn.UseVisualStyleBackColor = true;
+            buttonReturn.Click += button7_Click;
             // 
-            // button8
+            // buttonReports
             // 
-            button8.Location = new Point(712, 483);
-            button8.Margin = new Padding(3, 4, 3, 4);
-            button8.Name = "button8";
-            button8.Size = new Size(195, 71);
-            button8.TabIndex = 8;
-            button8.Text = "button8";
-            button8.UseVisualStyleBackColor = true;
-            
+            buttonReports.Anchor = AnchorStyles.None;
+            buttonReports.Location = new Point(623, 362);
+            buttonReports.Name = "buttonReports";
+            buttonReports.Size = new Size(171, 53);
+            buttonReports.TabIndex = 8;
+            buttonReports.Text = "Request Reports";
+            buttonReports.UseVisualStyleBackColor = true;
+            buttonReports.Click += button8_Click;
             // 
             // Admin_Menu
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(188, 170, 146);
             BackgroundImage = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
             BackgroundImageLayout = ImageLayout.Zoom;
-            ClientSize = new Size(1102, 761);
-            Controls.Add(button8);
-            Controls.Add(button7);
-            Controls.Add(button6);
-            Controls.Add(button5);
-            Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            ClientSize = new Size(964, 571);
+            Controls.Add(buttonReports);
+            Controls.Add(buttonReturn);
+            Controls.Add(buttonPayment);
+            Controls.Add(buttonRentalOrder);
+            Controls.Add(buttonUsers);
+            Controls.Add(buttonVehicle);
+            Controls.Add(buttonVehicleClass);
+            Controls.Add(buttonClient);
             Controls.Add(label1);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "Admin_Menu";
             Text = "Admin_Menu";
+            Load += Admin_Menu_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -159,13 +166,13 @@
         #endregion
 
         private Label label1;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
-        private Button button5;
-        private Button button6;
-        private Button button7;
-        private Button button8;
+        private Button buttonClient;
+        private Button buttonVehicleClass;
+        private Button buttonVehicle;
+        private Button buttonUsers;
+        private Button buttonRentalOrder;
+        private Button buttonPayment;
+        private Button buttonReturn;
+        private Button buttonReports;
     }
 }
