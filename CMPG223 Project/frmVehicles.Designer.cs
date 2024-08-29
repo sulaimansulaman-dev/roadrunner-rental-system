@@ -31,13 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVehicles));
             tabControlVehicleClasses = new TabControl();
             tabAdd = new TabPage();
-            label4 = new Label();
             txtYear = new TextBox();
             lblLicenseNo = new Label();
-            hsbCostPerDay = new HScrollBar();
             lblCostPerDay = new Label();
             txtLicenseNo = new TextBox();
-            cmbNoOfSeats = new ComboBox();
             lblNoSeats = new Label();
             lblYear = new Label();
             cmbClassSelect = new ComboBox();
@@ -72,6 +69,10 @@
             dgvVehicles_Delete = new DataGridView();
             cmbVehicleID_Delete = new ComboBox();
             lblClassID_Delete = new Label();
+            txtName = new TextBox();
+            label5 = new Label();
+            txtCostPerDay = new TextBox();
+            cmbNoOfSeats = new ComboBox();
             tabControlVehicleClasses.SuspendLayout();
             tabAdd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvVehicles_Add).BeginInit();
@@ -99,10 +100,11 @@
             tabAdd.BackColor = Color.FromArgb(188, 170, 146);
             tabAdd.BackgroundImage = (Image)resources.GetObject("tabAdd.BackgroundImage");
             tabAdd.BackgroundImageLayout = ImageLayout.Zoom;
-            tabAdd.Controls.Add(label4);
+            tabAdd.Controls.Add(txtCostPerDay);
+            tabAdd.Controls.Add(txtName);
+            tabAdd.Controls.Add(label5);
             tabAdd.Controls.Add(txtYear);
             tabAdd.Controls.Add(lblLicenseNo);
-            tabAdd.Controls.Add(hsbCostPerDay);
             tabAdd.Controls.Add(lblCostPerDay);
             tabAdd.Controls.Add(txtLicenseNo);
             tabAdd.Controls.Add(cmbNoOfSeats);
@@ -121,18 +123,9 @@
             tabAdd.TabIndex = 0;
             tabAdd.Text = "Add";
             // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(262, 212);
-            label4.Name = "label4";
-            label4.Size = new Size(50, 20);
-            label4.TabIndex = 21;
-            label4.Text = "label4";
-            // 
             // txtYear
             // 
-            txtYear.Location = new Point(364, 95);
+            txtYear.Location = new Point(362, 138);
             txtYear.Name = "txtYear";
             txtYear.Size = new Size(125, 27);
             txtYear.TabIndex = 19;
@@ -142,29 +135,18 @@
             lblLicenseNo.AutoSize = true;
             lblLicenseNo.BackColor = Color.Transparent;
             lblLicenseNo.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblLicenseNo.Location = new Point(8, 257);
+            lblLicenseNo.Location = new Point(6, 300);
             lblLicenseNo.Name = "lblLicenseNo";
             lblLicenseNo.Size = new Size(274, 41);
             lblLicenseNo.TabIndex = 17;
             lblLicenseNo.Text = "Licencse Number: ";
-            // 
-            // hsbCostPerDay
-            // 
-            hsbCostPerDay.LargeChange = 1000;
-            hsbCostPerDay.Location = new Point(328, 212);
-            hsbCostPerDay.Maximum = 10000;
-            hsbCostPerDay.Name = "hsbCostPerDay";
-            hsbCostPerDay.Size = new Size(161, 26);
-            hsbCostPerDay.SmallChange = 1000;
-            hsbCostPerDay.TabIndex = 16;
-            hsbCostPerDay.Scroll += hsbCostPerDay_Scroll;
             // 
             // lblCostPerDay
             // 
             lblCostPerDay.AutoSize = true;
             lblCostPerDay.BackColor = Color.Transparent;
             lblCostPerDay.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblCostPerDay.Location = new Point(8, 197);
+            lblCostPerDay.Location = new Point(6, 240);
             lblCostPerDay.Name = "lblCostPerDay";
             lblCostPerDay.Size = new Size(211, 41);
             lblCostPerDay.TabIndex = 14;
@@ -172,26 +154,17 @@
             // 
             // txtLicenseNo
             // 
-            txtLicenseNo.Location = new Point(364, 265);
+            txtLicenseNo.Location = new Point(362, 308);
             txtLicenseNo.Name = "txtLicenseNo";
             txtLicenseNo.Size = new Size(125, 27);
             txtLicenseNo.TabIndex = 13;
-            // 
-            // cmbNoOfSeats
-            // 
-            cmbNoOfSeats.FormattingEnabled = true;
-            cmbNoOfSeats.Items.AddRange(new object[] { "2", "4", "6", "13" });
-            cmbNoOfSeats.Location = new Point(384, 149);
-            cmbNoOfSeats.Name = "cmbNoOfSeats";
-            cmbNoOfSeats.Size = new Size(105, 28);
-            cmbNoOfSeats.TabIndex = 12;
             // 
             // lblNoSeats
             // 
             lblNoSeats.AutoSize = true;
             lblNoSeats.BackColor = Color.Transparent;
             lblNoSeats.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblNoSeats.Location = new Point(8, 134);
+            lblNoSeats.Location = new Point(6, 177);
             lblNoSeats.Name = "lblNoSeats";
             lblNoSeats.Size = new Size(275, 41);
             lblNoSeats.TabIndex = 11;
@@ -202,7 +175,7 @@
             lblYear.AutoSize = true;
             lblYear.BackColor = Color.Transparent;
             lblYear.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblYear.Location = new Point(8, 75);
+            lblYear.Location = new Point(6, 118);
             lblYear.Name = "lblYear";
             lblYear.Size = new Size(94, 41);
             lblYear.TabIndex = 9;
@@ -211,9 +184,9 @@
             // cmbClassSelect
             // 
             cmbClassSelect.FormattingEnabled = true;
-            cmbClassSelect.Location = new Point(283, 31);
+            cmbClassSelect.Location = new Point(364, 74);
             cmbClassSelect.Name = "cmbClassSelect";
-            cmbClassSelect.Size = new Size(206, 28);
+            cmbClassSelect.Size = new Size(123, 28);
             cmbClassSelect.TabIndex = 8;
             cmbClassSelect.SelectedIndexChanged += cmbClassSelect_SelectedIndexChanged;
             // 
@@ -260,7 +233,7 @@
             lblClassSelect.AutoSize = true;
             lblClassSelect.BackColor = Color.Transparent;
             lblClassSelect.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblClassSelect.Location = new Point(8, 18);
+            lblClassSelect.Location = new Point(6, 61);
             lblClassSelect.Name = "lblClassSelect";
             lblClassSelect.Size = new Size(104, 41);
             lblClassSelect.TabIndex = 0;
@@ -534,6 +507,40 @@
             lblClassID_Delete.TabIndex = 17;
             lblClassID_Delete.Text = "Vehicle ID: ";
             // 
+            // txtName
+            // 
+            txtName.Location = new Point(364, 25);
+            txtName.Name = "txtName";
+            txtName.Size = new Size(125, 27);
+            txtName.TabIndex = 23;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.BackColor = Color.Transparent;
+            label5.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.Location = new Point(8, 5);
+            label5.Name = "label5";
+            label5.Size = new Size(225, 41);
+            label5.TabIndex = 22;
+            label5.Text = "Vehicle Name: ";
+            // 
+            // txtCostPerDay
+            // 
+            txtCostPerDay.Location = new Point(362, 248);
+            txtCostPerDay.Name = "txtCostPerDay";
+            txtCostPerDay.Size = new Size(125, 27);
+            txtCostPerDay.TabIndex = 24;
+            // 
+            // cmbNoOfSeats
+            // 
+            cmbNoOfSeats.FormattingEnabled = true;
+            cmbNoOfSeats.Items.AddRange(new object[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" });
+            cmbNoOfSeats.Location = new Point(362, 192);
+            cmbNoOfSeats.Name = "cmbNoOfSeats";
+            cmbNoOfSeats.Size = new Size(125, 28);
+            cmbNoOfSeats.TabIndex = 12;
+            // 
             // frmVehicles
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -586,11 +593,9 @@
         private ComboBox cmbClassSelect;
         private Label lblYear;
         private Label lblNoSeats;
-        private ComboBox cmbNoOfSeats;
         private Label lblCostPerDay;
         private TextBox txtLicenseNo;
         private Label lblLicenseNo;
-        private HScrollBar hsbCostPerDay;
         private TextBox txtYear;
         private PictureBox pbxImage_Update;
         private TextBox txtYear_Update;
@@ -604,6 +609,9 @@
         private Label label10;
         private ComboBox cmbClass_Update;
         private Label label3;
-        private Label label4;
+        private TextBox txtCostPerDay;
+        private TextBox txtName;
+        private Label label5;
+        private ComboBox cmbNoOfSeats;
     }
 }

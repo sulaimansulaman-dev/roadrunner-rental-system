@@ -15,6 +15,7 @@ namespace CMPG223_Project
 {
     public partial class frmVehicles : Form
     {
+        int classId;
         SqlConnection cnn;
         public frmVehicles()
         {
@@ -23,7 +24,7 @@ namespace CMPG223_Project
 
         private void frmVehicles_Load(object sender, EventArgs e)
         {
-            string connectionstring = @"Data Source=DESKTOP-20CLHAU;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+            string connectionstring = @"Data Source=DESKTOP-20CLHAU;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
             cnn = new SqlConnection(connectionstring);
 
             //Display Data
@@ -55,51 +56,43 @@ namespace CMPG223_Project
                 MessageBox.Show("Please connect to the database first");
             }
 
-            hsbCostPerDay.Value = 0;
-            hsbCostPerDay.Minimum = 0;
-            hsbCostPerDay.Maximum = 10000;
-            label4.Text = hsbCostPerDay.Value.ToString();
-
             LoadComboBox();
-
         }
 
         private void btnAdd_Add_Click(object sender, EventArgs e)
         {
-            int year = int.Parse(txtYear.Text);
-            int noOfSeats = int.Parse(cmbNoOfSeats.Text);
-            string licenceNo = txtLicenseNo.Text;
+            // Get values from the form
+            string vehicleName = txtName.Text;
+            if (cmbClassSelect.SelectedValue != null) {
+                classId = (int)cmbClassSelect.SelectedValue;
+            }
+            string year1 = txtYear.Text;
+            DateTime year = DateTime.ParseExact(year1, "yyyy", null);
+            int numOfSeats = int.Parse(cmbNoOfSeats.Text);
+            decimal costPerDay = int.Parse(txtCostPerDay.Text); // Assuming the TrackBar's Value property is used for the cost
+            char[] licenseNo = txtLicenseNo.Text.ToCharArray();
+
+
+            // Insert query
+            string query = "INSERT INTO Vehicle (Vehicle_Class_ID, Year, NumberOfSeats, CostPerDay,LicenseNumber, Vehicle_Name) VALUES (@Vehicle_Class_ID, @Year, @NumberOfSeats, @CostperDay,@LicenseNumber, @Vehicle_Name)";
+
             
+            using (SqlCommand cmd = new SqlCommand(query, cnn))
+            {
+                
+                cmd.Parameters.AddWithValue("@Vehicle_Class_ID", classId);
+                cmd.Parameters.AddWithValue("@Year", year);
+                cmd.Parameters.AddWithValue("@NumberOfSeats", numOfSeats);
+                cmd.Parameters.AddWithValue("@CostperDay", costPerDay);
+                cmd.Parameters.AddWithValue("@LicenseNumber", licenseNo);
+                cmd.Parameters.AddWithValue("@Vehicle_Name", vehicleName);
 
-            /*//Validation 
+                cnn.Open();
+                cmd.ExecuteNonQuery();
+                cnn.Close();
+            }
 
-                 if (int.(year))
-                     MessageBox.Show("Year Required");
-
-                 else if (String.IsNullOrWhiteSpace(description))
-                     MessageBox.Show("Description is Required");
-
-
-                 using (cnn)
-                 {
-                     string query = "INSERT INTO Vehicle_Class (ClassName, Description) VALUES(@ClassName, @Description)";
-                     SqlCommand cmd = new SqlCommand(query, conn);
-                     //Prevents SQL Injection and Ensures secure code practices
-                     cmd.Parameters.AddWithValue("@ClassName", className);
-                     cmd.Parameters.AddWithValue("@Description", description);
-
-                     try
-                     {
-                         conn.Open();
-                         cmd.ExecuteNonQuery();
-                         MessageBox.Show("Vehicle class added successfully");
-                         LoadData();
-                         LoadComboBoxClassID(); 
-
-                     }
-                     catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
-                 }
-             }*/
+            MessageBox.Show("Vehicle added successfully!");
 
         }
 
@@ -122,42 +115,25 @@ namespace CMPG223_Project
 
         private void LoadComboBox()
         {
-            string sql = "SELECT ClassName FROM Vehicle_Class";
-
             try
             {
-                using (cnn)
-                {
-                    cnn.Open();
-                    using (SqlCommand command = new SqlCommand(sql, cnn))
-                    {
-                        using (SqlDataReader dataReader = command.ExecuteReader())
-                        {
-                            cmbClassSelect.Items.Clear(); // Clear existing items
-                            cmbVehicleID_Update.Items.Clear();
-
-                            while (dataReader.Read())
-                            {
-                                var id = dataReader.GetValue(0).ToString();
-                                if (!cmbClassSelect.Items.Contains(id))
-                                {
-                                    cmbClassSelect.Items.Add(id);
-                                    cmbVehicleID_Update.Items.Add(id);
-                                }
-                            }
-                        }
-                    }
-                }
+                cnn.Open();
+                string comboBoxSelect = "SELECT * FROM Vehicle_Class";
+                SqlDataAdapter adapter = new SqlDataAdapter(comboBoxSelect, cnn);
+                DataTable comboTable = new DataTable();
+                adapter.Fill(comboTable);
+                cmbClassSelect.DataSource = comboTable;
+                cmbClassSelect.ValueMember = "Vehicle_Class_ID";
+                cmbClassSelect.DisplayMember = "ClassName";
+                cnn.Close();
+                cmbClassSelect.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show(ex.ToString());
             }
         }
 
-        private void hsbCostPerDay_Scroll(object sender, ScrollEventArgs e)
-        {
-            label4.Text = hsbCostPerDay.Value.ToString();
-        }
+       
     }
 }
