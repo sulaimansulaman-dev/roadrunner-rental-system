@@ -14,7 +14,7 @@ namespace CMPG223_Project
 
         private void button2_Click(object sender, EventArgs e)
         {
-            frmVehicleClasses frmVehicleClasses = new frmVehicleClasses(this);
+            frmVehicleClasses frmVehicleClasses = new frmVehicleClasses();
             frmVehicleClasses.ShowDialog();
         }
 
