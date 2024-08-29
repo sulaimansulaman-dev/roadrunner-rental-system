@@ -35,8 +35,8 @@
             label3 = new Label();
             dtpStartDate_RequestReports = new DateTimePicker();
             dtpEndDate_RequestReports = new DateTimePicker();
-            button1 = new Button();
-            button2 = new Button();
+            btnGenerateReport = new Button();
+            btnBack_RequestReport = new Button();
             dgvVehicleClasses_Add = new DataGridView();
             label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -56,6 +56,7 @@
             // cbReportType_RequestReports
             // 
             cbReportType_RequestReports.FormattingEnabled = true;
+            cbReportType_RequestReports.Items.AddRange(new object[] { "Top 10 Vehicles Per Time Period ", "Income Recieved Per Time Period" });
             cbReportType_RequestReports.Location = new Point(217, 125);
             cbReportType_RequestReports.Name = "cbReportType_RequestReports";
             cbReportType_RequestReports.Size = new Size(248, 28);
@@ -105,23 +106,24 @@
             dtpEndDate_RequestReports.Size = new Size(250, 27);
             dtpEndDate_RequestReports.TabIndex = 6;
             // 
-            // button1
+            // btnGenerateReport
             // 
-            button1.Location = new Point(361, 434);
-            button1.Name = "button1";
-            button1.Size = new Size(104, 52);
-            button1.TabIndex = 7;
-            button1.Text = "Generate Report";
-            button1.UseVisualStyleBackColor = true;
+            btnGenerateReport.Location = new Point(361, 434);
+            btnGenerateReport.Name = "btnGenerateReport";
+            btnGenerateReport.Size = new Size(104, 52);
+            btnGenerateReport.TabIndex = 7;
+            btnGenerateReport.Text = "Generate Report";
+            btnGenerateReport.UseVisualStyleBackColor = true;
+            btnGenerateReport.Click += btnGenerateReport_Click;
             // 
-            // button2
+            // btnBack_RequestReport
             // 
-            button2.Location = new Point(512, 434);
-            button2.Name = "button2";
-            button2.Size = new Size(104, 52);
-            button2.TabIndex = 8;
-            button2.Text = "Back";
-            button2.UseVisualStyleBackColor = true;
+            btnBack_RequestReport.Location = new Point(512, 434);
+            btnBack_RequestReport.Name = "btnBack_RequestReport";
+            btnBack_RequestReport.Size = new Size(104, 52);
+            btnBack_RequestReport.TabIndex = 8;
+            btnBack_RequestReport.Text = "Back";
+            btnBack_RequestReport.UseVisualStyleBackColor = true;
             // 
             // dgvVehicleClasses_Add
             // 
@@ -150,8 +152,8 @@
             ClientSize = new Size(1027, 584);
             Controls.Add(label4);
             Controls.Add(dgvVehicleClasses_Add);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnBack_RequestReport);
+            Controls.Add(btnGenerateReport);
             Controls.Add(dtpEndDate_RequestReports);
             Controls.Add(dtpStartDate_RequestReports);
             Controls.Add(label3);
@@ -176,8 +178,8 @@
         private Label label3;
         private DateTimePicker dtpStartDate_RequestReports;
         private DateTimePicker dtpEndDate_RequestReports;
-        private Button button1;
-        private Button button2;
+        private Button btnGenerateReport;
+        private Button btnBack_RequestReport;
         private DataGridView dgvVehicleClasses_Add;
         private Label label4;
     }
