@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,109 +13,271 @@ namespace CMPG223_Project
 {
     public partial class frmRequestReports : Form
     {
+        String connectionString = @"Data Source=LAPTOP-JHPD709J;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False"; 
         public frmRequestReports()
         {
             InitializeComponent();
         }
 
-        private void btnGenerateReport_Click(object sender, EventArgs e)
-        {
-            string selectedReport = cbReportType_RequestReports.SelectedItem.ToString();
-
-            // Ensure a report type is selected
-            if (string.IsNullOrEmpty(selectedReport))
-            {
-                MessageBox.Show("Please select a report type.");
-                return;
-            }
-
-            // Retrieve the selected date range
-            DateTime startDate = dtpStartDate_RequestReports.Value;
-            DateTime endDate = dtpEndDate_RequestReports.Value;
-
-            if (selectedReport == "Top 10 Vehicles Per Time Period")
-            {
-                GenerateTop10VehiclesReport(startDate, endDate);
-            }
-            else if (selectedReport == "Income Received Per Time Period")
-            {
-                GenerateIncomeReceivedReport(startDate, endDate);
-            }
-            else
-            {
-                MessageBox.Show("Unknown report type selected.");
-            }
-        }
-
-        private void GenerateTop10VehiclesReport(DateTime startDate, DateTime endDate)
-        {
-
-        }
-
-        private void GenerateIncomeReceivedReport(DateTime startDate, DateTime endDate)
-        {
-
-        }
 
         private void frmRequestReports_Load(object sender, EventArgs e)
         {
 
+
+        }
+
+
+        private ErrorProvider errorProvider = new ErrorProvider();
+
+        private void btnGenerateReport_Click(object sender, EventArgs e)
+        {
+            // Clear DataGridView rows and columns
+            dgvRequestReports.Rows.Clear();
+            dgvRequestReports.Columns.Clear();
+
+            // Initialize Variables
+            DateTime startDate = dtpStartDate_RequestReports.Value;
+            DateTime endDate = dtpEndDate_RequestReports.Value;
+            string Order_By = null;
+
+            // Perform validation
+            bool isDateValid = ValidateDateTimePickers(startDate, endDate);
+            bool isComboBoxValid = ValidateComboBox();
+
+            if (!isDateValid || !isComboBoxValid)
+                return;
+
+            // Display Dates in labels
+            lblStartDate_RequestReports.Text = startDate.Date.ToString("yyyy/MM/dd");
+            lblEndDate_RequestReports.Text = endDate.Date.ToString("yyyy/MM/dd");
+
+            // Assign ASC or DESC to Order_By based on ComboBox selection
+            Order_By = cbOrderBy_RequestReports.SelectedIndex == 0 ? "ASC" : "DESC";
+
+            // Generate report based on selected report type
+            if (cbReportType_RequestReports.SelectedIndex == 0)
             {
-                // Configure DataGridView columns
-                dgvVehicleClasses_Add.ColumnCount = 4;
-                dgvVehicleClasses_Add.Columns[0].Name = "Vehicle_ID";
-                dgvVehicleClasses_Add.Columns[1].Name = "Vehicle Name";
-                dgvVehicleClasses_Add.Columns[2].Name = "Vehicle Class";
-                dgvVehicleClasses_Add.Columns[3].Name = "Rental Count";
+                GenerateTop10VehiclesReport(startDate, endDate, Order_By);
+            }
+            else if (cbReportType_RequestReports.SelectedIndex == 1)
+            {
+                GenerateIncomeReceivedReport(startDate, endDate, Order_By);
+            }
 
-                // Example Data
+            // Row Count Excluding the Total Row in the Count
+            int Total_Entries = dgvRequestReports.Rows.Count - 1;
+            lblTotalEntries_RequestReports.Text = Total_Entries.ToString();
+        }
 
-                string[] row1 = { "2", "Polo", "Economy", "80" };
-                string[] row2 = { "3", "Fortuner", "SUV", "60" };
-                string[] row3 = { "1", "C200", "Sedan", "27" };
+        private bool ValidateDateTimePickers(DateTime startDate, DateTime endDate)
+        {
+            bool isValid = true;
+            errorProvider.SetError(dtpStartDate_RequestReports, "");
+            errorProvider.SetError(dtpEndDate_RequestReports, "");
 
-                dgvVehicleClasses_Add.Rows.Add(row1);
-                dgvVehicleClasses_Add.Rows.Add(row2);
-                dgvVehicleClasses_Add.Rows.Add(row3);
+            if (startDate.Date == endDate.Date)
+            {
+                errorProvider.SetError(dtpStartDate_RequestReports, "Start Date cannot be the same as End Date.");
+                errorProvider.SetError(dtpEndDate_RequestReports, "Start Date cannot be the same as End Date.");
+                isValid = false;
+            }
+            else if (startDate.Date > endDate.Date)
+            {
+                errorProvider.SetError(dtpEndDate_RequestReports, "End Date cannot be earlier than Start Date.");
+                errorProvider.SetError(dtpStartDate_RequestReports, "");
+                MessageBox.Show("Start Date cannot be later than End Date.");
+                isValid = false;
+            }
 
-                // Adding the Total row
-                string[] totalRow = { "Total:", "", "", "167" };
-                dgvVehicleClasses_Add.Rows.Add(totalRow);
+            return isValid;
+        }
 
-                // Add footer information as additional rows
+        private bool ValidateComboBox()
+        {
+            bool isValid = true;
+            errorProvider.SetError(cbOrderBy_RequestReports, "");
+            errorProvider.SetError(cbReportType_RequestReports, "");
+
+            if (cbOrderBy_RequestReports.SelectedIndex == -1 && cbReportType_RequestReports.SelectedIndex == -1)
+            {
+                errorProvider.SetError(cbOrderBy_RequestReports, "Please select an Order By option.");
+                errorProvider.SetError(cbReportType_RequestReports, "Please select a Report Type.");
+                isValid = false;
+            }
+            else if (cbReportType_RequestReports.SelectedIndex == -1)
+            {
+                errorProvider.SetError(cbReportType_RequestReports, "Please select a Report Type.");
+                isValid = false;
+            }
+            else if (cbOrderBy_RequestReports.SelectedIndex == -1)
+            {
+                errorProvider.SetError(cbOrderBy_RequestReports, "Please select an Order By option.");
+                isValid = false;
+            }
+
+            return isValid;
+        }
 
 
-                // Set header styling the Column Names
-                DataGridViewCellStyle headerStyle = new DataGridViewCellStyle();
-                headerStyle.Font = new Font("Arial", 12F, FontStyle.Bold);
-                headerStyle.BackColor = Color.Black;
-                headerStyle.ForeColor = Color.White;
-                headerStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgvVehicleClasses_Add.ColumnHeadersDefaultCellStyle = headerStyle;
 
-                // Adjust DataGridView Styling Cell style inside the DataGridView
-                dgvVehicleClasses_Add.DefaultCellStyle.Font = new Font("Arial", 10F);
-                dgvVehicleClasses_Add.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                dgvVehicleClasses_Add.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-                DataGridViewCellStyle boldStyle = new DataGridViewCellStyle();
-                boldStyle.Font = new Font("Arial", 10F, FontStyle.Bold);
+        private void GenerateTop10VehiclesReport(DateTime startDate, DateTime endDate, string Order_By )
+        {
+            // Configure DataGridView columns
+            dgvRequestReports.ColumnCount = 4;
+            dgvRequestReports.Columns[0].Name = "Vehicle_ID";
+            dgvRequestReports.Columns[1].Name = "Vehicle Name";
+            dgvRequestReports.Columns[2].Name = "Vehicle Class";
+            dgvRequestReports.Columns[3].Name = "Rental Count";
 
-                // Apply the bold style to specific rows
-                foreach (DataGridViewRow row in dgvVehicleClasses_Add.Rows)
+            // SQL query to get the top 10 vehicles
+            string query = @"
+        SELECT TOP 10 
+            V.Vehicle_ID, 
+            V.Vehicle_Name, 
+            VC.ClassName AS Vehicle_Class, 
+            COUNT(RO.Order_ID) AS Rental_Count
+        FROM 
+            RentalOrder RO
+        JOIN 
+            Vehicle V ON RO.Vehicle_ID = V.Vehicle_ID
+        JOIN 
+            Vehicle_Class VC ON V.Vehicle_Class_ID = VC.Vehicle_Class_ID
+        WHERE 
+            RO.Date BETWEEN @StartDate AND @EndDate
+        GROUP BY 
+            V.Vehicle_ID, V.Vehicle_Name, VC.ClassName
+        ORDER BY 
+            Rental_Count " +Order_By + ";";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@StartDate", startDate);
+                cmd.Parameters.AddWithValue("@EndDate", endDate);
+               
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    // Apply bold style to the 'Total:' row
-                    if (row.Cells[0].Value != null && row.Cells[0].Value.ToString().StartsWith("Total:"))
-                    {
-                        row.DefaultCellStyle = boldStyle;
-                    }
+                    string[] row = {
+                reader["Vehicle_ID"].ToString(),
+                reader["Vehicle_Name"].ToString(),
+                reader["Vehicle_Class"].ToString(),
+                reader["Rental_Count"].ToString()
+            };
+                    dgvRequestReports.Rows.Add(row);
                 }
 
+                reader.Close();
+            }
 
+            // Calculate and add the total row
+            int totalRentals = dgvRequestReports.Rows.Cast<DataGridViewRow>()
+                .Sum(r => Convert.ToInt32(r.Cells["Rental Count"].Value));
 
+            string[] totalRow = { "Total:", "", "", totalRentals.ToString() };
+            dgvRequestReports.Rows.Add(totalRow);
 
+            // Apply styles as in your original code
+            ApplyDataGridViewStyles();
+        }
+
+        private void GenerateIncomeReceivedReport(DateTime startDate, DateTime endDate, string Order_By)
+        {
+            // Configure DataGridView columns
+            dgvRequestReports.ColumnCount = 4;
+            dgvRequestReports.Columns[0].Name = "Class Name";
+            dgvRequestReports.Columns[1].Name = "CostPerDay";
+            dgvRequestReports.Columns[2].Name = "Quantity";
+            dgvRequestReports.Columns[3].Name = "Total Price";
+
+            // SQL query to get income received per time period
+            string query = @"
+        SELECT 
+            VC.ClassName AS Class_Name, 
+            V.CostPerDay, 
+            COUNT(RO.Order_ID) AS Quantity, 
+            SUM(V.CostPerDay) * COUNT(RO.Order_ID) AS Total_Price
+        FROM 
+            RentalOrder RO
+        JOIN 
+            Vehicle V ON RO.Vehicle_ID = V.Vehicle_ID
+        JOIN 
+            Vehicle_Class VC ON V.Vehicle_Class_ID = VC.Vehicle_Class_ID
+        WHERE 
+            RO.Date BETWEEN @StartDate AND @EndDate
+        GROUP BY 
+            VC.ClassName, V.CostPerDay
+        ORDER BY 
+            Total_Price " + @Order_By + ";";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@StartDate", startDate);
+                cmd.Parameters.AddWithValue("@EndDate", endDate);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string[] row = {
+                reader["Class_Name"].ToString(),
+                reader["CostPerDay"].ToString(),
+                reader["Quantity"].ToString(),
+                $"R {reader["Total_Price"]:N2}"
+            };
+                    dgvRequestReports.Rows.Add(row);
+                }
+
+                reader.Close();
+            }
+
+            // Calculate and add the total row
+            decimal totalPrice = dgvRequestReports.Rows.Cast<DataGridViewRow>()
+                .Sum(r => Convert.ToDecimal(r.Cells["Total Price"].Value.ToString().Replace("R ", "")));
+
+            string[] totalRow = { "Total:", "", "", $"R {totalPrice:N2}" };
+            dgvRequestReports.Rows.Add(totalRow);
+
+            // Apply styles as in your original code
+            ApplyDataGridViewStyles();
+        }
+
+        private void ApplyDataGridViewStyles()
+        {
+            // Set header styling for the Column Names
+            DataGridViewCellStyle headerStyle = new DataGridViewCellStyle();
+            headerStyle.Font = new Font("Arial", 12F, FontStyle.Bold);
+            headerStyle.BackColor = Color.Black;
+            headerStyle.ForeColor = Color.White;
+            headerStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvRequestReports.ColumnHeadersDefaultCellStyle = headerStyle;
+
+            // Adjust DataGridView Styling Cell style inside the DataGridView
+            dgvRequestReports.DefaultCellStyle.Font = new Font("Arial", 10F);
+            dgvRequestReports.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvRequestReports.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            DataGridViewCellStyle boldStyle = new DataGridViewCellStyle();
+            boldStyle.Font = new Font("Arial", 10F, FontStyle.Bold);
+
+            // Apply the bold style to specific rows
+            foreach (DataGridViewRow row in dgvRequestReports.Rows)
+            {
+                // Apply bold style to the 'Total:' row
+                if (row.Cells[0].Value != null && row.Cells[0].Value.ToString().StartsWith("Total:"))
+                {
+                    row.DefaultCellStyle = boldStyle;
+                }
             }
         }
+
+
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
@@ -124,6 +287,12 @@ namespace CMPG223_Project
         private void label13_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnClear_RequestReports_Click(object sender, EventArgs e)
+        {
+            dgvRequestReports.Rows.Clear();
+            dgvRequestReports.Columns.Clear();
         }
     }
 }

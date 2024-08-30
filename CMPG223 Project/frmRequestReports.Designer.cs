@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             pictureBox1 = new PictureBox();
             cbReportType_RequestReports = new ComboBox();
             label1 = new Label();
@@ -38,25 +39,32 @@
             dtpEndDate_RequestReports = new DateTimePicker();
             btnGenerateReport = new Button();
             btnBack_RequestReport = new Button();
-            dgvVehicleClasses_Add = new DataGridView();
+            dgvRequestReports = new DataGridView();
             label4 = new Label();
             pictureBox2 = new PictureBox();
             label5 = new Label();
             label6 = new Label();
-            label7 = new Label();
+            lblStartDate_RequestReports = new Label();
             label8 = new Label();
-            label9 = new Label();
+            lblEndDate_RequestReports = new Label();
             label10 = new Label();
             label12 = new Label();
-            label13 = new Label();
-            label14 = new Label();
+            lblTotalEntries_RequestReports = new Label();
+            lblPageNumber_RequestReports = new Label();
             label15 = new Label();
             label11 = new Label();
             label16 = new Label();
-            label17 = new Label();
+            lblPageNumberDual_RequestReports = new Label();
+            btnClear_RequestReports = new Button();
+            lblOrderBy_RequestReports = new Label();
+            cbOrderBy_RequestReports = new ComboBox();
+            errorProvider1 = new ErrorProvider(components);
+            errorProvider2 = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgvVehicleClasses_Add).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvRequestReports).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider2).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
@@ -74,7 +82,7 @@
             // 
             cbReportType_RequestReports.FormattingEnabled = true;
             cbReportType_RequestReports.Items.AddRange(new object[] { "Top 10 Vehicles Per Time Period ", "Income Recieved Per Time Period" });
-            cbReportType_RequestReports.Location = new Point(217, 125);
+            cbReportType_RequestReports.Location = new Point(217, 126);
             cbReportType_RequestReports.Name = "cbReportType_RequestReports";
             cbReportType_RequestReports.Size = new Size(248, 28);
             cbReportType_RequestReports.TabIndex = 1;
@@ -93,7 +101,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            label2.Location = new Point(12, 172);
+            label2.Location = new Point(12, 216);
             label2.Name = "label2";
             label2.Size = new Size(177, 41);
             label2.TabIndex = 3;
@@ -103,7 +111,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            label3.Location = new Point(12, 230);
+            label3.Location = new Point(12, 267);
             label3.Name = "label3";
             label3.Size = new Size(161, 41);
             label3.TabIndex = 4;
@@ -111,14 +119,14 @@
             // 
             // dtpStartDate_RequestReports
             // 
-            dtpStartDate_RequestReports.Location = new Point(217, 186);
+            dtpStartDate_RequestReports.Location = new Point(217, 230);
             dtpStartDate_RequestReports.Name = "dtpStartDate_RequestReports";
             dtpStartDate_RequestReports.Size = new Size(250, 27);
             dtpStartDate_RequestReports.TabIndex = 5;
             // 
             // dtpEndDate_RequestReports
             // 
-            dtpEndDate_RequestReports.Location = new Point(217, 244);
+            dtpEndDate_RequestReports.Location = new Point(217, 279);
             dtpEndDate_RequestReports.Name = "dtpEndDate_RequestReports";
             dtpEndDate_RequestReports.Size = new Size(250, 27);
             dtpEndDate_RequestReports.TabIndex = 6;
@@ -142,33 +150,33 @@
             btnBack_RequestReport.Text = "Back";
             btnBack_RequestReport.UseVisualStyleBackColor = true;
             // 
-            // dgvVehicleClasses_Add
+            // dgvRequestReports
             // 
-            dgvVehicleClasses_Add.AllowUserToAddRows = false;
-            dgvVehicleClasses_Add.AllowUserToDeleteRows = false;
-            dgvVehicleClasses_Add.AllowUserToResizeColumns = false;
-            dgvVehicleClasses_Add.AllowUserToResizeRows = false;
-            dgvVehicleClasses_Add.BackgroundColor = SystemColors.ControlLightLight;
-            dgvVehicleClasses_Add.BorderStyle = BorderStyle.None;
-            dgvVehicleClasses_Add.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            dgvVehicleClasses_Add.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Window;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.ControlLightLight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.Desktop;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgvVehicleClasses_Add.DefaultCellStyle = dataGridViewCellStyle3;
-            dgvVehicleClasses_Add.Enabled = false;
-            dgvVehicleClasses_Add.Location = new Point(506, 230);
-            dgvVehicleClasses_Add.Name = "dgvVehicleClasses_Add";
-            dgvVehicleClasses_Add.ReadOnly = true;
-            dgvVehicleClasses_Add.RowHeadersVisible = false;
-            dgvVehicleClasses_Add.RowHeadersWidth = 51;
-            dgvVehicleClasses_Add.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            dgvVehicleClasses_Add.Size = new Size(744, 396);
-            dgvVehicleClasses_Add.TabIndex = 9;
+            dgvRequestReports.AllowUserToAddRows = false;
+            dgvRequestReports.AllowUserToDeleteRows = false;
+            dgvRequestReports.AllowUserToResizeColumns = false;
+            dgvRequestReports.AllowUserToResizeRows = false;
+            dgvRequestReports.BackgroundColor = SystemColors.ControlLightLight;
+            dgvRequestReports.BorderStyle = BorderStyle.None;
+            dgvRequestReports.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            dgvRequestReports.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.ControlLightLight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.Desktop;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgvRequestReports.DefaultCellStyle = dataGridViewCellStyle1;
+            dgvRequestReports.Enabled = false;
+            dgvRequestReports.Location = new Point(506, 230);
+            dgvRequestReports.Name = "dgvRequestReports";
+            dgvRequestReports.ReadOnly = true;
+            dgvRequestReports.RowHeadersVisible = false;
+            dgvRequestReports.RowHeadersWidth = 51;
+            dgvRequestReports.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            dgvRequestReports.Size = new Size(744, 396);
+            dgvRequestReports.TabIndex = 9;
             // 
             // label4
             // 
@@ -213,16 +221,16 @@
             label6.TabIndex = 13;
             label6.Text = "Start Date:";
             // 
-            // label7
+            // lblStartDate_RequestReports
             // 
-            label7.AutoSize = true;
-            label7.BackColor = Color.White;
-            label7.Font = new Font("Segoe UI", 12F);
-            label7.Location = new Point(637, 186);
-            label7.Name = "label7";
-            label7.Size = new Size(116, 28);
-            label7.TabIndex = 14;
-            label7.Text = "28/07/2024";
+            lblStartDate_RequestReports.AutoSize = true;
+            lblStartDate_RequestReports.BackColor = Color.White;
+            lblStartDate_RequestReports.Font = new Font("Segoe UI", 12F);
+            lblStartDate_RequestReports.Location = new Point(637, 186);
+            lblStartDate_RequestReports.Name = "lblStartDate_RequestReports";
+            lblStartDate_RequestReports.Size = new Size(32, 28);
+            lblStartDate_RequestReports.TabIndex = 14;
+            lblStartDate_RequestReports.Text = ".....";
             // 
             // label8
             // 
@@ -235,16 +243,16 @@
             label8.TabIndex = 15;
             label8.Text = "End Date:";
             // 
-            // label9
+            // lblEndDate_RequestReports
             // 
-            label9.AutoSize = true;
-            label9.BackColor = Color.White;
-            label9.Font = new Font("Segoe UI", 12F);
-            label9.Location = new Point(937, 185);
-            label9.Name = "label9";
-            label9.Size = new Size(116, 28);
-            label9.TabIndex = 16;
-            label9.Text = "28/08/2024";
+            lblEndDate_RequestReports.AutoSize = true;
+            lblEndDate_RequestReports.BackColor = Color.White;
+            lblEndDate_RequestReports.Font = new Font("Segoe UI", 12F);
+            lblEndDate_RequestReports.Location = new Point(937, 185);
+            lblEndDate_RequestReports.Name = "lblEndDate_RequestReports";
+            lblEndDate_RequestReports.Size = new Size(32, 28);
+            lblEndDate_RequestReports.TabIndex = 16;
+            lblEndDate_RequestReports.Text = ".....";
             // 
             // label10
             // 
@@ -268,28 +276,28 @@
             label12.TabIndex = 19;
             label12.Text = "End Of Report";
             // 
-            // label13
+            // lblTotalEntries_RequestReports
             // 
-            label13.AutoSize = true;
-            label13.BackColor = Color.White;
-            label13.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label13.Location = new Point(939, 650);
-            label13.Name = "label13";
-            label13.Size = new Size(24, 28);
-            label13.TabIndex = 20;
-            label13.Text = "3";
-            label13.Click += label13_Click;
+            lblTotalEntries_RequestReports.AutoSize = true;
+            lblTotalEntries_RequestReports.BackColor = Color.White;
+            lblTotalEntries_RequestReports.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalEntries_RequestReports.Location = new Point(937, 650);
+            lblTotalEntries_RequestReports.Name = "lblTotalEntries_RequestReports";
+            lblTotalEntries_RequestReports.Size = new Size(32, 28);
+            lblTotalEntries_RequestReports.TabIndex = 20;
+            lblTotalEntries_RequestReports.Text = "....";
+            lblTotalEntries_RequestReports.Click += label13_Click;
             // 
-            // label14
+            // lblPageNumber_RequestReports
             // 
-            label14.AutoSize = true;
-            label14.BackColor = Color.White;
-            label14.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label14.Location = new Point(674, 158);
-            label14.Name = "label14";
-            label14.Size = new Size(24, 28);
-            label14.TabIndex = 21;
-            label14.Text = "1";
+            lblPageNumber_RequestReports.AutoSize = true;
+            lblPageNumber_RequestReports.BackColor = Color.White;
+            lblPageNumber_RequestReports.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPageNumber_RequestReports.Location = new Point(674, 158);
+            lblPageNumber_RequestReports.Name = "lblPageNumber_RequestReports";
+            lblPageNumber_RequestReports.Size = new Size(24, 28);
+            lblPageNumber_RequestReports.TabIndex = 21;
+            lblPageNumber_RequestReports.Text = "1";
             // 
             // label15
             // 
@@ -323,16 +331,53 @@
             label16.TabIndex = 24;
             label16.Text = "Page:";
             // 
-            // label17
+            // lblPageNumberDual_RequestReports
             // 
-            label17.AutoSize = true;
-            label17.BackColor = Color.White;
-            label17.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label17.Location = new Point(873, 743);
-            label17.Name = "label17";
-            label17.Size = new Size(38, 23);
-            label17.TabIndex = 25;
-            label17.Text = "1/2";
+            lblPageNumberDual_RequestReports.AutoSize = true;
+            lblPageNumberDual_RequestReports.BackColor = Color.White;
+            lblPageNumberDual_RequestReports.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblPageNumberDual_RequestReports.Location = new Point(873, 743);
+            lblPageNumberDual_RequestReports.Name = "lblPageNumberDual_RequestReports";
+            lblPageNumberDual_RequestReports.Size = new Size(20, 23);
+            lblPageNumberDual_RequestReports.TabIndex = 25;
+            lblPageNumberDual_RequestReports.Text = "1";
+            // 
+            // btnClear_RequestReports
+            // 
+            btnClear_RequestReports.Location = new Point(294, 403);
+            btnClear_RequestReports.Name = "btnClear_RequestReports";
+            btnClear_RequestReports.Size = new Size(104, 52);
+            btnClear_RequestReports.TabIndex = 26;
+            btnClear_RequestReports.Text = "Clear";
+            btnClear_RequestReports.UseVisualStyleBackColor = true;
+            btnClear_RequestReports.Click += btnClear_RequestReports_Click;
+            // 
+            // lblOrderBy_RequestReports
+            // 
+            lblOrderBy_RequestReports.AutoSize = true;
+            lblOrderBy_RequestReports.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            lblOrderBy_RequestReports.Location = new Point(12, 159);
+            lblOrderBy_RequestReports.Name = "lblOrderBy_RequestReports";
+            lblOrderBy_RequestReports.Size = new Size(151, 41);
+            lblOrderBy_RequestReports.TabIndex = 27;
+            lblOrderBy_RequestReports.Text = "Order By:";
+            // 
+            // cbOrderBy_RequestReports
+            // 
+            cbOrderBy_RequestReports.FormattingEnabled = true;
+            cbOrderBy_RequestReports.Items.AddRange(new object[] { "Ascending", "Descending" });
+            cbOrderBy_RequestReports.Location = new Point(217, 172);
+            cbOrderBy_RequestReports.Name = "cbOrderBy_RequestReports";
+            cbOrderBy_RequestReports.Size = new Size(248, 28);
+            cbOrderBy_RequestReports.TabIndex = 28;
+            // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
+            // errorProvider2
+            // 
+            errorProvider2.ContainerControl = this;
             // 
             // frmRequestReports
             // 
@@ -340,21 +385,24 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(188, 170, 146);
             ClientSize = new Size(1262, 803);
-            Controls.Add(label17);
+            Controls.Add(cbOrderBy_RequestReports);
+            Controls.Add(lblOrderBy_RequestReports);
+            Controls.Add(btnClear_RequestReports);
+            Controls.Add(lblPageNumberDual_RequestReports);
             Controls.Add(label16);
             Controls.Add(label11);
             Controls.Add(label15);
-            Controls.Add(label14);
-            Controls.Add(label13);
+            Controls.Add(lblPageNumber_RequestReports);
+            Controls.Add(lblTotalEntries_RequestReports);
             Controls.Add(label12);
             Controls.Add(label10);
-            Controls.Add(label9);
+            Controls.Add(lblEndDate_RequestReports);
             Controls.Add(label8);
-            Controls.Add(label7);
+            Controls.Add(lblStartDate_RequestReports);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
-            Controls.Add(dgvVehicleClasses_Add);
+            Controls.Add(dgvRequestReports);
             Controls.Add(btnBack_RequestReport);
             Controls.Add(btnGenerateReport);
             Controls.Add(dtpEndDate_RequestReports);
@@ -369,8 +417,10 @@
             Text = "frmRequestReports";
             Load += frmRequestReports_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgvVehicleClasses_Add).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvRequestReports).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -386,21 +436,26 @@
         private DateTimePicker dtpEndDate_RequestReports;
         private Button btnGenerateReport;
         private Button btnBack_RequestReport;
-        private DataGridView dgvVehicleClasses_Add;
+        private DataGridView dgvRequestReports;
         private Label label4;
         private PictureBox pictureBox2;
         private Label label5;
         private Label label6;
-        private Label label7;
+        private Label lblStartDate_RequestReports;
         private Label label8;
-        private Label label9;
+        private Label lblEndDate_RequestReports;
         private Label label10;
         private Label label12;
-        private Label label13;
-        private Label label14;
+        private Label lblTotalEntries_RequestReports;
+        private Label lblPageNumber_RequestReports;
         private Label label15;
         private Label label11;
         private Label label16;
-        private Label label17;
+        private Label lblPageNumberDual_RequestReports;
+        private Button btnClear_RequestReports;
+        private Label lblOrderBy_RequestReports;
+        private ComboBox cbOrderBy_RequestReports;
+        private ErrorProvider errorProvider1;
+        private ErrorProvider errorProvider2;
     }
 }
