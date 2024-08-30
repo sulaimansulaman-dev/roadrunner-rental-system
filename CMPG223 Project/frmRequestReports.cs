@@ -208,22 +208,23 @@ namespace CMPG223_Project
 
             // SQL query to get the data
             string query = @"
-        SELECT 
-            FORMAT(Date, 'MMMM') AS Month,
-            Vehicle_Class.ClassName,
-            SUM(OrderCost) AS Income
-        FROM 
-            RentalOrder 
-        INNER JOIN 
-            Vehicle ON RentalOrder.Vehicle_ID = Vehicle.Vehicle_ID
-        INNER JOIN 
-            Vehicle_Class ON Vehicle.Vehicle_Class_ID = Vehicle_Class.Vehicle_Class_ID
-        WHERE 
-            Date >= @startDate AND Date <= @endDate
-        GROUP BY 
-            FORMAT(Date, 'MMMM'), Vehicle_Class.ClassName
-        ORDER BY 
-            FORMAT(Date, 'MMMM') " + Order_By + ", Vehicle_Class.ClassName";
+    SELECT 
+        FORMAT(Date, 'MMMM') AS Month,
+        Vehicle_Class.ClassName,
+        SUM(OrderCost) AS Income,
+        DATEPART(MONTH, Date) AS MonthNumber
+    FROM 
+        RentalOrder 
+    INNER JOIN 
+        Vehicle ON RentalOrder.Vehicle_ID = Vehicle.Vehicle_ID
+    INNER JOIN 
+        Vehicle_Class ON Vehicle.Vehicle_Class_ID = Vehicle_Class.Vehicle_Class_ID
+    WHERE 
+        Date >= @startDate AND Date <= @endDate
+    GROUP BY 
+        FORMAT(Date, 'MMMM'), Vehicle_Class.ClassName, DATEPART(MONTH, Date)
+    ORDER BY 
+        MonthNumber " + Order_By + ", Vehicle_Class.ClassName";
 
             // Connect to the database
             using (SqlConnection conn = new SqlConnection(connectionString))
