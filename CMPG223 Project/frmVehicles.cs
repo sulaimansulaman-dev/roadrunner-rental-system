@@ -13,6 +13,8 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CMPG223_Project
 {
+    
+
     public partial class frmVehicles : Form
     {
         int classId;
@@ -22,11 +24,8 @@ namespace CMPG223_Project
             InitializeComponent();
         }
 
-        private void frmVehicles_Load(object sender, EventArgs e)
+        public void displayData()
         {
-            string connectionstring = @"Data Source=DESKTOP-20CLHAU;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
-            cnn = new SqlConnection(connectionstring);
-
             //Display Data
             try
             {
@@ -55,6 +54,14 @@ namespace CMPG223_Project
             {
                 MessageBox.Show("Please connect to the database first");
             }
+        }
+
+        private void frmVehicles_Load(object sender, EventArgs e)
+        {
+            string connectionstring = @"Data Source=DESKTOP-20CLHAU;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+            cnn = new SqlConnection(connectionstring);
+
+            displayData();
 
             LoadComboBox();
         }
@@ -63,7 +70,8 @@ namespace CMPG223_Project
         {
             // Get values from the form
             string vehicleName = txtName.Text;
-            if (cmbClassSelect.SelectedValue != null) {
+            if (cmbClassSelect.SelectedValue != null)
+            {
                 classId = (int)cmbClassSelect.SelectedValue;
             }
             string year1 = txtYear.Text;
@@ -76,10 +84,10 @@ namespace CMPG223_Project
             // Insert query
             string query = "INSERT INTO Vehicle (Vehicle_Class_ID, Year, NumberOfSeats, CostPerDay,LicenseNumber, Vehicle_Name) VALUES (@Vehicle_Class_ID, @Year, @NumberOfSeats, @CostperDay,@LicenseNumber, @Vehicle_Name)";
 
-            
+
             using (SqlCommand cmd = new SqlCommand(query, cnn))
             {
-                
+
                 cmd.Parameters.AddWithValue("@Vehicle_Class_ID", classId);
                 cmd.Parameters.AddWithValue("@Year", year);
                 cmd.Parameters.AddWithValue("@NumberOfSeats", numOfSeats);
@@ -93,10 +101,11 @@ namespace CMPG223_Project
             }
 
             MessageBox.Show("Vehicle added successfully!");
-
+            displayData();
+            
         }
 
-        
+
 
         private void frmVehicles_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -134,6 +143,9 @@ namespace CMPG223_Project
             }
         }
 
-       
+        private void btnBack_Add_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
