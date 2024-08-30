@@ -13,7 +13,7 @@ namespace CMPG223_Project
 {
     public partial class frmRequestReports : Form
     {
-        String connectionString = @"Data Source=LAPTOP-JHPD709J;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False"; 
+        String connectionString = @""; 
         public frmRequestReports()
         {
             InitializeComponent();
@@ -194,39 +194,40 @@ namespace CMPG223_Project
 
         private void GenerateIncomeReceivedReport(DateTime startDate, DateTime endDate, string Order_By)
         {
-        
+
             dgvRequestReports.Rows.Clear();
 
-           
+
             dgvRequestReports.ColumnCount = 3;
             dgvRequestReports.Columns[0].Name = "Month";
             dgvRequestReports.Columns[1].Name = "Vehicle Class";
             dgvRequestReports.Columns[2].Name = "Income";
 
-          
+
             decimal grandTotal = 0;
+            int totalEntries = 0;
 
-            // SQL query to get the data
             string query = @"
-    SELECT 
-        FORMAT(Date, 'MMMM') AS Month,
-        Vehicle_Class.ClassName,
-        SUM(OrderCost) AS Income,
-        DATEPART(MONTH, Date) AS MonthNumber
-    FROM 
-        RentalOrder 
-    INNER JOIN 
-        Vehicle ON RentalOrder.Vehicle_ID = Vehicle.Vehicle_ID
-    INNER JOIN 
-        Vehicle_Class ON Vehicle.Vehicle_Class_ID = Vehicle_Class.Vehicle_Class_ID
-    WHERE 
-        Date >= @startDate AND Date <= @endDate
-    GROUP BY 
-        FORMAT(Date, 'MMMM'), Vehicle_Class.ClassName, DATEPART(MONTH, Date)
-    ORDER BY 
-        MonthNumber " + Order_By + ", Vehicle_Class.ClassName";
+        SELECT 
+            RentalOrder.Order_ID,
+            FORMAT(Date, 'MMMM') AS Month,
+            Vehicle_Class.ClassName,
+            SUM(OrderCost) AS Income,
+            DATEPART(MONTH, Date) AS MonthNumber
+        FROM 
+            RentalOrder 
+        INNER JOIN 
+            Vehicle ON RentalOrder.Vehicle_ID = Vehicle.Vehicle_ID
+        INNER JOIN 
+            Vehicle_Class ON Vehicle.Vehicle_Class_ID = Vehicle_Class.Vehicle_Class_ID
+        WHERE 
+            Date >= @startDate AND Date <= @endDate
+        GROUP BY 
+            RentalOrder.Order_ID, FORMAT(Date, 'MMMM'), Vehicle_Class.ClassName, DATEPART(MONTH, Date)
+        ORDER BY 
+            MonthNumber " + Order_By + ", Vehicle_Class.ClassName";
 
-            // Connect to the database
+
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -246,43 +247,50 @@ namespace CMPG223_Project
                             string vehicleClass = reader["ClassName"].ToString();
                             decimal income = Convert.ToDecimal(reader["Income"]);
 
-                            // New month, add the total row for the previous month
+
                             if (currentMonth != null && month != currentMonth)
                             {
                                 dgvRequestReports.Rows.Add("", "Total:", "R " + monthlyTotal.ToString("N2"));
                                 dgvRequestReports.Rows.Add("");
-                                monthlyTotal = 0; // Reset monthly total
+                                monthlyTotal = 0;
+
+
+                                if (month != currentMonth)
+                                {
+                                    dgvRequestReports.Rows.Add(month, "", "");
+                                    currentMonth = month;
+                                }
+
+
+                                dgvRequestReports.Rows.Add("", vehicleClass, "R " + income.ToString("N2"));
+                                monthlyTotal += income;
+                                grandTotal += income;
+
+
+                                totalEntries++;
                             }
 
-                            // Add month header
-                            if (month != currentMonth)
+
+                            if (currentMonth != null)
                             {
-                                dgvRequestReports.Rows.Add(month, "", "");
-                                currentMonth = month;
+                                dgvRequestReports.Rows.Add("", "Total:", "R " + monthlyTotal.ToString("N2"));
                             }
-
-                            // Add vehicle class and income
-                            dgvRequestReports.Rows.Add("", vehicleClass, "R " + income.ToString("N2"));
-                            monthlyTotal += income;
-                            grandTotal += income;
-                        }
-
-                        // Add the last month's total row
-                        if (currentMonth != null)
-                        {
-                            dgvRequestReports.Rows.Add("", "Total:", "R " + monthlyTotal.ToString("N2"));
                         }
                     }
                 }
+
+
+                dgvRequestReports.Rows.Add("");
+                dgvRequestReports.Rows.Add("", "Grand Total:", "R " + grandTotal.ToString("N2"));
+
+
+                lblTotalEntries_RequestReports.Text = "Total Entries: " + totalEntries.ToString();
+
+
+                ApplyDataGridViewStyles();
             }
-
-            // Add the grand total row
-            dgvRequestReports.Rows.Add("");
-            dgvRequestReports.Rows.Add("", "Grand Total:", "R " + grandTotal.ToString("N2"));
-
-          
-            ApplyDataGridViewStyles();
         }
+
 
 
         private void ApplyDataGridViewStyles()
