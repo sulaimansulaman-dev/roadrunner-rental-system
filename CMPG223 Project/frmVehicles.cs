@@ -13,7 +13,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CMPG223_Project
 {
-    
+
 
     public partial class frmVehicles : Form
     {
@@ -35,7 +35,7 @@ namespace CMPG223_Project
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 DataSet ds = new DataSet();
 
-                string sql = "SELECT * FROM Vehicle"; // <- SELECT statement
+                string sql = "SELECT Vehicle_ID, Vehicle_Name, Vehicle_Class_ID, Year, NumberOfSeats, CostPerDay, LicenseNumber FROM Vehicle"; // <- SELECT statement
                 SqlCommand command = new SqlCommand(sql, cnn); // <-Execute an SQL statement against a given datasource
 
                 //Filling the dataset 
@@ -45,6 +45,12 @@ namespace CMPG223_Project
                 //Adding the data into the Data Grid 
                 dgvVehicles_Add.DataSource = ds;
                 dgvVehicles_Add.DataMember = "Vehicle";
+
+                dgvVehicles_Update.DataSource = ds;
+                dgvVehicles_Update.DataMember = "Vehicle";
+
+                dgvVehicles_Delete.DataSource = ds;
+                dgvVehicles_Delete.DataMember = "Vehicle";
 
                 cnn.Close();
             }
@@ -64,6 +70,7 @@ namespace CMPG223_Project
             displayData();
 
             LoadComboBox();
+            LoadComboBox_VehicleName();
         }
 
         private void btnAdd_Add_Click(object sender, EventArgs e)
@@ -102,7 +109,7 @@ namespace CMPG223_Project
 
             MessageBox.Show("Vehicle added successfully!");
             displayData();
-            
+
         }
 
 
@@ -114,7 +121,12 @@ namespace CMPG223_Project
 
         private void btnClear_Add_Click(object sender, EventArgs e)
         {
-
+            txtName.Text = string.Empty;
+            cmbClassSelect.SelectedIndex = -1;
+            txtYear.Text = string.Empty;
+            cmbNoOfSeats.SelectedIndex = -1;
+            txtCostPerDay.Text = string.Empty;
+            txtLicenseNo.Text = string.Empty;
         }
 
         private void cmbClassSelect_SelectedIndexChanged(object sender, EventArgs e)
@@ -143,9 +155,75 @@ namespace CMPG223_Project
             }
         }
 
+        private void LoadComboBox_VehicleName()
+        {
+            try
+            {
+                cnn.Open();
+                string comboBoxSelect = "SELECT * FROM Vehicle";
+                SqlDataAdapter adapter = new SqlDataAdapter(comboBoxSelect, cnn);
+                DataTable comboTable = new DataTable();
+                adapter.Fill(comboTable);
+                cmbVehicleID_Delete.DataSource = comboTable;
+                cmbVehicleID_Delete.ValueMember = "Vehicle_ID";
+                cmbVehicleID_Delete.DisplayMember = "Vehicle_Name";
+                cnn.Close();
+                cmbVehicleID_Delete.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         private void btnBack_Add_Click(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void btnUpdate_Update_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Delete_Click(object sender, EventArgs e)
+        {
+            if (cmbVehicleID_Delete.SelectedValue != null)
+            {
+                int vehicleId = (int)cmbVehicleID_Delete.SelectedValue;
+
+                string query = "DELETE FROM Vehicle WHERE Vehicle_ID = @Vehicle_ID";
+
+                using (SqlCommand cmd = new SqlCommand(query, cnn))
+                {
+                    cmd.Parameters.AddWithValue("@Vehicle_ID", vehicleId);
+
+                    try
+                    {
+                        cnn.Open();
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        cnn.Close();
+
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Vehicle deleted successfully!");
+                            displayData();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No vehicle found with the selected ID.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"An error occurred: {ex.Message}");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a vehicle to delete.");
+            }
         }
     }
 }

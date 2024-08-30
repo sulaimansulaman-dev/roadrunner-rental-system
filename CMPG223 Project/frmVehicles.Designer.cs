@@ -48,13 +48,13 @@
             btnBack_Add = new Button();
             lblClassSelect = new Label();
             tabUpdate = new TabPage();
+            txtCostPerDay_Update = new TextBox();
+            txtVehicleName_Update = new TextBox();
+            label1 = new Label();
             cmbClass_Update = new ComboBox();
             label3 = new Label();
-            pbxImage_Update = new PictureBox();
             txtYear_Update = new TextBox();
-            label1 = new Label();
             label2 = new Label();
-            hsbCostPerDay_Update = new HScrollBar();
             label8 = new Label();
             txtLicenseNo_Update = new TextBox();
             cmbNoOfSeats_Update = new ComboBox();
@@ -77,7 +77,6 @@
             tabAdd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvVehicles_Add).BeginInit();
             tabUpdate.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pbxImage_Update).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvVehicles_Update).BeginInit();
             tabDelete.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvVehicles_Delete).BeginInit();
@@ -186,6 +185,7 @@
             // 
             // cmbNoOfSeats
             // 
+            cmbNoOfSeats.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbNoOfSeats.FormattingEnabled = true;
             cmbNoOfSeats.Items.AddRange(new object[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" });
             cmbNoOfSeats.Location = new Point(362, 192);
@@ -217,6 +217,7 @@
             // 
             // cmbClassSelect
             // 
+            cmbClassSelect.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbClassSelect.FormattingEnabled = true;
             cmbClassSelect.Location = new Point(364, 74);
             cmbClassSelect.Name = "cmbClassSelect";
@@ -279,13 +280,13 @@
             tabUpdate.BackColor = Color.FromArgb(188, 170, 146);
             tabUpdate.BackgroundImage = (Image)resources.GetObject("tabUpdate.BackgroundImage");
             tabUpdate.BackgroundImageLayout = ImageLayout.Zoom;
+            tabUpdate.Controls.Add(txtCostPerDay_Update);
+            tabUpdate.Controls.Add(txtVehicleName_Update);
+            tabUpdate.Controls.Add(label1);
             tabUpdate.Controls.Add(cmbClass_Update);
             tabUpdate.Controls.Add(label3);
-            tabUpdate.Controls.Add(pbxImage_Update);
             tabUpdate.Controls.Add(txtYear_Update);
-            tabUpdate.Controls.Add(label1);
             tabUpdate.Controls.Add(label2);
-            tabUpdate.Controls.Add(hsbCostPerDay_Update);
             tabUpdate.Controls.Add(label8);
             tabUpdate.Controls.Add(txtLicenseNo_Update);
             tabUpdate.Controls.Add(cmbNoOfSeats_Update);
@@ -304,75 +305,73 @@
             tabUpdate.TabIndex = 1;
             tabUpdate.Text = "Update";
             // 
-            // cmbClass_Update
+            // txtCostPerDay_Update
             // 
-            cmbClass_Update.FormattingEnabled = true;
-            cmbClass_Update.Location = new Point(298, 86);
-            cmbClass_Update.Name = "cmbClass_Update";
-            cmbClass_Update.Size = new Size(209, 28);
-            cmbClass_Update.TabIndex = 32;
+            txtCostPerDay_Update.Location = new Point(382, 308);
+            txtCostPerDay_Update.Name = "txtCostPerDay_Update";
+            txtCostPerDay_Update.Size = new Size(125, 27);
+            txtCostPerDay_Update.TabIndex = 35;
             // 
-            // label3
+            // txtVehicleName_Update
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(25, 72);
-            label3.Name = "label3";
-            label3.Size = new Size(104, 41);
-            label3.TabIndex = 31;
-            label3.Text = "Class: ";
-            // 
-            // pbxImage_Update
-            // 
-            pbxImage_Update.Location = new Point(338, 359);
-            pbxImage_Update.Name = "pbxImage_Update";
-            pbxImage_Update.Size = new Size(169, 148);
-            pbxImage_Update.TabIndex = 30;
-            pbxImage_Update.TabStop = false;
-            // 
-            // txtYear_Update
-            // 
-            txtYear_Update.Location = new Point(382, 144);
-            txtYear_Update.Name = "txtYear_Update";
-            txtYear_Update.Size = new Size(125, 27);
-            txtYear_Update.TabIndex = 29;
+            txtVehicleName_Update.Location = new Point(382, 88);
+            txtVehicleName_Update.Name = "txtVehicleName_Update";
+            txtVehicleName_Update.Size = new Size(125, 27);
+            txtVehicleName_Update.TabIndex = 34;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(27, 359);
+            label1.Location = new Point(26, 68);
             label1.Name = "label1";
-            label1.Size = new Size(230, 41);
-            label1.TabIndex = 28;
-            label1.Text = "Add an image: ";
+            label1.Size = new Size(225, 41);
+            label1.TabIndex = 33;
+            label1.Text = "Vehicle Name: ";
+            // 
+            // cmbClass_Update
+            // 
+            cmbClass_Update.FormattingEnabled = true;
+            cmbClass_Update.Location = new Point(382, 134);
+            cmbClass_Update.Name = "cmbClass_Update";
+            cmbClass_Update.Size = new Size(125, 28);
+            cmbClass_Update.TabIndex = 32;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(25, 120);
+            label3.Name = "label3";
+            label3.Size = new Size(104, 41);
+            label3.TabIndex = 31;
+            label3.Text = "Class: ";
+            // 
+            // txtYear_Update
+            // 
+            txtYear_Update.Location = new Point(382, 192);
+            txtYear_Update.Name = "txtYear_Update";
+            txtYear_Update.Size = new Size(125, 27);
+            txtYear_Update.TabIndex = 29;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(26, 306);
+            label2.Location = new Point(26, 354);
             label2.Name = "label2";
             label2.Size = new Size(274, 41);
             label2.TabIndex = 27;
             label2.Text = "Licencse Number: ";
-            // 
-            // hsbCostPerDay_Update
-            // 
-            hsbCostPerDay_Update.Location = new Point(346, 263);
-            hsbCostPerDay_Update.Maximum = 10000;
-            hsbCostPerDay_Update.Name = "hsbCostPerDay_Update";
-            hsbCostPerDay_Update.Size = new Size(161, 26);
-            hsbCostPerDay_Update.TabIndex = 26;
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
             label8.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label8.Location = new Point(26, 246);
+            label8.Location = new Point(26, 294);
             label8.Name = "label8";
             label8.Size = new Size(211, 41);
             label8.TabIndex = 25;
@@ -380,7 +379,7 @@
             // 
             // txtLicenseNo_Update
             // 
-            txtLicenseNo_Update.Location = new Point(382, 314);
+            txtLicenseNo_Update.Location = new Point(382, 362);
             txtLicenseNo_Update.Name = "txtLicenseNo_Update";
             txtLicenseNo_Update.Size = new Size(125, 27);
             txtLicenseNo_Update.TabIndex = 24;
@@ -389,9 +388,9 @@
             // 
             cmbNoOfSeats_Update.FormattingEnabled = true;
             cmbNoOfSeats_Update.Items.AddRange(new object[] { "2", "4", "6", "13" });
-            cmbNoOfSeats_Update.Location = new Point(402, 198);
+            cmbNoOfSeats_Update.Location = new Point(382, 246);
             cmbNoOfSeats_Update.Name = "cmbNoOfSeats_Update";
-            cmbNoOfSeats_Update.Size = new Size(105, 28);
+            cmbNoOfSeats_Update.Size = new Size(125, 28);
             cmbNoOfSeats_Update.TabIndex = 23;
             // 
             // label9
@@ -399,7 +398,7 @@
             label9.AutoSize = true;
             label9.BackColor = Color.Transparent;
             label9.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.Location = new Point(26, 183);
+            label9.Location = new Point(26, 231);
             label9.Name = "label9";
             label9.Size = new Size(275, 41);
             label9.TabIndex = 22;
@@ -410,7 +409,7 @@
             label10.AutoSize = true;
             label10.BackColor = Color.Transparent;
             label10.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label10.Location = new Point(26, 124);
+            label10.Location = new Point(26, 172);
             label10.Name = "label10";
             label10.Size = new Size(94, 41);
             label10.TabIndex = 21;
@@ -419,9 +418,9 @@
             // cmbVehicleID_Update
             // 
             cmbVehicleID_Update.FormattingEnabled = true;
-            cmbVehicleID_Update.Location = new Point(298, 32);
+            cmbVehicleID_Update.Location = new Point(382, 32);
             cmbVehicleID_Update.Name = "cmbVehicleID_Update";
-            cmbVehicleID_Update.Size = new Size(209, 28);
+            cmbVehicleID_Update.Size = new Size(125, 28);
             cmbVehicleID_Update.TabIndex = 17;
             // 
             // lblVehicle
@@ -460,6 +459,7 @@
             btnUpdate_Update.TabIndex = 13;
             btnUpdate_Update.Text = "Update";
             btnUpdate_Update.UseVisualStyleBackColor = true;
+            btnUpdate_Update.Click += btnUpdate_Update_Click;
             // 
             // btnBack_Update
             // 
@@ -504,6 +504,7 @@
             btnDelete_Delete.TabIndex = 21;
             btnDelete_Delete.Text = "Delete";
             btnDelete_Delete.UseVisualStyleBackColor = true;
+            btnDelete_Delete.Click += btnDelete_Delete_Click;
             // 
             // btnBack_Delete
             // 
@@ -536,11 +537,11 @@
             lblClassID_Delete.AutoSize = true;
             lblClassID_Delete.BackColor = Color.Transparent;
             lblClassID_Delete.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblClassID_Delete.Location = new Point(315, 470);
+            lblClassID_Delete.Location = new Point(288, 470);
             lblClassID_Delete.Name = "lblClassID_Delete";
-            lblClassID_Delete.Size = new Size(164, 38);
+            lblClassID_Delete.Size = new Size(212, 38);
             lblClassID_Delete.TabIndex = 17;
-            lblClassID_Delete.Text = "Vehicle ID: ";
+            lblClassID_Delete.Text = "Vehicle Name: ";
             // 
             // frmVehicles
             // 
@@ -560,7 +561,6 @@
             ((System.ComponentModel.ISupportInitialize)dgvVehicles_Add).EndInit();
             tabUpdate.ResumeLayout(false);
             tabUpdate.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pbxImage_Update).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvVehicles_Update).EndInit();
             tabDelete.ResumeLayout(false);
             tabDelete.PerformLayout();
@@ -598,11 +598,8 @@
         private TextBox txtLicenseNo;
         private Label lblLicenseNo;
         private TextBox txtYear;
-        private PictureBox pbxImage_Update;
         private TextBox txtYear_Update;
-        private Label label1;
         private Label label2;
-        private HScrollBar hsbCostPerDay_Update;
         private Label label8;
         private TextBox txtLicenseNo_Update;
         private ComboBox cmbNoOfSeats_Update;
@@ -614,5 +611,8 @@
         private TextBox txtName;
         private Label label5;
         private ComboBox cmbNoOfSeats;
+        private TextBox txtCostPerDay_Update;
+        private TextBox txtVehicleName_Update;
+        private Label label1;
     }
 }
