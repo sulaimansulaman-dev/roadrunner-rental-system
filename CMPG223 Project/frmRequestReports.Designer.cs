@@ -61,6 +61,7 @@
             errorProvider1 = new ErrorProvider(components);
             errorProvider2 = new ErrorProvider(components);
             lblReportTypeName = new Label();
+            lblTodaysDate_RequestReport = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvRequestReports).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbRequestReports).BeginInit();
@@ -72,7 +73,7 @@
             // 
             pictureBox1.BackColor = Color.White;
             pictureBox1.Image = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
-            pictureBox1.Location = new Point(786, 9);
+            pictureBox1.Location = new Point(506, 12);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(173, 106);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -170,7 +171,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
             dgvRequestReports.DefaultCellStyle = dataGridViewCellStyle1;
             dgvRequestReports.Enabled = false;
-            dgvRequestReports.Location = new Point(506, 245);
+            dgvRequestReports.Location = new Point(506, 256);
             dgvRequestReports.Name = "dgvRequestReports";
             dgvRequestReports.ReadOnly = true;
             dgvRequestReports.RowHeadersVisible = false;
@@ -192,7 +193,7 @@
             // pbRequestReports
             // 
             pbRequestReports.BackColor = Color.White;
-            pbRequestReports.Location = new Point(506, 9);
+            pbRequestReports.Location = new Point(506, 12);
             pbRequestReports.Name = "pbRequestReports";
             pbRequestReports.Size = new Size(744, 782);
             pbRequestReports.SizeMode = PictureBoxSizeMode.Zoom;
@@ -205,7 +206,7 @@
             label5.AutoSize = true;
             label5.BackColor = Color.White;
             label5.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(713, 103);
+            label5.Location = new Point(685, 43);
             label5.Name = "label5";
             label5.Size = new Size(352, 46);
             label5.TabIndex = 12;
@@ -216,7 +217,7 @@
             label6.AutoSize = true;
             label6.BackColor = Color.White;
             label6.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(526, 205);
+            label6.Location = new Point(526, 215);
             label6.Name = "label6";
             label6.Size = new Size(115, 28);
             label6.TabIndex = 13;
@@ -227,7 +228,7 @@
             lblStartDate_RequestReports.AutoSize = true;
             lblStartDate_RequestReports.BackColor = Color.White;
             lblStartDate_RequestReports.Font = new Font("Segoe UI", 12F);
-            lblStartDate_RequestReports.Location = new Point(638, 205);
+            lblStartDate_RequestReports.Location = new Point(638, 215);
             lblStartDate_RequestReports.Name = "lblStartDate_RequestReports";
             lblStartDate_RequestReports.Size = new Size(32, 28);
             lblStartDate_RequestReports.TabIndex = 14;
@@ -238,7 +239,7 @@
             label8.AutoSize = true;
             label8.BackColor = Color.White;
             label8.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label8.Location = new Point(829, 205);
+            label8.Location = new Point(829, 215);
             label8.Name = "label8";
             label8.Size = new Size(103, 28);
             label8.TabIndex = 15;
@@ -249,7 +250,7 @@
             lblEndDate_RequestReports.AutoSize = true;
             lblEndDate_RequestReports.BackColor = Color.White;
             lblEndDate_RequestReports.Font = new Font("Segoe UI", 12F);
-            lblEndDate_RequestReports.Location = new Point(938, 204);
+            lblEndDate_RequestReports.Location = new Point(938, 214);
             lblEndDate_RequestReports.Name = "lblEndDate_RequestReports";
             lblEndDate_RequestReports.Size = new Size(32, 28);
             lblEndDate_RequestReports.TabIndex = 16;
@@ -294,7 +295,7 @@
             lblPageNumber_RequestReports.AutoSize = true;
             lblPageNumber_RequestReports.BackColor = Color.White;
             lblPageNumber_RequestReports.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblPageNumber_RequestReports.Location = new Point(675, 177);
+            lblPageNumber_RequestReports.Location = new Point(675, 187);
             lblPageNumber_RequestReports.Name = "lblPageNumber_RequestReports";
             lblPageNumber_RequestReports.Size = new Size(24, 28);
             lblPageNumber_RequestReports.TabIndex = 21;
@@ -315,7 +316,7 @@
             label11.AutoSize = true;
             label11.BackColor = Color.White;
             label11.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label11.Location = new Point(526, 177);
+            label11.Location = new Point(526, 187);
             label11.Name = "label11";
             label11.Size = new Size(147, 28);
             label11.TabIndex = 23;
@@ -339,9 +340,9 @@
             lblPageNumberDual_RequestReports.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblPageNumberDual_RequestReports.Location = new Point(873, 754);
             lblPageNumberDual_RequestReports.Name = "lblPageNumberDual_RequestReports";
-            lblPageNumberDual_RequestReports.Size = new Size(20, 23);
+            lblPageNumberDual_RequestReports.Size = new Size(38, 23);
             lblPageNumberDual_RequestReports.TabIndex = 25;
-            lblPageNumberDual_RequestReports.Text = "1";
+            lblPageNumberDual_RequestReports.Text = "1/1";
             // 
             // btnClear_RequestReports
             // 
@@ -386,11 +387,22 @@
             lblReportTypeName.AutoSize = true;
             lblReportTypeName.BackColor = Color.White;
             lblReportTypeName.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblReportTypeName.Location = new Point(526, 149);
+            lblReportTypeName.Location = new Point(526, 126);
             lblReportTypeName.Name = "lblReportTypeName";
             lblReportTypeName.Size = new Size(367, 31);
             lblReportTypeName.TabIndex = 29;
             lblReportTypeName.Text = "Income Recieved Per Time Period";
+            // 
+            // lblTodaysDate_RequestReport
+            // 
+            lblTodaysDate_RequestReport.AutoSize = true;
+            lblTodaysDate_RequestReport.BackColor = Color.White;
+            lblTodaysDate_RequestReport.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTodaysDate_RequestReport.Location = new Point(526, 159);
+            lblTodaysDate_RequestReport.Name = "lblTodaysDate_RequestReport";
+            lblTodaysDate_RequestReport.Size = new Size(147, 28);
+            lblTodaysDate_RequestReport.TabIndex = 30;
+            lblTodaysDate_RequestReport.Text = "Page Number:";
             // 
             // frmRequestReports
             // 
@@ -398,6 +410,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(188, 170, 146);
             ClientSize = new Size(1262, 803);
+            Controls.Add(lblTodaysDate_RequestReport);
             Controls.Add(lblReportTypeName);
             Controls.Add(cbOrderBy_RequestReports);
             Controls.Add(lblOrderBy_RequestReports);
@@ -416,7 +429,6 @@
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
-            Controls.Add(dgvRequestReports);
             Controls.Add(btnBack_RequestReport);
             Controls.Add(btnGenerateReport);
             Controls.Add(dtpEndDate_RequestReports);
@@ -426,6 +438,7 @@
             Controls.Add(label1);
             Controls.Add(cbReportType_RequestReports);
             Controls.Add(pictureBox1);
+            Controls.Add(dgvRequestReports);
             Controls.Add(pbRequestReports);
             Name = "frmRequestReports";
             Text = "frmRequestReports";
@@ -472,5 +485,6 @@
         private ErrorProvider errorProvider1;
         private ErrorProvider errorProvider2;
         private Label lblReportTypeName;
+        private Label lblTodaysDate_RequestReport;
     }
 }

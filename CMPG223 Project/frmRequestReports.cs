@@ -22,7 +22,10 @@ namespace CMPG223_Project
 
         private void frmRequestReports_Load(object sender, EventArgs e)
         {
-            pbRequestReports.BringToFront(); 
+            pbRequestReports.BringToFront();
+            dtpStartDate_RequestReports.Value = DateTime.Today;
+            dtpEndDate_RequestReports.Value = DateTime.Today.AddDays(1);
+
 
         }
 
@@ -39,6 +42,7 @@ namespace CMPG223_Project
             // Initialize Variables
             DateTime startDate = dtpStartDate_RequestReports.Value;
             DateTime endDate = dtpEndDate_RequestReports.Value;
+            lblTodaysDate_RequestReport.Text = DateTime.Today.Date.ToString("yyyy/MM/dd"); 
             string Order_By = null;
 
             // Perform validation
@@ -66,7 +70,7 @@ namespace CMPG223_Project
             }
 
             // Row Count Excluding the Total Row in the Count
-            int Total_Entries = dgvRequestReports.Rows.Count - 1;
+            int Total_Entries = dgvRequestReports.Rows.Count ;
             lblTotalEntries_RequestReports.Text = Total_Entries.ToString();
 
             pbRequestReports.SendToBack();
@@ -190,17 +194,95 @@ namespace CMPG223_Project
 
         private void GenerateIncomeReceivedReport(DateTime startDate, DateTime endDate, string Order_By)
         {
-            // Configure DataGridView columns
+        
+            dgvRequestReports.Rows.Clear();
+
+           
             dgvRequestReports.ColumnCount = 3;
             dgvRequestReports.Columns[0].Name = "Month";
             dgvRequestReports.Columns[1].Name = "Vehicle Class";
             dgvRequestReports.Columns[2].Name = "Income";
 
-            ApplyDataGridViewStyles(); 
+          
+            decimal grandTotal = 0;
 
+            // SQL query to get the data
+            string query = @"
+        SELECT 
+            FORMAT(Date, 'MMMM') AS Month,
+            Vehicle_Class.ClassName,
+            SUM(OrderCost) AS Income
+        FROM 
+            RentalOrder 
+        INNER JOIN 
+            Vehicle ON RentalOrder.Vehicle_ID = Vehicle.Vehicle_ID
+        INNER JOIN 
+            Vehicle_Class ON Vehicle.Vehicle_Class_ID = Vehicle_Class.Vehicle_Class_ID
+        WHERE 
+            Date >= @startDate AND Date <= @endDate
+        GROUP BY 
+            FORMAT(Date, 'MMMM'), Vehicle_Class.ClassName
+        ORDER BY 
+            FORMAT(Date, 'MMMM') " + Order_By + ", Vehicle_Class.ClassName";
 
+            // Connect to the database
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@startDate", startDate);
+                    cmd.Parameters.AddWithValue("@endDate", endDate);
+                    conn.Open();
 
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        string currentMonth = null;
+                        decimal monthlyTotal = 0;
+
+                        while (reader.Read())
+                        {
+                            string month = reader["Month"].ToString();
+                            string vehicleClass = reader["ClassName"].ToString();
+                            decimal income = Convert.ToDecimal(reader["Income"]);
+
+                            // New month, add the total row for the previous month
+                            if (currentMonth != null && month != currentMonth)
+                            {
+                                dgvRequestReports.Rows.Add("", "Total:", "R " + monthlyTotal.ToString("N2"));
+                                dgvRequestReports.Rows.Add("");
+                                monthlyTotal = 0; // Reset monthly total
+                            }
+
+                            // Add month header
+                            if (month != currentMonth)
+                            {
+                                dgvRequestReports.Rows.Add(month, "", "");
+                                currentMonth = month;
+                            }
+
+                            // Add vehicle class and income
+                            dgvRequestReports.Rows.Add("", vehicleClass, "R " + income.ToString("N2"));
+                            monthlyTotal += income;
+                            grandTotal += income;
+                        }
+
+                        // Add the last month's total row
+                        if (currentMonth != null)
+                        {
+                            dgvRequestReports.Rows.Add("", "Total:", "R " + monthlyTotal.ToString("N2"));
+                        }
+                    }
+                }
+            }
+
+            // Add the grand total row
+            dgvRequestReports.Rows.Add("");
+            dgvRequestReports.Rows.Add("", "Grand Total:", "R " + grandTotal.ToString("N2"));
+
+          
+            ApplyDataGridViewStyles();
         }
+
 
         private void ApplyDataGridViewStyles()
         {
@@ -220,15 +302,21 @@ namespace CMPG223_Project
             DataGridViewCellStyle boldStyle = new DataGridViewCellStyle();
             boldStyle.Font = new Font("Arial", 10F, FontStyle.Bold);
 
+          
             // Apply the bold style to specific rows
             foreach (DataGridViewRow row in dgvRequestReports.Rows)
             {
-                // Apply bold style to the 'Total:' row
-                if (row.Cells[0].Value != null && row.Cells[0].Value.ToString().StartsWith("Total:"))
+             
+                if (row.Cells[1].Value != null)
                 {
-                    row.DefaultCellStyle = boldStyle;
+                    string cellValue = row.Cells[1].Value.ToString();
+                    if (cellValue.StartsWith("Total:") || cellValue.StartsWith("Grand Total:"))
+                    {
+                        row.DefaultCellStyle = boldStyle;
+                    }
                 }
             }
+
         }
 
 
@@ -251,8 +339,9 @@ namespace CMPG223_Project
             cbReportType_RequestReports.SelectedIndex = -1; 
             cbOrderBy_RequestReports.SelectedIndex = -1;
 
-            dtpEndDate_RequestReports.Value = DateTime.Today;
             dtpStartDate_RequestReports.Value = DateTime.Today;
+            dtpEndDate_RequestReports.Value = DateTime.Today.AddDays(1);
+
 
             lblStartDate_RequestReports.Text = ".....";
             lblEndDate_RequestReports.Text = ".....";
