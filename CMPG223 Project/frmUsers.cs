@@ -19,7 +19,7 @@ namespace CMPG223_Project
         SqlDataReader reader;
         DataSet ds;
 
-        public string connectionString = @"Data Source=METAMIDNIGHT;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30";
+        public string connectionString = @"Data Source=METAMIDNIGHT;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
         string userName_Add, firstName_Add, lastName_Add, cellNumber_Add;
 
@@ -69,23 +69,30 @@ namespace CMPG223_Project
 
         private void btnAdd_AddUsers_Click(object sender, EventArgs e)
         {
+            // Initialize ErrorProviders (add these in your form's constructor or designer file)
+            ErrorProvider usernameErrorProvider = new ErrorProvider();
+            ErrorProvider firstNameErrorProvider = new ErrorProvider();
+            ErrorProvider lastNameErrorProvider = new ErrorProvider();
+            ErrorProvider cellNumberErrorProvider = new ErrorProvider();
+
             try
             {
                 conn = new SqlConnection(connectionString);
 
                 bool isValid = true; // A flag to check if all validations pass
 
+                // Clear previous error messages
+                usernameErrorProvider.Clear();
+                firstNameErrorProvider.Clear();
+                lastNameErrorProvider.Clear();
+                cellNumberErrorProvider.Clear();
+
                 // Username validation
                 string usernamePattern = @"^[a-zA-Z0-9]{1,25}$";
                 if (!System.Text.RegularExpressions.Regex.IsMatch(txtUsername_AddUsers.Text, usernamePattern))
                 {
-                    lblUsernameError_AddUsers.Text = "Username must be 1-25 characters long and contain only letters and numbers.";
-                    lblUsernameError_AddUsers.Visible = true;
+                    usernameErrorProvider.SetError(txtUsername_AddUsers, "Username must be 1-25 characters long and contain only letters and numbers.");
                     isValid = false;
-                }
-                else
-                {
-                    lblUsernameError_AddUsers.Visible = false;
                 }
 
                 // Check if username already exists
@@ -98,13 +105,8 @@ namespace CMPG223_Project
 
                 if (userCount > 0)
                 {
-                    lblUsernameError_AddUsers.Text = "This username already exists. Please choose a different one.";
-                    lblUsernameError_AddUsers.Visible = true;
+                    usernameErrorProvider.SetError(txtUsername_AddUsers, "This username already exists. Please choose a different one.");
                     isValid = false;
-                }
-                else if (lblUsernameError_AddUsers.Visible == false) // Only hide if there are no other username errors
-                {
-                    lblUsernameError_AddUsers.Visible = false;
                 }
 
                 userName_Add = txtUsername_AddUsers.Text;
@@ -113,13 +115,8 @@ namespace CMPG223_Project
                 string namePattern = @"^[a-zA-Z]{1,25}$";
                 if (!System.Text.RegularExpressions.Regex.IsMatch(txtFirstName_AddUsers.Text, namePattern))
                 {
-                    lblFirstNameError_AddUsers.Text = "First name must be 1-25 characters long and contain only letters.";
-                    lblFirstNameError_AddUsers.Visible = true;
+                    firstNameErrorProvider.SetError(txtFirstName_AddUsers, "First name must be 1-25 characters long and contain only letters.");
                     isValid = false;
-                }
-                else
-                {
-                    lblFirstNameError_AddUsers.Visible = false;
                 }
 
                 firstName_Add = txtFirstName_AddUsers.Text;
@@ -127,13 +124,8 @@ namespace CMPG223_Project
                 // Last name validation
                 if (!System.Text.RegularExpressions.Regex.IsMatch(txtLastName_AddUsers.Text, namePattern))
                 {
-                    lblLastNameError_AddUsers.Text = "Last name must be 1-25 characters long and contain only letters.";
-                    lblLastNameError_AddUsers.Visible = true;
+                    lastNameErrorProvider.SetError(txtLastName_AddUsers, "Last name must be 1-25 characters long and contain only letters.");
                     isValid = false;
-                }
-                else
-                {
-                    lblLastNameError_AddUsers.Visible = false;
                 }
 
                 lastName_Add = txtLastName_AddUsers.Text;
@@ -143,19 +135,15 @@ namespace CMPG223_Project
                 string pattern = @"^0\d{9}$";
                 if (!System.Text.RegularExpressions.Regex.IsMatch(phoneInput, pattern))
                 {
-                    lblCellNumberError_AddUsers.Text = "Invalid phone number. It must be 10 digits long and start with 0.";
-                    lblCellNumberError_AddUsers.Visible = true;
+                    cellNumberErrorProvider.SetError(txtCellNumber_AddUsers, "Invalid phone number. It must be 10 digits long and start with 0.");
                     txtCellNumber_AddUsers.Clear();
                     txtCellNumber_AddUsers.Focus();
                     isValid = false;
                 }
                 else
                 {
-                    lblCellNumberError_AddUsers.Text = "";
-                    lblCellNumberError_AddUsers.Visible = false;
+                    cellNumber_Add = phoneInput.Replace(" ", ""); // Remove any spaces
                 }
-
-                cellNumber_Add = phoneInput.Replace(" ", ""); // Remove any spaces
 
                 // If any validation failed, return early
                 if (!isValid)
@@ -278,7 +266,7 @@ namespace CMPG223_Project
             ///////////
         }
 
-        
+
         private void btnClear_AddUsers_Click(object sender, EventArgs e)
         {
             txtUsername_AddUsers.Clear();
@@ -440,11 +428,11 @@ namespace CMPG223_Project
                     MessageBox.Show("An error occurred: " + ex.Message);
                 }
 
-                //repoopulate datagridview
+                //repopulate datagridview
                 conn = new SqlConnection(connectionString);
 
                 conn.Open();
-                string sqlDisplay = $"SELECT * FROM Users"; 
+                string sqlDisplay = $"SELECT * FROM Users";
                 command = new SqlCommand(sqlDisplay, conn);
                 adapter = new SqlDataAdapter();
                 adapter.SelectCommand = command;
@@ -458,6 +446,15 @@ namespace CMPG223_Project
                 dgvUpdateUsers.DataMember = "Users";
                 conn.Close();
             }
+        }
+
+        private void btnClearUsers_UpdateUsers_Click(object sender, EventArgs e)
+        {
+            txtUsername_UpdateUsers.Clear();
+            txtFirstName_UpdateUsers.Clear();
+            txtLastName_UpdateUsers.Clear();
+            txtCellNumber_UpdateUsers.Clear();
+            dgvUpdateUsers.Focus();
         }
     }
 }
