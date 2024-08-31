@@ -13,7 +13,7 @@ namespace CMPG223_Project
 {
     public partial class frmRequestReports : Form
     {
-        String connectionString = @"Data Source=LAPTOP-JHPD709J;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False"; 
+        String connectionString = @"Data Source=DESKTOP-20CLHAU;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False"; 
         public frmRequestReports()
         {
             InitializeComponent();
@@ -159,7 +159,8 @@ namespace CMPG223_Project
 
            
             dgvRequestReports.ColumnCount = 3;
-            dgvRequestReports.Columns[0].Name = "Month";
+            
+            dgvRequestReports.Columns[0].Name = "Date";
             dgvRequestReports.Columns[1].Name = "Vehicle Class";
             dgvRequestReports.Columns[2].Name = "Income";
 
@@ -170,10 +171,11 @@ namespace CMPG223_Project
             // SQL query to get the data
             string query = @"
     SELECT 
-        FORMAT(Date, 'MMMM') AS Month,
+        FORMAT(Date, 'yyyy MMMM') AS Month,
         Vehicle_Class.ClassName,
         SUM(OrderCost) AS Income,
-        DATEPART(MONTH, Date) AS MonthNumber
+        DATEPART(MONTH, Date) AS MonthNumber,
+        DATEPART(YEAR, Date) AS YearNumber
     FROM 
         RentalOrder 
     INNER JOIN 
@@ -183,9 +185,9 @@ namespace CMPG223_Project
     WHERE 
         Date >= @startDate AND Date <= @endDate
     GROUP BY 
-        FORMAT(Date, 'MMMM'), Vehicle_Class.ClassName, DATEPART(MONTH, Date)
+        FORMAT(Date, 'yyyy MMMM'), Vehicle_Class.ClassName, DATEPART(MONTH, Date), DATEPART(YEAR, Date)
     ORDER BY 
-        MonthNumber " + Order_By + ", Vehicle_Class.ClassName";
+        YearNumber, MonthNumber , Income " + Order_By + ", Vehicle_Class.ClassName";
 
             // Connect to the database
             using (SqlConnection conn = new SqlConnection(connectionString))
