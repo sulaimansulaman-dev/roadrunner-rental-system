@@ -19,21 +19,16 @@ namespace CMPG223_Project
         SqlDataReader reader;
         DataSet ds;
 
+        // Connection string to connect to the database
         public string connectionString = @"Data Source=METAMIDNIGHT;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
         string userName_Add, firstName_Add, lastName_Add, cellNumber_Add;
-        
-        // Initialize ErrorProviders 
+
+        // Initialize ErrorProviders for validation feedback
         ErrorProvider usernameErrorProvider = new ErrorProvider();
         ErrorProvider firstNameErrorProvider = new ErrorProvider();
         ErrorProvider lastNameErrorProvider = new ErrorProvider();
         ErrorProvider cellNumberErrorProvider = new ErrorProvider();
-
-        /*// Initialize ErrorProviders 
-        ErrorProvider usernameErrorProvider = new ErrorProvider();
-        ErrorProvider firstNameErrorProvider = new ErrorProvider();
-        ErrorProvider lastNameErrorProvider = new ErrorProvider();
-        ErrorProvider cellNumberErrorProvider = new ErrorProvider();*/
 
         public frmUsers()
         {
@@ -54,7 +49,7 @@ namespace CMPG223_Project
             // Check if a valid row is clicked (not the header row)
             if (e.RowIndex >= 0)
             {
-                
+                // Retrieve the selected User ID from the clicked row and set it to the update TextBox
                 string selectedUserID = dgvUpdateUsers.Rows[e.RowIndex].Cells[0].Value.ToString();
                 txtUserID_UpdateUser.Text = selectedUserID;
             }
@@ -62,31 +57,11 @@ namespace CMPG223_Project
 
         public void refreshCombobox()
         {
-            string sqlRefresh;
-
-            conn.Open();
-            cmbUsername_DeleteUsers.Items.Clear();
-
-            sqlRefresh = "SELECT DISTINCT * FROM Users";
-            command = new SqlCommand(sqlRefresh, conn);
-            reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                cmbUsername_DeleteUsers.Items.Add(reader.GetString(0));
-            }
-
-            conn.Close();
+            ////////////////
         }
 
         private void btnAdd_AddUsers_Click(object sender, EventArgs e)
         {
-            /*// Initialize ErrorProviders 
-            ErrorProvider usernameErrorProvider = new ErrorProvider();
-            ErrorProvider firstNameErrorProvider = new ErrorProvider();
-            ErrorProvider lastNameErrorProvider = new ErrorProvider();
-            ErrorProvider cellNumberErrorProvider = new ErrorProvider();*/
-
             try
             {
                 conn = new SqlConnection(connectionString);
@@ -163,7 +138,7 @@ namespace CMPG223_Project
                     return;
                 }
 
-                // Adding a new user
+                // Insert the new user into the database
                 string sqlInsert = "INSERT INTO Users(Username, Lastname, FirstName, Cellnumber) VALUES (@Username, @LastName, @FirstName, @CellNumber)";
                 conn.Open();
                 SqlCommand insertCommand = new SqlCommand(sqlInsert, conn);
@@ -174,7 +149,7 @@ namespace CMPG223_Project
                 insertCommand.ExecuteNonQuery();
                 conn.Close();
 
-                // Repopulating DataGridView
+                // Repopulating DataGridView to show the added user
                 conn.Open();
                 string sqlDisplay = "SELECT * FROM Users";
                 SqlCommand command = new SqlCommand(sqlDisplay, conn);
@@ -189,10 +164,8 @@ namespace CMPG223_Project
                 dgvUpdateUsers.DataMember = "Users";
                 conn.Close();
 
-                // Clear ComboBox
+                // Clear ComboBox for usernames and repopulate it
                 cmbUsername_DeleteUsers.Items.Clear();
-
-                // Repopulate ComboBox
                 conn.Open();
                 string sqlSelect = "SELECT Username FROM Users";
                 command = new SqlCommand(sqlSelect, conn);
@@ -204,7 +177,7 @@ namespace CMPG223_Project
                 reader.Close();
                 conn.Close();
 
-                // Clear textboxes
+                // Clear textboxes for adding new users
                 txtUsername_AddUsers.Clear();
                 txtFirstName_AddUsers.Clear();
                 txtLastName_AddUsers.Clear();
@@ -213,16 +186,19 @@ namespace CMPG223_Project
             }
             catch (SqlException sqlEx)
             {
+                // Handle SQL exceptions
                 MessageBox.Show("Database error: " + sqlEx.Message);
             }
             catch (Exception ex)
             {
+                // Handle general exceptions
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
         }
 
         private void AddUser_Click(object sender, EventArgs e)
         {
+            // Display users in DataGridView when "Add User" button is clicked
             conn.Open();
             string sqlDisplay = $"SELECT * FROM Users"; 
             command = new SqlCommand(sqlDisplay, conn);
@@ -244,6 +220,7 @@ namespace CMPG223_Project
 
             conn = new SqlConnection(connectionString);
 
+            // Populate the DataGridViews with the list of users
             conn.Open();
             string sqlDisplay = $"SELECT * FROM Users"; 
             command = new SqlCommand(sqlDisplay, conn);
@@ -259,7 +236,7 @@ namespace CMPG223_Project
             dgvUpdateUsers.DataMember = "Users";
             conn.Close();
 
-            //fills combobox with the usernames
+            // Populate ComboBox with the list of usernames from the Users table
             conn.Open();
             string sqlSelect = $"SELECT Username FROM Users";
             command = new SqlCommand(sqlSelect, conn);
@@ -281,11 +258,16 @@ namespace CMPG223_Project
 
         private void btnClear_AddUsers_Click(object sender, EventArgs e)
         {
+            // Clears all input fields for adding a new user
             txtUsername_AddUsers.Clear();
             txtFirstName_AddUsers.Clear();
             txtLastName_AddUsers.Clear();
             txtCellNumber_AddUsers.Clear();
+
+            // Sets focus back to the username input field
             txtUsername_AddUsers.Focus();
+
+            // Clears any error messages set by ErrorProviders
             usernameErrorProvider.Clear();
             firstNameErrorProvider.Clear();
             lastNameErrorProvider.Clear();
@@ -294,22 +276,25 @@ namespace CMPG223_Project
 
         private void btnDelete_DeleteUsers_Click(object sender, EventArgs e)
         {
-
+            // SQL statement to delete a user based on the selected username from the ComboBox
             string sqlDelete = "DELETE FROM Users WHERE Username ='" + cmbUsername_DeleteUsers.Text + "'";
 
+            // Open database connection
             conn.Open();
             command = new SqlCommand(sqlDelete, conn);
             adapter = new SqlDataAdapter();
 
+            // Execute the delete command
             adapter.DeleteCommand = command;
             adapter.DeleteCommand.ExecuteNonQuery();
 
+            // Close the database connection
             conn.Close();
 
-            //clear combobox
+            // Clear the ComboBox items for refreshing
             cmbUsername_DeleteUsers.Items.Clear();
 
-            //repopulate cmb
+            // Repopulate the ComboBox with the updated list of usernames
             conn.Open();
             string sqlSelect = $"SELECT Username FROM Users";
             command = new SqlCommand(sqlSelect, conn);
@@ -322,11 +307,11 @@ namespace CMPG223_Project
             reader.Close();
             conn.Close();
 
+            // Clear the selected value in ComboBox
             cmbUsername_DeleteUsers.Text = "";
 
-            //update datagridview
+            // Update the DataGridView to reflect the changes after deletion
             conn = new SqlConnection(connectionString);
-
             conn.Open();
             string sqlDisplay = $"SELECT * FROM Users"; 
             command = new SqlCommand(sqlDisplay, conn);
@@ -334,6 +319,8 @@ namespace CMPG223_Project
             adapter.SelectCommand = command;
             ds = new DataSet();
             adapter.Fill(ds, "Users");
+
+            // Update all DataGridViews to show current data
             dgvAddUsers.DataSource = ds;
             dgvAddUsers.DataMember = "Users";
             dgvDelete_DeleteUsers.DataSource = ds;
@@ -346,6 +333,7 @@ namespace CMPG223_Project
 
         private void DeleteUsers_Click(object sender, EventArgs e)
         {
+            // Open the connection to display the list of users
             conn.Open();
             string sqlDisplay = $"SELECT * FROM Users"; 
             command = new SqlCommand(sqlDisplay, conn);
@@ -353,6 +341,8 @@ namespace CMPG223_Project
             adapter.SelectCommand = command;
             ds = new DataSet();
             adapter.Fill(ds, "Users");
+
+            // Set DataGridViews data source to show users
             dgvAddUsers.DataSource = ds;
             dgvAddUsers.DataMember = "Users";
             dgvDelete_DeleteUsers.DataSource = ds;
@@ -367,12 +357,7 @@ namespace CMPG223_Project
 
         private void btnUpdateUsers_UpdateUsers_Click(object sender, EventArgs e)
         {
-            /*// Initialize ErrorProviders 
-            ErrorProvider usernameErrorProvider = new ErrorProvider();
-            ErrorProvider firstNameErrorProvider = new ErrorProvider();
-            ErrorProvider lastNameErrorProvider = new ErrorProvider();
-            ErrorProvider cellNumberErrorProvider = new ErrorProvider();*/
-
+            // Check if a user is selected to update
             if (string.IsNullOrEmpty(txtUserID_UpdateUser.Text))
             {
                 MessageBox.Show("Please select a user to update.");
@@ -552,11 +537,14 @@ namespace CMPG223_Project
 
         private void btnClearUsers_UpdateUsers_Click(object sender, EventArgs e)
         {
+            // Clears all input fields
             txtUsername_UpdateUsers.Clear();
             txtFirstName_UpdateUsers.Clear();
             txtLastName_UpdateUsers.Clear();
             txtCellNumber_UpdateUsers.Clear();
             dgvUpdateUsers.Focus();
+
+            // Clears any error messages set by ErrorProviders
             usernameErrorProvider.Clear();
             firstNameErrorProvider.Clear();
             lastNameErrorProvider.Clear();
