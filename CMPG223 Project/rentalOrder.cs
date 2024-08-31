@@ -60,6 +60,7 @@ namespace CMPG223_Project
                 bool vehicleReturned = false;
                 if (isValid == true)
                 {
+                    con.Open();
                     string insert = "INSERT INTO RentalOrder (Client_ID, User_ID, Vehicle_ID, Time, OrderCost, DaysRented, Paid, VehicleReturned, Date) VALUES(@Client_ID, @User_ID, @Vehicle_ID, @Time, @OrderCost, @DaysRented, @Paid, @VehicleReturned, @Date)";
                     SqlCommand cmd = new SqlCommand(insert, con);
                     cmd.Parameters.AddWithValue("@Client_ID", Client_ID);
@@ -71,13 +72,16 @@ namespace CMPG223_Project
                     cmd.Parameters.AddWithValue("@DaysRented", days);
                     cmd.Parameters.AddWithValue("@VehicleReturned", vehicleReturned);
                     cmd.Parameters.AddWithValue("@Date", date);
+                    cmd.ExecuteNonQuery();
                     MessageBox.Show("Added successfully");
+                    con.Close();
                 }
 
             }
             catch (Exception ex)
             {
-
+                con.Close();
+                MessageBox.Show(ex.Message);
             }
 
 
@@ -100,7 +104,7 @@ namespace CMPG223_Project
             try
             {
 
-                string select = "SELECT Vehicle.Vehicle_ID, Vehicle.CostPerDay, Vehicle.NumberOfSeats, Vehicle_Class.ClassName, FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_CLass_ID=Vehicle_Class.Vehicle_Class_ID WHERE Vehicle.InUse = 'False'";
+                string select = "SELECT Vehicle.Vehicle_ID, Vehicle.CostPerDay, Vehicle.NumberOfSeats, Vehicle_Class.ClassName FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_CLass_ID=Vehicle_Class.Vehicle_Class_ID WHERE Vehicle.InUse = 'False'";
                 SqlDataAdapter adapter = new SqlDataAdapter(select, con);
                 DataSet dataSet = new DataSet();
                 adapter.Fill(dataSet);
