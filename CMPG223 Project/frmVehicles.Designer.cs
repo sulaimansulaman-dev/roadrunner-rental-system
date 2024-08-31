@@ -49,6 +49,7 @@
             btnBack_Add = new Button();
             lblClassSelect = new Label();
             tabUpdate = new TabPage();
+            txtVehicleID_Update = new TextBox();
             txtCostPerDay_Update = new TextBox();
             txtVehicleName_Update = new TextBox();
             label1 = new Label();
@@ -74,7 +75,6 @@
             cmbVehicleID_Delete = new ComboBox();
             lblClassID_Delete = new Label();
             errorProvider1 = new ErrorProvider(components);
-            textBox1 = new TextBox();
             tabControlVehicleClasses.SuspendLayout();
             tabAdd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvVehicles_Add).BeginInit();
@@ -283,7 +283,7 @@
             tabUpdate.BackColor = Color.FromArgb(188, 170, 146);
             tabUpdate.BackgroundImage = (Image)resources.GetObject("tabUpdate.BackgroundImage");
             tabUpdate.BackgroundImageLayout = ImageLayout.Zoom;
-            tabUpdate.Controls.Add(textBox1);
+            tabUpdate.Controls.Add(txtVehicleID_Update);
             tabUpdate.Controls.Add(txtCostPerDay_Update);
             tabUpdate.Controls.Add(txtVehicleName_Update);
             tabUpdate.Controls.Add(label1);
@@ -307,6 +307,14 @@
             tabUpdate.Size = new Size(1094, 728);
             tabUpdate.TabIndex = 1;
             tabUpdate.Text = "Update";
+            // 
+            // txtVehicleID_Update
+            // 
+            txtVehicleID_Update.Enabled = false;
+            txtVehicleID_Update.Location = new Point(382, 32);
+            txtVehicleID_Update.Name = "txtVehicleID_Update";
+            txtVehicleID_Update.Size = new Size(125, 27);
+            txtVehicleID_Update.TabIndex = 36;
             // 
             // txtCostPerDay_Update
             // 
@@ -336,6 +344,7 @@
             // 
             // cmbClass_Update
             // 
+            cmbClass_Update.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbClass_Update.FormattingEnabled = true;
             cmbClass_Update.Location = new Point(382, 134);
             cmbClass_Update.Name = "cmbClass_Update";
@@ -391,8 +400,9 @@
             // 
             // cmbNoOfSeats_Update
             // 
+            cmbNoOfSeats_Update.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbNoOfSeats_Update.FormattingEnabled = true;
-            cmbNoOfSeats_Update.Items.AddRange(new object[] { "2", "4", "6", "13" });
+            cmbNoOfSeats_Update.Items.AddRange(new object[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" });
             cmbNoOfSeats_Update.Location = new Point(382, 246);
             cmbNoOfSeats_Update.Name = "cmbNoOfSeats_Update";
             cmbNoOfSeats_Update.Size = new Size(125, 28);
@@ -438,6 +448,7 @@
             dgvVehicles_Update.RowHeadersWidth = 51;
             dgvVehicles_Update.Size = new Size(473, 293);
             dgvVehicles_Update.TabIndex = 15;
+            dgvVehicles_Update.CellClick += dgvVehicles_Update_CellClick;
             // 
             // btnClear_Update
             // 
@@ -544,14 +555,6 @@
             // 
             errorProvider1.ContainerControl = this;
             // 
-            // textBox1
-            // 
-            textBox1.Enabled = false;
-            textBox1.Location = new Point(382, 32);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(125, 27);
-            textBox1.TabIndex = 36;
-            // 
             // frmVehicles
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -624,6 +627,6 @@
         private TextBox txtVehicleName_Update;
         private Label label1;
         private ErrorProvider errorProvider1;
-        private TextBox textBox1;
+        private TextBox txtVehicleID_Update;
     }
 }

@@ -37,7 +37,7 @@ namespace CMPG223_Project
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 DataSet ds = new DataSet();
 
-                string sql = "SELECT Vehicle_ID, Vehicle_Name, Vehicle_Class_ID, Year, NumberOfSeats, CostPerDay, LicenseNumber FROM Vehicle"; // <- SELECT statement
+                string sql = "SELECT Vehicle.Vehicle_ID, Vehicle.Vehicle_Name, Vehicle_Class.ClassName, Vehicle.Year, Vehicle.NumberOfSeats, Vehicle.CostPerDay, Vehicle.LicenseNumber FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_Class_ID = Vehicle_Class.Vehicle_Class_ID;"; // <- SELECT statement
                 SqlCommand command = new SqlCommand(sql, cnn); // <-Execute an SQL statement against a given datasource
 
                 //Filling the dataset 
@@ -61,6 +61,7 @@ namespace CMPG223_Project
             catch
             {
                 MessageBox.Show("Please connect to the database first");
+                cnn.Close();
             }
         }
 
@@ -72,12 +73,13 @@ namespace CMPG223_Project
             displayData();
 
             LoadComboBox();
+            LoadComboBoxUpdateClass();
             LoadComboBox_VehicleName();
         }
 
         private void btnAdd_Add_Click(object sender, EventArgs e)
         {
-            
+
             string vehicleName = txtName.Text.Trim();
             bool isValid = true;
             // Regular expression patterns for validation
@@ -96,7 +98,8 @@ namespace CMPG223_Project
                 errorProvider1.SetError(txtName, "Class Name must contain only letters and allowed punctuation.");
                 isValid = false;
             }
-            else {
+            else
+            {
                 errorProvider1.SetError(txtName, "");
             }
 
@@ -106,7 +109,8 @@ namespace CMPG223_Project
                 errorProvider1.SetError(cmbClassSelect, "Please select a class.");
                 return;
             }
-            else {
+            else
+            {
                 errorProvider1.SetError(cmbClassSelect, "");
             }
 
@@ -194,6 +198,26 @@ namespace CMPG223_Project
             }
         }
 
+        private void LoadComboBoxUpdateClass() {
+            try
+            {
+                cnn.Open();
+                string comboBoxSelect = "SELECT * FROM Vehicle_Class";
+                SqlDataAdapter adapter = new SqlDataAdapter(comboBoxSelect, cnn);
+                DataTable comboTable = new DataTable();
+                adapter.Fill(comboTable);
+                cmbClass_Update.DataSource = comboTable;
+                cmbClass_Update.ValueMember = "Vehicle_Class_ID";
+                cmbClass_Update.DisplayMember = "ClassName";
+                cnn.Close();
+                cmbClass_Update.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         private void LoadComboBox_VehicleName()
         {
             try
@@ -222,7 +246,162 @@ namespace CMPG223_Project
 
         private void btnUpdate_Update_Click(object sender, EventArgs e)
         {
+            // Variables
+            string vehicleID = txtVehicleID_Update.Text.Trim();
+            string vehicleName = txtVehicleName_Update.Text.Trim();
+            string class1 = cmbClass_Update.Text.Trim();
+            string year = txtYear_Update.Text.Trim();
+            string numSeats = cmbNoOfSeats_Update.Text.Trim();
+            string costPDay = txtCostPerDay_Update.Text.Trim();
+            string license = txtLicenseNo_Update.Text.Trim();
 
+            bool isValid = true;
+            string namePattern = @"^[a-zA-Z0-9\s.'-]+$";
+
+            // Validation Block
+            if (string.IsNullOrWhiteSpace(vehicleID))
+            {
+                errorProvider1.SetError(txtVehicleID_Update, "Select a Vehicle.");
+                return;
+            }
+            else
+            {
+                errorProvider1.SetError(txtVehicleID_Update, "");
+            }
+
+            // Validation Block
+            if (string.IsNullOrWhiteSpace(vehicleName))
+            {
+                errorProvider1.SetError(txtVehicleName_Update, "Please enter Vehicle Name.");
+                return;
+            }
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(vehicleName, namePattern))
+            {
+                errorProvider1.SetError(txtVehicleName_Update, "Car Name must contain only letters, numbers, spaces, and allowed punctuation.");
+                isValid = false;
+            }
+            else
+            {
+                errorProvider1.SetError(txtVehicleName_Update, "");
+            }
+
+            // cmb validation
+            if (cmbClass_Update.SelectedIndex == -1)
+            {
+                errorProvider1.SetError(cmbClass_Update, "Please select a class.");
+                return;
+            }
+            else
+            {
+                errorProvider1.SetError(cmbClass_Update, "");
+            }
+
+            // Year validation
+            string yearPattern = @"^\d{4}$";
+            if (string.IsNullOrWhiteSpace(year))
+            {
+                errorProvider1.SetError(txtYear_Update, "Please enter the year.");
+                return;
+            }
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(year, yearPattern))
+            {
+                errorProvider1.SetError(txtYear_Update, "Year must be a four-digit number.");
+                isValid = false;
+            }
+            else
+            {
+                errorProvider1.SetError(txtYear_Update, "");
+            }
+
+            // Num SEATS validation
+            if (cmbNoOfSeats_Update.SelectedIndex == -1)
+            {
+                errorProvider1.SetError(cmbNoOfSeats_Update, "Please select a number.");
+                return;
+            }
+            else
+            {
+                errorProvider1.SetError(cmbNoOfSeats_Update, "");
+            }
+
+            // Cost per day validation
+            string pricePattern = @"^\d+(\.\d{1,2})?$";
+            if (string.IsNullOrWhiteSpace(costPDay))
+            {
+                errorProvider1.SetError(txtCostPerDay_Update, "Please enter the Price.");
+                return;
+            }
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(costPDay, pricePattern))
+            {
+                errorProvider1.SetError(txtCostPerDay_Update, "Price must be a valid number with up to two decimal places.");
+                isValid = false;
+            }
+            else
+            {
+                errorProvider1.SetError(txtCostPerDay_Update, "");
+            }
+
+            // License validation
+            if (string.IsNullOrWhiteSpace(license))
+            {
+                errorProvider1.SetError(txtLicenseNo_Update, "Please enter the License Number.");
+                return;
+            }
+            else
+            {
+                errorProvider1.SetError(txtLicenseNo_Update, "");
+            }
+
+            // Preparing the SQL update query
+            string updateQuery = "UPDATE Vehicle SET Vehicle_Name = @VehicleName, Vehicle_Class_ID = @ClassName, Year = @Year, NumberOfSeats = @NumberOfSeats, CostPerDay = @CostPerDay, LicenseNumber = @License WHERE Vehicle_ID = @Vehicle_ID";
+
+            try
+            {
+                // Open the connection if it's not already open
+                if (cnn.State != ConnectionState.Open)
+                {
+                    cnn.Open();
+                }
+
+                // Using the existing connection to execute the update command
+                using (SqlCommand cmd = new SqlCommand(updateQuery, cnn))
+                {
+                    cmd.Parameters.AddWithValue("@VehicleName", vehicleName);
+                    cmd.Parameters.AddWithValue("@ClassName", class1);
+                    cmd.Parameters.AddWithValue("@Year", year);
+                    cmd.Parameters.AddWithValue("@NumberOfSeats", numSeats);
+                    cmd.Parameters.AddWithValue("@CostPerDay", costPDay);
+                    cmd.Parameters.AddWithValue("@License", license);
+                    cmd.Parameters.AddWithValue("@Vehicle_ID", vehicleID);
+
+                    // Debugging output
+                    Console.WriteLine($"Executing Query: {updateQuery}");
+                    Console.WriteLine($"VehicleName: {vehicleName}, ClassName: {class1}, Year: {year}, NumberOfSeats: {numSeats}, CostPerDay: {costPDay}, License: {license}, Vehicle_ID: {vehicleID}");
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Vehicle updated successfully.");
+                        displayData();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No records were updated. Please check if the Vehicle ID exists.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                // Close the connection if it's still open
+                if (cnn.State == ConnectionState.Open)
+                {
+                    cnn.Close();
+                }
+            }
         }
 
         private void btnDelete_Delete_Click(object sender, EventArgs e)
@@ -278,6 +457,35 @@ namespace CMPG223_Project
         private void cmbClass_Update_Validating(object sender, CancelEventArgs e)
         {
 
+        }
+
+        private void dgvVehicles_Update_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvVehicles_Update.CurrentRow != null)
+            {
+
+                DataGridViewRow selectedRow = dgvVehicles_Update.CurrentRow;
+
+
+                string vehicleId = selectedRow.Cells["Vehicle_ID"].Value.ToString();
+                string vehicleName = selectedRow.Cells["Vehicle_Name"].Value.ToString();
+                string className = selectedRow.Cells["ClassName"].Value.ToString();
+                string sYear = selectedRow.Cells["Year"].Value.ToString();
+                string numOfSeats = selectedRow.Cells["NumberOfSeats"].Value.ToString();
+                string cost = selectedRow.Cells["CostPerDay"].Value.ToString();
+                string license = selectedRow.Cells["LicenseNumber"].Value.ToString();
+
+
+
+                txtVehicleID_Update.Text = vehicleId;
+                txtVehicleName_Update.Text = vehicleName;
+                cmbClass_Update.Text = className;
+                txtYear_Update.Text = sYear;
+                cmbNoOfSeats_Update.Text = numOfSeats;
+                txtCostPerDay_Update.Text = cost;
+                txtLicenseNo_Update.Text = license;
+
+            }
         }
     }
 }
