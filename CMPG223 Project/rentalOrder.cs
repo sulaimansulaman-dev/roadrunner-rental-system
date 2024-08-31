@@ -7,34 +7,55 @@ namespace CMPG223_Project
     {
         Form form1;
         SqlConnection con = new SqlConnection("Data Source=MOMO;Initial Catalog=\"Roadrunner Rentals\";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
-        decimal cost;
-        int days;
-        public rentalOrder(Form form1)
+        decimal cost = 0;
+        int days = 0;
+        int VehicleID = 0;
+        int userID = 0;
+        bool paid = false;
+        public rentalOrder(Form form1, int userID)
         {
             InitializeComponent();
             this.form1 = form1;
+            this.userID = userID;
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedValue != null)
+            try
             {
-                int Client_ID = (int)comboBox1.SelectedValue;
+                bool isValid = true;
+                if (comboBox1.SelectedIndex != -1)
+                {
+                    int Client_ID = (int)comboBox1.SelectedValue;
+                    label9.Visible = false;
+                }
+                else
+                {
+                    label9.Visible = true;
+                    isValid = false;
+                }
+
+                if (checkBox1.Checked)
+                {
+                    bool paid = true;
+                }
+
+                if (VehicleID == 0)
+                {
+                    label10.Visible = true;
+                    isValid = false;
+                }
+                
+                string insert = "INSERT INTO RentalOrder (Client_ID, User_ID, Vehicle_ID, Time, OrderCost, TimeRented, Paid, VehicleReturned, Date)";
+
             }
-            if (textBox2.Text != null)
+            catch (Exception ex)
             {
-                int Vehicle_Id = int.Parse(textBox2.Text);
-            }
-            if (checkBox1.Checked)
-            {
-                bool paid = true;
+
             }
 
 
 
-
-
-            string insert = "INSERT INTO RentalOrder (Client_ID, User_ID, Vehicle_ID, Time, OrderCost, TimeRented, Paid, VehicleReturned, Date)";
 
         }
 
@@ -44,7 +65,7 @@ namespace CMPG223_Project
             populateDataGridView();
             dateTimePicker1.MinDate = DateTime.Today;
             dateTimePicker2.MinDate = DateTime.Today;
-           
+
         }
         private void populateDataGridView()
         {
@@ -92,6 +113,7 @@ namespace CMPG223_Project
             {
                 DataGridViewRow row = dataGridView1.Rows[indexRow];
                 textBox2.Text = row.Cells[0].Value.ToString();
+                VehicleID = (int)row.Cells[0].Value;
                 cost = (decimal)row.Cells[1].Value;
             }
         }
@@ -138,6 +160,10 @@ namespace CMPG223_Project
             checkBox1.Checked = false;
             textBox1.Clear();
             label7.Visible = false;
+            label101.Visible = false;
+            label92.Visible = false;
         }
+
+       
     }
 }

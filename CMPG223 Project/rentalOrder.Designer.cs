@@ -49,6 +49,8 @@
             dateTimePicker1 = new DateTimePicker();
             comboBox1 = new ComboBox();
             tabControl1 = new TabControl();
+            label9 = new Label();
+            label10 = new Label();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             tabControl1.SuspendLayout();
@@ -67,6 +69,8 @@
             // tabPage1
             // 
             tabPage1.BackColor = Color.FromArgb(188, 170, 146);
+            tabPage1.Controls.Add(label10);
+            tabPage1.Controls.Add(label9);
             tabPage1.Controls.Add(label8);
             tabPage1.Controls.Add(checkBox1);
             tabPage1.Controls.Add(label7);
@@ -128,7 +132,7 @@
             // textBox2
             // 
             textBox2.Enabled = false;
-            textBox2.Location = new Point(266, 102);
+            textBox2.Location = new Point(102, 102);
             textBox2.Name = "textBox2";
             textBox2.ReadOnly = true;
             textBox2.Size = new Size(154, 23);
@@ -137,9 +141,9 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(525, 3);
+            dataGridView1.Location = new Point(581, 62);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(463, 319);
+            dataGridView1.Size = new Size(407, 260);
             dataGridView1.TabIndex = 2;
             dataGridView1.CellClick += dataGridView1_CellClick;
             // 
@@ -176,7 +180,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(0, 3);
+            label6.Location = new Point(-4, 3);
             label6.Name = "label6";
             label6.Size = new Size(289, 40);
             label6.TabIndex = 11;
@@ -227,9 +231,9 @@
             label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             label2.Location = new Point(0, 93);
             label2.Name = "label2";
-            label2.Size = new Size(254, 32);
+            label2.Size = new Size(101, 32);
             label2.TabIndex = 6;
-            label2.Text = "Please Select Vehicle:";
+            label2.Text = "Vehicle:";
             // 
             // label1
             // 
@@ -237,9 +241,9 @@
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             label1.Location = new Point(0, 53);
             label1.Name = "label1";
-            label1.Size = new Size(240, 32);
+            label1.Size = new Size(87, 32);
             label1.TabIndex = 5;
-            label1.Text = "Please Select Client:";
+            label1.Text = "Client:";
             // 
             // dateTimePicker2
             // 
@@ -264,7 +268,7 @@
             // 
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(266, 62);
+            comboBox1.Location = new Point(102, 62);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(154, 23);
             comboBox1.TabIndex = 1;
@@ -279,6 +283,28 @@
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(1009, 492);
             tabControl1.TabIndex = 0;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label9.ForeColor = Color.Red;
+            label9.Location = new Point(262, 53);
+            label9.Name = "label9";
+            label9.Size = new Size(209, 30);
+            label9.TabIndex = 20;
+            label9.Text = "Please Select a Client";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label10.ForeColor = Color.Red;
+            label10.Location = new Point(262, 95);
+            label10.Name = "label10";
+            label10.Size = new Size(222, 30);
+            label10.TabIndex = 21;
+            label10.Text = "Please Select a Vehicle";
             // 
             // rentalOrder
             // 
@@ -321,5 +347,7 @@
         private Label label7;
         private Label label8;
         private CheckBox checkBox1;
+        private Label label9;
+        private Label label10;
     }
 }
