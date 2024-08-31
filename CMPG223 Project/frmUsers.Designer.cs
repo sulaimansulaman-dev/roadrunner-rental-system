@@ -324,11 +324,11 @@
             // 
             dgvUpdateUsers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvUpdateUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUpdateUsers.Location = new Point(538, 31);
+            dgvUpdateUsers.Location = new Point(538, 29);
             dgvUpdateUsers.Margin = new Padding(3, 4, 3, 4);
             dgvUpdateUsers.Name = "dgvUpdateUsers";
             dgvUpdateUsers.RowHeadersWidth = 51;
-            dgvUpdateUsers.Size = new Size(499, 163);
+            dgvUpdateUsers.Size = new Size(499, 250);
             dgvUpdateUsers.TabIndex = 12;
             // 
             // txtCellNumber_UpdateUsers
