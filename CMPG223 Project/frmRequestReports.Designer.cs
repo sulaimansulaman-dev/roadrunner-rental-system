@@ -170,7 +170,6 @@
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.Desktop;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
             dgvRequestReports.DefaultCellStyle = dataGridViewCellStyle1;
-            dgvRequestReports.Enabled = false;
             dgvRequestReports.Location = new Point(506, 256);
             dgvRequestReports.Name = "dgvRequestReports";
             dgvRequestReports.ReadOnly = true;
