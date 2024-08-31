@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             btnAdd_AddClients = new Button();
             lblClient_ID_Number_AddClient = new Label();
             lblFirst_Name_AddClient = new Label();
@@ -72,6 +73,7 @@
             btnBack_DeleteClient = new Button();
             dgvDeleteClient = new DataGridView();
             lblClient_ID_DeleteClient = new Label();
+            errorProvider1 = new ErrorProvider(components);
             MaintainClient.SuspendLayout();
             AddClient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAddClient).BeginInit();
@@ -79,6 +81,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvUpdateClient).BeginInit();
             DeleteClient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDeleteClient).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // btnAdd_AddClients
@@ -529,6 +532,10 @@
             lblClient_ID_DeleteClient.TabIndex = 28;
             lblClient_ID_DeleteClient.Text = "Client ID: ";
             // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
             // frmClients
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -548,6 +555,7 @@
             DeleteClient.ResumeLayout(false);
             DeleteClient.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDeleteClient).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
         }
 
@@ -597,5 +605,6 @@
         private Button btnBack_DeleteClient;
         private DataGridView dgvDeleteClient;
         private Label lblClient_ID_DeleteClient;
+        private ErrorProvider errorProvider1;
     }
 }

@@ -26,164 +26,165 @@ namespace CMPG223_Project
 
         private void btnAdd_AddClients_Click(object sender, EventArgs e)
         {
-            string Client_ID_Number = txtClient_ID_Number_AddClient.Text;
-            string firstName = txtFirstName_AddClient.Text;
-            string lastName = txtLastName_AddClient.Text;
-            string cellNumber = txtCellNumber_AddClient.Text;
-            string email = txtEmail_AddClient.Text;
-            string HasDriversLicense = cmbHasDriversLicense_AddClient.Text;
+                string Client_ID_Number = txtClient_ID_Number_AddClient.Text;
+                string firstName = txtFirstName_AddClient.Text;
+                string lastName = txtLastName_AddClient.Text;
+                string cellNumber = txtCellNumber_AddClient.Text;
+                string email = txtEmail_AddClient.Text;
+                string HasDriversLicense = cmbHasDriversLicense_AddClient.Text;
 
-            bool isValid = true;
+                bool isValid = true;
 
-            // Regular expression patterns for validation
-            string alphaPattern = @"^[a-zA-Z\s.,'-]*$";  // Allows letters, spaces, and some punctuation
+                // Regular expression patterns for validation
+                string alphaPattern = @"^[a-zA-Z\s.,'-]*$";  // Allows letters, spaces, and some punctuation
+                string numericPattern = @"^\d+$";  // Allows only numbers
+                string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";  // Basic email validation pattern
 
-            // Validation using ErrorProvider
-            if (string.IsNullOrWhiteSpace(Client_ID_Number))
-            {
-                errorProvider1.SetError(txtClient_ID_Number_AddClient, "Client ID Number  is required.");
-                isValid = false;
-            }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(Client_ID_Number, alphaPattern))
-            {
-                errorProvider1.SetError(txtClient_ID_Number_AddClient, "Client ID Number must contain only Numbers.");
-                isValid = false;
-            }
-            else
-            {
-                errorProvider1.SetError(txtClient_ID_Number_AddClient, "");
-            }
-
-            if (string.IsNullOrWhiteSpace(firstName))
-            {
-                errorProvider1.SetError(txtFirstName_AddClient, "First Name is required.");
-                isValid = false;
-            }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(firstName, alphaPattern))
-            {
-                errorProvider1.SetError(txtFirstName_AddClient, "First Name must contain only letters and allowed punctuation.");
-                isValid = false;
-            }
-            else
-            {
-                errorProvider1.SetError(txtFirstName_AddClient, "");
-            }
-
-            if (string.IsNullOrWhiteSpace(lastName))
-            {
-                errorProvider1.SetError(txtLastName_AddClient, "Last Name  is required.");
-                isValid = false;
-            }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(lastName, alphaPattern))
-            {
-                errorProvider1.SetError(txtLastName_AddClient, "Last Name must contain only letters and allowed punctuation.");
-                isValid = false;
-            }
-            else
-            {
-                errorProvider1.SetError(txtLastName_AddClient, "");
-            }
-
-            if (string.IsNullOrWhiteSpace(cellNumber))
-            {
-                errorProvider1.SetError(txtCellNumber_AddClient, "Cell Number is required.");
-                isValid = false;
-            }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(cellNumber, alphaPattern))
-            {
-                errorProvider1.SetError(txtCellNumber_AddClient, "Cell Number must contain only Numbers.");
-                isValid = false;
-            }
-            else
-            {
-                errorProvider1.SetError(txtCellNumber_AddClient, "");
-            }
-
-            if (string.IsNullOrWhiteSpace(email))
-            {
-                errorProvider1.SetError(txtEmail_AddClient, "Email is required.");
-                isValid = false;
-            }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(email, alphaPattern))
-            {
-                errorProvider1.SetError(txtEmail_AddClient, "Email must contain letters, Numbers and Special Symbols.");
-                isValid = false;
-            }
-            else
-            {
-                errorProvider1.SetError(txtEmail_AddClient, "");
-            }
-
-            if (string.IsNullOrWhiteSpace(HasDriversLicense))
-            {
-                errorProvider1.SetError(cmbHasDriversLicense_AddClient, "Yes or No is required.");
-                isValid = false;
-            }
-            else
-            {
-                errorProvider1.SetError(cmbHasDriversLicense_AddClient, "");
-            }
-
-            if (!isValid)
-            {
-                MessageBox.Show("Please correct the errors before adding.");
-                return;
-            }
-
-            // Confirmation message box
-            DialogResult result = MessageBox.Show("Are you sure you want to add this Client to the database?", "Confirm Add", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.No)
-            {
-                return;
-            }
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                // Check for duplicates
-                string checkQuery = "SELECT COUNT(*) FROM Client WHERE Client_ID_Number = @ClientIDNumber";
-                SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
-                checkCmd.Parameters.AddWithValue("@ClientIDNumber", Client_ID_Number);
-
-                try
+                // Validation using ErrorProvider
+                if (string.IsNullOrWhiteSpace(Client_ID_Number))
                 {
-                    conn.Open();
-                    int count = (int)checkCmd.ExecuteScalar();
-
-                    if (count > 0)
-                    {
-                        errorProvider1.SetError(txtClient_ID_Number_AddClient, "Client ID Number already exists.");
-                        MessageBox.Show("Client ID Number already exists in the database. Please check if you are entering it correctly.");
-                        return;
-                    }
-                    else
-                    {
-                        errorProvider1.SetError(txtClient_ID_Number_AddClient, "");
-                    }
-
-                    string query = "INSERT INTO Client (Client_ID_Number, FirstName, LastName, CellNumber, Email, HasDriversLicense) VALUES (@ClientIDNumber, @FirstName, @LastName, @CellNumber, @Email, @HasDriversLicense)";
-
-
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@ClientIDNumber", Client_ID_Number);
-                    cmd.Parameters.AddWithValue("@FirstName", firstName);
-                    cmd.Parameters.AddWithValue("@LastName", lastName);
-                    cmd.Parameters.AddWithValue("@CellNumber", cellNumber);
-                    cmd.Parameters.AddWithValue("@Email", email);
-                    cmd.Parameters.AddWithValue("@HasDriversLicense", HasDriversLicense);
-
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Cliente added successfully");
-
-                    LoadData();
-                    btnClear_AddClients_Click(sender, e);
+                    errorProvider1.SetError(txtClient_ID_Number_AddClient, "Client ID Number is required.");
+                    isValid = false;
                 }
-                catch (Exception ex)
+                else if (!System.Text.RegularExpressions.Regex.IsMatch(Client_ID_Number, numericPattern))
                 {
-                    MessageBox.Show("Error: " + ex.Message);
+                    errorProvider1.SetError(txtClient_ID_Number_AddClient, "Client ID Number must contain only numbers.");
+                    isValid = false;
+                }
+                else
+                {
+                    errorProvider1.SetError(txtClient_ID_Number_AddClient, "");
+                }
+
+                if (string.IsNullOrWhiteSpace(firstName))
+                {
+                    errorProvider1.SetError(txtFirstName_AddClient, "First Name is required.");
+                    isValid = false;
+                }
+                else if (!System.Text.RegularExpressions.Regex.IsMatch(firstName, alphaPattern))
+                {
+                    errorProvider1.SetError(txtFirstName_AddClient, "First Name must contain only letters and allowed punctuation.");
+                    isValid = false;
+                }
+                else
+                {
+                    errorProvider1.SetError(txtFirstName_AddClient, "");
+                }
+
+                if (string.IsNullOrWhiteSpace(lastName))
+                {
+                    errorProvider1.SetError(txtLastName_AddClient, "Last Name is required.");
+                    isValid = false;
+                }
+                else if (!System.Text.RegularExpressions.Regex.IsMatch(lastName, alphaPattern))
+                {
+                    errorProvider1.SetError(txtLastName_AddClient, "Last Name must contain only letters and allowed punctuation.");
+                    isValid = false;
+                }
+                else
+                {
+                    errorProvider1.SetError(txtLastName_AddClient, "");
+                }
+
+                if (string.IsNullOrWhiteSpace(cellNumber))
+                {
+                    errorProvider1.SetError(txtCellNumber_AddClient, "Cell Number is required.");
+                    isValid = false;
+                }
+                else if (!System.Text.RegularExpressions.Regex.IsMatch(cellNumber, numericPattern))
+                {
+                    errorProvider1.SetError(txtCellNumber_AddClient, "Cell Number must contain only numbers.");
+                    isValid = false;
+                }
+                else
+                {
+                    errorProvider1.SetError(txtCellNumber_AddClient, "");
+                }
+
+                if (string.IsNullOrWhiteSpace(email))
+                {
+                    errorProvider1.SetError(txtEmail_AddClient, "Email is required.");
+                    isValid = false;
+                }
+                else if (!System.Text.RegularExpressions.Regex.IsMatch(email, emailPattern))
+                {
+                    errorProvider1.SetError(txtEmail_AddClient, "Email must be a valid email address.");
+                    isValid = false;
+                }
+                else
+                {
+                    errorProvider1.SetError(txtEmail_AddClient, "");
+                }
+
+                if (string.IsNullOrWhiteSpace(HasDriversLicense))
+                {
+                    errorProvider1.SetError(cmbHasDriversLicense_AddClient, "Yes or No is required.");
+                    isValid = false;
+                }
+                else
+                {
+                    errorProvider1.SetError(cmbHasDriversLicense_AddClient, "");
+                }
+
+                if (!isValid)
+                {
+                    MessageBox.Show("Please correct the errors before adding.");
+                    return;
+                }
+
+                // Confirmation message box
+                DialogResult result = MessageBox.Show("Are you sure you want to add this Client to the database?", "Confirm Add", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.No)
+                {
+                    return;
+                }
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    // Check for duplicates
+                    string checkQuery = "SELECT COUNT(*) FROM Client WHERE Client_ID_Number = @ClientIDNumber";
+                    SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
+                    checkCmd.Parameters.AddWithValue("@ClientIDNumber", Client_ID_Number);
+
+                    try
+                    {
+                        conn.Open();
+                        int count = (int)checkCmd.ExecuteScalar();
+
+                        if (count > 0)
+                        {
+                            errorProvider1.SetError(txtClient_ID_Number_AddClient, "Client ID Number already exists.");
+                            MessageBox.Show("Client ID Number already exists in the database. Please check if you are entering it correctly.");
+                            return;
+                        }
+                        else
+                        {
+                            errorProvider1.SetError(txtClient_ID_Number_AddClient, "");
+                        }
+
+                        string query = "INSERT INTO Client (Client_ID_Number, FirstName, LastName, CellNumber, Email, HasDriversLicense) VALUES (@ClientIDNumber, @FirstName, @LastName, @CellNumber, @Email, @HasDriversLicense)";
+
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@ClientIDNumber", Client_ID_Number);
+                        cmd.Parameters.AddWithValue("@FirstName", firstName);
+                        cmd.Parameters.AddWithValue("@LastName", lastName);
+                        cmd.Parameters.AddWithValue("@CellNumber", cellNumber);
+                        cmd.Parameters.AddWithValue("@Email", email);
+                        cmd.Parameters.AddWithValue("@HasDriversLicense", HasDriversLicense);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Client added successfully");
+
+                        LoadData();
+                        btnClear_AddClients_Click(sender, e);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
                 }
             }
-        }
 
         private void btnClear_AddClients_Click(object sender, EventArgs e)
         {
@@ -192,7 +193,7 @@ namespace CMPG223_Project
             txtLastName_AddClient.Clear();
             txtCellNumber_AddClient.Clear();
             txtEmail_AddClient.Clear();
-            cmbHasDriversLicense_AddClient.Items.Clear();
+            cmbHasDriversLicense_AddClient.SelectedIndex = -1; // Unselects any selected item
             txtClient_ID_Number_AddClient.Focus();
         }
 
@@ -204,7 +205,7 @@ namespace CMPG223_Project
             txtLastName_UpdateClient.Clear();
             txtCellNumber_UpdateClient.Clear();
             txtEmail_UpdateClient.Clear();
-            cmbHasDriversLicense_UpdateClient.Items.Clear();
+            cmbHasDriversLicense_UpdateClient.SelectedIndex = -1; // Unselects any selected item
             txtClient_ID_UpdateClient.Focus();
         }
 
@@ -212,6 +213,7 @@ namespace CMPG223_Project
         {
             txtClient_ID_DeleteClient.Clear();
         }
+
 
         private void frmClients_Load(object sender, EventArgs e)
         {
@@ -226,7 +228,7 @@ namespace CMPG223_Project
             bool isValid = true;
 
             // Regular expression pattern for validation
-            string alphaPattern = @"^[a-zA-Z\s.,'-]*$";
+            string numericPattern = @"^\d+$";  // Allows only numbers
 
             // Validation using ErrorProvider
             if (string.IsNullOrWhiteSpace(Client_ID))
@@ -235,9 +237,9 @@ namespace CMPG223_Project
                 MessageBox.Show("Please click on a field in the data grid view!");
                 isValid = false;
             }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(Client_ID, alphaPattern))
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(Client_ID, numericPattern))
             {
-                errorProvider1.SetError(txtClient_ID_DeleteClient, "Client_ID must contain only Numbers.");
+                errorProvider1.SetError(txtClient_ID_DeleteClient, "Client_ID must contain only numbers.");
                 isValid = false;
             }
             else
@@ -260,7 +262,7 @@ namespace CMPG223_Project
 
             string selectedClient_ID = Client_ID;
 
-            string sqlDelete = "DELETE FROM Client WHERE Client_ID = (SELECT Client_ID FROM Client WHERE Client_ID = @Client_ID)";
+            string sqlDelete = "DELETE FROM Client WHERE Client_ID = @Client_ID";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 try
@@ -275,10 +277,11 @@ namespace CMPG223_Project
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Client deleted successfully.");
+                            errorProvider1.SetError(txtClient_ID_DeleteClient, "");  // Clear any error message after successful deletion
                         }
                         else
                         {
-                            MessageBox.Show("No Client found with the specified name.");
+                            MessageBox.Show("No Client found with the specified ID.");
                         }
 
                         LoadData();
@@ -287,28 +290,41 @@ namespace CMPG223_Project
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: " + ex.Message);
+                    MessageBox.Show("An error occurred while deleting the client: " + ex.Message);
                 }
             }
         }
 
+
         private void LoadData()
         {
-            using (SqlConnection con = new SqlConnection(connectionString))
+            try
             {
-                con.Open();
-                string query = "SELECT * FROM Client";
-                using (SqlDataAdapter da = new SqlDataAdapter(query, con))
+                using (SqlConnection con = new SqlConnection(connectionString))
                 {
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    dgvAddClient.DataSource = dt;
-                    dgvDeleteClient.DataSource = dt;
-                    dgvUpdateClient.DataSource = dt;
+                    con.Open();
+                    string query = "SELECT * FROM Client";
+                    using (SqlDataAdapter da = new SqlDataAdapter(query, con))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        DataTable dtAddClient = dt.Copy();
+                        DataTable dtDeleteClient = dt.Copy();
+                        DataTable dtUpdateClient = dt.Copy();
+
+                        dgvAddClient.DataSource = dtAddClient;
+                        dgvDeleteClient.DataSource = dtDeleteClient;
+                        dgvUpdateClient.DataSource = dtUpdateClient;
+                    }
                 }
-                con.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while loading data: " + ex.Message);
             }
         }
+
 
         private void btnUpdate_UpdateClient_Click(object sender, EventArgs e)
         {
@@ -320,13 +336,12 @@ namespace CMPG223_Project
             string email = txtEmail_UpdateClient.Text;
             string HasDriversLicense = cmbHasDriversLicense_UpdateClient.Text;
 
-            // Initialize ErrorProvider component 
             bool isValid = true;
 
-            // Regular expression pattern for validation
-            string alphaPattern = @"^[a-zA-Z\s.,'-]*$";  // Allows letters, spaces, and some punctuation
+            string numericPattern = @"^\d+$";
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            string alphaPattern = @"^[a-zA-Z\s.,'-]+$";
 
-            // Validation using ErrorProvider
             if (string.IsNullOrWhiteSpace(Client_ID))
             {
                 errorProvider1.SetError(txtClient_ID_UpdateClient, "Client ID is required.");
@@ -342,9 +357,9 @@ namespace CMPG223_Project
                 errorProvider1.SetError(txtClient_ID_Number_UpdateClient, "Client ID Number is required.");
                 isValid = false;
             }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(Client_ID_Number, alphaPattern))
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(Client_ID_Number, numericPattern))
             {
-                errorProvider1.SetError(txtClient_ID_Number_UpdateClient, "Client ID Number must contain only Numbers");
+                errorProvider1.SetError(txtClient_ID_Number_UpdateClient, "Client ID Number must contain only numbers.");
                 isValid = false;
             }
             else
@@ -359,7 +374,7 @@ namespace CMPG223_Project
             }
             else if (!System.Text.RegularExpressions.Regex.IsMatch(firstName, alphaPattern))
             {
-                errorProvider1.SetError(txtFirstName_UpdateClient, "First Name must contain only Alphabets.");
+                errorProvider1.SetError(txtFirstName_UpdateClient, "First Name must contain only alphabets.");
                 isValid = false;
             }
             else
@@ -374,7 +389,7 @@ namespace CMPG223_Project
             }
             else if (!System.Text.RegularExpressions.Regex.IsMatch(lastName, alphaPattern))
             {
-                errorProvider1.SetError(txtLastName_UpdateClient, "Last Name must contain only Alphabets.");
+                errorProvider1.SetError(txtLastName_UpdateClient, "Last Name must contain only alphabets.");
                 isValid = false;
             }
             else
@@ -387,9 +402,9 @@ namespace CMPG223_Project
                 errorProvider1.SetError(txtCellNumber_UpdateClient, "Cell Number is required.");
                 isValid = false;
             }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(cellNumber, alphaPattern))
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(cellNumber, numericPattern))
             {
-                errorProvider1.SetError(txtCellNumber_UpdateClient, "Cell Number must contain only Numbers");
+                errorProvider1.SetError(txtCellNumber_UpdateClient, "Cell Number must contain only numbers.");
                 isValid = false;
             }
             else
@@ -402,9 +417,9 @@ namespace CMPG223_Project
                 errorProvider1.SetError(txtEmail_UpdateClient, "Email is required.");
                 isValid = false;
             }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(email, alphaPattern))
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(email, emailPattern))
             {
-                errorProvider1.SetError(txtEmail_UpdateClient, "Email must contain letters, Numbers and Special Symbols.");
+                errorProvider1.SetError(txtEmail_UpdateClient, "Invalid email format.");
                 isValid = false;
             }
             else
@@ -435,14 +450,6 @@ namespace CMPG223_Project
                 return;
             }
 
-            string ClientID = Client_ID;
-            string ClientIDNumber = Client_ID_Number;
-            string newFirstName = firstName;
-            string newLastName = lastName;
-            string newCellNumber = cellNumber;
-            string newEmail = email;
-            string newHasDriversLicense = HasDriversLicense;
-
             string sqlupdate = "UPDATE Client SET Client_ID_Number = @ClientIDNumber, FirstName = @FirstName, LastName = @LastName, CellNumber = @CellNumber, Email = @Email, HasDriversLicense = @HasDriversLicense WHERE Client_ID = @ClientID";
 
             try
@@ -452,18 +459,13 @@ namespace CMPG223_Project
                     con.Open();
                     using (SqlCommand cmd = new SqlCommand(sqlupdate, con))
                     {
-                        cmd.Parameters.AddWithValue("@ClientID", ClientID);
-                        cmd.Parameters.AddWithValue("@ClientIDNumber", ClientIDNumber);
-                        cmd.Parameters.AddWithValue("@FirstName", newFirstName);
-                        cmd.Parameters.AddWithValue("@LastName", newLastName);
-                        cmd.Parameters.AddWithValue("@CellNumber", newCellNumber);
-                        cmd.Parameters.AddWithValue("@Email", newEmail);
-                        cmd.Parameters.AddWithValue("@HasDriversLicense", newHasDriversLicense);
-
-
-                        // Debugging output
-                        Console.WriteLine($"Executing Query: {sqlupdate}");
-                        Console.WriteLine($"Client_ID_Number: {ClientIDNumber}, FirstName: {newFirstName}, LastName: {newLastName}, CellNumber: {newCellNumber}, Email: {newEmail}, HasDriversLicense: {newHasDriversLicense}, ClientID: {ClientID}");
+                        cmd.Parameters.AddWithValue("@ClientID", Client_ID);
+                        cmd.Parameters.AddWithValue("@ClientIDNumber", Client_ID_Number);
+                        cmd.Parameters.AddWithValue("@FirstName", firstName);
+                        cmd.Parameters.AddWithValue("@LastName", lastName);
+                        cmd.Parameters.AddWithValue("@CellNumber", cellNumber);
+                        cmd.Parameters.AddWithValue("@Email", email);
+                        cmd.Parameters.AddWithValue("@HasDriversLicense", HasDriversLicense);
 
                         int rowsAffected = cmd.ExecuteNonQuery();
                         if (rowsAffected > 0)
@@ -477,11 +479,11 @@ namespace CMPG223_Project
                             txtLastName_UpdateClient.Clear();
                             txtCellNumber_UpdateClient.Clear();
                             txtEmail_UpdateClient.Clear();
-                            cmbHasDriversLicense_UpdateClient.Items.Clear();
+                            cmbHasDriversLicense_UpdateClient.SelectedIndex = -1;
                         }
                         else
                         {
-                            MessageBox.Show("No records were updated. Please check if the Client_ID exists.");
+                            MessageBox.Show("No records were updated. This could mean the Client_ID does not exist or the data is unchanged.");
                         }
                     }
                 }
@@ -489,22 +491,36 @@ namespace CMPG223_Project
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
+                Console.WriteLine("Error Stack Trace: " + ex.StackTrace);
             }
         }
+
 
         private void dgvDeleteClient_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvDeleteClient.CurrentRow != null)
+            try
             {
+                if (e.RowIndex >= 0 && dgvDeleteClient.CurrentRow != null)
+                {
+                    DataGridViewRow selectedRow = dgvDeleteClient.Rows[e.RowIndex];
 
-                DataGridViewRow selectedRow = dgvDeleteClient.CurrentRow;
-
-                string Client_ID = selectedRow.Cells["Client_ID"].Value.ToString();
-
-                txtClient_ID_DeleteClient.Text = Client_ID;
-
+                    if (selectedRow.Cells["Client_ID"].Value != null)
+                    {
+                        txtClient_ID_DeleteClient.Text = selectedRow.Cells["Client_ID"].Value.ToString();
+                    }
+                    else
+                    {
+                        txtClient_ID_DeleteClient.Text = string.Empty;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                Console.WriteLine("Error Stack Trace: " + ex.StackTrace);
             }
         }
+
 
         private void dgvUpdateClient_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -527,7 +543,10 @@ namespace CMPG223_Project
                 txtLastName_UpdateClient.Text = lastName;
                 txtCellNumber_UpdateClient.Text = cellNumber;
                 txtEmail_UpdateClient.Text = email;
+
+                cmbHasDriversLicense_UpdateClient.Items.Clear();
                 cmbHasDriversLicense_UpdateClient.Items.Add(HasDriversLicense);
+                cmbHasDriversLicense_UpdateClient.SelectedIndex = 0;
             }
         }
     }
