@@ -38,6 +38,7 @@
             lblHasDriversLicense_AddClient = new Label();
             MaintainClient = new TabControl();
             AddClient = new TabPage();
+            chkbYes_HasDriversLicense_AddClient = new CheckBox();
             btnBack_AddClients = new Button();
             btnClear_AddClients = new Button();
             cmbHasDriversLicense_AddClient = new ComboBox();
@@ -48,6 +49,7 @@
             txtClient_ID_Number_AddClient = new TextBox();
             dgvAddClient = new DataGridView();
             UpdateClient = new TabPage();
+            chkbYesHasDriversLicense_UpdateClient = new CheckBox();
             txtClient_ID_UpdateClient = new TextBox();
             btnBack_UpdateClient = new Button();
             btnClear_UpdateClient = new Button();
@@ -74,6 +76,10 @@
             dgvDeleteClient = new DataGridView();
             lblClient_ID_DeleteClient = new Label();
             errorProvider1 = new ErrorProvider(components);
+            txtSearch_UpdateClient = new TextBox();
+            lblSearch_UpdateClient = new Label();
+            txtSearch_DeleteClient = new TextBox();
+            lblSearch_DeleteClient = new Label();
             MaintainClient.SuspendLayout();
             AddClient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAddClient).BeginInit();
@@ -167,6 +173,7 @@
             // 
             // AddClient
             // 
+            AddClient.Controls.Add(chkbYes_HasDriversLicense_AddClient);
             AddClient.Controls.Add(btnBack_AddClients);
             AddClient.Controls.Add(btnClear_AddClients);
             AddClient.Controls.Add(cmbHasDriversLicense_AddClient);
@@ -191,6 +198,16 @@
             AddClient.Text = "Add";
             AddClient.UseVisualStyleBackColor = true;
             // 
+            // chkbYes_HasDriversLicense_AddClient
+            // 
+            chkbYes_HasDriversLicense_AddClient.AutoSize = true;
+            chkbYes_HasDriversLicense_AddClient.Location = new Point(344, 376);
+            chkbYes_HasDriversLicense_AddClient.Name = "chkbYes_HasDriversLicense_AddClient";
+            chkbYes_HasDriversLicense_AddClient.Size = new Size(63, 29);
+            chkbYes_HasDriversLicense_AddClient.TabIndex = 19;
+            chkbYes_HasDriversLicense_AddClient.Text = "Yes";
+            chkbYes_HasDriversLicense_AddClient.UseVisualStyleBackColor = true;
+            // 
             // btnBack_AddClients
             // 
             btnBack_AddClients.Location = new Point(1049, 619);
@@ -214,7 +231,7 @@
             // 
             cmbHasDriversLicense_AddClient.FormattingEnabled = true;
             cmbHasDriversLicense_AddClient.Items.AddRange(new object[] { "Yes", "No" });
-            cmbHasDriversLicense_AddClient.Location = new Point(344, 374);
+            cmbHasDriversLicense_AddClient.Location = new Point(357, 506);
             cmbHasDriversLicense_AddClient.Name = "cmbHasDriversLicense_AddClient";
             cmbHasDriversLicense_AddClient.Size = new Size(198, 33);
             cmbHasDriversLicense_AddClient.TabIndex = 16;
@@ -265,6 +282,9 @@
             // 
             // UpdateClient
             // 
+            UpdateClient.Controls.Add(txtSearch_UpdateClient);
+            UpdateClient.Controls.Add(lblSearch_UpdateClient);
+            UpdateClient.Controls.Add(chkbYesHasDriversLicense_UpdateClient);
             UpdateClient.Controls.Add(txtClient_ID_UpdateClient);
             UpdateClient.Controls.Add(btnBack_UpdateClient);
             UpdateClient.Controls.Add(btnClear_UpdateClient);
@@ -290,6 +310,16 @@
             UpdateClient.TabIndex = 1;
             UpdateClient.Text = "Update";
             UpdateClient.UseVisualStyleBackColor = true;
+            // 
+            // chkbYesHasDriversLicense_UpdateClient
+            // 
+            chkbYesHasDriversLicense_UpdateClient.AutoSize = true;
+            chkbYesHasDriversLicense_UpdateClient.Location = new Point(338, 444);
+            chkbYesHasDriversLicense_UpdateClient.Name = "chkbYesHasDriversLicense_UpdateClient";
+            chkbYesHasDriversLicense_UpdateClient.Size = new Size(63, 29);
+            chkbYesHasDriversLicense_UpdateClient.TabIndex = 35;
+            chkbYesHasDriversLicense_UpdateClient.Text = "Yes";
+            chkbYesHasDriversLicense_UpdateClient.UseVisualStyleBackColor = true;
             // 
             // txtClient_ID_UpdateClient
             // 
@@ -341,7 +371,7 @@
             // 
             cmbHasDriversLicense_UpdateClient.FormattingEnabled = true;
             cmbHasDriversLicense_UpdateClient.Items.AddRange(new object[] { "Yes", "No" });
-            cmbHasDriversLicense_UpdateClient.Location = new Point(338, 442);
+            cmbHasDriversLicense_UpdateClient.Location = new Point(394, 538);
             cmbHasDriversLicense_UpdateClient.Name = "cmbHasDriversLicense_UpdateClient";
             cmbHasDriversLicense_UpdateClient.Size = new Size(198, 33);
             cmbHasDriversLicense_UpdateClient.TabIndex = 29;
@@ -384,7 +414,7 @@
             // dgvUpdateClient
             // 
             dgvUpdateClient.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUpdateClient.Location = new Point(656, 35);
+            dgvUpdateClient.Location = new Point(652, 99);
             dgvUpdateClient.Name = "dgvUpdateClient";
             dgvUpdateClient.RowHeadersWidth = 62;
             dgvUpdateClient.Size = new Size(490, 297);
@@ -453,6 +483,8 @@
             // 
             // DeleteClient
             // 
+            DeleteClient.Controls.Add(txtSearch_DeleteClient);
+            DeleteClient.Controls.Add(lblSearch_DeleteClient);
             DeleteClient.Controls.Add(txtClient_ID_DeleteClient);
             DeleteClient.Controls.Add(btnClear_DeleteClient);
             DeleteClient.Controls.Add(btnDelete_DeleteClient);
@@ -512,7 +544,7 @@
             // dgvDeleteClient
             // 
             dgvDeleteClient.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDeleteClient.Location = new Point(553, 21);
+            dgvDeleteClient.Location = new Point(548, 113);
             dgvDeleteClient.Margin = new Padding(4);
             dgvDeleteClient.Name = "dgvDeleteClient";
             dgvDeleteClient.RowHeadersWidth = 51;
@@ -535,6 +567,48 @@
             // errorProvider1
             // 
             errorProvider1.ContainerControl = this;
+            // 
+            // txtSearch_UpdateClient
+            // 
+            txtSearch_UpdateClient.Location = new Point(818, 40);
+            txtSearch_UpdateClient.Margin = new Padding(4);
+            txtSearch_UpdateClient.MaxLength = 15;
+            txtSearch_UpdateClient.Name = "txtSearch_UpdateClient";
+            txtSearch_UpdateClient.Size = new Size(256, 31);
+            txtSearch_UpdateClient.TabIndex = 37;
+            txtSearch_UpdateClient.TextChanged += txtSearch_UpdateClient_TextChanged;
+            // 
+            // lblSearch_UpdateClient
+            // 
+            lblSearch_UpdateClient.AutoSize = true;
+            lblSearch_UpdateClient.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            lblSearch_UpdateClient.Location = new Point(652, 20);
+            lblSearch_UpdateClient.Margin = new Padding(4, 0, 4, 0);
+            lblSearch_UpdateClient.Name = "lblSearch_UpdateClient";
+            lblSearch_UpdateClient.Size = new Size(151, 48);
+            lblSearch_UpdateClient.TabIndex = 36;
+            lblSearch_UpdateClient.Text = "Search: ";
+            // 
+            // txtSearch_DeleteClient
+            // 
+            txtSearch_DeleteClient.Location = new Point(714, 56);
+            txtSearch_DeleteClient.Margin = new Padding(4);
+            txtSearch_DeleteClient.MaxLength = 15;
+            txtSearch_DeleteClient.Name = "txtSearch_DeleteClient";
+            txtSearch_DeleteClient.Size = new Size(256, 31);
+            txtSearch_DeleteClient.TabIndex = 35;
+            txtSearch_DeleteClient.TextChanged += txtSearch_DeleteClient_TextChanged;
+            // 
+            // lblSearch_DeleteClient
+            // 
+            lblSearch_DeleteClient.AutoSize = true;
+            lblSearch_DeleteClient.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            lblSearch_DeleteClient.Location = new Point(548, 36);
+            lblSearch_DeleteClient.Margin = new Padding(4, 0, 4, 0);
+            lblSearch_DeleteClient.Name = "lblSearch_DeleteClient";
+            lblSearch_DeleteClient.Size = new Size(151, 48);
+            lblSearch_DeleteClient.TabIndex = 34;
+            lblSearch_DeleteClient.Text = "Search: ";
             // 
             // frmClients
             // 
@@ -606,5 +680,11 @@
         private DataGridView dgvDeleteClient;
         private Label lblClient_ID_DeleteClient;
         private ErrorProvider errorProvider1;
+        private CheckBox chkbYes_HasDriversLicense_AddClient;
+        private CheckBox chkbYesHasDriversLicense_UpdateClient;
+        private TextBox txtSearch_UpdateClient;
+        private Label lblSearch_UpdateClient;
+        private TextBox txtSearch_DeleteClient;
+        private Label lblSearch_DeleteClient;
     }
 }
