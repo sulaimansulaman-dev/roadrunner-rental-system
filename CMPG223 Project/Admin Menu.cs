@@ -20,7 +20,8 @@ namespace CMPG223_Project
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            frmVehicles frmVehicles = new frmVehicles(); 
+            frmVehicles.ShowDialog();
         }
 
         private void button4_Click(object sender, EventArgs e)
