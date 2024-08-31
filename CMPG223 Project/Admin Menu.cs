@@ -46,7 +46,8 @@ namespace CMPG223_Project
 
         private void button8_Click(object sender, EventArgs e)
         {
-
+            frmRequestReports RequestReportsfrm = new frmRequestReports(); 
+            RequestReportsfrm.ShowDialog();
         }
 
         private void Admin_Menu_Load(object sender, EventArgs e)

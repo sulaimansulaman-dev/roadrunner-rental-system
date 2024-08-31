@@ -15,7 +15,7 @@ namespace CMPG223_Project
 
     public partial class frmVehicleClasses : Form
     {
-        string connectionString = @"Data Source=LAPTOP-JHPD709J;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        string connectionString = @"Data Source=DESKTOP-20CLHAU;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
 
 
@@ -33,6 +33,9 @@ namespace CMPG223_Project
 
         private void btnAdd_Add_Click(object sender, EventArgs e)
         {
+            //Variables 
+
+            //VALIDATION BEGIN
             string className = txtClassName_Add.Text.Trim();
             string description = txtDescription_Add.Text.Trim();
 
@@ -75,17 +78,12 @@ namespace CMPG223_Project
 
             if (!isValid)
             {
-                MessageBox.Show("Please correct the errors before adding.");
+                
                 return;
             }
 
-            // Confirmation message box
-            DialogResult result = MessageBox.Show("Are you sure you want to add this vehicle class to the database?", "Confirm Add", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.No)
-            {
-                return;
-            }
+            
+            
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -107,13 +105,17 @@ namespace CMPG223_Project
                     if (count > 0)
                     {
                         errorProvider1.SetError(txtClassName_Add, "Class Name already exists.");
-                        MessageBox.Show("Class Name already exists in the database. Please use a different name.");
+                        
                         return;
                     }
                     else
                     {
                         errorProvider1.SetError(txtClassName_Add, "");
                     }
+
+                    //VALIDATION END
+
+                    //LOGIC BEGIN
 
                     string query = "INSERT INTO Vehicle_Class (ClassName, Description) VALUES(@ClassName, @Description)";
                     SqlCommand cmd = new SqlCommand(query, conn);
@@ -130,6 +132,8 @@ namespace CMPG223_Project
                 {
                     MessageBox.Show("Error: " + ex.Message);
                 }
+
+                //LOGIC END
             }
         }
 
@@ -159,7 +163,10 @@ namespace CMPG223_Project
 
         private void btnDelete_Delete_Click(object sender, EventArgs e)
         {
+            //Validation
             string className = txtClassName_Delete.Text.Trim();
+
+            //VALIDATION BEGIN
 
             // Initialize ErrorProvider component 
             bool isValid = true;
@@ -171,7 +178,7 @@ namespace CMPG223_Project
             if (string.IsNullOrWhiteSpace(className))
             {
                 errorProvider1.SetError(txtClassName_Delete, "Class Name is required.");
-                MessageBox.Show("Please click on a field in the data grid view!");
+                
                 isValid = false;
             }
             else if (!System.Text.RegularExpressions.Regex.IsMatch(className, alphaPattern))
@@ -186,7 +193,7 @@ namespace CMPG223_Project
 
             if (!isValid)
             {
-                MessageBox.Show("Please correct the errors before deleting.");
+                //MessageBox.Show("Please correct the errors before deleting.");
                 return;
             }
 
@@ -196,6 +203,10 @@ namespace CMPG223_Project
             {
                 return;
             }
+
+            //VALIDATION END
+
+            //LOGIC BEGIN
 
             string selectedClassName = className;
 
@@ -218,7 +229,7 @@ namespace CMPG223_Project
                         }
                         else
                         {
-                            MessageBox.Show("No vehicle class found with the specified name.");
+                            //MessageBox.Show("No vehicle class found with the specified name.");
                         }
 
                         LoadData();
@@ -230,15 +241,21 @@ namespace CMPG223_Project
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
+            //LOGIC END
         }
 
 
 
         private void btnUpdate_Update_Click(object sender, EventArgs e)
         {
+            //Variables
+
+
             string classID = txtClassID_Update.Text.Trim();
             string className = txtClassName_Update.Text.Trim();
             string description = txtDescription_Update.Text.Trim();
+
+            //VALIDATION BEGIN
 
             // Initialize ErrorProvider component 
             bool isValid = true;
@@ -284,20 +301,20 @@ namespace CMPG223_Project
 
             if (!isValid)
             {
-                MessageBox.Show("Please correct the errors before updating.");
+                //MessageBox.Show("Please correct the errors before updating.");
                 return;
             }
 
-            DialogResult result = MessageBox.Show("Are you sure you want to update this vehicle class in the database?", "Confirm Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //VALIDATION END
 
-            if (result == DialogResult.No)
-            {
-                return;
-            }
 
+
+            //Variables
             string vehicleClassID = classID;
             string newClassName = className;
             string newDescription = description;
+
+            //LOGIC BEGIN
 
             string updateQuery = "UPDATE Vehicle_Class SET ClassName = @ClassName, Description = @Description WHERE Vehicle_Class_ID = @VehicleClassID";
 
@@ -328,7 +345,7 @@ namespace CMPG223_Project
                         }
                         else
                         {
-                            MessageBox.Show("No records were updated. Please check if the Vehicle Class ID exists.");
+                            //MessageBox.Show("No records were updated. Please check if the Vehicle Class ID exists.");
                         }
                     }
                 }
@@ -337,11 +354,13 @@ namespace CMPG223_Project
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+
+            //LOGIC END
         }
 
 
 
-
+        //Load Data, Loades the Data into the Data Grid View
         private void LoadData()
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -361,7 +380,7 @@ namespace CMPG223_Project
         }
 
 
-
+        //Search Function for the Vehicle Class Field In The Data Grid View
         private void txtSearch_Update_TextChanged(object sender, EventArgs e)
         {
 
@@ -396,6 +415,7 @@ namespace CMPG223_Project
 
         }
 
+        //Search Function for the Vehicle Class Field In The Data Grid View
         private void txtSearch_Add_TextChanged(object sender, EventArgs e)
         {
 
@@ -427,6 +447,7 @@ namespace CMPG223_Project
 
         }
 
+        //Search Function for the Vehicle Class Field In The Data Grid View
         private void txtSearch_Delete_TextChanged(object sender, EventArgs e)
         {
 
@@ -477,6 +498,7 @@ namespace CMPG223_Project
 
         }
 
+        //Adds the Data Grid View Components to the TextBoxes in Update
         private void dgvVehicleClasses_Update_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvVehicleClasses_Update.CurrentRow != null)
@@ -497,6 +519,7 @@ namespace CMPG223_Project
 
         }
 
+        //Adds the Data Grid View Components to the TextBoxes in Update
         private void dgvVehicleClasses_Delete_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvVehicleClasses_Delete.CurrentRow != null)
