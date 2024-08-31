@@ -69,9 +69,7 @@ namespace CMPG223_Project
                 GenerateIncomeReceivedReport(startDate, endDate, Order_By);
             }
 
-            // Row Count Excluding the Total Row in the Count
-            int Total_Entries = dgvRequestReports.Rows.Count ;
-            lblTotalEntries_RequestReports.Text = Total_Entries.ToString();
+            
 
             pbRequestReports.SendToBack();
         }
@@ -205,6 +203,7 @@ namespace CMPG223_Project
 
           
             decimal grandTotal = 0;
+            int total_Entries = 0;
 
             // SQL query to get the data
             string query = @"
@@ -265,6 +264,11 @@ namespace CMPG223_Project
                             dgvRequestReports.Rows.Add("", vehicleClass, "R " + income.ToString("N2"));
                             monthlyTotal += income;
                             grandTotal += income;
+
+                            if (!string.IsNullOrWhiteSpace(vehicleClass)) { 
+                                total_Entries++;
+                            }
+                            
                         }
 
                         // Add the last month's total row
@@ -279,6 +283,7 @@ namespace CMPG223_Project
             // Add the grand total row
             dgvRequestReports.Rows.Add("");
             dgvRequestReports.Rows.Add("", "Grand Total:", "R " + grandTotal.ToString("N2"));
+            lblTotalEntries_RequestReports.Text = total_Entries.ToString();
 
           
             ApplyDataGridViewStyles();
