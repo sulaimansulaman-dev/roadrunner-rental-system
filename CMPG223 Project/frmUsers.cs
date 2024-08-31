@@ -19,58 +19,206 @@ namespace CMPG223_Project
         SqlDataReader reader;
         DataSet ds;
 
-        //public string connectionString = @"Data Source=METAMIDNIGHT;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
         public string connectionString = @"Data Source=METAMIDNIGHT;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30";
 
         string userName_Add, firstName_Add, lastName_Add, cellNumber_Add;
 
-
         public frmUsers()
         {
             InitializeComponent();
+
+            // Set up the DataGridView cell click event
+            dgvUpdateUsers.CellClick += dgvUpdateUsers_CellClick;
+
+            //disable multiple row selection
+            dgvUpdateUsers.MultiSelect = false;
+
+            // Set the TextBox to read-only
+            txtUserID_UpdateUser.ReadOnly = true;
+        }
+
+        private void dgvUpdateUsers_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if a valid row is clicked (not the header row)
+            if (e.RowIndex >= 0)
+            {
+                // Assuming UserID is in the first column (index 0)
+                string selectedUserID = dgvUpdateUsers.Rows[e.RowIndex].Cells[0].Value.ToString();
+                txtUserID_UpdateUser.Text = selectedUserID;
+            }
+        }
+
+        public void refreshCombobox()
+        {
+            string sqlRefresh;
+
+            conn.Open();
+            cmbUsername_DeleteUsers.Items.Clear();
+
+            sqlRefresh = "SELECT DISTINCT * FROM Users";
+            command = new SqlCommand(sqlRefresh, conn);
+            reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                cmbUsername_DeleteUsers.Items.Add(reader.GetString(0));
+            }
+
+            conn.Close();
         }
 
         private void btnAdd_AddUsers_Click(object sender, EventArgs e)
         {
-            conn = new SqlConnection(connectionString);
-            userName_Add = txtUsername_AddUsers.Text;
-            firstName_Add = txtFirstName_AddUsers.Text;
-            lastName_Add = txtLastName_AddUsers.Text;
-            cellNumber_Add = txtCellNumber_AddUsers.Text;
+            try
+            {
+                conn = new SqlConnection(connectionString);
 
-            //adding a new user
-            string sqlInsert = $"INSERT INTO Users(Username, Lastname, FirstName, Cellnumber) VALUES ('{userName_Add}', '{lastName_Add}', '{firstName_Add}', '{cellNumber_Add}')";
+                bool isValid = true; // A flag to check if all validations pass
 
-            conn.Open();
+                // Username validation
+                string usernamePattern = @"^[a-zA-Z0-9]{1,25}$";
+                if (!System.Text.RegularExpressions.Regex.IsMatch(txtUsername_AddUsers.Text, usernamePattern))
+                {
+                    lblUsernameError_AddUsers.Text = "Username must be 1-25 characters long and contain only letters and numbers.";
+                    lblUsernameError_AddUsers.Visible = true;
+                    isValid = false;
+                }
+                else
+                {
+                    lblUsernameError_AddUsers.Visible = false;
+                }
 
-            adapter = new SqlDataAdapter();
-            command = new SqlCommand(sqlInsert, conn);
+                // Check if username already exists
+                conn.Open();
+                string checkUsername = "SELECT COUNT(*) FROM Users WHERE Username = @Username";
+                SqlCommand checkCmd = new SqlCommand(checkUsername, conn);
+                checkCmd.Parameters.AddWithValue("@Username", txtUsername_AddUsers.Text);
+                int userCount = (int)checkCmd.ExecuteScalar();
+                conn.Close();
 
-            adapter.InsertCommand = command;
-            adapter.InsertCommand.ExecuteNonQuery();
-            ds = new DataSet();
-            string sqlDisplay = $"SELECT * FROM Users";
-            command = new SqlCommand(sqlDisplay, conn);
+                if (userCount > 0)
+                {
+                    lblUsernameError_AddUsers.Text = "This username already exists. Please choose a different one.";
+                    lblUsernameError_AddUsers.Visible = true;
+                    isValid = false;
+                }
+                else if (lblUsernameError_AddUsers.Visible == false) // Only hide if there are no other username errors
+                {
+                    lblUsernameError_AddUsers.Visible = false;
+                }
 
-            adapter.SelectCommand = command;
-            adapter.Fill(ds, "Users");
-            conn.Close();
+                userName_Add = txtUsername_AddUsers.Text;
 
-            conn = new SqlConnection(connectionString);
+                // First name validation
+                string namePattern = @"^[a-zA-Z]{1,25}$";
+                if (!System.Text.RegularExpressions.Regex.IsMatch(txtFirstName_AddUsers.Text, namePattern))
+                {
+                    lblFirstNameError_AddUsers.Text = "First name must be 1-25 characters long and contain only letters.";
+                    lblFirstNameError_AddUsers.Visible = true;
+                    isValid = false;
+                }
+                else
+                {
+                    lblFirstNameError_AddUsers.Visible = false;
+                }
 
-            conn.Open();
-            sqlDisplay = $"SELECT * FROM Users"; //display when form opens , formLoad event look it up
-            command = new SqlCommand(sqlDisplay, conn);
-            adapter = new SqlDataAdapter();
-            adapter.SelectCommand = command;
-            ds = new DataSet();
-            adapter.Fill(ds, "Users");
-            dgvAddUsers.DataSource = ds;
-            dgvAddUsers.DataMember = "Users";
-            dgvDelete_DeleteUsers.DataSource = ds;
-            dgvDelete_DeleteUsers.DataMember = "Users";
-            conn.Close();
+                firstName_Add = txtFirstName_AddUsers.Text;
 
+                // Last name validation
+                if (!System.Text.RegularExpressions.Regex.IsMatch(txtLastName_AddUsers.Text, namePattern))
+                {
+                    lblLastNameError_AddUsers.Text = "Last name must be 1-25 characters long and contain only letters.";
+                    lblLastNameError_AddUsers.Visible = true;
+                    isValid = false;
+                }
+                else
+                {
+                    lblLastNameError_AddUsers.Visible = false;
+                }
+
+                lastName_Add = txtLastName_AddUsers.Text;
+
+                // Phone number validation using regex
+                string phoneInput = txtCellNumber_AddUsers.Text;
+                string pattern = @"^0\d{9}$";
+                if (!System.Text.RegularExpressions.Regex.IsMatch(phoneInput, pattern))
+                {
+                    lblCellNumberError_AddUsers.Text = "Invalid phone number. It must be 10 digits long and start with 0.";
+                    lblCellNumberError_AddUsers.Visible = true;
+                    txtCellNumber_AddUsers.Clear();
+                    txtCellNumber_AddUsers.Focus();
+                    isValid = false;
+                }
+                else
+                {
+                    lblCellNumberError_AddUsers.Text = "";
+                    lblCellNumberError_AddUsers.Visible = false;
+                }
+
+                cellNumber_Add = phoneInput.Replace(" ", ""); // Remove any spaces
+
+                // If any validation failed, return early
+                if (!isValid)
+                {
+                    return;
+                }
+
+                // Adding a new user
+                string sqlInsert = "INSERT INTO Users(Username, Lastname, FirstName, Cellnumber) VALUES (@Username, @LastName, @FirstName, @CellNumber)";
+                conn.Open();
+                SqlCommand insertCommand = new SqlCommand(sqlInsert, conn);
+                insertCommand.Parameters.AddWithValue("@Username", userName_Add);
+                insertCommand.Parameters.AddWithValue("@LastName", lastName_Add);
+                insertCommand.Parameters.AddWithValue("@FirstName", firstName_Add);
+                insertCommand.Parameters.AddWithValue("@CellNumber", cellNumber_Add);
+                insertCommand.ExecuteNonQuery();
+                conn.Close();
+
+                // Repopulating DataGridView
+                conn.Open();
+                string sqlDisplay = "SELECT * FROM Users";
+                SqlCommand command = new SqlCommand(sqlDisplay, conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds, "Users");
+                dgvAddUsers.DataSource = ds;
+                dgvAddUsers.DataMember = "Users";
+                dgvDelete_DeleteUsers.DataSource = ds;
+                dgvDelete_DeleteUsers.DataMember = "Users";
+                dgvUpdateUsers.DataSource = ds;
+                dgvUpdateUsers.DataMember = "Users";
+                conn.Close();
+
+                // Clear ComboBox
+                cmbUsername_DeleteUsers.Items.Clear();
+
+                // Repopulate ComboBox
+                conn.Open();
+                string sqlSelect = "SELECT Username FROM Users";
+                command = new SqlCommand(sqlSelect, conn);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    cmbUsername_DeleteUsers.Items.Add(reader["Username"]);
+                }
+                reader.Close();
+                conn.Close();
+
+                // Clear textboxes
+                txtUsername_AddUsers.Clear();
+                txtFirstName_AddUsers.Clear();
+                txtLastName_AddUsers.Clear();
+                txtCellNumber_AddUsers.Clear();
+                txtUsername_AddUsers.Focus();
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show("Database error: " + sqlEx.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
         }
 
         private void AddUser_Click(object sender, EventArgs e)
@@ -107,6 +255,8 @@ namespace CMPG223_Project
             dgvAddUsers.DataMember = "Users";
             dgvDelete_DeleteUsers.DataSource = ds;
             dgvDelete_DeleteUsers.DataMember = "Users";
+            dgvUpdateUsers.DataSource = ds;
+            dgvUpdateUsers.DataMember = "Users";
             conn.Close();
 
             //fills combobox with the usernames
@@ -121,10 +271,14 @@ namespace CMPG223_Project
             }
             reader.Close();
             conn.Close();
-
-
         }
 
+        private void dgvUpdateUsers_SelectionChanged(object sender, EventArgs e)
+        {
+            ///////////
+        }
+
+        
         private void btnClear_AddUsers_Click(object sender, EventArgs e)
         {
             txtUsername_AddUsers.Clear();
@@ -136,18 +290,6 @@ namespace CMPG223_Project
 
         private void btnDelete_DeleteUsers_Click(object sender, EventArgs e)
         {
-            //cmbUsername_DeleteUsers.Items.Clear();
-            /*conn.Open();
-            string sqlSelect = $"SELECT Username FROM Users";
-            command = new SqlCommand(sqlSelect, conn);
-            reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                cmbUsername_DeleteUsers.Items.Add(reader["Username"]);
-            }
-            reader.Close();
-            conn.Close();*/
 
             string sqlDelete = "DELETE FROM Users WHERE Username ='" + cmbUsername_DeleteUsers.Text + "'";
 
@@ -160,6 +302,25 @@ namespace CMPG223_Project
 
             conn.Close();
 
+            //clear combobox
+            cmbUsername_DeleteUsers.Items.Clear();
+
+            //repopulate cmb
+            conn.Open();
+            string sqlSelect = $"SELECT Username FROM Users";
+            command = new SqlCommand(sqlSelect, conn);
+            reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                cmbUsername_DeleteUsers.Items.Add(reader["Username"]);
+            }
+            reader.Close();
+            conn.Close();
+
+            cmbUsername_DeleteUsers.Text = "";
+
+            //update datagridview
             conn = new SqlConnection(connectionString);
 
             conn.Open();
@@ -173,28 +334,10 @@ namespace CMPG223_Project
             dgvAddUsers.DataMember = "Users";
             dgvDelete_DeleteUsers.DataSource = ds;
             dgvDelete_DeleteUsers.DataMember = "Users";
+            dgvUpdateUsers.DataSource = ds;
+            dgvUpdateUsers.DataMember = "Users";
             conn.Close();
 
-
-            //string sqlDelete = "DELETE FROM Users WHERE ";
-            /*conn.Open();
-string sql = $"SELECT DISTINCT role FROM Staff";
-adapter = new SqlDataAdapter(sql, conn);
-DataSet ds = new DataSet();
-adapter.Fill(ds, "staff_role");
-comboBox1.DisplayMember = "role";
-comboBox1.ValueMember = "role";
-comboBox1.DataSource = ds.Tables["staff_role"];
-conn.Close();*/
-
-            /*
-            adapter = new SqlDataAdapter(sqlSelect, conn);
-            ds = new DataSet();
-            adapter.Fill(ds, "Username");
-            cmbUsername_DeleteUsers.DisplayMember = "Username";
-            cmbUsername_DeleteUsers.ValueMember = "Username";
-            cmbUsername_DeleteUsers.DataSource = ds.Tables["Users"];
-            conn.Close();*/
         }
 
         private void DeleteUsers_Click(object sender, EventArgs e)
@@ -211,34 +354,110 @@ conn.Close();*/
             dgvDelete_DeleteUsers.DataSource = ds;
             dgvDelete_DeleteUsers.DataMember = "Users";
             conn.Close();
-
-            //cmbUsername_DeleteUsers.Items.Clear();
-            conn.Open();
-            string sqlSelect = $"SELECT Username FROM Users";
-            command = new SqlCommand(sqlSelect, conn);
-            reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                cmbUsername_DeleteUsers.Items.Add(reader["Username"]);
-            }
-            reader.Close();
-            conn.Close();
         }
 
         private void cmbUsername_DeleteUsers_SelectedIndexChanged(object sender, EventArgs e)
         {
-           /* conn.Open();
-            string sqlSelect = $"SELECT Username FROM Users";
-            command = new SqlCommand(sqlSelect, conn);
-            reader = command.ExecuteReader();
+            ///////
+        }
 
-            while (reader.Read())
+        private void btnUpdateUsers_UpdateUsers_Click(object sender, EventArgs e)
+        {
+            ///////
+            if (string.IsNullOrEmpty(txtUserID_UpdateUser.Text))
             {
-                cmbUsername_DeleteUsers.Items.Add(reader["Username"]);
+                MessageBox.Show("Please select a user to update.");
+                return;
             }
-            reader.Close();
-            conn.Close();*/
+
+            //string connectionString = "Your_Connection_String_Here";
+            string userID = txtUserID_UpdateUser.Text;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    // Start building the UPDATE query
+                    List<string> updateFields = new List<string>();
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = connection;
+
+                    if (!string.IsNullOrWhiteSpace(txtUsername_UpdateUsers.Text))
+                    {
+                        updateFields.Add("Username = @Username");
+                        command.Parameters.AddWithValue("@Username", txtUsername_UpdateUsers.Text);
+                    }
+                    if (!string.IsNullOrWhiteSpace(txtFirstName_UpdateUsers.Text))
+                    {
+                        updateFields.Add("FirstName = @FirstName");
+                        command.Parameters.AddWithValue("@FirstName", txtFirstName_UpdateUsers.Text);
+                    }
+                    if (!string.IsNullOrWhiteSpace(txtLastName_UpdateUsers.Text))
+                    {
+                        updateFields.Add("Lastname = @Lastname");
+                        command.Parameters.AddWithValue("@Lastname", txtLastName_UpdateUsers.Text);
+                    }
+                    if (!string.IsNullOrWhiteSpace(txtCellNumber_UpdateUsers.Text))
+                    {
+                        updateFields.Add("Cellnumber = @Cellnumber");
+                        command.Parameters.AddWithValue("@Cellnumber", txtCellNumber_UpdateUsers.Text);
+                    }
+
+                    if (updateFields.Count == 0)
+                    {
+                        MessageBox.Show("No fields to update.");
+                        return;
+                    }
+
+                    string updateQuery = $"UPDATE Users SET {string.Join(", ", updateFields)} WHERE User_ID = @User_ID";
+                    command.CommandText = updateQuery;
+                    command.Parameters.AddWithValue("@User_ID", userID);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("User information updated successfully!");
+
+                        // Refresh the DataGridView
+                        string selectQuery = "SELECT User_ID, Username, FirstName, Lastname, Cellnumber FROM Users";
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(selectQuery, connection))
+                        {
+                            DataTable usersTable = new DataTable();
+                            adapter.Fill(usersTable);
+                            dgvUpdateUsers.DataSource = usersTable;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Update failed. User not found.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
+
+                //repoopulate datagridview
+                conn = new SqlConnection(connectionString);
+
+                conn.Open();
+                string sqlDisplay = $"SELECT * FROM Users"; 
+                command = new SqlCommand(sqlDisplay, conn);
+                adapter = new SqlDataAdapter();
+                adapter.SelectCommand = command;
+                ds = new DataSet();
+                adapter.Fill(ds, "Users");
+                dgvAddUsers.DataSource = ds;
+                dgvAddUsers.DataMember = "Users";
+                dgvDelete_DeleteUsers.DataSource = ds;
+                dgvDelete_DeleteUsers.DataMember = "Users";
+                dgvUpdateUsers.DataSource = ds;
+                dgvUpdateUsers.DataMember = "Users";
+                conn.Close();
+            }
         }
     }
 }

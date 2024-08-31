@@ -30,6 +30,7 @@
         {
             MaintainUsers = new TabControl();
             AddUser = new TabPage();
+            lblCellNumberError_AddUsers = new Label();
             dgvAddUsers = new DataGridView();
             btnBack_AddUsers = new Button();
             btnClear_AddUsers = new Button();
@@ -43,7 +44,7 @@
             lblFirstName_Users = new Label();
             lblUsername_AddUsers = new Label();
             UpdateUsers = new TabPage();
-            cmbUserID_UpdateUser = new ComboBox();
+            txtUserID_UpdateUser = new TextBox();
             lblUserID_UpdateUsers = new Label();
             btnBack_UpdateUsers = new Button();
             btnClearUsers_UpdateUsers = new Button();
@@ -64,6 +65,9 @@
             cmbUsername_DeleteUsers = new ComboBox();
             lblUserID_DeleteUser = new Label();
             dgvDelete_DeleteUsers = new DataGridView();
+            lblLastNameError_AddUsers = new Label();
+            lblUsernameError_AddUsers = new Label();
+            lblFirstNameError_AddUsers = new Label();
             MaintainUsers.SuspendLayout();
             AddUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAddUsers).BeginInit();
@@ -92,6 +96,10 @@
             AddUser.BackColor = Color.FromArgb(188, 170, 146);
             AddUser.BackgroundImage = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
             AddUser.BackgroundImageLayout = ImageLayout.Zoom;
+            AddUser.Controls.Add(lblFirstNameError_AddUsers);
+            AddUser.Controls.Add(lblUsernameError_AddUsers);
+            AddUser.Controls.Add(lblLastNameError_AddUsers);
+            AddUser.Controls.Add(lblCellNumberError_AddUsers);
             AddUser.Controls.Add(dgvAddUsers);
             AddUser.Controls.Add(btnBack_AddUsers);
             AddUser.Controls.Add(btnClear_AddUsers);
@@ -112,6 +120,18 @@
             AddUser.TabIndex = 0;
             AddUser.Text = "Add";
             AddUser.Click += AddUser_Click;
+            // 
+            // lblCellNumberError_AddUsers
+            // 
+            lblCellNumberError_AddUsers.AutoSize = true;
+            lblCellNumberError_AddUsers.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCellNumberError_AddUsers.ForeColor = Color.Red;
+            lblCellNumberError_AddUsers.Location = new Point(266, 243);
+            lblCellNumberError_AddUsers.Name = "lblCellNumberError_AddUsers";
+            lblCellNumberError_AddUsers.Size = new Size(51, 20);
+            lblCellNumberError_AddUsers.TabIndex = 12;
+            lblCellNumberError_AddUsers.Text = "label1";
+            lblCellNumberError_AddUsers.Visible = false;
             // 
             // dgvAddUsers
             // 
@@ -244,7 +264,7 @@
             UpdateUsers.BackColor = Color.FromArgb(188, 170, 146);
             UpdateUsers.BackgroundImage = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
             UpdateUsers.BackgroundImageLayout = ImageLayout.Zoom;
-            UpdateUsers.Controls.Add(cmbUserID_UpdateUser);
+            UpdateUsers.Controls.Add(txtUserID_UpdateUser);
             UpdateUsers.Controls.Add(lblUserID_UpdateUsers);
             UpdateUsers.Controls.Add(btnBack_UpdateUsers);
             UpdateUsers.Controls.Add(btnClearUsers_UpdateUsers);
@@ -266,14 +286,13 @@
             UpdateUsers.TabIndex = 1;
             UpdateUsers.Text = "Update";
             // 
-            // cmbUserID_UpdateUser
+            // txtUserID_UpdateUser
             // 
-            cmbUserID_UpdateUser.FormattingEnabled = true;
-            cmbUserID_UpdateUser.Location = new Point(225, 28);
-            cmbUserID_UpdateUser.Margin = new Padding(3, 4, 3, 4);
-            cmbUserID_UpdateUser.Name = "cmbUserID_UpdateUser";
-            cmbUserID_UpdateUser.Size = new Size(196, 28);
-            cmbUserID_UpdateUser.TabIndex = 17;
+            txtUserID_UpdateUser.Location = new Point(225, 29);
+            txtUserID_UpdateUser.Name = "txtUserID_UpdateUser";
+            txtUserID_UpdateUser.ReadOnly = true;
+            txtUserID_UpdateUser.Size = new Size(196, 27);
+            txtUserID_UpdateUser.TabIndex = 17;
             // 
             // lblUserID_UpdateUsers
             // 
@@ -282,9 +301,9 @@
             lblUserID_UpdateUsers.ForeColor = SystemColors.ControlText;
             lblUserID_UpdateUsers.Location = new Point(9, 16);
             lblUserID_UpdateUsers.Name = "lblUserID_UpdateUsers";
-            lblUserID_UpdateUsers.Size = new Size(129, 41);
+            lblUserID_UpdateUsers.Size = new Size(121, 41);
             lblUserID_UpdateUsers.TabIndex = 16;
-            lblUserID_UpdateUsers.Text = "User ID:";
+            lblUserID_UpdateUsers.Text = "UserID:";
             // 
             // btnBack_UpdateUsers
             // 
@@ -318,6 +337,7 @@
             btnUpdateUsers_UpdateUsers.TabIndex = 13;
             btnUpdateUsers_UpdateUsers.Text = "Update";
             btnUpdateUsers_UpdateUsers.UseVisualStyleBackColor = true;
+            btnUpdateUsers_UpdateUsers.Click += btnUpdateUsers_UpdateUsers_Click;
             // 
             // dgvUpdateUsers
             // 
@@ -493,6 +513,42 @@
             dgvDelete_DeleteUsers.Size = new Size(589, 223);
             dgvDelete_DeleteUsers.TabIndex = 13;
             // 
+            // lblLastNameError_AddUsers
+            // 
+            lblLastNameError_AddUsers.AutoSize = true;
+            lblLastNameError_AddUsers.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblLastNameError_AddUsers.ForeColor = Color.Red;
+            lblLastNameError_AddUsers.Location = new Point(266, 171);
+            lblLastNameError_AddUsers.Name = "lblLastNameError_AddUsers";
+            lblLastNameError_AddUsers.Size = new Size(51, 20);
+            lblLastNameError_AddUsers.TabIndex = 13;
+            lblLastNameError_AddUsers.Text = "label1";
+            lblLastNameError_AddUsers.Visible = false;
+            // 
+            // lblUsernameError_AddUsers
+            // 
+            lblUsernameError_AddUsers.AutoSize = true;
+            lblUsernameError_AddUsers.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUsernameError_AddUsers.ForeColor = Color.Red;
+            lblUsernameError_AddUsers.Location = new Point(266, 59);
+            lblUsernameError_AddUsers.Name = "lblUsernameError_AddUsers";
+            lblUsernameError_AddUsers.Size = new Size(51, 20);
+            lblUsernameError_AddUsers.TabIndex = 14;
+            lblUsernameError_AddUsers.Text = "label1";
+            lblUsernameError_AddUsers.Visible = false;
+            // 
+            // lblFirstNameError_AddUsers
+            // 
+            lblFirstNameError_AddUsers.AutoSize = true;
+            lblFirstNameError_AddUsers.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblFirstNameError_AddUsers.ForeColor = Color.Red;
+            lblFirstNameError_AddUsers.Location = new Point(266, 113);
+            lblFirstNameError_AddUsers.Name = "lblFirstNameError_AddUsers";
+            lblFirstNameError_AddUsers.Size = new Size(51, 20);
+            lblFirstNameError_AddUsers.TabIndex = 15;
+            lblFirstNameError_AddUsers.Text = "label1";
+            lblFirstNameError_AddUsers.Visible = false;
+            // 
             // frmUsers
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -549,11 +605,15 @@
         private Label lblUserID_UpdateUsers;
         private TextBox txtUserID_UpdateUsers;
         private DataGridView dgvDelete_DeleteUsers;
-        private ComboBox cmbUserID_UpdateUser;
         private ComboBox cmbUsername_DeleteUsers;
         private Label lblUserID_DeleteUser;
         private Button btnBack_DeleteUsers;
         private Button btnClear_DeleteUsers;
         private Button btnDelete_DeleteUsers;
+        private TextBox txtUserID_UpdateUser;
+        private Label lblCellNumberError_AddUsers;
+        private Label lblFirstNameError_AddUsers;
+        private Label lblUsernameError_AddUsers;
+        private Label lblLastNameError_AddUsers;
     }
 }
