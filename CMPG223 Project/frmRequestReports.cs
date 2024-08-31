@@ -13,7 +13,7 @@ namespace CMPG223_Project
 {
     public partial class frmRequestReports : Form
     {
-        String connectionString = @"Data Source=DESKTOP-20CLHAU;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False"; 
+        String connectionString = @"Data Source=LAPTOP-JHPD709J;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False"; 
         public frmRequestReports()
         {
             InitializeComponent();
@@ -73,62 +73,18 @@ namespace CMPG223_Project
 
             pbRequestReports.SendToBack();
         }
-
-        private bool ValidateDateTimePickers(DateTime startDate, DateTime endDate)
-        {
-            bool isValid = true;
-            errorProvider.SetError(dtpStartDate_RequestReports, "");
-            errorProvider.SetError(dtpEndDate_RequestReports, "");
-
-            if (startDate.Date == endDate.Date)
-            {
-                errorProvider.SetError(dtpStartDate_RequestReports, "Start Date cannot be the same as End Date.");
-                errorProvider.SetError(dtpEndDate_RequestReports, "Start Date cannot be the same as End Date.");
-                isValid = false;
-            }
-            else if (startDate.Date > endDate.Date)
-            {
-                errorProvider.SetError(dtpEndDate_RequestReports, "End Date cannot be earlier than Start Date.");
-                errorProvider.SetError(dtpStartDate_RequestReports, "");
-                MessageBox.Show("Start Date cannot be later than End Date.");
-                isValid = false;
-            }
-
-            return isValid;
-        }
-
-        private bool ValidateComboBox()
-        {
-            bool isValid = true;
-            errorProvider.SetError(cbOrderBy_RequestReports, "");
-            errorProvider.SetError(cbReportType_RequestReports, "");
-
-            if (cbOrderBy_RequestReports.SelectedIndex == -1 && cbReportType_RequestReports.SelectedIndex == -1)
-            {
-                errorProvider.SetError(cbOrderBy_RequestReports, "Please select an Order By option.");
-                errorProvider.SetError(cbReportType_RequestReports, "Please select a Report Type.");
-                isValid = false;
-            }
-            else if (cbReportType_RequestReports.SelectedIndex == -1)
-            {
-                errorProvider.SetError(cbReportType_RequestReports, "Please select a Report Type.");
-                isValid = false;
-            }
-            else if (cbOrderBy_RequestReports.SelectedIndex == -1)
-            {
-                errorProvider.SetError(cbOrderBy_RequestReports, "Please select an Order By option.");
-                isValid = false;
-            }
-
-            return isValid;
-        }
-
-
-
-
         private void GenerateTop10VehiclesReport(DateTime startDate, DateTime endDate, string Order_By )
         {
-            // Configure DataGridView columns
+            //Validation
+            int total_Entries = 0;
+            lblReportTypeName.Text = "Top 10 Vehicles Per Time Period";
+
+            //Resets the Data Grid View
+            dgvRequestReports.Rows.Clear();
+            dgvRequestReports.Columns.Clear();
+
+
+            // Add to Data Grid View Columns 
             dgvRequestReports.ColumnCount = 4;
             dgvRequestReports.Columns[0].Name = "Vehicle_ID";
             dgvRequestReports.Columns[1].Name = "Vehicle Name";
@@ -180,20 +136,26 @@ namespace CMPG223_Project
             }
 
             // Calculate and add the total row
-            int totalRentals = dgvRequestReports.Rows.Cast<DataGridViewRow>()
-                .Sum(r => Convert.ToInt32(r.Cells["Rental Count"].Value));
+            int totalRentals = dgvRequestReports.Rows.Cast<DataGridViewRow>().Sum(r => Convert.ToInt32(r.Cells["Rental Count"].Value));
 
             string[] totalRow = { "Total:", "", "", totalRentals.ToString() };
             dgvRequestReports.Rows.Add(totalRow);
 
             // Apply styles as in your original code
             ApplyDataGridViewStyles();
+
+            total_Entries = dgvRequestReports.Rows.Count - 1; 
+            lblTotalEntries_RequestReports.Text = total_Entries.ToString();
         }
 
         private void GenerateIncomeReceivedReport(DateTime startDate, DateTime endDate, string Order_By)
         {
-        
+            //Validation 
+            lblReportTypeName.Text = "Income Recieved Per Time Period"; 
+
+            //Resets the Data Grid View
             dgvRequestReports.Rows.Clear();
+            dgvRequestReports.Columns.Clear(); 
 
            
             dgvRequestReports.ColumnCount = 3;
@@ -335,6 +297,54 @@ namespace CMPG223_Project
         private void label13_Click(object sender, EventArgs e)
         {
 
+        }
+        private bool ValidateDateTimePickers(DateTime startDate, DateTime endDate)
+        {
+            bool isValid = true;
+            errorProvider.SetError(dtpStartDate_RequestReports, "");
+            errorProvider.SetError(dtpEndDate_RequestReports, "");
+
+            if (startDate.Date == endDate.Date)
+            {
+                errorProvider.SetError(dtpStartDate_RequestReports, "Start Date cannot be the same as End Date.");
+                errorProvider.SetError(dtpEndDate_RequestReports, "Start Date cannot be the same as End Date.");
+                isValid = false;
+            }
+            else if (startDate.Date > endDate.Date)
+            {
+                errorProvider.SetError(dtpEndDate_RequestReports, "End Date cannot be earlier than Start Date.");
+                errorProvider.SetError(dtpStartDate_RequestReports, "");
+                MessageBox.Show("Start Date cannot be later than End Date.");
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        private bool ValidateComboBox()
+        {
+            bool isValid = true;
+            errorProvider.SetError(cbOrderBy_RequestReports, "");
+            errorProvider.SetError(cbReportType_RequestReports, "");
+
+            if (cbOrderBy_RequestReports.SelectedIndex == -1 && cbReportType_RequestReports.SelectedIndex == -1)
+            {
+                errorProvider.SetError(cbOrderBy_RequestReports, "Please select an Order By option.");
+                errorProvider.SetError(cbReportType_RequestReports, "Please select a Report Type.");
+                isValid = false;
+            }
+            else if (cbReportType_RequestReports.SelectedIndex == -1)
+            {
+                errorProvider.SetError(cbReportType_RequestReports, "Please select a Report Type.");
+                isValid = false;
+            }
+            else if (cbOrderBy_RequestReports.SelectedIndex == -1)
+            {
+                errorProvider.SetError(cbOrderBy_RequestReports, "Please select an Order By option.");
+                isValid = false;
+            }
+
+            return isValid;
         }
 
         private void btnClear_RequestReports_Click(object sender, EventArgs e)
