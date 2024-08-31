@@ -9,9 +9,11 @@ namespace CMPG223_Project
         SqlConnection con = new SqlConnection("Data Source=MOMO;Initial Catalog=\"Roadrunner Rentals\";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
         decimal cost = 0;
         int days = 0;
-        int VehicleID = 0;
+        int vehicleID = 0;
         int userID = 0;
         bool paid = false;
+        bool isValid = true;
+        int Client_ID = 0;
         public rentalOrder(Form form1, int userID)
         {
             InitializeComponent();
@@ -23,10 +25,9 @@ namespace CMPG223_Project
         {
             try
             {
-                bool isValid = true;
                 if (comboBox1.SelectedIndex != -1)
                 {
-                    int Client_ID = (int)comboBox1.SelectedValue;
+                    Client_ID = (int)comboBox1.SelectedValue;
                     label9.Visible = false;
                 }
                 else
@@ -37,16 +38,41 @@ namespace CMPG223_Project
 
                 if (checkBox1.Checked)
                 {
-                    bool paid = true;
+                    paid = true;
                 }
 
-                if (VehicleID == 0)
+                if (vehicleID == 0)
                 {
                     label10.Visible = true;
                     isValid = false;
                 }
-                
-                string insert = "INSERT INTO RentalOrder (Client_ID, User_ID, Vehicle_ID, Time, OrderCost, TimeRented, Paid, VehicleReturned, Date)";
+                if(days == 0)
+                {
+                   isValid = false;
+                }
+                if(cost == 0)
+                {
+                    isValid = false;
+                }
+                DayCalculator();
+                TimeSpan time = DateTime.Now.TimeOfDay;
+                DateTime date = DateTime.Now.Date;
+                bool vehicleReturned = false;
+                if (isValid == true)
+                {
+                    string insert = "INSERT INTO RentalOrder (Client_ID, User_ID, Vehicle_ID, Time, OrderCost, DaysRented, Paid, VehicleReturned, Date) VALUES(@Client_ID, @User_ID, @Vehicle_ID, @Time, @OrderCost, @DaysRented, @Paid, @VehicleReturned, @Date)";
+                    SqlCommand cmd = new SqlCommand(insert, con);
+                    cmd.Parameters.AddWithValue("@Client_ID", Client_ID);
+                    cmd.Parameters.AddWithValue("@Paid", paid);
+                    cmd.Parameters.AddWithValue("@User_ID", userID);
+                    cmd.Parameters.AddWithValue("@Vehicle_ID", vehicleID);
+                    cmd.Parameters.AddWithValue("@Time", time);
+                    cmd.Parameters.AddWithValue("@OrderCost", cost);
+                    cmd.Parameters.AddWithValue("@DaysRented", days);
+                    cmd.Parameters.AddWithValue("@VehicleReturned", vehicleReturned);
+                    cmd.Parameters.AddWithValue("@Date", date);
+                    MessageBox.Show("Added successfully");
+                }
 
             }
             catch (Exception ex)
@@ -64,7 +90,9 @@ namespace CMPG223_Project
             populateClients();
             populateDataGridView();
             dateTimePicker1.MinDate = DateTime.Today;
-            dateTimePicker2.MinDate = DateTime.Today;
+            dateTimePicker2.MinDate = DateTime.Today.AddDays(1);
+            label7.Visible = false;
+            label10.Visible = false;
 
         }
         private void populateDataGridView()
@@ -72,7 +100,7 @@ namespace CMPG223_Project
             try
             {
 
-                string select = "SELECT Vehicle.Vehicle_ID, Vehicle.CostPerDay, Vehicle.NumberOfSeats, Vehicle.LicenseNumber, Vehicle_Class.ClassName, Vehicle.ImageOfVehicle FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_CLass_ID=Vehicle_Class.Vehicle_Class_ID WHERE Vehicle.InUse = 'False'";
+                string select = "SELECT Vehicle.Vehicle_ID, Vehicle.CostPerDay, Vehicle.NumberOfSeats, Vehicle_Class.ClassName, FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_CLass_ID=Vehicle_Class.Vehicle_Class_ID WHERE Vehicle.InUse = 'False'";
                 SqlDataAdapter adapter = new SqlDataAdapter(select, con);
                 DataSet dataSet = new DataSet();
                 adapter.Fill(dataSet);
@@ -113,8 +141,10 @@ namespace CMPG223_Project
             {
                 DataGridViewRow row = dataGridView1.Rows[indexRow];
                 textBox2.Text = row.Cells[0].Value.ToString();
-                VehicleID = (int)row.Cells[0].Value;
+                vehicleID = (int)row.Cells[0].Value;
+                label10.Visible = false;
                 cost = (decimal)row.Cells[1].Value;
+                DayCalculator();
             }
         }
 
@@ -134,17 +164,28 @@ namespace CMPG223_Project
             DateTime date2 = dateTimePicker2.Value;
             DateTime date1 = dateTimePicker1.Value;
             textBox1.Clear();
-            if ((date2.DayOfYear - date1.DayOfYear) >= 0 && cost != 0)
+            if ((date2.DayOfYear - date1.DayOfYear) >= 0 && cost != 0 && vehicleID != 0)
             {
                 result = (date2.DayOfYear - date1.DayOfYear) * cost;
                 days = (date2.DayOfYear - date1.DayOfYear);
                 label7.Visible = false;
+                isValid = true;
                 textBox1.Text = result.ToString();
                 return result;
             }
             else
             {
-                label7.Visible = true;
+                if(vehicleID == 0)
+                {
+                    label10.Visible = true;
+
+                }
+                if ((date2.DayOfYear - date1.DayOfYear) <= 0)
+                {
+                    label7.Visible = true;
+
+                }
+                isValid = false;
                 return result;
             }
 
@@ -160,8 +201,15 @@ namespace CMPG223_Project
             checkBox1.Checked = false;
             textBox1.Clear();
             label7.Visible = false;
-            label101.Visible = false;
-            label92.Visible = false;
+            label10.Visible = false;
+            label9.Visible = false;
+            cost = 0;
+            days = 0;
+            vehicleID = 0;
+            userID = 0;
+            paid = false;
+            isValid = true;
+            Client_ID = 0;
         }
 
        

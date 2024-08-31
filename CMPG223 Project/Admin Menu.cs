@@ -30,7 +30,7 @@ namespace CMPG223_Project
 
         private void button5_Click(object sender, EventArgs e)
         {
-            rentalOrder rentalOrder = new rentalOrder(this);
+            rentalOrder rentalOrder = new rentalOrder(this,1);
             rentalOrder.ShowDialog();
         }
 

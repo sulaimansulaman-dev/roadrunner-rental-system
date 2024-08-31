@@ -30,6 +30,8 @@
         {
             tabPage2 = new TabPage();
             tabPage1 = new TabPage();
+            label10 = new Label();
+            label9 = new Label();
             label8 = new Label();
             checkBox1 = new CheckBox();
             label7 = new Label();
@@ -49,8 +51,6 @@
             dateTimePicker1 = new DateTimePicker();
             comboBox1 = new ComboBox();
             tabControl1 = new TabControl();
-            label9 = new Label();
-            label10 = new Label();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             tabControl1.SuspendLayout();
@@ -95,6 +95,30 @@
             tabPage1.Size = new Size(1001, 464);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Create Order";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label10.ForeColor = Color.Red;
+            label10.Location = new Point(262, 95);
+            label10.Name = "label10";
+            label10.Size = new Size(222, 30);
+            label10.TabIndex = 21;
+            label10.Text = "Please Select a Vehicle";
+            label10.Visible = false;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label9.ForeColor = Color.Red;
+            label9.Location = new Point(262, 53);
+            label9.Name = "label9";
+            label9.Size = new Size(209, 30);
+            label9.TabIndex = 20;
+            label9.Text = "Please Select a Client";
+            label9.Visible = false;
             // 
             // label8
             // 
@@ -283,28 +307,6 @@
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(1009, 492);
             tabControl1.TabIndex = 0;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.ForeColor = Color.Red;
-            label9.Location = new Point(262, 53);
-            label9.Name = "label9";
-            label9.Size = new Size(209, 30);
-            label9.TabIndex = 20;
-            label9.Text = "Please Select a Client";
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label10.ForeColor = Color.Red;
-            label10.Location = new Point(262, 95);
-            label10.Name = "label10";
-            label10.Size = new Size(222, 30);
-            label10.TabIndex = 21;
-            label10.Text = "Please Select a Vehicle";
             // 
             // rentalOrder
             // 
