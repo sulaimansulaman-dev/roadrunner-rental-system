@@ -29,6 +29,24 @@
         private void InitializeComponent()
         {
             tabPage2 = new TabPage();
+            label13 = new Label();
+            checkBox2 = new CheckBox();
+            label14 = new Label();
+            textBoxUpdateVehicle = new TextBox();
+            dataGridViewUpdate = new DataGridView();
+            button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
+            label15 = new Label();
+            textBoxUpdateTotal = new TextBox();
+            label16 = new Label();
+            label17 = new Label();
+            label18 = new Label();
+            label19 = new Label();
+            label20 = new Label();
+            dateTimePickerUpdate2 = new DateTimePicker();
+            dateTimePickerUpate1 = new DateTimePicker();
+            comboBoxUpdateClient = new ComboBox();
             tabPage1 = new TabPage();
             label10 = new Label();
             label9 = new Label();
@@ -36,7 +54,7 @@
             checkBox1 = new CheckBox();
             label7 = new Label();
             textBox2 = new TextBox();
-            dataGridView1 = new DataGridView();
+            dataGridViewAdd = new DataGridView();
             buttonBack = new Button();
             buttonClear = new Button();
             buttonCreate = new Button();
@@ -51,14 +69,44 @@
             dateTimePicker1 = new DateTimePicker();
             comboBox1 = new ComboBox();
             tabControl1 = new TabControl();
+            label21 = new Label();
+            textBoxSearchAdd = new TextBox();
+            textBoxSearchUpdate = new TextBox();
+            label22 = new Label();
+            textBoxOrder = new TextBox();
+            label23 = new Label();
+            tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewUpdate).BeginInit();
             tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewAdd).BeginInit();
             tabControl1.SuspendLayout();
             SuspendLayout();
             // 
             // tabPage2
             // 
             tabPage2.BackColor = Color.FromArgb(188, 170, 148);
+            tabPage2.Controls.Add(textBoxOrder);
+            tabPage2.Controls.Add(label23);
+            tabPage2.Controls.Add(textBoxSearchUpdate);
+            tabPage2.Controls.Add(label22);
+            tabPage2.Controls.Add(label13);
+            tabPage2.Controls.Add(checkBox2);
+            tabPage2.Controls.Add(label14);
+            tabPage2.Controls.Add(textBoxUpdateVehicle);
+            tabPage2.Controls.Add(dataGridViewUpdate);
+            tabPage2.Controls.Add(button1);
+            tabPage2.Controls.Add(button2);
+            tabPage2.Controls.Add(button3);
+            tabPage2.Controls.Add(label15);
+            tabPage2.Controls.Add(textBoxUpdateTotal);
+            tabPage2.Controls.Add(label16);
+            tabPage2.Controls.Add(label17);
+            tabPage2.Controls.Add(label18);
+            tabPage2.Controls.Add(label19);
+            tabPage2.Controls.Add(label20);
+            tabPage2.Controls.Add(dateTimePickerUpdate2);
+            tabPage2.Controls.Add(dateTimePickerUpate1);
+            tabPage2.Controls.Add(comboBoxUpdateClient);
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
@@ -66,16 +114,191 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Update Orders";
             // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label13.Location = new Point(3, 244);
+            label13.Name = "label13";
+            label13.Size = new Size(143, 32);
+            label13.TabIndex = 39;
+            label13.Text = "Order Paid:";
+            // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            checkBox2.Location = new Point(159, 243);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(77, 36);
+            checkBox2.TabIndex = 27;
+            checkBox2.Text = "Paid";
+            checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label14.ForeColor = Color.Red;
+            label14.Location = new Point(265, 208);
+            label14.Name = "label14";
+            label14.Size = new Size(250, 30);
+            label14.TabIndex = 38;
+            label14.Text = "Please Select a Valid Date";
+            label14.Visible = false;
+            // 
+            // textBoxUpdateVehicle
+            // 
+            textBoxUpdateVehicle.Enabled = false;
+            textBoxUpdateVehicle.Location = new Point(105, 131);
+            textBoxUpdateVehicle.Name = "textBoxUpdateVehicle";
+            textBoxUpdateVehicle.ReadOnly = true;
+            textBoxUpdateVehicle.Size = new Size(154, 23);
+            textBoxUpdateVehicle.TabIndex = 37;
+            // 
+            // dataGridViewUpdate
+            // 
+            dataGridViewUpdate.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewUpdate.Location = new Point(545, 38);
+            dataGridViewUpdate.Name = "dataGridViewUpdate";
+            dataGridViewUpdate.Size = new Size(445, 260);
+            dataGridViewUpdate.TabIndex = 23;
+            dataGridViewUpdate.CellClick += dataGridViewUpdate_CellClick;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(418, 397);
+            button1.Name = "button1";
+            button1.Size = new Size(104, 43);
+            button1.TabIndex = 33;
+            button1.Text = "Back";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(515, 330);
+            button2.Name = "button2";
+            button2.Size = new Size(104, 43);
+            button2.TabIndex = 30;
+            button2.Text = "Clear";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(326, 330);
+            button3.Name = "button3";
+            button3.Size = new Size(104, 43);
+            button3.TabIndex = 29;
+            button3.Text = "Update";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label15.Location = new Point(-1, 1);
+            label15.Name = "label15";
+            label15.Size = new Size(289, 40);
+            label15.TabIndex = 36;
+            label15.Text = "Create Rental Order";
+            // 
+            // textBoxUpdateTotal
+            // 
+            textBoxUpdateTotal.Enabled = false;
+            textBoxUpdateTotal.Location = new Point(159, 217);
+            textBoxUpdateTotal.Name = "textBoxUpdateTotal";
+            textBoxUpdateTotal.ReadOnly = true;
+            textBoxUpdateTotal.Size = new Size(100, 23);
+            textBoxUpdateTotal.TabIndex = 35;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label16.Location = new Point(3, 208);
+            label16.Name = "label16";
+            label16.Size = new Size(150, 32);
+            label16.TabIndex = 34;
+            label16.Text = "Order Total:";
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label17.Location = new Point(300, 165);
+            label17.Name = "label17";
+            label17.Size = new Size(67, 32);
+            label17.TabIndex = 32;
+            label17.Text = "until";
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            label18.Location = new Point(3, 164);
+            label18.Name = "label18";
+            label18.Size = new Size(136, 32);
+            label18.TabIndex = 31;
+            label18.Text = "Rent from:";
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            label19.Location = new Point(3, 122);
+            label19.Name = "label19";
+            label19.Size = new Size(101, 32);
+            label19.TabIndex = 28;
+            label19.Text = "Vehicle:";
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            label20.Location = new Point(3, 82);
+            label20.Name = "label20";
+            label20.Size = new Size(87, 32);
+            label20.TabIndex = 26;
+            label20.Text = "Client:";
+            // 
+            // dateTimePickerUpdate2
+            // 
+            dateTimePickerUpdate2.Location = new Point(373, 172);
+            dateTimePickerUpdate2.MinDate = new DateTime(2024, 8, 31, 0, 0, 0, 0);
+            dateTimePickerUpdate2.Name = "dateTimePickerUpdate2";
+            dateTimePickerUpdate2.Size = new Size(149, 23);
+            dateTimePickerUpdate2.TabIndex = 25;
+            dateTimePickerUpdate2.Value = new DateTime(2024, 8, 31, 0, 0, 0, 0);
+            // 
+            // dateTimePickerUpate1
+            // 
+            dateTimePickerUpate1.Location = new Point(145, 172);
+            dateTimePickerUpate1.MinDate = new DateTime(2024, 8, 27, 0, 0, 0, 0);
+            dateTimePickerUpate1.Name = "dateTimePickerUpate1";
+            dateTimePickerUpate1.Size = new Size(149, 23);
+            dateTimePickerUpate1.TabIndex = 24;
+            // 
+            // comboBoxUpdateClient
+            // 
+            comboBoxUpdateClient.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxUpdateClient.FormattingEnabled = true;
+            comboBoxUpdateClient.Location = new Point(105, 91);
+            comboBoxUpdateClient.Name = "comboBoxUpdateClient";
+            comboBoxUpdateClient.Size = new Size(154, 23);
+            comboBoxUpdateClient.TabIndex = 22;
+            // 
             // tabPage1
             // 
             tabPage1.BackColor = Color.FromArgb(188, 170, 146);
+            tabPage1.Controls.Add(textBoxSearchAdd);
+            tabPage1.Controls.Add(label21);
             tabPage1.Controls.Add(label10);
             tabPage1.Controls.Add(label9);
             tabPage1.Controls.Add(label8);
             tabPage1.Controls.Add(checkBox1);
             tabPage1.Controls.Add(label7);
             tabPage1.Controls.Add(textBox2);
-            tabPage1.Controls.Add(dataGridView1);
+            tabPage1.Controls.Add(dataGridViewAdd);
             tabPage1.Controls.Add(buttonBack);
             tabPage1.Controls.Add(buttonClear);
             tabPage1.Controls.Add(buttonCreate);
@@ -162,14 +385,14 @@
             textBox2.Size = new Size(154, 23);
             textBox2.TabIndex = 17;
             // 
-            // dataGridView1
+            // dataGridViewAdd
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(581, 62);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(407, 260);
-            dataGridView1.TabIndex = 2;
-            dataGridView1.CellClick += dataGridView1_CellClick;
+            dataGridViewAdd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewAdd.Location = new Point(544, 36);
+            dataGridViewAdd.Name = "dataGridViewAdd";
+            dataGridViewAdd.Size = new Size(446, 260);
+            dataGridViewAdd.TabIndex = 2;
+            dataGridViewAdd.CellClick += dataGridView1_CellClick;
             // 
             // buttonBack
             // 
@@ -308,6 +531,59 @@
             tabControl1.Size = new Size(1009, 492);
             tabControl1.TabIndex = 0;
             // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label21.Location = new Point(583, 1);
+            label21.Name = "label21";
+            label21.Size = new Size(194, 32);
+            label21.TabIndex = 22;
+            label21.Text = "Search Vehicles:";
+            // 
+            // textBoxSearchAdd
+            // 
+            textBoxSearchAdd.Location = new Point(783, 10);
+            textBoxSearchAdd.Name = "textBoxSearchAdd";
+            textBoxSearchAdd.Size = new Size(176, 23);
+            textBoxSearchAdd.TabIndex = 23;
+            // 
+            // textBoxSearchUpdate
+            // 
+            textBoxSearchUpdate.Location = new Point(784, 12);
+            textBoxSearchUpdate.Name = "textBoxSearchUpdate";
+            textBoxSearchUpdate.Size = new Size(176, 23);
+            textBoxSearchUpdate.TabIndex = 43;
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label22.Location = new Point(584, 3);
+            label22.Name = "label22";
+            label22.Size = new Size(194, 32);
+            label22.TabIndex = 42;
+            label22.Text = "Search Vehicles:";
+            // 
+            // textBoxOrder
+            // 
+            textBoxOrder.Enabled = false;
+            textBoxOrder.Location = new Point(105, 50);
+            textBoxOrder.Name = "textBoxOrder";
+            textBoxOrder.ReadOnly = true;
+            textBoxOrder.Size = new Size(154, 23);
+            textBoxOrder.TabIndex = 45;
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            label23.Location = new Point(6, 41);
+            label23.Name = "label23";
+            label23.Size = new Size(88, 32);
+            label23.TabIndex = 44;
+            label23.Text = "Order:";
+            // 
             // rentalOrder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -319,9 +595,12 @@
             Name = "rentalOrder";
             Text = "rentalOrder";
             Load += rentalOrder_Load;
+            tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewUpdate).EndInit();
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewAdd).EndInit();
             tabControl1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -344,12 +623,36 @@
         private DateTimePicker dateTimePicker1;
         private ComboBox comboBox1;
         private TabControl tabControl1;
-        private DataGridView dataGridView1;
+        private DataGridView dataGridViewAdd;
         private TextBox textBox2;
         private Label label7;
         private Label label8;
         private CheckBox checkBox1;
         private Label label9;
         private Label label10;
+        private Label label13;
+        private CheckBox checkBox2;
+        private Label label14;
+        private TextBox textBoxUpdateVehicle;
+        private DataGridView dataGridViewUpdate;
+        private Button button1;
+        private Button button2;
+        private Button button3;
+        private Label label15;
+        private TextBox textBoxUpdateTotal;
+        private Label label16;
+        private Label label17;
+        private Label label18;
+        private Label label19;
+        private Label label20;
+        private DateTimePicker dateTimePickerUpdate2;
+        private DateTimePicker dateTimePickerUpate1;
+        private ComboBox comboBoxUpdateClient;
+        private Label label21;
+        private TextBox textBoxSearchAdd;
+        private TextBox textBoxSearchUpdate;
+        private Label label22;
+        private TextBox textBoxOrder;
+        private Label label23;
     }
 }

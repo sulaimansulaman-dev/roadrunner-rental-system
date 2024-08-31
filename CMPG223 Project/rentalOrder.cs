@@ -46,11 +46,11 @@ namespace CMPG223_Project
                     label10.Visible = true;
                     isValid = false;
                 }
-                if(days == 0)
+                if (days == 0)
                 {
-                   isValid = false;
+                    isValid = false;
                 }
-                if(cost == 0)
+                if (cost == 0)
                 {
                     isValid = false;
                 }
@@ -108,8 +108,8 @@ namespace CMPG223_Project
                 SqlDataAdapter adapter = new SqlDataAdapter(select, con);
                 DataSet dataSet = new DataSet();
                 adapter.Fill(dataSet);
-                dataGridView1.ReadOnly = true;
-                dataGridView1.DataSource = dataSet.Tables[0];
+                dataGridViewAdd.ReadOnly = true;
+                dataGridViewAdd.DataSource = dataSet.Tables[0];
 
             }
             catch (Exception ex)
@@ -143,7 +143,7 @@ namespace CMPG223_Project
             int indexRow = e.RowIndex;
             if (indexRow >= 0)
             {
-                DataGridViewRow row = dataGridView1.Rows[indexRow];
+                DataGridViewRow row = dataGridViewAdd.Rows[indexRow];
                 textBox2.Text = row.Cells[0].Value.ToString();
                 vehicleID = (int)row.Cells[0].Value;
                 label10.Visible = false;
@@ -179,7 +179,7 @@ namespace CMPG223_Project
             }
             else
             {
-                if(vehicleID == 0)
+                if (vehicleID == 0)
                 {
                     label10.Visible = true;
 
@@ -216,6 +216,17 @@ namespace CMPG223_Project
             Client_ID = 0;
         }
 
-       
+        private void dataGridViewUpdate_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int indexRow = e.RowIndex;
+            if (indexRow >= 0)
+            {
+                DataGridViewRow row = dataGridViewAdd.Rows[indexRow];
+                textBox2.Text = row.Cells[0].Value.ToString();
+                vehicleID = (int)row.Cells[0].Value;
+                label10.Visible = false;
+                cost = (decimal)row.Cells[1].Value;
+            }
+        }
     }
 }
