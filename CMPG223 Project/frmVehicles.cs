@@ -24,6 +24,8 @@ namespace CMPG223_Project
             InitializeComponent();
         }
 
+
+
         public void displayData()
         {
             //Display Data
@@ -75,8 +77,45 @@ namespace CMPG223_Project
 
         private void btnAdd_Add_Click(object sender, EventArgs e)
         {
+            
+            string vehicleName = txtName.Text.Trim();
+            bool isValid = true;
+            // Regular expression patterns for validation
+            string alphaPattern = @"^[a-zA-Z\s.,'-]*$";  // Allows letters, spaces, and some punctuation
+
+
+
+            //Validation Block
+            if (string.IsNullOrWhiteSpace(vehicleName))
+            {
+                errorProvider1.SetError(txtName, "Please enter Vehicle Name.");
+                return;
+            }
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(vehicleName, alphaPattern))
+            {
+                errorProvider1.SetError(txtName, "Class Name must contain only letters and allowed punctuation.");
+                isValid = false;
+            }
+            else {
+                errorProvider1.SetError(txtName, "");
+            }
+
+            //cmb validation
+            if (cmbClassSelect.SelectedIndex == -1)
+            {
+                errorProvider1.SetError(cmbClassSelect, "Please select a class.");
+                return;
+            }
+            else {
+                errorProvider1.SetError(cmbClassSelect, "");
+            }
+
+
+
+
+
             // Get values from the form
-            string vehicleName = txtName.Text;
+
             if (cmbClassSelect.SelectedValue != null)
             {
                 classId = (int)cmbClassSelect.SelectedValue;
@@ -224,6 +263,21 @@ namespace CMPG223_Project
             {
                 MessageBox.Show("Please select a vehicle to delete.");
             }
+        }
+
+        private void cmbVehicleID_Update_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void txtVehicleName_Update_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void cmbClass_Update_Validating(object sender, CancelEventArgs e)
+        {
+
         }
     }
 }

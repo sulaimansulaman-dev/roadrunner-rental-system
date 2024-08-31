@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVehicles));
             tabControlVehicleClasses = new TabControl();
             tabAdd = new TabPage();
@@ -60,7 +61,6 @@
             cmbNoOfSeats_Update = new ComboBox();
             label9 = new Label();
             label10 = new Label();
-            cmbVehicleID_Update = new ComboBox();
             lblVehicle = new Label();
             dgvVehicles_Update = new DataGridView();
             btnClear_Update = new Button();
@@ -73,6 +73,8 @@
             dgvVehicles_Delete = new DataGridView();
             cmbVehicleID_Delete = new ComboBox();
             lblClassID_Delete = new Label();
+            errorProvider1 = new ErrorProvider(components);
+            textBox1 = new TextBox();
             tabControlVehicleClasses.SuspendLayout();
             tabAdd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvVehicles_Add).BeginInit();
@@ -80,6 +82,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvVehicles_Update).BeginInit();
             tabDelete.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvVehicles_Delete).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // tabControlVehicleClasses
@@ -280,6 +283,7 @@
             tabUpdate.BackColor = Color.FromArgb(188, 170, 146);
             tabUpdate.BackgroundImage = (Image)resources.GetObject("tabUpdate.BackgroundImage");
             tabUpdate.BackgroundImageLayout = ImageLayout.Zoom;
+            tabUpdate.Controls.Add(textBox1);
             tabUpdate.Controls.Add(txtCostPerDay_Update);
             tabUpdate.Controls.Add(txtVehicleName_Update);
             tabUpdate.Controls.Add(label1);
@@ -292,7 +296,6 @@
             tabUpdate.Controls.Add(cmbNoOfSeats_Update);
             tabUpdate.Controls.Add(label9);
             tabUpdate.Controls.Add(label10);
-            tabUpdate.Controls.Add(cmbVehicleID_Update);
             tabUpdate.Controls.Add(lblVehicle);
             tabUpdate.Controls.Add(dgvVehicles_Update);
             tabUpdate.Controls.Add(btnClear_Update);
@@ -318,6 +321,7 @@
             txtVehicleName_Update.Name = "txtVehicleName_Update";
             txtVehicleName_Update.Size = new Size(125, 27);
             txtVehicleName_Update.TabIndex = 34;
+            txtVehicleName_Update.Validating += txtVehicleName_Update_Validating;
             // 
             // label1
             // 
@@ -337,6 +341,7 @@
             cmbClass_Update.Name = "cmbClass_Update";
             cmbClass_Update.Size = new Size(125, 28);
             cmbClass_Update.TabIndex = 32;
+            cmbClass_Update.Validating += cmbClass_Update_Validating;
             // 
             // label3
             // 
@@ -415,14 +420,6 @@
             label10.TabIndex = 21;
             label10.Text = "Year: ";
             // 
-            // cmbVehicleID_Update
-            // 
-            cmbVehicleID_Update.FormattingEnabled = true;
-            cmbVehicleID_Update.Location = new Point(382, 32);
-            cmbVehicleID_Update.Name = "cmbVehicleID_Update";
-            cmbVehicleID_Update.Size = new Size(125, 28);
-            cmbVehicleID_Update.TabIndex = 17;
-            // 
             // lblVehicle
             // 
             lblVehicle.AutoSize = true;
@@ -436,7 +433,7 @@
             // dgvVehicles_Update
             // 
             dgvVehicles_Update.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvVehicles_Update.Location = new Point(528, 32);
+            dgvVehicles_Update.Location = new Point(567, 32);
             dgvVehicles_Update.Name = "dgvVehicles_Update";
             dgvVehicles_Update.RowHeadersWidth = 51;
             dgvVehicles_Update.Size = new Size(473, 293);
@@ -543,6 +540,18 @@
             lblClassID_Delete.TabIndex = 17;
             lblClassID_Delete.Text = "Vehicle Name: ";
             // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
+            // textBox1
+            // 
+            textBox1.Enabled = false;
+            textBox1.Location = new Point(382, 32);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(125, 27);
+            textBox1.TabIndex = 36;
+            // 
             // frmVehicles
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -565,6 +574,7 @@
             tabDelete.ResumeLayout(false);
             tabDelete.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvVehicles_Delete).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
         }
 
@@ -578,7 +588,6 @@
         private Button btnBack_Add;
         private Label lblClassSelect;
         private TabPage tabUpdate;
-        private ComboBox cmbVehicleID_Update;
         private Label lblVehicle;
         private DataGridView dgvVehicles_Update;
         private Button btnClear_Update;
@@ -614,5 +623,7 @@
         private TextBox txtCostPerDay_Update;
         private TextBox txtVehicleName_Update;
         private Label label1;
+        private ErrorProvider errorProvider1;
+        private TextBox textBox1;
     }
 }
