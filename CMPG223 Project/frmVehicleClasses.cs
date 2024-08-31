@@ -33,6 +33,9 @@ namespace CMPG223_Project
 
         private void btnAdd_Add_Click(object sender, EventArgs e)
         {
+            //Variables 
+
+            //VALIDATION BEGIN
             string className = txtClassName_Add.Text.Trim();
             string description = txtDescription_Add.Text.Trim();
 
@@ -75,11 +78,11 @@ namespace CMPG223_Project
 
             if (!isValid)
             {
-                //MessageBox.Show("Please correct the errors before adding.");
+                
                 return;
             }
 
-            // Confirmation message box
+            
             
 
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -110,6 +113,10 @@ namespace CMPG223_Project
                         errorProvider1.SetError(txtClassName_Add, "");
                     }
 
+                    //VALIDATION END
+
+                    //LOGIC BEGIN
+
                     string query = "INSERT INTO Vehicle_Class (ClassName, Description) VALUES(@ClassName, @Description)";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@ClassName", className);
@@ -125,6 +132,8 @@ namespace CMPG223_Project
                 {
                     MessageBox.Show("Error: " + ex.Message);
                 }
+
+                //LOGIC END
             }
         }
 
@@ -154,7 +163,10 @@ namespace CMPG223_Project
 
         private void btnDelete_Delete_Click(object sender, EventArgs e)
         {
+            //Validation
             string className = txtClassName_Delete.Text.Trim();
+
+            //VALIDATION BEGIN
 
             // Initialize ErrorProvider component 
             bool isValid = true;
@@ -192,6 +204,10 @@ namespace CMPG223_Project
                 return;
             }
 
+            //VALIDATION END
+
+            //LOGIC BEGIN
+
             string selectedClassName = className;
 
             string delete_query = "DELETE FROM Vehicle_Class WHERE Vehicle_Class_ID = (SELECT Vehicle_Class_ID FROM Vehicle_Class WHERE ClassName = @ClassName)";
@@ -225,15 +241,21 @@ namespace CMPG223_Project
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
+            //LOGIC END
         }
 
 
 
         private void btnUpdate_Update_Click(object sender, EventArgs e)
         {
+            //Variables
+
+
             string classID = txtClassID_Update.Text.Trim();
             string className = txtClassName_Update.Text.Trim();
             string description = txtDescription_Update.Text.Trim();
+
+            //VALIDATION BEGIN
 
             // Initialize ErrorProvider component 
             bool isValid = true;
@@ -283,11 +305,16 @@ namespace CMPG223_Project
                 return;
             }
 
-            
+            //VALIDATION END
 
+
+
+            //Variables
             string vehicleClassID = classID;
             string newClassName = className;
             string newDescription = description;
+
+            //LOGIC BEGIN
 
             string updateQuery = "UPDATE Vehicle_Class SET ClassName = @ClassName, Description = @Description WHERE Vehicle_Class_ID = @VehicleClassID";
 
@@ -327,11 +354,13 @@ namespace CMPG223_Project
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+
+            //LOGIC END
         }
 
 
 
-
+        //Load Data, Loades the Data into the Data Grid View
         private void LoadData()
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -351,7 +380,7 @@ namespace CMPG223_Project
         }
 
 
-
+        //Search Function for the Vehicle Class Field In The Data Grid View
         private void txtSearch_Update_TextChanged(object sender, EventArgs e)
         {
 
@@ -386,6 +415,7 @@ namespace CMPG223_Project
 
         }
 
+        //Search Function for the Vehicle Class Field In The Data Grid View
         private void txtSearch_Add_TextChanged(object sender, EventArgs e)
         {
 
@@ -417,6 +447,7 @@ namespace CMPG223_Project
 
         }
 
+        //Search Function for the Vehicle Class Field In The Data Grid View
         private void txtSearch_Delete_TextChanged(object sender, EventArgs e)
         {
 
@@ -467,6 +498,7 @@ namespace CMPG223_Project
 
         }
 
+        //Adds the Data Grid View Components to the TextBoxes in Update
         private void dgvVehicleClasses_Update_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvVehicleClasses_Update.CurrentRow != null)
@@ -487,6 +519,7 @@ namespace CMPG223_Project
 
         }
 
+        //Adds the Data Grid View Components to the TextBoxes in Update
         private void dgvVehicleClasses_Delete_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvVehicleClasses_Delete.CurrentRow != null)
