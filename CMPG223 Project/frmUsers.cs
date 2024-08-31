@@ -22,6 +22,18 @@ namespace CMPG223_Project
         public string connectionString = @"Data Source=METAMIDNIGHT;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
         string userName_Add, firstName_Add, lastName_Add, cellNumber_Add;
+        
+        // Initialize ErrorProviders 
+        ErrorProvider usernameErrorProvider = new ErrorProvider();
+        ErrorProvider firstNameErrorProvider = new ErrorProvider();
+        ErrorProvider lastNameErrorProvider = new ErrorProvider();
+        ErrorProvider cellNumberErrorProvider = new ErrorProvider();
+
+        /*// Initialize ErrorProviders 
+        ErrorProvider usernameErrorProvider = new ErrorProvider();
+        ErrorProvider firstNameErrorProvider = new ErrorProvider();
+        ErrorProvider lastNameErrorProvider = new ErrorProvider();
+        ErrorProvider cellNumberErrorProvider = new ErrorProvider();*/
 
         public frmUsers()
         {
@@ -42,7 +54,7 @@ namespace CMPG223_Project
             // Check if a valid row is clicked (not the header row)
             if (e.RowIndex >= 0)
             {
-                // Assuming UserID is in the first column (index 0)
+                
                 string selectedUserID = dgvUpdateUsers.Rows[e.RowIndex].Cells[0].Value.ToString();
                 txtUserID_UpdateUser.Text = selectedUserID;
             }
@@ -69,11 +81,11 @@ namespace CMPG223_Project
 
         private void btnAdd_AddUsers_Click(object sender, EventArgs e)
         {
-            // Initialize ErrorProviders (add these in your form's constructor or designer file)
+            /*// Initialize ErrorProviders 
             ErrorProvider usernameErrorProvider = new ErrorProvider();
             ErrorProvider firstNameErrorProvider = new ErrorProvider();
             ErrorProvider lastNameErrorProvider = new ErrorProvider();
-            ErrorProvider cellNumberErrorProvider = new ErrorProvider();
+            ErrorProvider cellNumberErrorProvider = new ErrorProvider();*/
 
             try
             {
@@ -212,7 +224,7 @@ namespace CMPG223_Project
         private void AddUser_Click(object sender, EventArgs e)
         {
             conn.Open();
-            string sqlDisplay = $"SELECT * FROM Users"; //display when form opens , formLoad event look it up
+            string sqlDisplay = $"SELECT * FROM Users"; 
             command = new SqlCommand(sqlDisplay, conn);
             adapter = new SqlDataAdapter();
             adapter.SelectCommand = command;
@@ -223,7 +235,7 @@ namespace CMPG223_Project
             dgvDelete_DeleteUsers.DataSource = ds;
             dgvDelete_DeleteUsers.DataMember = "Users";
             conn.Close();
-            ///////////////////////////////////////////////////////////////////
+            
         }
 
         private void frmUsers_Load(object sender, EventArgs e)
@@ -233,7 +245,7 @@ namespace CMPG223_Project
             conn = new SqlConnection(connectionString);
 
             conn.Open();
-            string sqlDisplay = $"SELECT * FROM Users"; //display when form opens , formLoad event look it up
+            string sqlDisplay = $"SELECT * FROM Users"; 
             command = new SqlCommand(sqlDisplay, conn);
             adapter = new SqlDataAdapter();
             adapter.SelectCommand = command;
@@ -274,6 +286,10 @@ namespace CMPG223_Project
             txtLastName_AddUsers.Clear();
             txtCellNumber_AddUsers.Clear();
             txtUsername_AddUsers.Focus();
+            usernameErrorProvider.Clear();
+            firstNameErrorProvider.Clear();
+            lastNameErrorProvider.Clear();
+            cellNumberErrorProvider.Clear();
         }
 
         private void btnDelete_DeleteUsers_Click(object sender, EventArgs e)
@@ -312,7 +328,7 @@ namespace CMPG223_Project
             conn = new SqlConnection(connectionString);
 
             conn.Open();
-            string sqlDisplay = $"SELECT * FROM Users"; //display when form opens , formLoad event look it up
+            string sqlDisplay = $"SELECT * FROM Users"; 
             command = new SqlCommand(sqlDisplay, conn);
             adapter = new SqlDataAdapter();
             adapter.SelectCommand = command;
@@ -331,7 +347,7 @@ namespace CMPG223_Project
         private void DeleteUsers_Click(object sender, EventArgs e)
         {
             conn.Open();
-            string sqlDisplay = $"SELECT * FROM Users"; //display when form opens , formLoad event look it up
+            string sqlDisplay = $"SELECT * FROM Users"; 
             command = new SqlCommand(sqlDisplay, conn);
             adapter = new SqlDataAdapter();
             adapter.SelectCommand = command;
@@ -351,16 +367,103 @@ namespace CMPG223_Project
 
         private void btnUpdateUsers_UpdateUsers_Click(object sender, EventArgs e)
         {
-            ///////
+            /*// Initialize ErrorProviders 
+            ErrorProvider usernameErrorProvider = new ErrorProvider();
+            ErrorProvider firstNameErrorProvider = new ErrorProvider();
+            ErrorProvider lastNameErrorProvider = new ErrorProvider();
+            ErrorProvider cellNumberErrorProvider = new ErrorProvider();*/
+
             if (string.IsNullOrEmpty(txtUserID_UpdateUser.Text))
             {
                 MessageBox.Show("Please select a user to update.");
                 return;
             }
 
-            //string connectionString = "Your_Connection_String_Here";
             string userID = txtUserID_UpdateUser.Text;
 
+            // Clear previous error messages
+            usernameErrorProvider.Clear();
+            firstNameErrorProvider.Clear();
+            lastNameErrorProvider.Clear();
+            cellNumberErrorProvider.Clear();
+
+            bool isValid = true; // Flag to check if all validations pass
+
+            // Username validation
+            string usernamePattern = @"^[a-zA-Z0-9]{1,25}$"; // Letters and numbers only, up to 25 characters
+            if (!string.IsNullOrWhiteSpace(txtUsername_UpdateUsers.Text))
+            {
+                if (!System.Text.RegularExpressions.Regex.IsMatch(txtUsername_UpdateUsers.Text, usernamePattern))
+                {
+                    usernameErrorProvider.SetError(txtUsername_UpdateUsers, "Username must be 1-25 characters long and contain only letters and numbers.");
+                    isValid = false;
+                }
+                else
+                {
+                    // Check if username already exists in the database
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    {
+                        conn.Open();
+                        string checkUsername = "SELECT COUNT(*) FROM Users WHERE Username = @Username AND User_ID <> @User_ID"; // Exclude current user by User_ID
+                        SqlCommand checkCmd = new SqlCommand(checkUsername, conn);
+                        checkCmd.Parameters.AddWithValue("@Username", txtUsername_UpdateUsers.Text);
+                        checkCmd.Parameters.AddWithValue("@User_ID", userID);
+                        int userCount = (int)checkCmd.ExecuteScalar();
+                        conn.Close();
+
+                        if (userCount > 0)
+                        {
+                            usernameErrorProvider.SetError(txtUsername_UpdateUsers, "This username already exists. Please choose a different one.");
+                            isValid = false;
+                        }
+                    }
+                }
+            }
+
+            // First name validation
+            string namePattern = @"^[a-zA-Z]{1,25}$"; // Letters only, up to 25 characters
+            if (!string.IsNullOrWhiteSpace(txtFirstName_UpdateUsers.Text))
+            {
+                if (!System.Text.RegularExpressions.Regex.IsMatch(txtFirstName_UpdateUsers.Text, namePattern))
+                {
+                    firstNameErrorProvider.SetError(txtFirstName_UpdateUsers, "First name must be 1-25 characters long and contain only letters.");
+                    isValid = false;
+                }
+            }
+
+            // Last name validation
+            if (!string.IsNullOrWhiteSpace(txtLastName_UpdateUsers.Text))
+            {
+                if (!System.Text.RegularExpressions.Regex.IsMatch(txtLastName_UpdateUsers.Text, namePattern))
+                {
+                    lastNameErrorProvider.SetError(txtLastName_UpdateUsers, "Last name must be 1-25 characters long and contain only letters.");
+                    isValid = false;
+                }
+            }
+
+            // Cell number validation
+            string phonePattern = @"^0\d{9}$"; // Must be 10 digits, starting with a zero
+            if (!string.IsNullOrWhiteSpace(txtCellNumber_UpdateUsers.Text))
+            {
+                string phoneInput = txtCellNumber_UpdateUsers.Text.Replace(" ", ""); // Remove spaces
+                if (!System.Text.RegularExpressions.Regex.IsMatch(phoneInput, phonePattern))
+                {
+                    cellNumberErrorProvider.SetError(txtCellNumber_UpdateUsers, "Invalid phone number. It must be 10 digits long, start with 0, and contain no spaces.");
+                    isValid = false;
+                }
+                else
+                {
+                    txtCellNumber_UpdateUsers.Text = phoneInput; // Update the textbox without spaces if valid
+                }
+            }
+
+            // If any validation failed, return early
+            if (!isValid)
+            {
+                return;
+            }
+
+            // Proceed with updating the user if all validations pass
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -411,10 +514,10 @@ namespace CMPG223_Project
 
                         // Refresh the DataGridView
                         string selectQuery = "SELECT User_ID, Username, FirstName, Lastname, Cellnumber FROM Users";
-                        using (SqlDataAdapter adapter = new SqlDataAdapter(selectQuery, connection))
+                        using (SqlDataAdapter adapter1 = new SqlDataAdapter(selectQuery, connection))
                         {
                             DataTable usersTable = new DataTable();
-                            adapter.Fill(usersTable);
+                            adapter1.Fill(usersTable);
                             dgvUpdateUsers.DataSource = usersTable;
                         }
                     }
@@ -428,15 +531,13 @@ namespace CMPG223_Project
                     MessageBox.Show("An error occurred: " + ex.Message);
                 }
 
-                //repopulate datagridview
-                conn = new SqlConnection(connectionString);
-
+                // Repopulate DataGridView
+                SqlConnection conn = new SqlConnection(connectionString);
                 conn.Open();
-                string sqlDisplay = $"SELECT * FROM Users";
-                command = new SqlCommand(sqlDisplay, conn);
-                adapter = new SqlDataAdapter();
-                adapter.SelectCommand = command;
-                ds = new DataSet();
+                string sqlDisplay = "SELECT * FROM Users";
+                SqlCommand repopulateCommand = new SqlCommand(sqlDisplay, conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(repopulateCommand);
+                DataSet ds = new DataSet();
                 adapter.Fill(ds, "Users");
                 dgvAddUsers.DataSource = ds;
                 dgvAddUsers.DataMember = "Users";
@@ -446,6 +547,7 @@ namespace CMPG223_Project
                 dgvUpdateUsers.DataMember = "Users";
                 conn.Close();
             }
+
         }
 
         private void btnClearUsers_UpdateUsers_Click(object sender, EventArgs e)
@@ -455,6 +557,10 @@ namespace CMPG223_Project
             txtLastName_UpdateUsers.Clear();
             txtCellNumber_UpdateUsers.Clear();
             dgvUpdateUsers.Focus();
+            usernameErrorProvider.Clear();
+            firstNameErrorProvider.Clear();
+            lastNameErrorProvider.Clear();
+            cellNumberErrorProvider.Clear();
         }
     }
 }
