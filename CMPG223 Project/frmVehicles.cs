@@ -32,7 +32,7 @@ namespace CMPG223_Project
             //Display Data
             try
             {
-                
+
                 //Opening Connection to the database
                 cnn.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -56,7 +56,7 @@ namespace CMPG223_Project
                 dgvVehicles_Delete.DataMember = "Vehicle";
 
 
-                cnn.Close(); 
+                cnn.Close();
 
 
 
@@ -74,7 +74,7 @@ namespace CMPG223_Project
         private void frmVehicles_Load(object sender, EventArgs e)
         {
             //string connectionstring = @"Data Source=DESKTOP-20CLHAU;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
-            string connectionstring = @"Data Source=LAPTOP-JHPD709J;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+            string connectionstring = @"Data Source=MOMO;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
             cnn = new SqlConnection(connectionstring);
 
@@ -301,7 +301,7 @@ namespace CMPG223_Project
 
         private void btnBack_Add_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void btnUpdate_Update_Click(object sender, EventArgs e)
@@ -623,13 +623,23 @@ namespace CMPG223_Project
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
-            
+
         }
 
 
         private void textBox1_TextChanged_2(object sender, EventArgs e)
         {
-  
+
+        }
+
+        private void btnBack_Update_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnBack_Delete_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
