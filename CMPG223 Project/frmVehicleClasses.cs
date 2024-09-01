@@ -142,9 +142,6 @@ namespace CMPG223_Project
 
         private void btnBack_Add_Click(object sender, EventArgs e)
         {
-            Admin_Menu Admin_MenuForm = new Admin_Menu();
-            Admin_MenuForm.Show();
-
             this.Close();
         }
 
@@ -490,7 +487,7 @@ namespace CMPG223_Project
 
         private void btnBack_Update_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void dgvVehicleClasses_Update_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -551,7 +548,7 @@ namespace CMPG223_Project
 
         private void btnBack_Delete_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void dgvVehicleClasses_Add_CellClick(object sender, DataGridViewCellEventArgs e)

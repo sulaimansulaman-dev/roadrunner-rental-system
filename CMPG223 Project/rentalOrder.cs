@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using System.CodeDom;
 using System.Data;
 using System.Windows.Forms;
 
@@ -303,7 +304,7 @@ namespace CMPG223_Project
             checkBoxUpdate.Checked = false;
             textBoxSearchUpdate.Text = string.Empty;
             Order_ID = 0;
-            label17.Visible= false;
+            label17.Visible = false;
             vehicleID = 0;
         }
 
@@ -399,7 +400,7 @@ namespace CMPG223_Project
                     label18.Visible = false;
                     string query = "UPDATE RentalOrder SET VehicleReturned = @Returned WHERE Order_ID = @ID";
                     string queryVehicle = "UPDATE Vehicle SET InUse = @InUse WHERE Vehicle_ID = @ID";
-                    SqlCommand vehiclecmd = new SqlCommand(queryVehicle,con);
+                    SqlCommand vehiclecmd = new SqlCommand(queryVehicle, con);
                     SqlCommand sqlCommand = new SqlCommand(query, con);
                     sqlCommand.Parameters.AddWithValue("@ID", Order_ID);
                     sqlCommand.Parameters.AddWithValue("@Returned", true);
@@ -424,11 +425,26 @@ namespace CMPG223_Project
         private void buttonClearReturn_Click(object sender, EventArgs e)
         {
             Order_ID = 0;
-            textBoxReturnOrder.Text = string.Empty; 
+            textBoxReturnOrder.Text = string.Empty;
             textBoxReturnSearch.Text = string.Empty;
             vehicleID = 0;
             label18.Visible = false;
 
+        }
+
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

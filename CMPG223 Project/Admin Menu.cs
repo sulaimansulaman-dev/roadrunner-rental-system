@@ -22,19 +22,25 @@ namespace CMPG223_Project
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            frmVehicles frmVehicles = new frmVehicles();
+            frmVehicles.Closed += (s, args) => this.Show();
+            frmVehicles.ShowDialog();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            frmUsers frmUsers = new frmUsers();
+            frmUsers.Closed += (s, args) => this.Show();
+            frmUsers.ShowDialog();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             this.Hide();
             rentalOrder rentalOrder = new rentalOrder(this,1);
-            rentalOrder.Closed += (s, args) => Application.Exit();
+            rentalOrder.Closed += (s, args) => this.Show();
             rentalOrder.ShowDialog();
         }
 

@@ -346,7 +346,7 @@
             // 
             // btnClear_Update
             // 
-            btnClear_Update.Location = new Point(756, 344);
+            btnClear_Update.Location = new Point(597, 344);
             btnClear_Update.Margin = new Padding(3, 2, 3, 2);
             btnClear_Update.Name = "btnClear_Update";
             btnClear_Update.Size = new Size(91, 39);
@@ -357,7 +357,7 @@
             // 
             // btnUpdate_Update
             // 
-            btnUpdate_Update.Location = new Point(594, 344);
+            btnUpdate_Update.Location = new Point(433, 344);
             btnUpdate_Update.Margin = new Padding(3, 2, 3, 2);
             btnUpdate_Update.Name = "btnUpdate_Update";
             btnUpdate_Update.Size = new Size(91, 39);
@@ -368,7 +368,7 @@
             // 
             // btnBack_Update
             // 
-            btnBack_Update.Location = new Point(433, 344);
+            btnBack_Update.Location = new Point(756, 344);
             btnBack_Update.Margin = new Padding(3, 2, 3, 2);
             btnBack_Update.Name = "btnBack_Update";
             btnBack_Update.Size = new Size(91, 39);
