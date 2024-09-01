@@ -73,8 +73,8 @@
             checkBoxReturned = new CheckBox();
             dataGridViewReturn = new DataGridView();
             button4 = new Button();
-            button5 = new Button();
-            button6 = new Button();
+            buttonClearReturn = new Button();
+            buttonUpdateReturn = new Button();
             label16 = new Label();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewUpdate).BeginInit();
@@ -472,7 +472,7 @@
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(1009, 492);
             tabControl1.TabIndex = 0;
-            tabControl1.Enter += tabControl1_Enter;
+            tabControl1.Selected += tabControl1_Selected;
             // 
             // tabPage3
             // 
@@ -485,8 +485,8 @@
             tabPage3.Controls.Add(checkBoxReturned);
             tabPage3.Controls.Add(dataGridViewReturn);
             tabPage3.Controls.Add(button4);
-            tabPage3.Controls.Add(button5);
-            tabPage3.Controls.Add(button6);
+            tabPage3.Controls.Add(buttonClearReturn);
+            tabPage3.Controls.Add(buttonUpdateReturn);
             tabPage3.Controls.Add(label16);
             tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
@@ -569,23 +569,24 @@
             button4.Text = "Back";
             button4.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // buttonClearReturn
             // 
-            button5.Location = new Point(519, 332);
-            button5.Name = "button5";
-            button5.Size = new Size(104, 43);
-            button5.TabIndex = 49;
-            button5.Text = "Clear";
-            button5.UseVisualStyleBackColor = true;
+            buttonClearReturn.Location = new Point(519, 332);
+            buttonClearReturn.Name = "buttonClearReturn";
+            buttonClearReturn.Size = new Size(104, 43);
+            buttonClearReturn.TabIndex = 49;
+            buttonClearReturn.Text = "Clear";
+            buttonClearReturn.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // buttonUpdateReturn
             // 
-            button6.Location = new Point(330, 332);
-            button6.Name = "button6";
-            button6.Size = new Size(104, 43);
-            button6.TabIndex = 48;
-            button6.Text = "Update";
-            button6.UseVisualStyleBackColor = true;
+            buttonUpdateReturn.Location = new Point(330, 332);
+            buttonUpdateReturn.Name = "buttonUpdateReturn";
+            buttonUpdateReturn.Size = new Size(104, 43);
+            buttonUpdateReturn.TabIndex = 48;
+            buttonUpdateReturn.Text = "Update";
+            buttonUpdateReturn.UseVisualStyleBackColor = true;
+            buttonUpdateReturn.Click += buttonUpdateReturn_Click;
             // 
             // label16
             // 
@@ -668,8 +669,8 @@
         private CheckBox checkBoxReturned;
         private DataGridView dataGridViewReturn;
         private Button button4;
-        private Button button5;
-        private Button button6;
+        private Button buttonClearReturn;
+        private Button buttonUpdateReturn;
         private Label label16;
     }
 }

@@ -15,6 +15,7 @@ namespace CMPG223_Project
         bool paid = false;
         bool isValid = true;
         int Client_ID = 0;
+        int Order_ID = 0;
         public rentalOrder(Form form1, int userID)
         {
             InitializeComponent();
@@ -229,7 +230,7 @@ namespace CMPG223_Project
                     con.Open();
                     DataGridViewRow row = dataGridViewUpdate.Rows[indexRow];
                     textBoxOrderUpdate.Text = row.Cells[0].Value.ToString();
-                    int Order_ID = (int)row.Cells[0].Value;
+                    Order_ID = (int)row.Cells[0].Value;
                     textBoxOrderUpdate.Text = Order_ID.ToString();
                     string query = "SELECT Paid FROM RentalOrder WHERE Order_ID = @ID";
                     SqlCommand sqlCommand = new SqlCommand(query, con);
@@ -255,9 +256,29 @@ namespace CMPG223_Project
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e) // Payment form update button
         {
-
+            bool valid = true;
+            if (Order_ID == 0)
+            {
+                valid = false;
+            }
+            if (valid)
+            {
+                con.Open();
+                string query = "SELECT Vehicle.InUse FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID WHERE Order_ID = @ID";
+                SqlCommand sqlCommand = new SqlCommand(query, con);
+                sqlCommand.Parameters.AddWithValue("@ID", Order_ID);
+                SqlDataReader r = sqlCommand.ExecuteReader();
+                if (r.Read())
+                {
+                    if ((bool)r["InUse"] == false)
+                    {
+                        MessageBox.Show("IT WORKS");
+                    }
+                }
+                con.Close();
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -278,10 +299,7 @@ namespace CMPG223_Project
 
         }
 
-        private void tabControl1_Enter(object sender, EventArgs e)
-        {
-            buttonClear_Click(sender, e);
-        }
+
 
         private void dataGridViewReturn_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -322,6 +340,47 @@ namespace CMPG223_Project
         {
             string searchTerm = textBoxReturnSearch.Text.Trim();
             (dataGridViewReturn.DataSource as DataTable).DefaultView.RowFilter = string.Format("LastName like '{0}%' OR Vehicle_Name like '{0}%' OR FirstName like '{0}%' OR Email like '{0}%' OR CellNumber like '{0}%'", searchTerm);
+        }
+
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            if (tabControl1.SelectedTab == tabPage1)
+            {
+                buttonClear_Click(sender, e);
+            }
+            else if (tabControl1.SelectedTab == tabPage2)
+            {
+
+            }
+            else if (tabControl1.SelectedTab == tabPage3)
+            {
+
+            }
+        }
+
+        private void buttonUpdateReturn_Click(object sender, EventArgs e)
+        {
+            bool valid = true;
+            if (Order_ID == 0)
+            {
+                valid = false;
+            }
+            if (valid)
+            {
+                con.Open();
+                string query = "SELECT Vehicle.InUse FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID WHERE Order_ID = @ID";
+                SqlCommand sqlCommand = new SqlCommand(query, con);
+                sqlCommand.Parameters.AddWithValue("@ID", Order_ID);
+                SqlDataReader r = sqlCommand.ExecuteReader();
+                if (r.Read())
+                {
+                    if ((bool)r["InUse"] == false)
+                    {
+                        MessageBox.Show("IT WORKS");
+                    }
+                }
+                con.Close();
+            }
         }
     }
 }
