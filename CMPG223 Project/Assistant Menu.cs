@@ -43,7 +43,10 @@ namespace CMPG223_Project
 
         private void buttonClient_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            frmClients frmClients = new frmClients();
+            frmClients.Closed += (s, args) => this.Show();
+            frmClients.ShowDialog();
         }
 
         private void buttonOrder_Click(object sender, EventArgs e)

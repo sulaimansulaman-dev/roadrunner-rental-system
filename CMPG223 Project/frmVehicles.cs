@@ -68,7 +68,7 @@ namespace CMPG223_Project
 
         private void frmVehicles_Load(object sender, EventArgs e)
         {
-            string connectionstring = @"Data Source=DESKTOP-20CLHAU;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+            string connectionstring = @"Data Source=MOMO;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
             cnn = new SqlConnection(connectionstring);
 
             displayData();
@@ -83,7 +83,7 @@ namespace CMPG223_Project
             string vehicleName = txtName.Text.Trim();
             string licNum = txtLicenseNo.Text.Trim();
             //decimal vCostPerDay = decimal.Parse(txtCostPerDay.Text.Trim());
-            
+
             bool isValid = true;
             // Regular expression patterns for validation
             string alphaPattern = @"^[a-zA-Z\s.,'-]*$";  // Allows letters, spaces, and some punctuation
@@ -153,7 +153,7 @@ namespace CMPG223_Project
             {
                 classId = (int)cmbClassSelect.SelectedValue;
             }
-            
+
             int numOfSeats = int.Parse(cmbNoOfSeats.Text);
             decimal costPerDay = decimal.Parse(txtCostPerDay.Text); // Assuming the TrackBar's Value property is used for the cost
             char[] licenseNo = txtLicenseNo.Text.ToCharArray();
@@ -189,7 +189,6 @@ namespace CMPG223_Project
 
         private void frmVehicles_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
         }
 
         private void btnClear_Add_Click(object sender, EventArgs e)
@@ -271,7 +270,7 @@ namespace CMPG223_Project
 
         private void btnBack_Add_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void btnUpdate_Update_Click(object sender, EventArgs e)
@@ -302,7 +301,6 @@ namespace CMPG223_Project
                 {
                     cmd.Parameters.AddWithValue("@VehicleName", vehicleName);
                     cmd.Parameters.AddWithValue("@ClassName", class1);
-                    
                     cmd.Parameters.AddWithValue("@NumberOfSeats", numSeats);
                     cmd.Parameters.AddWithValue("@CostPerDay", costPDay);
                     cmd.Parameters.AddWithValue("@License", license);
@@ -426,10 +424,20 @@ namespace CMPG223_Project
         private void dgvVehicles_Delete_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow selectedRow = dgvVehicles_Update.CurrentRow;
-            
+
             string vehicleName = selectedRow.Cells["Vehicle_Name"].Value.ToString();
 
             cmbVehicleID_Delete.Text = vehicleName;
+        }
+
+        private void btnBack_Update_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnBack_Delete_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

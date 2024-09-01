@@ -20,7 +20,7 @@ namespace CMPG223_Project
         DataSet ds;
 
         // Connection string to connect to the database
-        public string connectionString = @"Data Source=METAMIDNIGHT;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        public string connectionString = @"Data Source=MOMO;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
         string userName_Add, firstName_Add, lastName_Add, cellNumber_Add;
 
@@ -108,7 +108,7 @@ namespace CMPG223_Project
 
                 firstName_Add = txtFirstName_AddUsers.Text;
 
-                
+
                 // Last name validation: allow letters and spaces
                 string lastNamePattern = @"^[a-zA-Z\s]{1,25}$";
                 if (!System.Text.RegularExpressions.Regex.IsMatch(txtLastName_AddUsers.Text.Trim(), lastNamePattern))
@@ -206,7 +206,7 @@ namespace CMPG223_Project
         {
             // Display users in DataGridView when "Add User" button is clicked
             conn.Open();
-            string sqlDisplay = $"SELECT * FROM Users"; 
+            string sqlDisplay = $"SELECT * FROM Users";
             command = new SqlCommand(sqlDisplay, conn);
             adapter = new SqlDataAdapter();
             adapter.SelectCommand = command;
@@ -217,7 +217,7 @@ namespace CMPG223_Project
             dgvDelete_DeleteUsers.DataSource = ds;
             dgvDelete_DeleteUsers.DataMember = "Users";
             conn.Close();
-            
+
         }
 
         private void frmUsers_Load(object sender, EventArgs e)
@@ -228,7 +228,7 @@ namespace CMPG223_Project
 
             // Populate the DataGridViews with the list of users
             conn.Open();
-            string sqlDisplay = $"SELECT * FROM Users"; 
+            string sqlDisplay = $"SELECT * FROM Users";
             command = new SqlCommand(sqlDisplay, conn);
             adapter = new SqlDataAdapter();
             adapter.SelectCommand = command;
@@ -319,7 +319,7 @@ namespace CMPG223_Project
             // Update the DataGridView to reflect the changes after deletion
             conn = new SqlConnection(connectionString);
             conn.Open();
-            string sqlDisplay = $"SELECT * FROM Users"; 
+            string sqlDisplay = $"SELECT * FROM Users";
             command = new SqlCommand(sqlDisplay, conn);
             adapter = new SqlDataAdapter();
             adapter.SelectCommand = command;
@@ -341,7 +341,7 @@ namespace CMPG223_Project
         {
             // Open the connection to display the list of users
             conn.Open();
-            string sqlDisplay = $"SELECT * FROM Users"; 
+            string sqlDisplay = $"SELECT * FROM Users";
             command = new SqlCommand(sqlDisplay, conn);
             adapter = new SqlDataAdapter();
             adapter.SelectCommand = command;
@@ -567,6 +567,21 @@ namespace CMPG223_Project
             firstNameErrorProvider.Clear();
             lastNameErrorProvider.Clear();
             cellNumberErrorProvider.Clear();
+        }
+
+        private void btnBack_DeleteUsers_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnBack_UpdateUsers_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnBack_AddUsers_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

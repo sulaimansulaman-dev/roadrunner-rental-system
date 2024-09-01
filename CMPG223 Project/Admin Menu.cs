@@ -9,7 +9,10 @@ namespace CMPG223_Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            frmClients frmClients = new frmClients();
+            frmClients.Closed += (s, args) => this.Show();
+            frmClients.ShowDialog();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -42,16 +45,6 @@ namespace CMPG223_Project
             rentalOrder rentalOrder = new rentalOrder(this,1);
             rentalOrder.Closed += (s, args) => this.Show();
             rentalOrder.ShowDialog();
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button8_Click(object sender, EventArgs e)
