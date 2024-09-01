@@ -570,7 +570,7 @@
             // 
             // button4
             // 
-            button4.Location = new Point(422, 399);
+            button4.Location = new Point(890, 317);
             button4.Name = "button4";
             button4.Size = new Size(104, 43);
             button4.TabIndex = 50;
@@ -580,7 +580,7 @@
             // 
             // buttonClearReturn
             // 
-            buttonClearReturn.Location = new Point(519, 332);
+            buttonClearReturn.Location = new Point(722, 317);
             buttonClearReturn.Name = "buttonClearReturn";
             buttonClearReturn.Size = new Size(104, 43);
             buttonClearReturn.TabIndex = 49;
@@ -590,7 +590,7 @@
             // 
             // buttonUpdateReturn
             // 
-            buttonUpdateReturn.Location = new Point(330, 332);
+            buttonUpdateReturn.Location = new Point(549, 317);
             buttonUpdateReturn.Name = "buttonUpdateReturn";
             buttonUpdateReturn.Size = new Size(104, 43);
             buttonUpdateReturn.TabIndex = 48;
