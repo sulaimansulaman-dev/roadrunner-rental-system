@@ -18,7 +18,7 @@ namespace CMPG223_Project
     {
 
         //Mo Kalla: public string connectionString = @"Data Source=LAPTOP-9FK1U57R;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
-        public string connectionString = @"Data Source=LAPTOP-9FK1U57R;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        public string connectionString = @"Data Source=LAPTOP-JHPD709J;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
 
         public frmClients()
@@ -257,7 +257,7 @@ namespace CMPG223_Project
 
             if (!isValid)
             {
-               // MessageBox.Show("Please correct the errors before deleting.");
+                // MessageBox.Show("Please correct the errors before deleting.");
                 return;
             }
 
@@ -289,7 +289,7 @@ namespace CMPG223_Project
                         }
                         else
                         {
-                           // MessageBox.Show("No Client found with the specified ID.");
+                            // MessageBox.Show("No Client found with the specified ID.");
                         }
 
                         LoadData();
@@ -645,5 +645,43 @@ namespace CMPG223_Project
             }
         }
 
+        private void dgvAddClient_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void txtSearch_Add_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = txtSearch_DeleteClient.Text;
+
+            if (dgvAddClient.DataSource is DataTable dataTable)
+            {
+                // Handle empty search term to show all rows
+                if (string.IsNullOrEmpty(searchTerm))
+                {
+                    dataTable.DefaultView.RowFilter = string.Empty; // Show all rows
+                }
+                else
+                {
+                    // Apply the filter with the search term
+                    dataTable.DefaultView.RowFilter = $"LastName LIKE '%{searchTerm}%'";
+                }
+            }
+            else
+            {
+                foreach (DataGridViewRow row in dgvAddClient.Rows)
+                {
+                    if (row.Cells["Client_ID"].Value != null &&
+                        row.Cells["Client_ID"].Value.ToString().IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        row.Visible = true;
+                    }
+                    else
+                    {
+                        row.Visible = false;
+                    }
+                }
+            }
+        }
     }
 }
