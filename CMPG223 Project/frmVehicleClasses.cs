@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
+using System.Configuration;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace CMPG223_Project
@@ -16,7 +17,8 @@ namespace CMPG223_Project
 
     public partial class frmVehicleClasses : Form
     {
-        string connectionString = @"Data Source=MOMO;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        string connectionString = ConfigurationManager.ConnectionStrings["MyDatabaseConnectionString"].ConnectionString;
+
 
 
 

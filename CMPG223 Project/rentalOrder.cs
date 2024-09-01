@@ -2,13 +2,14 @@
 using System.CodeDom;
 using System.Data;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace CMPG223_Project
 {
     public partial class rentalOrder : Form
     {
         Form form1;
-        SqlConnection con = new SqlConnection("Data Source=MOMO;Initial Catalog=\"Roadrunner Rentals\";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MyDatabaseConnectionString"].ConnectionString);
         decimal cost = 0;
         int days = 0;
         int vehicleID = 0;

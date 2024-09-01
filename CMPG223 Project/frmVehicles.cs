@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Configuration;
 
 
 namespace CMPG223_Project
@@ -74,7 +75,8 @@ namespace CMPG223_Project
         private void frmVehicles_Load(object sender, EventArgs e)
         {
             //string connectionstring = @"Data Source=DESKTOP-20CLHAU;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
-            string connectionstring = @"Data Source=MOMO;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+            string connectionstring = ConfigurationManager.ConnectionStrings["MyDatabaseConnectionString"].ConnectionString;
+            ;
 
             cnn = new SqlConnection(connectionstring);
 

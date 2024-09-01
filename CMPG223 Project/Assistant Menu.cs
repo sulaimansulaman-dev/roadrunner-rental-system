@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Drawing;
+using System.Configuration;
 
 namespace CMPG223_Project
 {
@@ -18,7 +19,7 @@ namespace CMPG223_Project
         {
             try
             {
-                SqlConnection con = new SqlConnection("Data Source=MOMO;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MyDatabaseConnectionString"].ConnectionString);
                 con.Open();
                 string comboBoxSelect = "SELECT * FROM Users";
                 SqlDataAdapter adapter = new SqlDataAdapter(comboBoxSelect, con);

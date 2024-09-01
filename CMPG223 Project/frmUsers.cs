@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
+using System.Configuration;
 
 namespace CMPG223_Project
 {
@@ -20,7 +21,7 @@ namespace CMPG223_Project
         DataSet ds;
 
         // Connection string to connect to the database
-        public string connectionString = @"Data Source=MOMO;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        public string connectionString = ConfigurationManager.ConnectionStrings["MyDatabaseConnectionString"].ConnectionString;
 
         string userName_Add, firstName_Add, lastName_Add, cellNumber_Add;
 

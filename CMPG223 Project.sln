@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMPG223 Project", "CMPG223 Project\CMPG223 Project.csproj", "{F1ABF335-A75C-449C-B83A-73E6F2272645}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CMPG223 Project", "CMPG223 Project\CMPG223 Project.csproj", "{F1ABF335-A75C-449C-B83A-73E6F2272645}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Road Runner Rentals", "Road Runner Rentals\Road Runner Rentals.vdproj", "{1260D2BE-342E-426C-9796-DB586AB970C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,8 @@ Global
 		{F1ABF335-A75C-449C-B83A-73E6F2272645}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1ABF335-A75C-449C-B83A-73E6F2272645}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1ABF335-A75C-449C-B83A-73E6F2272645}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1260D2BE-342E-426C-9796-DB586AB970C6}.Debug|Any CPU.ActiveCfg = Debug
+		{1260D2BE-342E-426C-9796-DB586AB970C6}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
