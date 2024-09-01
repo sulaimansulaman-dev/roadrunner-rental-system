@@ -141,9 +141,9 @@
             // btnBack_AddUsers
             // 
             btnBack_AddUsers.Anchor = AnchorStyles.None;
-            btnBack_AddUsers.Location = new Point(448, 320);
+            btnBack_AddUsers.Location = new Point(783, 186);
             btnBack_AddUsers.Name = "btnBack_AddUsers";
-            btnBack_AddUsers.Size = new Size(75, 23);
+            btnBack_AddUsers.Size = new Size(92, 41);
             btnBack_AddUsers.TabIndex = 10;
             btnBack_AddUsers.Text = "Back";
             btnBack_AddUsers.UseVisualStyleBackColor = true;
@@ -152,9 +152,9 @@
             // btnClear_AddUsers
             // 
             btnClear_AddUsers.Anchor = AnchorStyles.None;
-            btnClear_AddUsers.Location = new Point(493, 271);
+            btnClear_AddUsers.Location = new Point(637, 186);
             btnClear_AddUsers.Name = "btnClear_AddUsers";
-            btnClear_AddUsers.Size = new Size(75, 23);
+            btnClear_AddUsers.Size = new Size(92, 41);
             btnClear_AddUsers.TabIndex = 9;
             btnClear_AddUsers.Text = "Clear";
             btnClear_AddUsers.UseVisualStyleBackColor = true;
@@ -163,9 +163,9 @@
             // btnAdd_AddUsers
             // 
             btnAdd_AddUsers.Anchor = AnchorStyles.None;
-            btnAdd_AddUsers.Location = new Point(395, 271);
+            btnAdd_AddUsers.Location = new Point(493, 186);
             btnAdd_AddUsers.Name = "btnAdd_AddUsers";
-            btnAdd_AddUsers.Size = new Size(75, 23);
+            btnAdd_AddUsers.Size = new Size(92, 41);
             btnAdd_AddUsers.TabIndex = 8;
             btnAdd_AddUsers.Text = "Add";
             btnAdd_AddUsers.UseVisualStyleBackColor = true;
@@ -307,9 +307,9 @@
             // btnBack_UpdateUsers
             // 
             btnBack_UpdateUsers.Anchor = AnchorStyles.None;
-            btnBack_UpdateUsers.Location = new Point(430, 296);
+            btnBack_UpdateUsers.Location = new Point(818, 229);
             btnBack_UpdateUsers.Name = "btnBack_UpdateUsers";
-            btnBack_UpdateUsers.Size = new Size(75, 23);
+            btnBack_UpdateUsers.Size = new Size(90, 39);
             btnBack_UpdateUsers.TabIndex = 15;
             btnBack_UpdateUsers.Text = "Back";
             btnBack_UpdateUsers.UseVisualStyleBackColor = true;
@@ -318,9 +318,9 @@
             // btnClearUsers_UpdateUsers
             // 
             btnClearUsers_UpdateUsers.Anchor = AnchorStyles.None;
-            btnClearUsers_UpdateUsers.Location = new Point(483, 251);
+            btnClearUsers_UpdateUsers.Location = new Point(641, 229);
             btnClearUsers_UpdateUsers.Name = "btnClearUsers_UpdateUsers";
-            btnClearUsers_UpdateUsers.Size = new Size(75, 23);
+            btnClearUsers_UpdateUsers.Size = new Size(90, 39);
             btnClearUsers_UpdateUsers.TabIndex = 14;
             btnClearUsers_UpdateUsers.Text = "Clear";
             btnClearUsers_UpdateUsers.UseVisualStyleBackColor = true;
@@ -329,9 +329,9 @@
             // btnUpdateUsers_UpdateUsers
             // 
             btnUpdateUsers_UpdateUsers.Anchor = AnchorStyles.None;
-            btnUpdateUsers_UpdateUsers.Location = new Point(381, 251);
+            btnUpdateUsers_UpdateUsers.Location = new Point(471, 229);
             btnUpdateUsers_UpdateUsers.Name = "btnUpdateUsers_UpdateUsers";
-            btnUpdateUsers_UpdateUsers.Size = new Size(75, 23);
+            btnUpdateUsers_UpdateUsers.Size = new Size(90, 39);
             btnUpdateUsers_UpdateUsers.TabIndex = 13;
             btnUpdateUsers_UpdateUsers.Text = "Update";
             btnUpdateUsers_UpdateUsers.UseVisualStyleBackColor = true;
@@ -452,9 +452,9 @@
             // btnBack_DeleteUsers
             // 
             btnBack_DeleteUsers.Anchor = AnchorStyles.None;
-            btnBack_DeleteUsers.Location = new Point(430, 311);
+            btnBack_DeleteUsers.Location = new Point(630, 251);
             btnBack_DeleteUsers.Name = "btnBack_DeleteUsers";
-            btnBack_DeleteUsers.Size = new Size(75, 23);
+            btnBack_DeleteUsers.Size = new Size(92, 40);
             btnBack_DeleteUsers.TabIndex = 21;
             btnBack_DeleteUsers.Text = "Back";
             btnBack_DeleteUsers.UseVisualStyleBackColor = true;
@@ -463,9 +463,9 @@
             // btnClear_DeleteUsers
             // 
             btnClear_DeleteUsers.Anchor = AnchorStyles.None;
-            btnClear_DeleteUsers.Location = new Point(479, 272);
+            btnClear_DeleteUsers.Location = new Point(415, 251);
             btnClear_DeleteUsers.Name = "btnClear_DeleteUsers";
-            btnClear_DeleteUsers.Size = new Size(75, 23);
+            btnClear_DeleteUsers.Size = new Size(92, 40);
             btnClear_DeleteUsers.TabIndex = 20;
             btnClear_DeleteUsers.Text = "Clear";
             btnClear_DeleteUsers.UseVisualStyleBackColor = true;
@@ -473,9 +473,9 @@
             // btnDelete_DeleteUsers
             // 
             btnDelete_DeleteUsers.Anchor = AnchorStyles.None;
-            btnDelete_DeleteUsers.Location = new Point(378, 272);
+            btnDelete_DeleteUsers.Location = new Point(207, 251);
             btnDelete_DeleteUsers.Name = "btnDelete_DeleteUsers";
-            btnDelete_DeleteUsers.Size = new Size(75, 23);
+            btnDelete_DeleteUsers.Size = new Size(92, 40);
             btnDelete_DeleteUsers.TabIndex = 19;
             btnDelete_DeleteUsers.Text = "Delete";
             btnDelete_DeleteUsers.UseVisualStyleBackColor = true;
@@ -485,7 +485,7 @@
             // 
             cmbUsername_DeleteUsers.Anchor = AnchorStyles.None;
             cmbUsername_DeleteUsers.FormattingEnabled = true;
-            cmbUsername_DeleteUsers.Location = new Point(456, 236);
+            cmbUsername_DeleteUsers.Location = new Point(454, 215);
             cmbUsername_DeleteUsers.Name = "cmbUsername_DeleteUsers";
             cmbUsername_DeleteUsers.Size = new Size(172, 23);
             cmbUsername_DeleteUsers.TabIndex = 18;
@@ -496,7 +496,7 @@
             lblUserID_DeleteUser.Anchor = AnchorStyles.None;
             lblUserID_DeleteUser.AutoSize = true;
             lblUserID_DeleteUser.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblUserID_DeleteUser.Location = new Point(313, 227);
+            lblUserID_DeleteUser.Location = new Point(311, 206);
             lblUserID_DeleteUser.Name = "lblUserID_DeleteUser";
             lblUserID_DeleteUser.Size = new Size(73, 32);
             lblUserID_DeleteUser.TabIndex = 17;
