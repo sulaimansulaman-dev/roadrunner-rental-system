@@ -108,11 +108,17 @@ namespace CMPG223_Project
 
                 firstName_Add = txtFirstName_AddUsers.Text;
 
-                // Last name validation
-                if (!System.Text.RegularExpressions.Regex.IsMatch(txtLastName_AddUsers.Text, namePattern))
+                
+                // Last name validation: allow letters and spaces
+                string lastNamePattern = @"^[a-zA-Z\s]{1,25}$";
+                if (!System.Text.RegularExpressions.Regex.IsMatch(txtLastName_AddUsers.Text.Trim(), lastNamePattern))
                 {
-                    lastNameErrorProvider.SetError(txtLastName_AddUsers, "Last name must be 1-25 characters long and contain only letters.");
+                    lastNameErrorProvider.SetError(txtLastName_AddUsers, "Last name must be 1-25 characters long and contain only letters and spaces.");
                     isValid = false;
+                }
+                else
+                {
+                    lastName_Add = txtLastName_AddUsers.Text.Trim(); // Trim to remove any leading or trailing spaces
                 }
 
                 lastName_Add = txtLastName_AddUsers.Text;
@@ -417,12 +423,17 @@ namespace CMPG223_Project
             }
 
             // Last name validation
+            string lastNamePattern = @"^[a-zA-Z\s]{1,25}$"; // Letters and spaces, up to 25 characters
             if (!string.IsNullOrWhiteSpace(txtLastName_UpdateUsers.Text))
             {
-                if (!System.Text.RegularExpressions.Regex.IsMatch(txtLastName_UpdateUsers.Text, namePattern))
+                if (!System.Text.RegularExpressions.Regex.IsMatch(txtLastName_UpdateUsers.Text.Trim(), lastNamePattern))
                 {
-                    lastNameErrorProvider.SetError(txtLastName_UpdateUsers, "Last name must be 1-25 characters long and contain only letters.");
+                    lastNameErrorProvider.SetError(txtLastName_UpdateUsers, "Last name must be 1-25 characters long and contain only letters and spaces.");
                     isValid = false;
+                }
+                else
+                {
+                    txtLastName_UpdateUsers.Text = txtLastName_UpdateUsers.Text.Trim(); // Trim to remove leading or trailing spaces
                 }
             }
 
@@ -531,6 +542,13 @@ namespace CMPG223_Project
                 dgvUpdateUsers.DataSource = ds;
                 dgvUpdateUsers.DataMember = "Users";
                 conn.Close();
+
+                //clears all textboxes
+                txtUserID_UpdateUser.Clear();
+                txtFirstName_UpdateUsers.Clear();
+                txtLastName_UpdateUsers.Clear();
+                txtCellNumber_UpdateUsers.Clear();
+                dgvUpdateUsers.Focus();
             }
 
         }
