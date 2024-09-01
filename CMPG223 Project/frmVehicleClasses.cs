@@ -9,13 +9,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace CMPG223_Project
 {
 
     public partial class frmVehicleClasses : Form
     {
-        string connectionString = @"Data Source=MOMO;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        string connectionString = @"Data Source=LAPTOP-JHPD709J;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
 
 
@@ -142,6 +143,9 @@ namespace CMPG223_Project
 
         private void btnBack_Add_Click(object sender, EventArgs e)
         {
+            Admin_Menu Admin_MenuForm = new Admin_Menu();
+            Admin_MenuForm.Show();
+
             this.Close();
         }
 
@@ -171,6 +175,12 @@ namespace CMPG223_Project
             // Regular expression pattern for validation
             string alphaPattern = @"^[a-zA-Z\s.,'-]*$";  // Allows letters, spaces, and some punctuation
 
+            // Check if all fields are empty
+            if (string.IsNullOrWhiteSpace(className))
+            {
+                MessageBox.Show("Please click on the Data Grid View.");
+                return;
+            }
             // Validation using ErrorProvider
             if (string.IsNullOrWhiteSpace(className))
             {
@@ -259,6 +269,15 @@ namespace CMPG223_Project
 
             // Regular expression pattern for validation
             string alphaPattern = @"^[a-zA-Z\s.,'-]*$";  // Allows letters, spaces, and some punctuation
+
+            // Check if all fields are empty
+            if (string.IsNullOrWhiteSpace(classID) &&
+                string.IsNullOrWhiteSpace(className) &&
+                string.IsNullOrWhiteSpace(description))
+            {
+                MessageBox.Show("Please click on the Data Grid View.");
+                return;
+            }
 
             // Validation using ErrorProvider
             if (string.IsNullOrWhiteSpace(classID))
@@ -487,7 +506,7 @@ namespace CMPG223_Project
 
         private void btnBack_Update_Click(object sender, EventArgs e)
         {
-            this.Close();
+
         }
 
         private void dgvVehicleClasses_Update_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -548,7 +567,7 @@ namespace CMPG223_Project
 
         private void btnBack_Delete_Click(object sender, EventArgs e)
         {
-            this.Close();
+
         }
 
         private void dgvVehicleClasses_Add_CellClick(object sender, DataGridViewCellEventArgs e)
