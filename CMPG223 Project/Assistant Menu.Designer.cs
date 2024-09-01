@@ -30,11 +30,9 @@
         {
             label1 = new Label();
             comboBoxUsers = new ComboBox();
-            labelWelcome = new Label();
             buttonClient = new Button();
-            buttonPayment = new Button();
             buttonOrder = new Button();
-            buttonReturn = new Button();
+            label2 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -57,60 +55,42 @@
             comboBoxUsers.Name = "comboBoxUsers";
             comboBoxUsers.Size = new Size(133, 23);
             comboBoxUsers.TabIndex = 1;
-            comboBoxUsers.SelectedIndexChanged += comboBoxUsers_SelectedIndexChanged;
-            // 
-            // labelWelcome
-            // 
-            labelWelcome.AutoSize = true;
-            labelWelcome.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelWelcome.Location = new Point(400, 508);
-            labelWelcome.Name = "labelWelcome";
-            labelWelcome.Size = new Size(169, 32);
-            labelWelcome.TabIndex = 2;
-            labelWelcome.Text = "LabelWelcome";
+            comboBoxUsers.SelectionChangeCommitted += comboBoxUsers_SelectionChangeCommitted;
             // 
             // buttonClient
             // 
-            buttonClient.Location = new Point(134, 170);
+            buttonClient.Location = new Point(135, 244);
             buttonClient.Name = "buttonClient";
             buttonClient.Size = new Size(214, 66);
             buttonClient.TabIndex = 3;
             buttonClient.Text = "Maintain Clients";
             buttonClient.UseVisualStyleBackColor = true;
+            buttonClient.Visible = false;
             buttonClient.Click += buttonClient_Click;
-            // 
-            // buttonPayment
-            // 
-            buttonPayment.Location = new Point(134, 325);
-            buttonPayment.Name = "buttonPayment";
-            buttonPayment.Size = new Size(214, 66);
-            buttonPayment.TabIndex = 4;
-            buttonPayment.Text = "Recieve Payment";
-            buttonPayment.UseVisualStyleBackColor = true;
-            buttonPayment.Visible = false;
-            buttonPayment.Click += buttonPayment_Click;
             // 
             // buttonOrder
             // 
-            buttonOrder.Location = new Point(617, 170);
+            buttonOrder.Location = new Point(618, 244);
             buttonOrder.Name = "buttonOrder";
             buttonOrder.Size = new Size(214, 66);
             buttonOrder.TabIndex = 5;
-            buttonOrder.Text = "Make a Rental Order";
+            buttonOrder.Text = "Rental Orders";
             buttonOrder.UseVisualStyleBackColor = true;
             buttonOrder.Visible = false;
             buttonOrder.Click += buttonOrder_Click;
             // 
-            // buttonReturn
+            // label2
             // 
-            buttonReturn.Location = new Point(617, 325);
-            buttonReturn.Name = "buttonReturn";
-            buttonReturn.Size = new Size(214, 66);
-            buttonReturn.TabIndex = 6;
-            buttonReturn.Text = "Return vehicle";
-            buttonReturn.UseVisualStyleBackColor = true;
-            buttonReturn.Visible = false;
-            buttonReturn.Click += buttonReturn_Click;
+            label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.ForeColor = SystemColors.ControlText;
+            label2.Location = new Point(391, 9);
+            label2.Name = "label2";
+            label2.Size = new Size(174, 50);
+            label2.TabIndex = 6;
+            label2.Text = "Welcome";
+            label2.Visible = false;
             // 
             // Assistant_Menu
             // 
@@ -120,16 +100,15 @@
             BackgroundImage = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
             BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(964, 571);
-            Controls.Add(buttonReturn);
+            Controls.Add(label2);
             Controls.Add(buttonOrder);
-            Controls.Add(buttonPayment);
             Controls.Add(buttonClient);
-            Controls.Add(labelWelcome);
             Controls.Add(comboBoxUsers);
             Controls.Add(label1);
             Name = "Assistant_Menu";
             Text = "Assistant_Menu";
             FormClosing += Assistant_Menu_FormClosing;
+            Load += Assistant_Menu_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -138,10 +117,8 @@
 
         private Label label1;
         private ComboBox comboBoxUsers;
-        private Label labelWelcome;
         private Button buttonClient;
-        private Button buttonPayment;
         private Button buttonOrder;
-        private Button buttonReturn;
+        private Label label2;
     }
 }

@@ -18,7 +18,7 @@ namespace CMPG223_Project
     {
 
         //Mo Kalla: public string connectionString = @"Data Source=LAPTOP-9FK1U57R;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
-        public string connectionString = @"Data Source=LAPTOP-JHPD709J;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        private string connectionString = @"Data Source=MOMO;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
 
         public frmClients()
@@ -685,5 +685,19 @@ namespace CMPG223_Project
             }
         }
 
+        private void btnBack_AddClients_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnBack_UpdateClient_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnBack_DeleteClient_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
