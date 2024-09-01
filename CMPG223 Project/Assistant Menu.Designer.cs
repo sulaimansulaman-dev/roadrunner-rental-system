@@ -33,6 +33,8 @@
             buttonClient = new Button();
             buttonOrder = new Button();
             label2 = new Label();
+            button1 = new Button();
+            button2 = new Button();
             SuspendLayout();
             // 
             // label1
@@ -92,6 +94,24 @@
             label2.Text = "Welcome";
             label2.Visible = false;
             // 
+            // button1
+            // 
+            button1.Location = new Point(12, 507);
+            button1.Name = "button1";
+            button1.Size = new Size(106, 52);
+            button1.TabIndex = 7;
+            button1.Text = "Help";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(846, 507);
+            button2.Name = "button2";
+            button2.Size = new Size(106, 52);
+            button2.TabIndex = 11;
+            button2.Text = "Back";
+            button2.UseVisualStyleBackColor = true;
+            // 
             // Assistant_Menu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -100,6 +120,8 @@
             BackgroundImage = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
             BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(964, 571);
+            Controls.Add(button2);
+            Controls.Add(button1);
             Controls.Add(label2);
             Controls.Add(buttonOrder);
             Controls.Add(buttonClient);
@@ -120,5 +142,7 @@
         private Button buttonClient;
         private Button buttonOrder;
         private Label label2;
+        private Button button1;
+        private Button button2;
     }
 }

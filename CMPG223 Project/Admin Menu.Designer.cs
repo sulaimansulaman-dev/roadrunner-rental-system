@@ -35,6 +35,8 @@ namespace CMPG223_Project
             buttonUsers = new Button();
             buttonRentalOrder = new Button();
             buttonReports = new Button();
+            button1 = new Button();
+            button2 = new Button();
             SuspendLayout();
             // 
             // label1
@@ -115,6 +117,24 @@ namespace CMPG223_Project
             buttonReports.UseVisualStyleBackColor = true;
             buttonReports.Click += button8_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(12, 507);
+            button1.Name = "button1";
+            button1.Size = new Size(106, 52);
+            button1.TabIndex = 9;
+            button1.Text = "Help";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(846, 507);
+            button2.Name = "button2";
+            button2.Size = new Size(106, 52);
+            button2.TabIndex = 10;
+            button2.Text = "Back";
+            button2.UseVisualStyleBackColor = true;
+            // 
             // Admin_Menu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -123,6 +143,8 @@ namespace CMPG223_Project
             BackgroundImage = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
             BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(964, 571);
+            Controls.Add(button2);
+            Controls.Add(button1);
             Controls.Add(buttonReports);
             Controls.Add(buttonRentalOrder);
             Controls.Add(buttonUsers);
@@ -146,5 +168,7 @@ namespace CMPG223_Project
         private Button buttonUsers;
         private Button buttonRentalOrder;
         private Button buttonReports;
+        private Button button1;
+        private Button button2;
     }
 }
