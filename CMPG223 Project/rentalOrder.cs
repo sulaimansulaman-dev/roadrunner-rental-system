@@ -37,7 +37,7 @@ namespace CMPG223_Project
                     isValid = false;
                 }
 
-                if (checkBox1.Checked)
+                if (checkBoxAdd.Checked)
                 {
                     paid = true;
                 }
@@ -62,7 +62,7 @@ namespace CMPG223_Project
                 if (isValid == true)
                 {
                     con.Open();
-                    string insert = "INSERT INTO RentalOrder (Client_ID, User_ID, Vehicle_ID, Time, OrderCost, DaysRented, Paid, VehicleReturned, Date) VALUES(@Client_ID, @User_ID, @Vehicle_ID, @Time, @OrderCost, @DaysRented, @Paid, @VehicleReturned, @Date)";
+                    string insert = "INSERT INTO RentalOrder (Client_ID, User_ID, Vehicle_ID, Time, OrderCost, TimeRented, Paid, VehicleReturned, Date) VALUES(@Client_ID, @User_ID, @Vehicle_ID, @Time, @OrderCost, @DaysRented, @Paid, @VehicleReturned, @Date)";
                     SqlCommand cmd = new SqlCommand(insert, con);
                     cmd.Parameters.AddWithValue("@Client_ID", Client_ID);
                     cmd.Parameters.AddWithValue("@Paid", paid);
@@ -75,6 +75,7 @@ namespace CMPG223_Project
                     cmd.Parameters.AddWithValue("@Date", date);
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Added successfully");
+                    populateDataGridView(dataGridViewUpdate, "Select RentalOrder.Order_ID, Client.FirstName, Client.LastName,Vehicle.Vehicle_Name, RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
                     con.Close();
                 }
 
@@ -93,14 +94,12 @@ namespace CMPG223_Project
         private void rentalOrder_Load(object sender, EventArgs e)
         {
             populateClients(comboBox1);
-            populateClients(comboBoxUpdateClient);
             populateDataGridView(dataGridViewAdd, "SELECT Vehicle.Vehicle_ID, Vehicle.Vehicle_Name, Vehicle.CostPerDay, Vehicle.NumberOfSeats, Vehicle_Class.ClassName FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_CLass_ID=Vehicle_Class.Vehicle_Class_ID WHERE Vehicle.InUse = 'False'");
-            populateDataGridView(dataGridViewUpdate, "Select RentalOrder.Order_ID, Client.FirstName, Client.LastName,Vehicle.Vehicle_Name, RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
+            populateDataGridView(dataGridViewUpdate, "SELECT RentalOrder.Order_ID, Client.FirstName, Client.LastName, Email,Vehicle.Vehicle_Name,RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
             dateTimePicker1.MinDate = DateTime.Today;
             dateTimePicker2.MinDate = DateTime.Today.AddDays(1);
             label7.Visible = false;
             label10.Visible = false;
-            comboBox1.SelectedIndex = -1;
         }
         private void populateDataGridView(DataGridView dataGridView, string select)
         {
@@ -127,9 +126,11 @@ namespace CMPG223_Project
                 SqlDataAdapter adapter = new SqlDataAdapter(comboBoxSelect, con);
                 DataTable comboTable = new DataTable();
                 adapter.Fill(comboTable);
+                comboTable.Columns.Add("FullName", typeof(string), "FirstName + ' ' + LastName");
                 comboBox.DataSource = comboTable;
                 comboBox.ValueMember = "Client_ID";
-                comboBox.DisplayMember = "FirstName";
+                comboBox.DisplayMember = "FullName";
+                comboBox.SelectedIndex = -1;
                 con.Close();
             }
             catch (Exception ex)
@@ -147,7 +148,7 @@ namespace CMPG223_Project
                 textBox2.Text = row.Cells[0].Value.ToString();
                 vehicleID = (int)row.Cells[0].Value;
                 label10.Visible = false;
-                cost = (decimal)row.Cells[1].Value;
+                cost = (decimal)row.Cells[2].Value;
                 DayCalculator();
             }
         }
@@ -202,7 +203,7 @@ namespace CMPG223_Project
             comboBox1.SelectedIndex = -1;
             dateTimePicker1.Value = dateTimePicker1.MinDate;
             dateTimePicker2.Value = dateTimePicker2.MinDate;
-            checkBox1.Checked = false;
+            checkBoxAdd.Checked = false;
             textBox1.Clear();
             label7.Visible = false;
             label10.Visible = false;
@@ -218,15 +219,39 @@ namespace CMPG223_Project
 
         private void dataGridViewUpdate_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int indexRow = e.RowIndex;
-            if (indexRow >= 0)
+            try
             {
-                DataGridViewRow row = dataGridViewUpdate.Rows[indexRow];
-                comboBoxUpdateOrder.Text = row.Cells[0].Value.ToString();
-                Client_ID = (int)row.Cells[0].Value;
-                label10.Visible = false;
+                int indexRow = e.RowIndex;
+                if (indexRow >= 0)
+                {
+                    con.Open();
+                    DataGridViewRow row = dataGridViewUpdate.Rows[indexRow];
+                    textBoxOrderUpdate.Text = row.Cells[0].Value.ToString();
+                    int Order_ID = (int)row.Cells[0].Value;
+                    textBoxOrderUpdate.Text = Order_ID.ToString();
+                    string query = "SELECT Paid FROM RentalOrder WHERE Order_ID = @ID";
+                    SqlCommand sqlCommand = new SqlCommand(query, con);
+                    sqlCommand.Parameters.AddWithValue("@ID", Order_ID);
+                    SqlDataReader reader = sqlCommand.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        if ((bool)reader["Paid"] == true)
+                        {
+                            checkBoxUpdate.Checked = true;
+                        }
+                    }
+                    con.Close();
+                }
             }
-        }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            {
+
+            }
+
+            }
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -249,6 +274,11 @@ namespace CMPG223_Project
             string searchTerm = textBoxSearchAdd.Text.Trim();
             (dataGridViewAdd.DataSource as DataTable).DefaultView.RowFilter = string.Format("ClassName like '{0}%' OR Vehicle_Name like '{0}%'", searchTerm);
 
+        }
+
+        private void tabControl1_Enter(object sender, EventArgs e)
+        {
+            buttonClear_Click(sender, e);
         }
     }
 }

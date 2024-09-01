@@ -29,34 +29,24 @@
         private void InitializeComponent()
         {
             tabPage2 = new TabPage();
+            textBoxOrderUpdate = new TextBox();
             label23 = new Label();
             textBoxSearchUpdate = new TextBox();
             label22 = new Label();
             label13 = new Label();
-            checkBox2 = new CheckBox();
-            label14 = new Label();
-            textBoxUpdateVehicle = new TextBox();
+            checkBoxUpdate = new CheckBox();
             dataGridViewUpdate = new DataGridView();
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
             label15 = new Label();
-            textBoxUpdateTotal = new TextBox();
-            label16 = new Label();
-            label17 = new Label();
-            label18 = new Label();
-            label19 = new Label();
-            label20 = new Label();
-            dateTimePickerUpdate2 = new DateTimePicker();
-            dateTimePickerUpate1 = new DateTimePicker();
-            comboBoxUpdateClient = new ComboBox();
             tabPage1 = new TabPage();
             textBoxSearchAdd = new TextBox();
             label21 = new Label();
             label10 = new Label();
             label9 = new Label();
             label8 = new Label();
-            checkBox1 = new CheckBox();
+            checkBoxAdd = new CheckBox();
             label7 = new Label();
             textBox2 = new TextBox();
             dataGridViewAdd = new DataGridView();
@@ -74,7 +64,6 @@
             dateTimePicker1 = new DateTimePicker();
             comboBox1 = new ComboBox();
             tabControl1 = new TabControl();
-            textBox3 = new TextBox();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewUpdate).BeginInit();
             tabPage1.SuspendLayout();
@@ -85,34 +74,30 @@
             // tabPage2
             // 
             tabPage2.BackColor = Color.FromArgb(188, 170, 148);
-            tabPage2.Controls.Add(textBox3);
+            tabPage2.Controls.Add(textBoxOrderUpdate);
             tabPage2.Controls.Add(label23);
             tabPage2.Controls.Add(textBoxSearchUpdate);
             tabPage2.Controls.Add(label22);
             tabPage2.Controls.Add(label13);
-            tabPage2.Controls.Add(checkBox2);
-            tabPage2.Controls.Add(label14);
-            tabPage2.Controls.Add(textBoxUpdateVehicle);
+            tabPage2.Controls.Add(checkBoxUpdate);
             tabPage2.Controls.Add(dataGridViewUpdate);
             tabPage2.Controls.Add(button1);
             tabPage2.Controls.Add(button2);
             tabPage2.Controls.Add(button3);
             tabPage2.Controls.Add(label15);
-            tabPage2.Controls.Add(textBoxUpdateTotal);
-            tabPage2.Controls.Add(label16);
-            tabPage2.Controls.Add(label17);
-            tabPage2.Controls.Add(label18);
-            tabPage2.Controls.Add(label19);
-            tabPage2.Controls.Add(label20);
-            tabPage2.Controls.Add(dateTimePickerUpdate2);
-            tabPage2.Controls.Add(dateTimePickerUpate1);
-            tabPage2.Controls.Add(comboBoxUpdateClient);
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
             tabPage2.Size = new Size(1001, 464);
             tabPage2.TabIndex = 1;
-            tabPage2.Text = "Update Orders";
+            tabPage2.Text = "Make Payment";
+            // 
+            // textBoxOrderUpdate
+            // 
+            textBoxOrderUpdate.Location = new Point(105, 50);
+            textBoxOrderUpdate.Name = "textBoxOrderUpdate";
+            textBoxOrderUpdate.Size = new Size(154, 23);
+            textBoxOrderUpdate.TabIndex = 45;
             // 
             // label23
             // 
@@ -146,43 +131,22 @@
             // 
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label13.Location = new Point(0, 234);
+            label13.Location = new Point(6, 76);
             label13.Name = "label13";
             label13.Size = new Size(143, 32);
             label13.TabIndex = 39;
             label13.Text = "Order Paid:";
             // 
-            // checkBox2
+            // checkBoxUpdate
             // 
-            checkBox2.AutoSize = true;
-            checkBox2.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBox2.Location = new Point(156, 233);
-            checkBox2.Name = "checkBox2";
-            checkBox2.Size = new Size(77, 36);
-            checkBox2.TabIndex = 27;
-            checkBox2.Text = "Paid";
-            checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label14.ForeColor = Color.Red;
-            label14.Location = new Point(262, 198);
-            label14.Name = "label14";
-            label14.Size = new Size(250, 30);
-            label14.TabIndex = 38;
-            label14.Text = "Please Select a Valid Date";
-            label14.Visible = false;
-            // 
-            // textBoxUpdateVehicle
-            // 
-            textBoxUpdateVehicle.Enabled = false;
-            textBoxUpdateVehicle.Location = new Point(105, 131);
-            textBoxUpdateVehicle.Name = "textBoxUpdateVehicle";
-            textBoxUpdateVehicle.ReadOnly = true;
-            textBoxUpdateVehicle.Size = new Size(154, 23);
-            textBoxUpdateVehicle.TabIndex = 37;
+            checkBoxUpdate.AutoSize = true;
+            checkBoxUpdate.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            checkBoxUpdate.Location = new Point(162, 75);
+            checkBoxUpdate.Name = "checkBoxUpdate";
+            checkBoxUpdate.Size = new Size(77, 36);
+            checkBoxUpdate.TabIndex = 27;
+            checkBoxUpdate.Text = "Paid";
+            checkBoxUpdate.UseVisualStyleBackColor = true;
             // 
             // dataGridViewUpdate
             // 
@@ -232,91 +196,6 @@
             label15.TabIndex = 36;
             label15.Text = "Create Rental Order";
             // 
-            // textBoxUpdateTotal
-            // 
-            textBoxUpdateTotal.Enabled = false;
-            textBoxUpdateTotal.Location = new Point(156, 207);
-            textBoxUpdateTotal.Name = "textBoxUpdateTotal";
-            textBoxUpdateTotal.ReadOnly = true;
-            textBoxUpdateTotal.Size = new Size(100, 23);
-            textBoxUpdateTotal.TabIndex = 35;
-            // 
-            // label16
-            // 
-            label16.AutoSize = true;
-            label16.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label16.Location = new Point(0, 198);
-            label16.Name = "label16";
-            label16.Size = new Size(150, 32);
-            label16.TabIndex = 34;
-            label16.Text = "Order Total:";
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label17.Location = new Point(300, 165);
-            label17.Name = "label17";
-            label17.Size = new Size(67, 32);
-            label17.TabIndex = 32;
-            label17.Text = "until";
-            // 
-            // label18
-            // 
-            label18.AutoSize = true;
-            label18.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            label18.Location = new Point(3, 164);
-            label18.Name = "label18";
-            label18.Size = new Size(136, 32);
-            label18.TabIndex = 31;
-            label18.Text = "Rent from:";
-            // 
-            // label19
-            // 
-            label19.AutoSize = true;
-            label19.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            label19.Location = new Point(3, 122);
-            label19.Name = "label19";
-            label19.Size = new Size(101, 32);
-            label19.TabIndex = 28;
-            label19.Text = "Vehicle:";
-            // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            label20.Location = new Point(3, 82);
-            label20.Name = "label20";
-            label20.Size = new Size(87, 32);
-            label20.TabIndex = 26;
-            label20.Text = "Client:";
-            // 
-            // dateTimePickerUpdate2
-            // 
-            dateTimePickerUpdate2.Location = new Point(373, 172);
-            dateTimePickerUpdate2.MinDate = new DateTime(2024, 8, 31, 0, 0, 0, 0);
-            dateTimePickerUpdate2.Name = "dateTimePickerUpdate2";
-            dateTimePickerUpdate2.Size = new Size(149, 23);
-            dateTimePickerUpdate2.TabIndex = 25;
-            dateTimePickerUpdate2.Value = new DateTime(2024, 8, 31, 0, 0, 0, 0);
-            // 
-            // dateTimePickerUpate1
-            // 
-            dateTimePickerUpate1.Location = new Point(145, 172);
-            dateTimePickerUpate1.MinDate = new DateTime(2024, 8, 27, 0, 0, 0, 0);
-            dateTimePickerUpate1.Name = "dateTimePickerUpate1";
-            dateTimePickerUpate1.Size = new Size(149, 23);
-            dateTimePickerUpate1.TabIndex = 24;
-            // 
-            // comboBoxUpdateClient
-            // 
-            comboBoxUpdateClient.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxUpdateClient.FormattingEnabled = true;
-            comboBoxUpdateClient.Location = new Point(105, 91);
-            comboBoxUpdateClient.Name = "comboBoxUpdateClient";
-            comboBoxUpdateClient.Size = new Size(154, 23);
-            comboBoxUpdateClient.TabIndex = 22;
-            // 
             // tabPage1
             // 
             tabPage1.BackColor = Color.FromArgb(188, 170, 146);
@@ -325,7 +204,7 @@
             tabPage1.Controls.Add(label10);
             tabPage1.Controls.Add(label9);
             tabPage1.Controls.Add(label8);
-            tabPage1.Controls.Add(checkBox1);
+            tabPage1.Controls.Add(checkBoxAdd);
             tabPage1.Controls.Add(label7);
             tabPage1.Controls.Add(textBox2);
             tabPage1.Controls.Add(dataGridViewAdd);
@@ -401,16 +280,16 @@
             label8.TabIndex = 19;
             label8.Text = "Order Paid:";
             // 
-            // checkBox1
+            // checkBoxAdd
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBox1.Location = new Point(156, 204);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(77, 36);
-            checkBox1.TabIndex = 5;
-            checkBox1.Text = "Paid";
-            checkBox1.UseVisualStyleBackColor = true;
+            checkBoxAdd.AutoSize = true;
+            checkBoxAdd.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            checkBoxAdd.Location = new Point(156, 204);
+            checkBoxAdd.Name = "checkBoxAdd";
+            checkBoxAdd.Size = new Size(77, 36);
+            checkBoxAdd.TabIndex = 5;
+            checkBoxAdd.Text = "Paid";
+            checkBoxAdd.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
@@ -578,13 +457,7 @@
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(1009, 492);
             tabControl1.TabIndex = 0;
-            // 
-            // textBox3
-            // 
-            textBox3.Location = new Point(105, 50);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(154, 23);
-            textBox3.TabIndex = 45;
+            tabControl1.Enter += tabControl1_Enter;
             // 
             // rentalOrder
             // 
@@ -629,32 +502,21 @@
         private TextBox textBox2;
         private Label label7;
         private Label label8;
-        private CheckBox checkBox1;
+        private CheckBox checkBoxAdd;
         private Label label9;
         private Label label10;
         private Label label13;
-        private CheckBox checkBox2;
-        private Label label14;
-        private TextBox textBoxUpdateVehicle;
+        private CheckBox checkBoxUpdate;
         private DataGridView dataGridViewUpdate;
         private Button button1;
         private Button button2;
         private Button button3;
         private Label label15;
-        private TextBox textBoxUpdateTotal;
-        private Label label16;
-        private Label label17;
-        private Label label18;
-        private Label label19;
-        private Label label20;
-        private DateTimePicker dateTimePickerUpdate2;
-        private DateTimePicker dateTimePickerUpate1;
-        private ComboBox comboBoxUpdateClient;
         private Label label21;
         private TextBox textBoxSearchAdd;
         private TextBox textBoxSearchUpdate;
         private Label label22;
         private Label label23;
-        private TextBox textBox3;
+        private TextBox textBoxOrderUpdate;
     }
 }
