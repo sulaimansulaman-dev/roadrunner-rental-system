@@ -120,7 +120,7 @@
             // 
             // txtSearch_Add
             // 
-            txtSearch_Add.Location = new Point(743, 82);
+            txtSearch_Add.Location = new Point(666, 82);
             txtSearch_Add.MaxLength = 15;
             txtSearch_Add.Name = "txtSearch_Add";
             txtSearch_Add.Size = new Size(206, 27);
@@ -131,11 +131,11 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            label8.Location = new Point(626, 68);
+            label8.Location = new Point(610, 38);
             label8.Name = "label8";
-            label8.Size = new Size(127, 41);
+            label8.Size = new Size(339, 41);
             label8.TabIndex = 22;
-            label8.Text = "Search: ";
+            label8.Text = "Search By Class Name: ";
             // 
             // label3
             // 
@@ -262,7 +262,7 @@
             // 
             // txtSearch_Update
             // 
-            txtSearch_Update.Location = new Point(651, 82);
+            txtSearch_Update.Location = new Point(629, 85);
             txtSearch_Update.MaxLength = 15;
             txtSearch_Update.Name = "txtSearch_Update";
             txtSearch_Update.Size = new Size(206, 27);
@@ -273,11 +273,11 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            label6.Location = new Point(518, 66);
+            label6.Location = new Point(570, 41);
             label6.Name = "label6";
-            label6.Size = new Size(127, 41);
+            label6.Size = new Size(339, 41);
             label6.TabIndex = 21;
-            label6.Text = "Search: ";
+            label6.Text = "Search By Class Name: ";
             // 
             // txtClassID_Update
             // 
@@ -341,7 +341,7 @@
             // 
             // btnUpdate_Update
             // 
-            btnUpdate_Update.Location = new Point(679, 458);
+            btnUpdate_Update.Location = new Point(495, 458);
             btnUpdate_Update.Name = "btnUpdate_Update";
             btnUpdate_Update.Size = new Size(104, 52);
             btnUpdate_Update.TabIndex = 13;
@@ -351,7 +351,7 @@
             // 
             // btnBack_Update
             // 
-            btnBack_Update.Location = new Point(495, 458);
+            btnBack_Update.Location = new Point(679, 458);
             btnBack_Update.Name = "btnBack_Update";
             btnBack_Update.Size = new Size(104, 52);
             btnBack_Update.TabIndex = 12;
@@ -418,7 +418,7 @@
             // 
             // txtSearch_Delete
             // 
-            txtSearch_Delete.Location = new Point(440, 86);
+            txtSearch_Delete.Location = new Point(370, 95);
             txtSearch_Delete.MaxLength = 15;
             txtSearch_Delete.Name = "txtSearch_Delete";
             txtSearch_Delete.Size = new Size(206, 27);
@@ -429,11 +429,11 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            label7.Location = new Point(316, 72);
+            label7.Location = new Point(307, 46);
             label7.Name = "label7";
-            label7.Size = new Size(127, 41);
+            label7.Size = new Size(339, 41);
             label7.TabIndex = 26;
-            label7.Text = "Search: ";
+            label7.Text = "Search By Class Name: ";
             // 
             // txtClassName_Delete
             // 
@@ -448,7 +448,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(0, 0);
+            label5.Location = new Point(-4, 0);
             label5.Name = "label5";
             label5.Size = new Size(374, 46);
             label5.TabIndex = 24;
