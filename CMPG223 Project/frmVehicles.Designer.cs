@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVehicles));
             tabControlVehicleClasses = new TabControl();
             tabAdd = new TabPage();
+            txtSearch_Add = new TextBox();
             txtCostPerDay = new TextBox();
             txtName = new TextBox();
             label5 = new Label();
@@ -47,6 +48,7 @@
             btnBack_Add = new Button();
             lblClassSelect = new Label();
             tabUpdate = new TabPage();
+            txtSearch_Update = new TextBox();
             txtVehicleID_Update = new TextBox();
             txtCostPerDay_Update = new TextBox();
             txtVehicleName_Update = new TextBox();
@@ -64,6 +66,7 @@
             btnUpdate_Update = new Button();
             btnBack_Update = new Button();
             tabDelete = new TabPage();
+            txtSearch_Delete = new TextBox();
             cmbVehicleID_Delete = new ComboBox();
             btnClear_Delete = new Button();
             btnDelete_Delete = new Button();
@@ -73,7 +76,6 @@
             errorProvider1 = new ErrorProvider(components);
             errorProvider2 = new ErrorProvider(components);
             errorProvider3 = new ErrorProvider(components);
-            errorProvider4 = new ErrorProvider(components);
             tabControlVehicleClasses.SuspendLayout();
             tabAdd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvVehicles_Add).BeginInit();
@@ -84,7 +86,6 @@
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)errorProvider4).BeginInit();
             SuspendLayout();
             // 
             // tabControlVehicleClasses
@@ -104,6 +105,7 @@
             tabAdd.BackColor = Color.FromArgb(188, 170, 146);
             tabAdd.BackgroundImage = (Image)resources.GetObject("tabAdd.BackgroundImage");
             tabAdd.BackgroundImageLayout = ImageLayout.Zoom;
+            tabAdd.Controls.Add(txtSearch_Add);
             tabAdd.Controls.Add(txtCostPerDay);
             tabAdd.Controls.Add(txtName);
             tabAdd.Controls.Add(label5);
@@ -124,6 +126,14 @@
             tabAdd.Size = new Size(1094, 728);
             tabAdd.TabIndex = 0;
             tabAdd.Text = "Add";
+            // 
+            // txtSearch_Add
+            // 
+            txtSearch_Add.Location = new Point(797, 53);
+            txtSearch_Add.Name = "txtSearch_Add";
+            txtSearch_Add.Size = new Size(175, 27);
+            txtSearch_Add.TabIndex = 38;
+            txtSearch_Add.TextChanged += textBox1_TextChanged_1;
             // 
             // txtCostPerDay
             // 
@@ -213,7 +223,7 @@
             // dgvVehicles_Add
             // 
             dgvVehicles_Add.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvVehicles_Add.Location = new Point(525, 18);
+            dgvVehicles_Add.Location = new Point(523, 86);
             dgvVehicles_Add.Name = "dgvVehicles_Add";
             dgvVehicles_Add.RowHeadersWidth = 51;
             dgvVehicles_Add.Size = new Size(473, 293);
@@ -265,6 +275,7 @@
             tabUpdate.BackColor = Color.FromArgb(188, 170, 146);
             tabUpdate.BackgroundImage = (Image)resources.GetObject("tabUpdate.BackgroundImage");
             tabUpdate.BackgroundImageLayout = ImageLayout.Zoom;
+            tabUpdate.Controls.Add(txtSearch_Update);
             tabUpdate.Controls.Add(txtVehicleID_Update);
             tabUpdate.Controls.Add(txtCostPerDay_Update);
             tabUpdate.Controls.Add(txtVehicleName_Update);
@@ -288,9 +299,16 @@
             tabUpdate.TabIndex = 1;
             tabUpdate.Text = "Update";
             // 
+            // txtSearch_Update
+            // 
+            txtSearch_Update.Location = new Point(779, 17);
+            txtSearch_Update.Name = "txtSearch_Update";
+            txtSearch_Update.Size = new Size(175, 27);
+            txtSearch_Update.TabIndex = 37;
+            txtSearch_Update.TextChanged += textBox1_TextChanged;
+            // 
             // txtVehicleID_Update
             // 
-            txtVehicleID_Update.Enabled = false;
             txtVehicleID_Update.Location = new Point(382, 32);
             txtVehicleID_Update.Name = "txtVehicleID_Update";
             txtVehicleID_Update.Size = new Size(125, 27);
@@ -405,7 +423,7 @@
             // dgvVehicles_Update
             // 
             dgvVehicles_Update.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvVehicles_Update.Location = new Point(567, 32);
+            dgvVehicles_Update.Location = new Point(558, 50);
             dgvVehicles_Update.Name = "dgvVehicles_Update";
             dgvVehicles_Update.RowHeadersWidth = 51;
             dgvVehicles_Update.Size = new Size(473, 293);
@@ -445,6 +463,7 @@
             tabDelete.BackColor = Color.FromArgb(188, 170, 146);
             tabDelete.BackgroundImage = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
             tabDelete.BackgroundImageLayout = ImageLayout.Zoom;
+            tabDelete.Controls.Add(txtSearch_Delete);
             tabDelete.Controls.Add(cmbVehicleID_Delete);
             tabDelete.Controls.Add(btnClear_Delete);
             tabDelete.Controls.Add(btnDelete_Delete);
@@ -456,6 +475,15 @@
             tabDelete.Size = new Size(1094, 728);
             tabDelete.TabIndex = 2;
             tabDelete.Text = "Delete";
+            // 
+            // txtSearch_Delete
+            // 
+            txtSearch_Delete.AcceptsReturn = true;
+            txtSearch_Delete.Location = new Point(506, 61);
+            txtSearch_Delete.Name = "txtSearch_Delete";
+            txtSearch_Delete.Size = new Size(175, 27);
+            txtSearch_Delete.TabIndex = 38;
+            txtSearch_Delete.TextChanged += textBox1_TextChanged_2;
             // 
             // cmbVehicleID_Delete
             // 
@@ -497,7 +525,7 @@
             // dgvVehicles_Delete
             // 
             dgvVehicles_Delete.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvVehicles_Delete.Location = new Point(250, 37);
+            dgvVehicles_Delete.Location = new Point(213, 94);
             dgvVehicles_Delete.Name = "dgvVehicles_Delete";
             dgvVehicles_Delete.RowHeadersWidth = 51;
             dgvVehicles_Delete.Size = new Size(529, 363);
@@ -527,10 +555,6 @@
             // 
             errorProvider3.ContainerControl = this;
             // 
-            // errorProvider4
-            // 
-            errorProvider4.ContainerControl = this;
-            // 
             // frmVehicles
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -556,7 +580,6 @@
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider2).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)errorProvider4).EndInit();
             ResumeLayout(false);
         }
 
@@ -605,6 +628,8 @@
         private ComboBox cmbVehicleID_Delete;
         private ErrorProvider errorProvider2;
         private ErrorProvider errorProvider3;
-        private ErrorProvider errorProvider4;
+        private TextBox txtSearch_Update;
+        private TextBox txtSearch_Add;
+        private TextBox txtSearch_Delete;
     }
 }
