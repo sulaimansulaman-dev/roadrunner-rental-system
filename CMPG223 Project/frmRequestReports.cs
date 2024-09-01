@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +13,7 @@ namespace CMPG223_Project
 {
     public partial class frmRequestReports : Form
     {
-        String connectionString = @"Data Source=MOMO;Initial Catalog=\""Roadrunner Rentals\"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        String connectionString = @"Data Source=MOMO;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False"; 
         public frmRequestReports()
         {
             InitializeComponent();
@@ -34,7 +34,7 @@ namespace CMPG223_Project
 
         private void btnGenerateReport_Click(object sender, EventArgs e)
         {
-
+            
             // Clear DataGridView rows and columns
             dgvRequestReports.Rows.Clear();
             dgvRequestReports.Columns.Clear();
@@ -42,7 +42,7 @@ namespace CMPG223_Project
             // Initialize Variables
             DateTime startDate = dtpStartDate_RequestReports.Value;
             DateTime endDate = dtpEndDate_RequestReports.Value;
-            lblTodaysDate_RequestReport.Text = DateTime.Today.Date.ToString("yyyy/MM/dd");
+            lblTodaysDate_RequestReport.Text = DateTime.Today.Date.ToString("yyyy/MM/dd"); 
             string Order_By = null;
 
             // Perform validation
@@ -69,11 +69,11 @@ namespace CMPG223_Project
                 GenerateIncomeReceivedReport(startDate, endDate, Order_By);
             }
 
-
+            
 
             pbRequestReports.SendToBack();
         }
-        private void GenerateTop10VehiclesReport(DateTime startDate, DateTime endDate, string Order_By)
+        private void GenerateTop10VehiclesReport(DateTime startDate, DateTime endDate, string Order_By )
         {
             //Validation
             int total_Entries = 0;
@@ -109,14 +109,14 @@ namespace CMPG223_Project
         GROUP BY 
             V.Vehicle_ID, V.Vehicle_Name, VC.ClassName
         ORDER BY 
-            Rental_Count " + Order_By + ";";
+            Rental_Count " +Order_By + ";";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@StartDate", startDate);
                 cmd.Parameters.AddWithValue("@EndDate", endDate);
-
+               
 
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -144,27 +144,27 @@ namespace CMPG223_Project
             // Apply styles as in your original code
             ApplyDataGridViewStyles();
 
-            total_Entries = dgvRequestReports.Rows.Count - 1;
+            total_Entries = dgvRequestReports.Rows.Count - 1; 
             lblTotalEntries_RequestReports.Text = total_Entries.ToString();
         }
 
         private void GenerateIncomeReceivedReport(DateTime startDate, DateTime endDate, string Order_By)
         {
             //Validation 
-            lblReportTypeName.Text = "Income Recieved Per Time Period";
+            lblReportTypeName.Text = "Income Recieved Per Time Period"; 
 
             //Resets the Data Grid View
             dgvRequestReports.Rows.Clear();
-            dgvRequestReports.Columns.Clear();
+            dgvRequestReports.Columns.Clear(); 
 
-
+           
             dgvRequestReports.ColumnCount = 3;
-
+            
             dgvRequestReports.Columns[0].Name = "Date";
             dgvRequestReports.Columns[1].Name = "Vehicle Class";
             dgvRequestReports.Columns[2].Name = "Income";
 
-
+          
             decimal grandTotal = 0;
             int total_Entries = 0;
 
@@ -229,11 +229,10 @@ namespace CMPG223_Project
                             monthlyTotal += income;
                             grandTotal += income;
 
-                            if (!string.IsNullOrWhiteSpace(vehicleClass))
-                            {
+                            if (!string.IsNullOrWhiteSpace(vehicleClass)) { 
                                 total_Entries++;
                             }
-
+                            
                         }
 
                         // Add the last month's total row
@@ -250,7 +249,7 @@ namespace CMPG223_Project
             dgvRequestReports.Rows.Add("", "Grand Total:", "R " + grandTotal.ToString("N2"));
             lblTotalEntries_RequestReports.Text = total_Entries.ToString();
 
-
+          
             ApplyDataGridViewStyles();
         }
 
@@ -273,11 +272,11 @@ namespace CMPG223_Project
             DataGridViewCellStyle boldStyle = new DataGridViewCellStyle();
             boldStyle.Font = new Font("Arial", 10F, FontStyle.Bold);
 
-
+          
             // Apply the bold style to specific rows
             foreach (DataGridViewRow row in dgvRequestReports.Rows)
             {
-
+             
                 if (row.Cells[1].Value != null)
                 {
                     string cellValue = row.Cells[1].Value.ToString();
@@ -355,7 +354,7 @@ namespace CMPG223_Project
             dgvRequestReports.Rows.Clear();
             dgvRequestReports.Columns.Clear();
 
-            cbReportType_RequestReports.SelectedIndex = -1;
+            cbReportType_RequestReports.SelectedIndex = -1; 
             cbOrderBy_RequestReports.SelectedIndex = -1;
 
             dtpStartDate_RequestReports.Value = DateTime.Today;
@@ -367,11 +366,6 @@ namespace CMPG223_Project
 
             pbRequestReports.BringToFront();
 
-        }
-
-        private void btnBack_RequestReport_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }
