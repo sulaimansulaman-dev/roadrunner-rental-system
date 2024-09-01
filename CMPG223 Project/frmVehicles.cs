@@ -212,6 +212,7 @@ namespace CMPG223_Project
             LoadComboBox();
             LoadComboBoxUpdateClass();
             LoadComboBox_VehicleName();
+            btnClear_Add_Click(sender, e);
 
         }
 
@@ -462,6 +463,10 @@ namespace CMPG223_Project
                 }
 
                 displayData();
+                LoadComboBox();
+                LoadComboBoxUpdateClass();
+                LoadComboBox_VehicleName();
+                btnDelete_Delete_Click(sender, e);
 
 
             }
@@ -497,6 +502,7 @@ namespace CMPG223_Project
                             LoadComboBox();
                             LoadComboBoxUpdateClass();
                             LoadComboBox_VehicleName();
+                            btnClear_Update_Click(sender, e);
                         }
                         else
                         {
