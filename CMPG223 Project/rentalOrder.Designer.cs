@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             tabPage2 = new TabPage();
+            label23 = new Label();
+            textBoxSearchUpdate = new TextBox();
+            label22 = new Label();
             label13 = new Label();
             checkBox2 = new CheckBox();
             label14 = new Label();
@@ -48,6 +51,8 @@
             dateTimePickerUpate1 = new DateTimePicker();
             comboBoxUpdateClient = new ComboBox();
             tabPage1 = new TabPage();
+            textBoxSearchAdd = new TextBox();
+            label21 = new Label();
             label10 = new Label();
             label9 = new Label();
             label8 = new Label();
@@ -69,12 +74,7 @@
             dateTimePicker1 = new DateTimePicker();
             comboBox1 = new ComboBox();
             tabControl1 = new TabControl();
-            label21 = new Label();
-            textBoxSearchAdd = new TextBox();
-            textBoxSearchUpdate = new TextBox();
-            label22 = new Label();
-            textBoxOrder = new TextBox();
-            label23 = new Label();
+            textBox3 = new TextBox();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewUpdate).BeginInit();
             tabPage1.SuspendLayout();
@@ -85,7 +85,7 @@
             // tabPage2
             // 
             tabPage2.BackColor = Color.FromArgb(188, 170, 148);
-            tabPage2.Controls.Add(textBoxOrder);
+            tabPage2.Controls.Add(textBox3);
             tabPage2.Controls.Add(label23);
             tabPage2.Controls.Add(textBoxSearchUpdate);
             tabPage2.Controls.Add(label22);
@@ -114,11 +114,39 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Update Orders";
             // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            label23.Location = new Point(6, 41);
+            label23.Name = "label23";
+            label23.Size = new Size(88, 32);
+            label23.TabIndex = 44;
+            label23.Text = "Order:";
+            // 
+            // textBoxSearchUpdate
+            // 
+            textBoxSearchUpdate.Location = new Point(784, 12);
+            textBoxSearchUpdate.Name = "textBoxSearchUpdate";
+            textBoxSearchUpdate.Size = new Size(176, 23);
+            textBoxSearchUpdate.TabIndex = 43;
+            textBoxSearchUpdate.TextChanged += textBoxSearchUpdate_TextChanged;
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label22.Location = new Point(584, 3);
+            label22.Name = "label22";
+            label22.Size = new Size(180, 32);
+            label22.TabIndex = 42;
+            label22.Text = "Search Orders:";
+            // 
             // label13
             // 
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label13.Location = new Point(3, 244);
+            label13.Location = new Point(0, 234);
             label13.Name = "label13";
             label13.Size = new Size(143, 32);
             label13.TabIndex = 39;
@@ -128,7 +156,7 @@
             // 
             checkBox2.AutoSize = true;
             checkBox2.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBox2.Location = new Point(159, 243);
+            checkBox2.Location = new Point(156, 233);
             checkBox2.Name = "checkBox2";
             checkBox2.Size = new Size(77, 36);
             checkBox2.TabIndex = 27;
@@ -140,7 +168,7 @@
             label14.AutoSize = true;
             label14.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label14.ForeColor = Color.Red;
-            label14.Location = new Point(265, 208);
+            label14.Location = new Point(262, 198);
             label14.Name = "label14";
             label14.Size = new Size(250, 30);
             label14.TabIndex = 38;
@@ -182,6 +210,7 @@
             button2.TabIndex = 30;
             button2.Text = "Clear";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button3
             // 
@@ -191,6 +220,7 @@
             button3.TabIndex = 29;
             button3.Text = "Update";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // label15
             // 
@@ -205,7 +235,7 @@
             // textBoxUpdateTotal
             // 
             textBoxUpdateTotal.Enabled = false;
-            textBoxUpdateTotal.Location = new Point(159, 217);
+            textBoxUpdateTotal.Location = new Point(156, 207);
             textBoxUpdateTotal.Name = "textBoxUpdateTotal";
             textBoxUpdateTotal.ReadOnly = true;
             textBoxUpdateTotal.Size = new Size(100, 23);
@@ -215,7 +245,7 @@
             // 
             label16.AutoSize = true;
             label16.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label16.Location = new Point(3, 208);
+            label16.Location = new Point(0, 198);
             label16.Name = "label16";
             label16.Size = new Size(150, 32);
             label16.TabIndex = 34;
@@ -319,6 +349,24 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Create Order";
             // 
+            // textBoxSearchAdd
+            // 
+            textBoxSearchAdd.Location = new Point(783, 10);
+            textBoxSearchAdd.Name = "textBoxSearchAdd";
+            textBoxSearchAdd.Size = new Size(176, 23);
+            textBoxSearchAdd.TabIndex = 23;
+            textBoxSearchAdd.TextChanged += textBoxSearchAdd_TextChanged;
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label21.Location = new Point(583, 1);
+            label21.Name = "label21";
+            label21.Size = new Size(194, 32);
+            label21.TabIndex = 22;
+            label21.Text = "Search Vehicles:";
+            // 
             // label10
             // 
             label10.AutoSize = true;
@@ -347,7 +395,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label8.Location = new Point(0, 215);
+            label8.Location = new Point(0, 205);
             label8.Name = "label8";
             label8.Size = new Size(143, 32);
             label8.TabIndex = 19;
@@ -357,7 +405,7 @@
             // 
             checkBox1.AutoSize = true;
             checkBox1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBox1.Location = new Point(156, 214);
+            checkBox1.Location = new Point(156, 204);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(77, 36);
             checkBox1.TabIndex = 5;
@@ -369,7 +417,7 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label7.ForeColor = Color.Red;
-            label7.Location = new Point(262, 179);
+            label7.Location = new Point(262, 169);
             label7.Name = "label7";
             label7.Size = new Size(250, 30);
             label7.TabIndex = 18;
@@ -436,7 +484,7 @@
             // textBox1
             // 
             textBox1.Enabled = false;
-            textBox1.Location = new Point(156, 188);
+            textBox1.Location = new Point(156, 178);
             textBox1.Name = "textBox1";
             textBox1.ReadOnly = true;
             textBox1.Size = new Size(100, 23);
@@ -446,7 +494,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(0, 179);
+            label5.Location = new Point(0, 169);
             label5.Name = "label5";
             label5.Size = new Size(150, 32);
             label5.TabIndex = 9;
@@ -495,11 +543,11 @@
             // dateTimePicker2
             // 
             dateTimePicker2.Location = new Point(370, 143);
-            dateTimePicker2.MinDate = new DateTime(2024, 8, 28, 16, 38, 32, 0);
+            dateTimePicker2.MinDate = new DateTime(2024, 8, 31, 0, 0, 0, 0);
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(149, 23);
             dateTimePicker2.TabIndex = 4;
-            dateTimePicker2.Value = new DateTime(2024, 8, 28, 16, 38, 32, 0);
+            dateTimePicker2.Value = new DateTime(2024, 8, 31, 0, 0, 0, 0);
             dateTimePicker2.ValueChanged += dateTimePicker2_ValueChanged;
             // 
             // dateTimePicker1
@@ -531,58 +579,12 @@
             tabControl1.Size = new Size(1009, 492);
             tabControl1.TabIndex = 0;
             // 
-            // label21
+            // textBox3
             // 
-            label21.AutoSize = true;
-            label21.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label21.Location = new Point(583, 1);
-            label21.Name = "label21";
-            label21.Size = new Size(194, 32);
-            label21.TabIndex = 22;
-            label21.Text = "Search Vehicles:";
-            // 
-            // textBoxSearchAdd
-            // 
-            textBoxSearchAdd.Location = new Point(783, 10);
-            textBoxSearchAdd.Name = "textBoxSearchAdd";
-            textBoxSearchAdd.Size = new Size(176, 23);
-            textBoxSearchAdd.TabIndex = 23;
-            // 
-            // textBoxSearchUpdate
-            // 
-            textBoxSearchUpdate.Location = new Point(784, 12);
-            textBoxSearchUpdate.Name = "textBoxSearchUpdate";
-            textBoxSearchUpdate.Size = new Size(176, 23);
-            textBoxSearchUpdate.TabIndex = 43;
-            // 
-            // label22
-            // 
-            label22.AutoSize = true;
-            label22.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label22.Location = new Point(584, 3);
-            label22.Name = "label22";
-            label22.Size = new Size(194, 32);
-            label22.TabIndex = 42;
-            label22.Text = "Search Vehicles:";
-            // 
-            // textBoxOrder
-            // 
-            textBoxOrder.Enabled = false;
-            textBoxOrder.Location = new Point(105, 50);
-            textBoxOrder.Name = "textBoxOrder";
-            textBoxOrder.ReadOnly = true;
-            textBoxOrder.Size = new Size(154, 23);
-            textBoxOrder.TabIndex = 45;
-            // 
-            // label23
-            // 
-            label23.AutoSize = true;
-            label23.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            label23.Location = new Point(6, 41);
-            label23.Name = "label23";
-            label23.Size = new Size(88, 32);
-            label23.TabIndex = 44;
-            label23.Text = "Order:";
+            textBox3.Location = new Point(105, 50);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(154, 23);
+            textBox3.TabIndex = 45;
             // 
             // rentalOrder
             // 
@@ -652,7 +654,7 @@
         private TextBox textBoxSearchAdd;
         private TextBox textBoxSearchUpdate;
         private Label label22;
-        private TextBox textBoxOrder;
         private Label label23;
+        private TextBox textBox3;
     }
 }

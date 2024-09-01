@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Data;
+using System.Windows.Forms;
 
 namespace CMPG223_Project
 {
@@ -91,25 +92,25 @@ namespace CMPG223_Project
 
         private void rentalOrder_Load(object sender, EventArgs e)
         {
-            populateClients();
-            populateDataGridView();
+            populateClients(comboBox1);
+            populateClients(comboBoxUpdateClient);
+            populateDataGridView(dataGridViewAdd, "SELECT Vehicle.Vehicle_ID, Vehicle.Vehicle_Name, Vehicle.CostPerDay, Vehicle.NumberOfSeats, Vehicle_Class.ClassName FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_CLass_ID=Vehicle_Class.Vehicle_Class_ID WHERE Vehicle.InUse = 'False'");
+            populateDataGridView(dataGridViewUpdate, "Select RentalOrder.Order_ID, Client.FirstName, Client.LastName,Vehicle.Vehicle_Name, RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
             dateTimePicker1.MinDate = DateTime.Today;
             dateTimePicker2.MinDate = DateTime.Today.AddDays(1);
             label7.Visible = false;
             label10.Visible = false;
-
+            comboBox1.SelectedIndex = -1;
         }
-        private void populateDataGridView()
+        private void populateDataGridView(DataGridView dataGridView, string select)
         {
             try
             {
-
-                string select = "SELECT Vehicle.Vehicle_ID, Vehicle.CostPerDay, Vehicle.NumberOfSeats, Vehicle_Class.ClassName FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_CLass_ID=Vehicle_Class.Vehicle_Class_ID WHERE Vehicle.InUse = 'False'";
                 SqlDataAdapter adapter = new SqlDataAdapter(select, con);
                 DataSet dataSet = new DataSet();
                 adapter.Fill(dataSet);
-                dataGridViewAdd.ReadOnly = true;
-                dataGridViewAdd.DataSource = dataSet.Tables[0];
+                dataGridView.ReadOnly = true;
+                dataGridView.DataSource = dataSet.Tables[0];
 
             }
             catch (Exception ex)
@@ -117,7 +118,7 @@ namespace CMPG223_Project
                 MessageBox.Show(ex.ToString());
             }
         }
-        private void populateClients()
+        private void populateClients(ComboBox comboBox)
         {
             try
             {
@@ -126,11 +127,10 @@ namespace CMPG223_Project
                 SqlDataAdapter adapter = new SqlDataAdapter(comboBoxSelect, con);
                 DataTable comboTable = new DataTable();
                 adapter.Fill(comboTable);
-                comboBox1.DataSource = comboTable;
-                comboBox1.ValueMember = "Client_ID";
-                comboBox1.DisplayMember = "FirstName";
+                comboBox.DataSource = comboTable;
+                comboBox.ValueMember = "Client_ID";
+                comboBox.DisplayMember = "FirstName";
                 con.Close();
-                comboBox1.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
@@ -221,12 +221,34 @@ namespace CMPG223_Project
             int indexRow = e.RowIndex;
             if (indexRow >= 0)
             {
-                DataGridViewRow row = dataGridViewAdd.Rows[indexRow];
-                textBox2.Text = row.Cells[0].Value.ToString();
-                vehicleID = (int)row.Cells[0].Value;
+                DataGridViewRow row = dataGridViewUpdate.Rows[indexRow];
+                comboBoxUpdateOrder.Text = row.Cells[0].Value.ToString();
+                Client_ID = (int)row.Cells[0].Value;
                 label10.Visible = false;
-                cost = (decimal)row.Cells[1].Value;
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxSearchUpdate_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = textBoxSearchUpdate.Text.Trim();
+            (dataGridViewUpdate.DataSource as DataTable).DefaultView.RowFilter = string.Format("LastName like '{0}%' OR Vehicle_Name like '{0}%' OR FirstName like '{0}%'", searchTerm);
+        }
+
+        private void textBoxSearchAdd_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = textBoxSearchAdd.Text.Trim();
+            (dataGridViewAdd.DataSource as DataTable).DefaultView.RowFilter = string.Format("ClassName like '{0}%' OR Vehicle_Name like '{0}%'", searchTerm);
+
         }
     }
 }
