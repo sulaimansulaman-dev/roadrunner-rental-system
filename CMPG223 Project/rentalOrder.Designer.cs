@@ -30,8 +30,8 @@
         {
             tabPage2 = new TabPage();
             textBoxOrderUpdate = new TextBox();
-            label23 = new Label();
             textBoxSearchUpdate = new TextBox();
+            label23 = new Label();
             label22 = new Label();
             label13 = new Label();
             checkBoxUpdate = new CheckBox();
@@ -42,19 +42,19 @@
             label15 = new Label();
             tabPage1 = new TabPage();
             textBoxSearchAdd = new TextBox();
+            textBox2 = new TextBox();
+            textBox1 = new TextBox();
             label21 = new Label();
             label10 = new Label();
             label9 = new Label();
             label8 = new Label();
             checkBoxAdd = new CheckBox();
             label7 = new Label();
-            textBox2 = new TextBox();
             dataGridViewAdd = new DataGridView();
             buttonBack = new Button();
             buttonClear = new Button();
             buttonCreate = new Button();
             label6 = new Label();
-            textBox1 = new TextBox();
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
@@ -64,19 +64,33 @@
             dateTimePicker1 = new DateTimePicker();
             comboBox1 = new ComboBox();
             tabControl1 = new TabControl();
+            tabPage3 = new TabPage();
+            textBoxReturnOrder = new TextBox();
+            textBoxReturnSearch = new TextBox();
+            label11 = new Label();
+            label12 = new Label();
+            label14 = new Label();
+            checkBoxReturned = new CheckBox();
+            dataGridViewReturn = new DataGridView();
+            button4 = new Button();
+            button5 = new Button();
+            button6 = new Button();
+            label16 = new Label();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewUpdate).BeginInit();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAdd).BeginInit();
             tabControl1.SuspendLayout();
+            tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewReturn).BeginInit();
             SuspendLayout();
             // 
             // tabPage2
             // 
             tabPage2.BackColor = Color.FromArgb(188, 170, 148);
             tabPage2.Controls.Add(textBoxOrderUpdate);
-            tabPage2.Controls.Add(label23);
             tabPage2.Controls.Add(textBoxSearchUpdate);
+            tabPage2.Controls.Add(label23);
             tabPage2.Controls.Add(label22);
             tabPage2.Controls.Add(label13);
             tabPage2.Controls.Add(checkBoxUpdate);
@@ -94,20 +108,10 @@
             // 
             // textBoxOrderUpdate
             // 
-            textBoxOrderUpdate.Location = new Point(105, 50);
+            textBoxOrderUpdate.Location = new Point(102, 50);
             textBoxOrderUpdate.Name = "textBoxOrderUpdate";
             textBoxOrderUpdate.Size = new Size(154, 23);
             textBoxOrderUpdate.TabIndex = 45;
-            // 
-            // label23
-            // 
-            label23.AutoSize = true;
-            label23.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            label23.Location = new Point(6, 41);
-            label23.Name = "label23";
-            label23.Size = new Size(88, 32);
-            label23.TabIndex = 44;
-            label23.Text = "Order:";
             // 
             // textBoxSearchUpdate
             // 
@@ -116,6 +120,16 @@
             textBoxSearchUpdate.Size = new Size(176, 23);
             textBoxSearchUpdate.TabIndex = 43;
             textBoxSearchUpdate.TextChanged += textBoxSearchUpdate_TextChanged;
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            label23.Location = new Point(3, 41);
+            label23.Name = "label23";
+            label23.Size = new Size(88, 32);
+            label23.TabIndex = 44;
+            label23.Text = "Order:";
             // 
             // label22
             // 
@@ -131,7 +145,7 @@
             // 
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label13.Location = new Point(6, 76);
+            label13.Location = new Point(3, 76);
             label13.Name = "label13";
             label13.Size = new Size(143, 32);
             label13.TabIndex = 39;
@@ -141,7 +155,7 @@
             // 
             checkBoxUpdate.AutoSize = true;
             checkBoxUpdate.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBoxUpdate.Location = new Point(162, 75);
+            checkBoxUpdate.Location = new Point(159, 75);
             checkBoxUpdate.Name = "checkBoxUpdate";
             checkBoxUpdate.Size = new Size(77, 36);
             checkBoxUpdate.TabIndex = 27;
@@ -192,27 +206,27 @@
             label15.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label15.Location = new Point(-1, 1);
             label15.Name = "label15";
-            label15.Size = new Size(289, 40);
+            label15.Size = new Size(429, 40);
             label15.TabIndex = 36;
-            label15.Text = "Create Rental Order";
+            label15.Text = "Update Rental Order Payment";
             // 
             // tabPage1
             // 
             tabPage1.BackColor = Color.FromArgb(188, 170, 146);
             tabPage1.Controls.Add(textBoxSearchAdd);
+            tabPage1.Controls.Add(textBox2);
+            tabPage1.Controls.Add(textBox1);
             tabPage1.Controls.Add(label21);
             tabPage1.Controls.Add(label10);
             tabPage1.Controls.Add(label9);
             tabPage1.Controls.Add(label8);
             tabPage1.Controls.Add(checkBoxAdd);
             tabPage1.Controls.Add(label7);
-            tabPage1.Controls.Add(textBox2);
             tabPage1.Controls.Add(dataGridViewAdd);
             tabPage1.Controls.Add(buttonBack);
             tabPage1.Controls.Add(buttonClear);
             tabPage1.Controls.Add(buttonCreate);
             tabPage1.Controls.Add(label6);
-            tabPage1.Controls.Add(textBox1);
             tabPage1.Controls.Add(label5);
             tabPage1.Controls.Add(label4);
             tabPage1.Controls.Add(label3);
@@ -235,6 +249,24 @@
             textBoxSearchAdd.Size = new Size(176, 23);
             textBoxSearchAdd.TabIndex = 23;
             textBoxSearchAdd.TextChanged += textBoxSearchAdd_TextChanged;
+            // 
+            // textBox2
+            // 
+            textBox2.Enabled = false;
+            textBox2.Location = new Point(102, 102);
+            textBox2.Name = "textBox2";
+            textBox2.ReadOnly = true;
+            textBox2.Size = new Size(154, 23);
+            textBox2.TabIndex = 17;
+            // 
+            // textBox1
+            // 
+            textBox1.Enabled = false;
+            textBox1.Location = new Point(156, 178);
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(100, 23);
+            textBox1.TabIndex = 10;
             // 
             // label21
             // 
@@ -303,15 +335,6 @@
             label7.Text = "Please Select a Valid Date";
             label7.Visible = false;
             // 
-            // textBox2
-            // 
-            textBox2.Enabled = false;
-            textBox2.Location = new Point(102, 102);
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new Size(154, 23);
-            textBox2.TabIndex = 17;
-            // 
             // dataGridViewAdd
             // 
             dataGridViewAdd.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -359,15 +382,6 @@
             label6.Size = new Size(289, 40);
             label6.TabIndex = 11;
             label6.Text = "Create Rental Order";
-            // 
-            // textBox1
-            // 
-            textBox1.Enabled = false;
-            textBox1.Location = new Point(156, 178);
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 10;
             // 
             // label5
             // 
@@ -452,12 +466,136 @@
             tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(tabPage3);
             tabControl1.Location = new Point(2, 3);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(1009, 492);
             tabControl1.TabIndex = 0;
             tabControl1.Enter += tabControl1_Enter;
+            // 
+            // tabPage3
+            // 
+            tabPage3.BackColor = Color.FromArgb(188, 170, 148);
+            tabPage3.Controls.Add(textBoxReturnOrder);
+            tabPage3.Controls.Add(textBoxReturnSearch);
+            tabPage3.Controls.Add(label11);
+            tabPage3.Controls.Add(label12);
+            tabPage3.Controls.Add(label14);
+            tabPage3.Controls.Add(checkBoxReturned);
+            tabPage3.Controls.Add(dataGridViewReturn);
+            tabPage3.Controls.Add(button4);
+            tabPage3.Controls.Add(button5);
+            tabPage3.Controls.Add(button6);
+            tabPage3.Controls.Add(label16);
+            tabPage3.Location = new Point(4, 24);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new Padding(3);
+            tabPage3.Size = new Size(1001, 464);
+            tabPage3.TabIndex = 2;
+            tabPage3.Text = "Return Vehicle";
+            // 
+            // textBoxReturnOrder
+            // 
+            textBoxReturnOrder.Location = new Point(105, 52);
+            textBoxReturnOrder.Name = "textBoxReturnOrder";
+            textBoxReturnOrder.Size = new Size(154, 23);
+            textBoxReturnOrder.TabIndex = 56;
+            // 
+            // textBoxReturnSearch
+            // 
+            textBoxReturnSearch.Location = new Point(788, 14);
+            textBoxReturnSearch.Name = "textBoxReturnSearch";
+            textBoxReturnSearch.Size = new Size(176, 23);
+            textBoxReturnSearch.TabIndex = 54;
+            textBoxReturnSearch.TextChanged += textBoxReturnSearch_TextChanged;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            label11.Location = new Point(6, 43);
+            label11.Name = "label11";
+            label11.Size = new Size(88, 32);
+            label11.TabIndex = 55;
+            label11.Text = "Order:";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label12.Location = new Point(588, 5);
+            label12.Name = "label12";
+            label12.Size = new Size(180, 32);
+            label12.TabIndex = 53;
+            label12.Text = "Search Orders:";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label14.Location = new Point(6, 85);
+            label14.Name = "label14";
+            label14.Size = new Size(213, 32);
+            label14.TabIndex = 52;
+            label14.Text = "Vehicle Returned:";
+            // 
+            // checkBoxReturned
+            // 
+            checkBoxReturned.AutoSize = true;
+            checkBoxReturned.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            checkBoxReturned.Location = new Point(225, 85);
+            checkBoxReturned.Name = "checkBoxReturned";
+            checkBoxReturned.Size = new Size(130, 36);
+            checkBoxReturned.TabIndex = 47;
+            checkBoxReturned.Text = "Returned";
+            checkBoxReturned.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewReturn
+            // 
+            dataGridViewReturn.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewReturn.Location = new Point(549, 40);
+            dataGridViewReturn.Name = "dataGridViewReturn";
+            dataGridViewReturn.Size = new Size(445, 260);
+            dataGridViewReturn.TabIndex = 46;
+            dataGridViewReturn.CellClick += dataGridViewReturn_CellClick;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(422, 399);
+            button4.Name = "button4";
+            button4.Size = new Size(104, 43);
+            button4.TabIndex = 50;
+            button4.Text = "Back";
+            button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            button5.Location = new Point(519, 332);
+            button5.Name = "button5";
+            button5.Size = new Size(104, 43);
+            button5.TabIndex = 49;
+            button5.Text = "Clear";
+            button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            button6.Location = new Point(330, 332);
+            button6.Name = "button6";
+            button6.Size = new Size(104, 43);
+            button6.TabIndex = 48;
+            button6.Text = "Update";
+            button6.UseVisualStyleBackColor = true;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label16.Location = new Point(3, 3);
+            label16.Name = "label16";
+            label16.Size = new Size(238, 40);
+            label16.TabIndex = 51;
+            label16.Text = "Return a Vehicle";
             // 
             // rentalOrder
             // 
@@ -477,18 +615,41 @@
             tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewAdd).EndInit();
             tabControl1.ResumeLayout(false);
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewReturn).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private TabPage tabPage2;
+        private TextBox textBoxOrderUpdate;
+        private TextBox textBoxSearchUpdate;
+        private Label label23;
+        private Label label22;
+        private Label label13;
+        private CheckBox checkBoxUpdate;
+        private DataGridView dataGridViewUpdate;
+        private Button button1;
+        private Button button2;
+        private Button button3;
+        private Label label15;
         private TabPage tabPage1;
+        private TextBox textBoxSearchAdd;
+        private TextBox textBox2;
+        private TextBox textBox1;
+        private Label label21;
+        private Label label10;
+        private Label label9;
+        private Label label8;
+        private CheckBox checkBoxAdd;
+        private Label label7;
+        private DataGridView dataGridViewAdd;
         private Button buttonBack;
         private Button buttonClear;
         private Button buttonCreate;
         private Label label6;
-        private TextBox textBox1;
         private Label label5;
         private Label label4;
         private Label label3;
@@ -498,25 +659,17 @@
         private DateTimePicker dateTimePicker1;
         private ComboBox comboBox1;
         private TabControl tabControl1;
-        private DataGridView dataGridViewAdd;
-        private TextBox textBox2;
-        private Label label7;
-        private Label label8;
-        private CheckBox checkBoxAdd;
-        private Label label9;
-        private Label label10;
-        private Label label13;
-        private CheckBox checkBoxUpdate;
-        private DataGridView dataGridViewUpdate;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Label label15;
-        private Label label21;
-        private TextBox textBoxSearchAdd;
-        private TextBox textBoxSearchUpdate;
-        private Label label22;
-        private Label label23;
-        private TextBox textBoxOrderUpdate;
+        private TabPage tabPage3;
+        private TextBox textBoxReturnOrder;
+        private TextBox textBoxReturnSearch;
+        private Label label11;
+        private Label label12;
+        private Label label14;
+        private CheckBox checkBoxReturned;
+        private DataGridView dataGridViewReturn;
+        private Button button4;
+        private Button button5;
+        private Button button6;
+        private Label label16;
     }
 }

@@ -75,7 +75,8 @@ namespace CMPG223_Project
                     cmd.Parameters.AddWithValue("@Date", date);
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Added successfully");
-                    populateDataGridView(dataGridViewUpdate, "Select RentalOrder.Order_ID, Client.FirstName, Client.LastName,Vehicle.Vehicle_Name, RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
+                    populateDataGridView(dataGridViewUpdate, "SELECT RentalOrder.Order_ID, Client.FirstName, Client.LastName, Client.Email, Client.CellNumber, Vehicle.Vehicle_Name, RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
+                    populateDataGridView(dataGridViewReturn, "SELECT RentalOrder.Order_ID, Client.FirstName, Client.LastName, Client.Email, Client.CellNumber, Vehicle.Vehicle_Name, RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
                     con.Close();
                 }
 
@@ -95,7 +96,8 @@ namespace CMPG223_Project
         {
             populateClients(comboBox1);
             populateDataGridView(dataGridViewAdd, "SELECT Vehicle.Vehicle_ID, Vehicle.Vehicle_Name, Vehicle.CostPerDay, Vehicle.NumberOfSeats, Vehicle_Class.ClassName FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_CLass_ID=Vehicle_Class.Vehicle_Class_ID WHERE Vehicle.InUse = 'False'");
-            populateDataGridView(dataGridViewUpdate, "SELECT RentalOrder.Order_ID, Client.FirstName, Client.LastName, Email,Vehicle.Vehicle_Name,RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
+            populateDataGridView(dataGridViewUpdate, "SELECT RentalOrder.Order_ID, Client.FirstName, Client.LastName, Client.Email, Client.CellNumber, Vehicle.Vehicle_Name, RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
+            populateDataGridView(dataGridViewReturn, "SELECT RentalOrder.Order_ID, Client.FirstName, Client.LastName, Client.Email, Client.CellNumber, Vehicle.Vehicle_Name, RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
             dateTimePicker1.MinDate = DateTime.Today;
             dateTimePicker2.MinDate = DateTime.Today.AddDays(1);
             label7.Visible = false;
@@ -251,7 +253,7 @@ namespace CMPG223_Project
 
             }
 
-            }
+        }
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -266,7 +268,7 @@ namespace CMPG223_Project
         private void textBoxSearchUpdate_TextChanged(object sender, EventArgs e)
         {
             string searchTerm = textBoxSearchUpdate.Text.Trim();
-            (dataGridViewUpdate.DataSource as DataTable).DefaultView.RowFilter = string.Format("LastName like '{0}%' OR Vehicle_Name like '{0}%' OR FirstName like '{0}%'", searchTerm);
+            (dataGridViewUpdate.DataSource as DataTable).DefaultView.RowFilter = string.Format("LastName like '{0}%' OR Vehicle_Name like '{0}%' OR FirstName like '{0}%' OR Email like '{0}%' OR CellNumber like '{0}%'", searchTerm);
         }
 
         private void textBoxSearchAdd_TextChanged(object sender, EventArgs e)
@@ -279,6 +281,47 @@ namespace CMPG223_Project
         private void tabControl1_Enter(object sender, EventArgs e)
         {
             buttonClear_Click(sender, e);
+        }
+
+        private void dataGridViewReturn_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                int indexRow = e.RowIndex;
+                if (indexRow >= 0)
+                {
+                    con.Open();
+                    DataGridViewRow row = dataGridViewReturn.Rows[indexRow];
+                    textBoxOrderUpdate.Text = row.Cells[0].Value.ToString();
+                    int Order_ID = (int)row.Cells[0].Value;
+                    textBoxReturnOrder.Text = Order_ID.ToString();
+                    string query = "SELECT VehicleReturned FROM RentalOrder WHERE Order_ID = @ID";
+                    SqlCommand sqlCommand = new SqlCommand(query, con);
+                    sqlCommand.Parameters.AddWithValue("@ID", Order_ID);
+                    SqlDataReader reader = sqlCommand.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        if ((bool)reader["VehicleReturned"] == true)
+                        {
+                            checkBoxReturned.Checked = true;
+                        }
+                    }
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            {
+
+            }
+        }
+
+        private void textBoxReturnSearch_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = textBoxReturnSearch.Text.Trim();
+            (dataGridViewReturn.DataSource as DataTable).DefaultView.RowFilter = string.Format("LastName like '{0}%' OR Vehicle_Name like '{0}%' OR FirstName like '{0}%' OR Email like '{0}%' OR CellNumber like '{0}%'", searchTerm);
         }
     }
 }
