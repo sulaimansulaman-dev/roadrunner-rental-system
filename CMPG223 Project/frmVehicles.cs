@@ -129,22 +129,40 @@ namespace CMPG223_Project
                 errorProvider4.SetError(cmbNoOfSeats, "");
             }
 
+            
+
+            string costPerDayText = txtCostPerDay.Text.Trim();
+            decimal vCostPerDay;
+            if (string.IsNullOrWhiteSpace(costPerDayText))
+            {
+                errorProvider1.SetError(txtCostPerDay, "Please enter the cost per day.");
+                isValid = false;
+            }
+            else if (!decimal.TryParse(costPerDayText, out vCostPerDay) || vCostPerDay <= 0)
+            {
+                errorProvider1.SetError(txtCostPerDay, "Please enter a valid positive decimal number for the cost per day.");
+                isValid = false;
+            }
+            else
+            {
+                errorProvider1.SetError(txtCostPerDay, "");
+            }
+
+            //Licen
             if (string.IsNullOrWhiteSpace(licNum))
             {
-                errorProvider1.SetError(txtLicenseNo, "Please enter a license number.");
-                return;
+                errorProvider1.SetError(txtLicenseNo, "License number is required.");
+                isValid = false;
             }
             else if (!System.Text.RegularExpressions.Regex.IsMatch(licNum, licensePattern))
             {
-                errorProvider1.SetError(txtLicenseNo, "Use the correct South African License Format");
+                errorProvider1.SetError(txtLicenseNo, "Please Use South African license number format.");
                 isValid = false;
             }
             else
             {
                 errorProvider1.SetError(txtLicenseNo, "");
             }
-
-
 
 
             // Get values from the form
@@ -155,8 +173,8 @@ namespace CMPG223_Project
             }
             
             int numOfSeats = int.Parse(cmbNoOfSeats.Text);
-            decimal costPerDay = decimal.Parse(txtCostPerDay.Text); // Assuming the TrackBar's Value property is used for the cost
-            char[] licenseNo = txtLicenseNo.Text.ToCharArray();
+            //decimal costPerDay = decimal.Parse(txtCostPerDay.Text); // Assuming the TrackBar's Value property is used for the cost
+            
 
 
             // Insert query
@@ -168,8 +186,8 @@ namespace CMPG223_Project
 
                 cmd.Parameters.AddWithValue("@Vehicle_Class_ID", classId);
                 cmd.Parameters.AddWithValue("@NumberOfSeats", numOfSeats);
-                cmd.Parameters.AddWithValue("@CostperDay", costPerDay);
-                cmd.Parameters.AddWithValue("@LicenseNumber", licenseNo);
+                cmd.Parameters.AddWithValue("@CostperDay", costPerDayText);
+                cmd.Parameters.AddWithValue("@LicenseNumber", licNum);
                 cmd.Parameters.AddWithValue("@Vehicle_Name", vehicleName);
 
                 cnn.Open();
@@ -276,15 +294,96 @@ namespace CMPG223_Project
 
         private void btnUpdate_Update_Click(object sender, EventArgs e)
         {
-            // Variables
             string vehicleID = txtVehicleID_Update.Text.Trim();
             string vehicleName = txtVehicleName_Update.Text.Trim();
-            string class1 = cmbClass_Update.Text.Trim();
-            int numSeats = int.Parse(cmbNoOfSeats_Update.Text.Trim());
-            decimal costPDay = decimal.Parse(txtCostPerDay_Update.Text.Trim());
-            string license = txtLicenseNo_Update.Text.Trim();
+            string licNum = txtLicenseNo_Update.Text.Trim();
+
+            bool isValid = true;
+            // Regular expression patterns for validation
+            string alphaPattern = @"^[a-zA-Z\s.,'-]*$";  // Allows letters, spaces, and some punctuation
+            string licensePattern = @"[A-Z]{3}\d{3,4}[A-Z]{2}$";
 
 
+            //Validation Block
+            if (string.IsNullOrWhiteSpace(vehicleName))
+            {
+                errorProvider1.SetError(txtVehicleName_Update, "Please enter Vehicle Name.");
+                return;
+            }
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(vehicleName, alphaPattern))
+            {
+                errorProvider1.SetError(txtVehicleName_Update, "Class Name must contain only letters and allowed punctuation.");
+                isValid = false;
+            }
+            else
+            {
+                errorProvider1.SetError(txtVehicleName_Update, "");
+            }
+
+
+            //cmb validation
+            if (cmbClass_Update.SelectedIndex == -1)
+            {
+                errorProvider4.SetError(cmbClass_Update, "Please select a class.");
+                return;
+            }
+            else
+            {
+                errorProvider4.SetError(cmbClass_Update, "");
+            }
+
+            //cmb validation
+            if (cmbNoOfSeats_Update.SelectedIndex == -1)
+            {
+                errorProvider4.SetError(cmbNoOfSeats_Update, "Please select a number of seats.");
+                return;
+            }
+            else
+            {
+                errorProvider4.SetError(cmbNoOfSeats_Update, "");
+            }
+
+
+
+            string costPerDayText = txtCostPerDay_Update.Text.Trim();
+            decimal vCostPerDay;
+            if (string.IsNullOrWhiteSpace(costPerDayText))
+            {
+                errorProvider1.SetError(txtCostPerDay_Update, "Please enter the cost per day.");
+                isValid = false;
+            }
+            else if (!decimal.TryParse(costPerDayText, out vCostPerDay) || vCostPerDay <= 0)
+            {
+                errorProvider1.SetError(txtCostPerDay_Update, "Please enter a valid positive decimal number for the cost per day.");
+                isValid = false;
+            }
+            else
+            {
+                errorProvider1.SetError(txtCostPerDay_Update, "");
+            }
+
+            //Licen
+            if (string.IsNullOrWhiteSpace(licNum))
+            {
+                errorProvider1.SetError(txtLicenseNo_Update, "License number is required.");
+                isValid = false;
+            }
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(licNum, licensePattern))
+            {
+                errorProvider1.SetError(txtLicenseNo_Update, "Please Use South African license number format.");
+                isValid = false;
+            }
+            else
+            {
+                errorProvider1.SetError(txtLicenseNo_Update, "");
+            }
+
+            if (cmbClass_Update.SelectedValue != null)
+            {
+                classId = (int)cmbClass_Update.SelectedValue;
+            }
+
+            int numOfSeats = int.Parse(cmbNoOfSeats_Update.Text);
 
             // Preparing the SQL update query
             string updateQuery = "UPDATE Vehicle SET Vehicle_Name = @VehicleName, Vehicle_Class_ID = @ClassName, NumberOfSeats = @NumberOfSeats, CostPerDay = @CostPerDay, LicenseNumber = @License WHERE Vehicle_ID = @Vehicle_ID";
@@ -300,17 +399,18 @@ namespace CMPG223_Project
                 // Using the existing connection to execute the update command
                 using (SqlCommand cmd = new SqlCommand(updateQuery, cnn))
                 {
-                    cmd.Parameters.AddWithValue("@VehicleName", vehicleName);
-                    cmd.Parameters.AddWithValue("@ClassName", class1);
+
                     
-                    cmd.Parameters.AddWithValue("@NumberOfSeats", numSeats);
-                    cmd.Parameters.AddWithValue("@CostPerDay", costPDay);
-                    cmd.Parameters.AddWithValue("@License", license);
+                    cmd.Parameters.AddWithValue("@VehicleName", vehicleName);
+                    cmd.Parameters.AddWithValue("@ClassName", classId);
+                    cmd.Parameters.AddWithValue("@NumberOfSeats", numOfSeats);
+                    cmd.Parameters.AddWithValue("@CostPerDay", costPerDayText);
+                    cmd.Parameters.AddWithValue("@License", licNum);
                     cmd.Parameters.AddWithValue("@Vehicle_ID", vehicleID);
 
                     // Debugging output
                     Console.WriteLine($"Executing Query: {updateQuery}");
-                    Console.WriteLine($"VehicleName: {vehicleName}, ClassName: {class1}, NumberOfSeats: {numSeats}, CostPerDay: {costPDay}, License: {license}, Vehicle_ID: {vehicleID}");
+                    Console.WriteLine($"VehicleName: {vehicleName}, ClassName: {classId}, NumberOfSeats: {numOfSeats}, CostPerDay: {costPerDayText}, License: {licNum}, Vehicle_ID: {vehicleID}");
 
                     int rowsAffected = cmd.ExecuteNonQuery();
                     if (rowsAffected > 0)
@@ -328,14 +428,7 @@ namespace CMPG223_Project
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-            finally
-            {
-                // Close the connection if it's still open
-                if (cnn.State == ConnectionState.Open)
-                {
-                    cnn.Close();
-                }
-            }
+            
         }
 
         private void btnDelete_Delete_Click(object sender, EventArgs e)
