@@ -18,7 +18,7 @@ namespace CMPG223_Project
     {
 
         //Mo Kalla: public string connectionString = @"Data Source=LAPTOP-9FK1U57R;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
-        public string connectionString = @"Data Source=LAPTOP-JHPD709J;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        public string connectionString = @"Data Source=LAPTOP-9FK1U57R;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
 
         public frmClients()
@@ -590,7 +590,7 @@ namespace CMPG223_Project
                 else
                 {
                     // Use parameterized filtering to prevent issues with special characters
-                    dataTable.DefaultView.RowFilter = $"Client_ID LIKE '%{searchTerm}%'";
+                    dataTable.DefaultView.RowFilter = $"LastName LIKE '%{searchTerm}%'";
                 }
             }
             else
@@ -625,7 +625,7 @@ namespace CMPG223_Project
                 else
                 {
                     // Apply the filter with the search term
-                    dataTable.DefaultView.RowFilter = $"Client_ID LIKE '%{searchTerm}%'";
+                    dataTable.DefaultView.RowFilter = $"LastName LIKE '%{searchTerm}%'";
                 }
             }
             else
