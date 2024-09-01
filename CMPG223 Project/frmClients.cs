@@ -597,8 +597,8 @@ namespace CMPG223_Project
             {
                 foreach (DataGridViewRow row in dgvUpdateClient.Rows)
                 {
-                    if (row.Cells["Client_ID"].Value != null &&
-                        row.Cells["Client_ID"].Value.ToString().IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0)
+                    if (row.Cells["LastName"].Value != null &&
+                        row.Cells["LastName"].Value.ToString().IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         row.Visible = true;
                     }
@@ -632,8 +632,8 @@ namespace CMPG223_Project
             {
                 foreach (DataGridViewRow row in dgvDeleteClient.Rows)
                 {
-                    if (row.Cells["Client_ID"].Value != null &&
-                        row.Cells["Client_ID"].Value.ToString().IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0)
+                    if (row.Cells["LastName"].Value != null &&
+                        row.Cells["LastName"].Value.ToString().IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         row.Visible = true;
                     }
@@ -652,7 +652,7 @@ namespace CMPG223_Project
 
         private void txtSearch_Add_TextChanged(object sender, EventArgs e)
         {
-            string searchTerm = txtSearch_DeleteClient.Text;
+            string searchTerm = txtSearch_Add.Text;
 
             if (dgvAddClient.DataSource is DataTable dataTable)
             {
@@ -669,10 +669,11 @@ namespace CMPG223_Project
             }
             else
             {
+                // Assuming the DataSource is not a DataTable, manually filter rows
                 foreach (DataGridViewRow row in dgvAddClient.Rows)
                 {
-                    if (row.Cells["Client_ID"].Value != null &&
-                        row.Cells["Client_ID"].Value.ToString().IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0)
+                    if (row.Cells["LastName"].Value != null &&
+                        row.Cells["LastName"].Value.ToString().IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         row.Visible = true;
                     }
@@ -683,5 +684,6 @@ namespace CMPG223_Project
                 }
             }
         }
+
     }
 }
