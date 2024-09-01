@@ -219,7 +219,7 @@ namespace CMPG223_Project
 
         private void frmVehicles_FormClosed(object sender, FormClosedEventArgs e)
         {
-           
+
         }
 
         private void btnClear_Add_Click(object sender, EventArgs e)
@@ -640,6 +640,21 @@ namespace CMPG223_Project
         private void btnBack_Delete_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnClear_Update_Click(object sender, EventArgs e)
+        {
+            txtVehicleID_Update.Text = string.Empty;
+            txtVehicleName_Update.Text = string.Empty;
+            cmbClass_Update.SelectedIndex = -1;
+            cmbNoOfSeats_Update.SelectedIndex = -1;
+            txtCostPerDay_Update.Text = string.Empty;
+            txtLicenseNo_Update.Text = string.Empty;
+        }
+
+        private void btnClear_Delete_Click(object sender, EventArgs e)
+        {
+            cmbVehicleID_Delete.SelectedIndex = -1;
         }
     }
 }
