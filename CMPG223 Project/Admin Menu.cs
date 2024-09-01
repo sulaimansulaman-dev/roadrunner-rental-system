@@ -9,7 +9,8 @@ namespace CMPG223_Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            frmClients ClientsFrm = new frmClients();
+            ClientsFrm.ShowDialog();
         }
 
         private void button2_Click(object sender, EventArgs e)
