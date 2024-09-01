@@ -34,8 +34,6 @@ namespace CMPG223_Project
             buttonVehicle = new Button();
             buttonUsers = new Button();
             buttonRentalOrder = new Button();
-            buttonPayment = new Button();
-            buttonReturn = new Button();
             buttonReports = new Button();
             SuspendLayout();
             // 
@@ -54,9 +52,9 @@ namespace CMPG223_Project
             // buttonClient
             // 
             buttonClient.Anchor = AnchorStyles.None;
-            buttonClient.Location = new Point(175, 132);
+            buttonClient.Location = new Point(164, 153);
             buttonClient.Name = "buttonClient";
-            buttonClient.Size = new Size(171, 53);
+            buttonClient.Size = new Size(201, 63);
             buttonClient.TabIndex = 1;
             buttonClient.Text = "Maintain Clients";
             buttonClient.UseVisualStyleBackColor = true;
@@ -65,9 +63,9 @@ namespace CMPG223_Project
             // buttonVehicleClass
             // 
             buttonVehicleClass.Anchor = AnchorStyles.None;
-            buttonVehicleClass.Location = new Point(175, 208);
+            buttonVehicleClass.Location = new Point(603, 233);
             buttonVehicleClass.Name = "buttonVehicleClass";
-            buttonVehicleClass.Size = new Size(171, 53);
+            buttonVehicleClass.Size = new Size(201, 63);
             buttonVehicleClass.TabIndex = 2;
             buttonVehicleClass.Text = "Maintain Vehicle Classes";
             buttonVehicleClass.UseVisualStyleBackColor = true;
@@ -76,9 +74,9 @@ namespace CMPG223_Project
             // buttonVehicle
             // 
             buttonVehicle.Anchor = AnchorStyles.None;
-            buttonVehicle.Location = new Point(175, 284);
+            buttonVehicle.Location = new Point(603, 153);
             buttonVehicle.Name = "buttonVehicle";
-            buttonVehicle.Size = new Size(171, 53);
+            buttonVehicle.Size = new Size(201, 63);
             buttonVehicle.TabIndex = 3;
             buttonVehicle.Text = "Maintain Vehicles";
             buttonVehicle.UseVisualStyleBackColor = true;
@@ -87,9 +85,9 @@ namespace CMPG223_Project
             // buttonUsers
             // 
             buttonUsers.Anchor = AnchorStyles.None;
-            buttonUsers.Location = new Point(175, 362);
+            buttonUsers.Location = new Point(164, 233);
             buttonUsers.Name = "buttonUsers";
-            buttonUsers.Size = new Size(171, 53);
+            buttonUsers.Size = new Size(201, 63);
             buttonUsers.TabIndex = 4;
             buttonUsers.Text = "Maintain Users";
             buttonUsers.UseVisualStyleBackColor = true;
@@ -98,42 +96,20 @@ namespace CMPG223_Project
             // buttonRentalOrder
             // 
             buttonRentalOrder.Anchor = AnchorStyles.None;
-            buttonRentalOrder.Location = new Point(623, 132);
+            buttonRentalOrder.Location = new Point(164, 313);
             buttonRentalOrder.Name = "buttonRentalOrder";
-            buttonRentalOrder.Size = new Size(171, 53);
+            buttonRentalOrder.Size = new Size(201, 63);
             buttonRentalOrder.TabIndex = 5;
             buttonRentalOrder.Text = "Rental Orders";
             buttonRentalOrder.UseVisualStyleBackColor = true;
             buttonRentalOrder.Click += button5_Click;
             // 
-            // buttonPayment
-            // 
-            buttonPayment.Anchor = AnchorStyles.None;
-            buttonPayment.Location = new Point(623, 208);
-            buttonPayment.Name = "buttonPayment";
-            buttonPayment.Size = new Size(171, 53);
-            buttonPayment.TabIndex = 6;
-            buttonPayment.Text = "Recieve a Payment";
-            buttonPayment.UseVisualStyleBackColor = true;
-            buttonPayment.Click += button6_Click;
-            // 
-            // buttonReturn
-            // 
-            buttonReturn.Anchor = AnchorStyles.None;
-            buttonReturn.Location = new Point(623, 284);
-            buttonReturn.Name = "buttonReturn";
-            buttonReturn.Size = new Size(171, 53);
-            buttonReturn.TabIndex = 7;
-            buttonReturn.Text = "Return Vehicle";
-            buttonReturn.UseVisualStyleBackColor = true;
-            buttonReturn.Click += button7_Click;
-            // 
             // buttonReports
             // 
             buttonReports.Anchor = AnchorStyles.None;
-            buttonReports.Location = new Point(623, 362);
+            buttonReports.Location = new Point(603, 313);
             buttonReports.Name = "buttonReports";
-            buttonReports.Size = new Size(171, 53);
+            buttonReports.Size = new Size(201, 63);
             buttonReports.TabIndex = 8;
             buttonReports.Text = "Request Reports";
             buttonReports.UseVisualStyleBackColor = true;
@@ -148,8 +124,6 @@ namespace CMPG223_Project
             BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(964, 571);
             Controls.Add(buttonReports);
-            Controls.Add(buttonReturn);
-            Controls.Add(buttonPayment);
             Controls.Add(buttonRentalOrder);
             Controls.Add(buttonUsers);
             Controls.Add(buttonVehicle);
@@ -171,8 +145,6 @@ namespace CMPG223_Project
         private Button buttonVehicle;
         private Button buttonUsers;
         private Button buttonRentalOrder;
-        private Button buttonPayment;
-        private Button buttonReturn;
         private Button buttonReports;
     }
 }

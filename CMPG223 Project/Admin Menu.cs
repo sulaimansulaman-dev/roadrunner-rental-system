@@ -14,7 +14,9 @@ namespace CMPG223_Project
 
         private void button2_Click(object sender, EventArgs e)
         {
+            this.Hide();
             frmVehicleClasses frmVehicleClasses = new frmVehicleClasses();
+            frmVehicleClasses.Closed += (s, args) => this.Show();
             frmVehicleClasses.ShowDialog();
         }
 
@@ -30,7 +32,9 @@ namespace CMPG223_Project
 
         private void button5_Click(object sender, EventArgs e)
         {
+            this.Hide();
             rentalOrder rentalOrder = new rentalOrder(this,1);
+            rentalOrder.Closed += (s, args) => Application.Exit();
             rentalOrder.ShowDialog();
         }
 
@@ -46,7 +50,9 @@ namespace CMPG223_Project
 
         private void button8_Click(object sender, EventArgs e)
         {
-            frmRequestReports RequestReportsfrm = new frmRequestReports(); 
+            this.Hide();
+            frmRequestReports RequestReportsfrm = new frmRequestReports();
+            RequestReportsfrm.Closed += (s, args) => this.Show();
             RequestReportsfrm.ShowDialog();
         }
 
