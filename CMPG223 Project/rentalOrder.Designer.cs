@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             tabPage2 = new TabPage();
+            label17 = new Label();
             textBoxOrderUpdate = new TextBox();
             textBoxSearchUpdate = new TextBox();
             label23 = new Label();
@@ -65,12 +66,11 @@
             comboBox1 = new ComboBox();
             tabControl1 = new TabControl();
             tabPage3 = new TabPage();
+            label18 = new Label();
             textBoxReturnOrder = new TextBox();
             textBoxReturnSearch = new TextBox();
             label11 = new Label();
             label12 = new Label();
-            label14 = new Label();
-            checkBoxReturned = new CheckBox();
             dataGridViewReturn = new DataGridView();
             button4 = new Button();
             buttonClearReturn = new Button();
@@ -88,6 +88,7 @@
             // tabPage2
             // 
             tabPage2.BackColor = Color.FromArgb(188, 170, 148);
+            tabPage2.Controls.Add(label17);
             tabPage2.Controls.Add(textBoxOrderUpdate);
             tabPage2.Controls.Add(textBoxSearchUpdate);
             tabPage2.Controls.Add(label23);
@@ -106,10 +107,24 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Make Payment";
             // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label17.ForeColor = Color.Red;
+            label17.Location = new Point(262, 43);
+            label17.Name = "label17";
+            label17.Size = new Size(221, 30);
+            label17.TabIndex = 46;
+            label17.Text = "Please Select an Order";
+            label17.Visible = false;
+            // 
             // textBoxOrderUpdate
             // 
+            textBoxOrderUpdate.Enabled = false;
             textBoxOrderUpdate.Location = new Point(102, 50);
             textBoxOrderUpdate.Name = "textBoxOrderUpdate";
+            textBoxOrderUpdate.ReadOnly = true;
             textBoxOrderUpdate.Size = new Size(154, 23);
             textBoxOrderUpdate.TabIndex = 45;
             // 
@@ -477,12 +492,11 @@
             // tabPage3
             // 
             tabPage3.BackColor = Color.FromArgb(188, 170, 148);
+            tabPage3.Controls.Add(label18);
             tabPage3.Controls.Add(textBoxReturnOrder);
             tabPage3.Controls.Add(textBoxReturnSearch);
             tabPage3.Controls.Add(label11);
             tabPage3.Controls.Add(label12);
-            tabPage3.Controls.Add(label14);
-            tabPage3.Controls.Add(checkBoxReturned);
             tabPage3.Controls.Add(dataGridViewReturn);
             tabPage3.Controls.Add(button4);
             tabPage3.Controls.Add(buttonClearReturn);
@@ -495,10 +509,23 @@
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Return Vehicle";
             // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label18.ForeColor = Color.Red;
+            label18.Location = new Point(265, 45);
+            label18.Name = "label18";
+            label18.Size = new Size(221, 30);
+            label18.TabIndex = 57;
+            label18.Text = "Please Select an Order";
+            label18.Visible = false;
+            // 
             // textBoxReturnOrder
             // 
             textBoxReturnOrder.Location = new Point(105, 52);
             textBoxReturnOrder.Name = "textBoxReturnOrder";
+            textBoxReturnOrder.ReadOnly = true;
             textBoxReturnOrder.Size = new Size(154, 23);
             textBoxReturnOrder.TabIndex = 56;
             // 
@@ -530,27 +557,6 @@
             label12.TabIndex = 53;
             label12.Text = "Search Orders:";
             // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label14.Location = new Point(6, 85);
-            label14.Name = "label14";
-            label14.Size = new Size(213, 32);
-            label14.TabIndex = 52;
-            label14.Text = "Vehicle Returned:";
-            // 
-            // checkBoxReturned
-            // 
-            checkBoxReturned.AutoSize = true;
-            checkBoxReturned.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            checkBoxReturned.Location = new Point(225, 85);
-            checkBoxReturned.Name = "checkBoxReturned";
-            checkBoxReturned.Size = new Size(130, 36);
-            checkBoxReturned.TabIndex = 47;
-            checkBoxReturned.Text = "Returned";
-            checkBoxReturned.UseVisualStyleBackColor = true;
-            // 
             // dataGridViewReturn
             // 
             dataGridViewReturn.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -577,6 +583,7 @@
             buttonClearReturn.TabIndex = 49;
             buttonClearReturn.Text = "Clear";
             buttonClearReturn.UseVisualStyleBackColor = true;
+            buttonClearReturn.Click += buttonClearReturn_Click;
             // 
             // buttonUpdateReturn
             // 
@@ -584,7 +591,7 @@
             buttonUpdateReturn.Name = "buttonUpdateReturn";
             buttonUpdateReturn.Size = new Size(104, 43);
             buttonUpdateReturn.TabIndex = 48;
-            buttonUpdateReturn.Text = "Update";
+            buttonUpdateReturn.Text = "Vehicle Returned";
             buttonUpdateReturn.UseVisualStyleBackColor = true;
             buttonUpdateReturn.Click += buttonUpdateReturn_Click;
             // 
@@ -665,12 +672,12 @@
         private TextBox textBoxReturnSearch;
         private Label label11;
         private Label label12;
-        private Label label14;
-        private CheckBox checkBoxReturned;
         private DataGridView dataGridViewReturn;
         private Button button4;
         private Button buttonClearReturn;
         private Button buttonUpdateReturn;
         private Label label16;
+        private Label label17;
+        private Label label18;
     }
 }

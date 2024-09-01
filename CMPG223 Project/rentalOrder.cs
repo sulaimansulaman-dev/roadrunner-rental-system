@@ -74,10 +74,18 @@ namespace CMPG223_Project
                     cmd.Parameters.AddWithValue("@DaysRented", days);
                     cmd.Parameters.AddWithValue("@VehicleReturned", vehicleReturned);
                     cmd.Parameters.AddWithValue("@Date", date);
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Added successfully");
-                    populateDataGridView(dataGridViewUpdate, "SELECT RentalOrder.Order_ID, Client.FirstName, Client.LastName, Client.Email, Client.CellNumber, Vehicle.Vehicle_Name, RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
-                    populateDataGridView(dataGridViewReturn, "SELECT RentalOrder.Order_ID, Client.FirstName, Client.LastName, Client.Email, Client.CellNumber, Vehicle.Vehicle_Name, RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
+                    string vehicleInUse = "UPDATE Vehicle SET InUse= @InUse WHERE Vehicle_ID = @ID";
+                    SqlCommand command = new SqlCommand(vehicleInUse, con);
+                    command.Parameters.AddWithValue("@InUse", true);
+                    command.Parameters.AddWithValue("@ID", vehicleID);
+                    command.ExecuteNonQuery();
+                    int affectedRows = cmd.ExecuteNonQuery();
+                    if (affectedRows > 0)
+                    {
+                        MessageBox.Show("Added successfully");
+                        populateDataGridView(dataGridViewAdd, "SELECT Vehicle.Vehicle_ID, Vehicle.Vehicle_Name, Vehicle.CostPerDay, Vehicle.NumberOfSeats, Vehicle_Class.ClassName FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_CLass_ID=Vehicle_Class.Vehicle_Class_ID WHERE Vehicle.InUse = 'false'");
+                        buttonClear_Click(sender, e);
+                    }
                     con.Close();
                 }
 
@@ -96,7 +104,7 @@ namespace CMPG223_Project
         private void rentalOrder_Load(object sender, EventArgs e)
         {
             populateClients(comboBox1);
-            populateDataGridView(dataGridViewAdd, "SELECT Vehicle.Vehicle_ID, Vehicle.Vehicle_Name, Vehicle.CostPerDay, Vehicle.NumberOfSeats, Vehicle_Class.ClassName FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_CLass_ID=Vehicle_Class.Vehicle_Class_ID WHERE Vehicle.InUse = 'False'");
+            populateDataGridView(dataGridViewAdd, "SELECT Vehicle.Vehicle_ID, Vehicle.Vehicle_Name, Vehicle.CostPerDay, Vehicle.NumberOfSeats, Vehicle_Class.ClassName FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_CLass_ID=Vehicle_Class.Vehicle_Class_ID WHERE Vehicle.InUse = 'false'");
             populateDataGridView(dataGridViewUpdate, "SELECT RentalOrder.Order_ID, Client.FirstName, Client.LastName, Client.Email, Client.CellNumber, Vehicle.Vehicle_Name, RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
             populateDataGridView(dataGridViewReturn, "SELECT RentalOrder.Order_ID, Client.FirstName, Client.LastName, Client.Email, Client.CellNumber, Vehicle.Vehicle_Name, RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
             dateTimePicker1.MinDate = DateTime.Today;
@@ -138,7 +146,7 @@ namespace CMPG223_Project
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -214,7 +222,6 @@ namespace CMPG223_Project
             cost = 0;
             days = 0;
             vehicleID = 0;
-            userID = 0;
             paid = false;
             isValid = true;
             Client_ID = 0;
@@ -258,32 +265,46 @@ namespace CMPG223_Project
 
         private void button3_Click(object sender, EventArgs e) // Payment form update button
         {
-            bool valid = true;
-            if (Order_ID == 0)
+            try
             {
-                valid = false;
-            }
-            if (valid)
-            {
-                con.Open();
-                string query = "SELECT Vehicle.InUse FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID WHERE Order_ID = @ID";
-                SqlCommand sqlCommand = new SqlCommand(query, con);
-                sqlCommand.Parameters.AddWithValue("@ID", Order_ID);
-                SqlDataReader r = sqlCommand.ExecuteReader();
-                if (r.Read())
+                bool valid = true;
+                if (Order_ID == 0)
                 {
-                    if ((bool)r["InUse"] == false)
-                    {
-                        MessageBox.Show("IT WORKS");
-                    }
+                    valid = false;
+                    label17.Visible = true;
                 }
-                con.Close();
+                if (valid)
+                {
+                    con.Open();
+                    label17.Visible = false;
+                    string query = "UPDATE RentalOrder SET Paid = @Paid WHERE Order_ID = @ID";
+                    SqlCommand sqlCommand = new SqlCommand(query, con);
+                    sqlCommand.Parameters.AddWithValue("@ID", Order_ID);
+                    sqlCommand.Parameters.AddWithValue("@Paid", checkBoxUpdate.Checked);
+                    int rowsaffected = sqlCommand.ExecuteNonQuery();
+                    if (rowsaffected > 0)
+                    {
+                        MessageBox.Show("Succesfully Updated");
+                        button2_Click(sender, e);
+                    }
+                    con.Close();
+                    populateDataGridView(dataGridViewUpdate, "SELECT RentalOrder.Order_ID, Client.FirstName, Client.LastName, Client.Email, Client.CellNumber, Vehicle.Vehicle_Name, RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            textBoxOrderUpdate.Text = string.Empty;
+            checkBoxUpdate.Checked = false;
+            textBoxSearchUpdate.Text = string.Empty;
+            Order_ID = 0;
+            label17.Visible= false;
+            vehicleID = 0;
         }
 
         private void textBoxSearchUpdate_TextChanged(object sender, EventArgs e)
@@ -311,18 +332,16 @@ namespace CMPG223_Project
                     con.Open();
                     DataGridViewRow row = dataGridViewReturn.Rows[indexRow];
                     textBoxOrderUpdate.Text = row.Cells[0].Value.ToString();
-                    int Order_ID = (int)row.Cells[0].Value;
+                    Order_ID = (int)row.Cells[0].Value;
                     textBoxReturnOrder.Text = Order_ID.ToString();
-                    string query = "SELECT VehicleReturned FROM RentalOrder WHERE Order_ID = @ID";
+                    string query = "SELECT * FROM RentalOrder WHERE Order_ID = @ID";
                     SqlCommand sqlCommand = new SqlCommand(query, con);
                     sqlCommand.Parameters.AddWithValue("@ID", Order_ID);
                     SqlDataReader reader = sqlCommand.ExecuteReader();
                     if (reader.Read())
                     {
-                        if ((bool)reader["VehicleReturned"] == true)
-                        {
-                            checkBoxReturned.Checked = true;
-                        }
+                        vehicleID = (int)reader["Vehicle_ID"];
+
                     }
                     con.Close();
                 }
@@ -347,40 +366,69 @@ namespace CMPG223_Project
             if (tabControl1.SelectedTab == tabPage1)
             {
                 buttonClear_Click(sender, e);
+                populateDataGridView(dataGridViewAdd, "SELECT Vehicle.Vehicle_ID, Vehicle.Vehicle_Name, Vehicle.CostPerDay, Vehicle.NumberOfSeats, Vehicle_Class.ClassName FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_CLass_ID=Vehicle_Class.Vehicle_Class_ID WHERE Vehicle.InUse = 'false'");
+
             }
             else if (tabControl1.SelectedTab == tabPage2)
             {
+                button2_Click(sender, e);
+                populateDataGridView(dataGridViewUpdate, "SELECT RentalOrder.Order_ID, Client.FirstName, Client.LastName, Client.Email, Client.CellNumber, Vehicle.Vehicle_Name, RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
 
             }
             else if (tabControl1.SelectedTab == tabPage3)
             {
+                buttonClearReturn_Click(sender, e);
+                populateDataGridView(dataGridViewReturn, "SELECT RentalOrder.Order_ID, Client.FirstName, Client.LastName, Client.Email, Client.CellNumber, Vehicle.Vehicle_Name, RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
 
             }
         }
 
         private void buttonUpdateReturn_Click(object sender, EventArgs e)
         {
-            bool valid = true;
-            if (Order_ID == 0)
+            try
             {
-                valid = false;
-            }
-            if (valid)
-            {
-                con.Open();
-                string query = "SELECT Vehicle.InUse FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID WHERE Order_ID = @ID";
-                SqlCommand sqlCommand = new SqlCommand(query, con);
-                sqlCommand.Parameters.AddWithValue("@ID", Order_ID);
-                SqlDataReader r = sqlCommand.ExecuteReader();
-                if (r.Read())
+                bool valid = true;
+                if (Order_ID == 0)
                 {
-                    if ((bool)r["InUse"] == false)
-                    {
-                        MessageBox.Show("IT WORKS");
-                    }
+                    valid = false;
+                    label18.Visible = true;
                 }
-                con.Close();
+                if (valid)
+                {
+                    con.Open();
+                    label18.Visible = false;
+                    string query = "UPDATE RentalOrder SET VehicleReturned = @Returned WHERE Order_ID = @ID";
+                    string queryVehicle = "UPDATE Vehicle SET InUse = @InUse WHERE Vehicle_ID = @ID";
+                    SqlCommand vehiclecmd = new SqlCommand(queryVehicle,con);
+                    SqlCommand sqlCommand = new SqlCommand(query, con);
+                    sqlCommand.Parameters.AddWithValue("@ID", Order_ID);
+                    sqlCommand.Parameters.AddWithValue("@Returned", true);
+                    vehiclecmd.Parameters.AddWithValue("@ID", vehicleID);
+                    vehiclecmd.Parameters.AddWithValue("@InUse", false);
+                    int rowsAffected = sqlCommand.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Vehicle Returned Succesfully");
+                        vehiclecmd.ExecuteNonQuery();
+                    }
+                    populateDataGridView(dataGridViewReturn, "SELECT RentalOrder.Order_ID, Client.FirstName, Client.LastName, Client.Email, Client.CellNumber, Vehicle.Vehicle_Name, RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
+                    con.Close();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void buttonClearReturn_Click(object sender, EventArgs e)
+        {
+            Order_ID = 0;
+            textBoxReturnOrder.Text = string.Empty; 
+            textBoxReturnSearch.Text = string.Empty;
+            vehicleID = 0;
+            label18.Visible = false;
+
         }
     }
 }
