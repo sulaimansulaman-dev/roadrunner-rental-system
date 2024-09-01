@@ -38,6 +38,10 @@
             lblHasDriversLicense_AddClient = new Label();
             MaintainClient = new TabControl();
             AddClient = new TabPage();
+            label3 = new Label();
+            pictureBox1 = new PictureBox();
+            label1 = new Label();
+            txtSearch_Add = new TextBox();
             chkbYes_HasDriversLicense_AddClient = new CheckBox();
             btnBack_AddClients = new Button();
             btnClear_AddClients = new Button();
@@ -48,6 +52,7 @@
             txtClient_ID_Number_AddClient = new TextBox();
             dgvAddClient = new DataGridView();
             UpdateClient = new TabPage();
+            label2 = new Label();
             txtSearch_UpdateClient = new TextBox();
             lblSearch_UpdateClient = new Label();
             chkbYesHasDriversLicense_UpdateClient = new CheckBox();
@@ -69,6 +74,8 @@
             lblLast_Name_UpdateClient = new Label();
             lblCell_Number_UpdateClient = new Label();
             DeleteClient = new TabPage();
+            label4 = new Label();
+            pictureBox2 = new PictureBox();
             txtSearch_DeleteClient = new TextBox();
             lblSearch_DeleteClient = new Label();
             txtClient_ID_DeleteClient = new TextBox();
@@ -80,20 +87,22 @@
             errorProvider1 = new ErrorProvider(components);
             MaintainClient.SuspendLayout();
             AddClient.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvAddClient).BeginInit();
             UpdateClient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUpdateClient).BeginInit();
             DeleteClient.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvDeleteClient).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // btnAdd_AddClients
             // 
-            btnAdd_AddClients.Location = new Point(786, 545);
+            btnAdd_AddClients.Location = new Point(504, 429);
             btnAdd_AddClients.Margin = new Padding(2);
             btnAdd_AddClients.Name = "btnAdd_AddClients";
-            btnAdd_AddClients.Size = new Size(118, 72);
+            btnAdd_AddClients.Size = new Size(94, 58);
             btnAdd_AddClients.TabIndex = 0;
             btnAdd_AddClients.Text = "Add";
             btnAdd_AddClients.UseVisualStyleBackColor = true;
@@ -103,10 +112,10 @@
             // 
             lblClient_ID_Number_AddClient.AutoSize = true;
             lblClient_ID_Number_AddClient.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblClient_ID_Number_AddClient.Location = new Point(14, 14);
+            lblClient_ID_Number_AddClient.Location = new Point(7, 64);
             lblClient_ID_Number_AddClient.Margin = new Padding(2, 0, 2, 0);
             lblClient_ID_Number_AddClient.Name = "lblClient_ID_Number_AddClient";
-            lblClient_ID_Number_AddClient.Size = new Size(324, 48);
+            lblClient_ID_Number_AddClient.Size = new Size(274, 41);
             lblClient_ID_Number_AddClient.TabIndex = 4;
             lblClient_ID_Number_AddClient.Text = "Client ID Number:";
             // 
@@ -114,10 +123,10 @@
             // 
             lblFirst_Name_AddClient.AutoSize = true;
             lblFirst_Name_AddClient.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblFirst_Name_AddClient.Location = new Point(14, 80);
+            lblFirst_Name_AddClient.Location = new Point(7, 117);
             lblFirst_Name_AddClient.Margin = new Padding(2, 0, 2, 0);
             lblFirst_Name_AddClient.Name = "lblFirst_Name_AddClient";
-            lblFirst_Name_AddClient.Size = new Size(212, 48);
+            lblFirst_Name_AddClient.Size = new Size(179, 41);
             lblFirst_Name_AddClient.TabIndex = 5;
             lblFirst_Name_AddClient.Text = "First Name:";
             // 
@@ -125,10 +134,10 @@
             // 
             lblLast_Name_AddClient.AutoSize = true;
             lblLast_Name_AddClient.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblLast_Name_AddClient.Location = new Point(14, 148);
+            lblLast_Name_AddClient.Location = new Point(7, 171);
             lblLast_Name_AddClient.Margin = new Padding(2, 0, 2, 0);
             lblLast_Name_AddClient.Name = "lblLast_Name_AddClient";
-            lblLast_Name_AddClient.Size = new Size(206, 48);
+            lblLast_Name_AddClient.Size = new Size(173, 41);
             lblLast_Name_AddClient.TabIndex = 6;
             lblLast_Name_AddClient.Text = "Last Name:";
             // 
@@ -136,10 +145,10 @@
             // 
             lblCell_Number_AddClient.AutoSize = true;
             lblCell_Number_AddClient.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblCell_Number_AddClient.Location = new Point(14, 216);
+            lblCell_Number_AddClient.Location = new Point(7, 226);
             lblCell_Number_AddClient.Margin = new Padding(2, 0, 2, 0);
             lblCell_Number_AddClient.Name = "lblCell_Number_AddClient";
-            lblCell_Number_AddClient.Size = new Size(240, 48);
+            lblCell_Number_AddClient.Size = new Size(204, 41);
             lblCell_Number_AddClient.TabIndex = 7;
             lblCell_Number_AddClient.Text = "Cell Number:";
             // 
@@ -147,10 +156,10 @@
             // 
             lblEmail_AddClient.AutoSize = true;
             lblEmail_AddClient.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblEmail_AddClient.Location = new Point(14, 282);
+            lblEmail_AddClient.Location = new Point(7, 279);
             lblEmail_AddClient.Margin = new Padding(2, 0, 2, 0);
             lblEmail_AddClient.Name = "lblEmail_AddClient";
-            lblEmail_AddClient.Size = new Size(121, 48);
+            lblEmail_AddClient.Size = new Size(103, 41);
             lblEmail_AddClient.TabIndex = 8;
             lblEmail_AddClient.Text = "Email:";
             // 
@@ -158,10 +167,10 @@
             // 
             lblHasDriversLicense_AddClient.AutoSize = true;
             lblHasDriversLicense_AddClient.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblHasDriversLicense_AddClient.Location = new Point(14, 358);
+            lblHasDriversLicense_AddClient.Location = new Point(7, 339);
             lblHasDriversLicense_AddClient.Margin = new Padding(2, 0, 2, 0);
             lblHasDriversLicense_AddClient.Name = "lblHasDriversLicense_AddClient";
-            lblHasDriversLicense_AddClient.Size = new Size(281, 48);
+            lblHasDriversLicense_AddClient.Size = new Size(235, 41);
             lblHasDriversLicense_AddClient.TabIndex = 9;
             lblHasDriversLicense_AddClient.Text = "Drivers License:";
             // 
@@ -170,16 +179,22 @@
             MaintainClient.Controls.Add(AddClient);
             MaintainClient.Controls.Add(UpdateClient);
             MaintainClient.Controls.Add(DeleteClient);
-            MaintainClient.Location = new Point(0, -2);
+            MaintainClient.Dock = DockStyle.Fill;
+            MaintainClient.Location = new Point(0, 0);
             MaintainClient.Margin = new Padding(2);
             MaintainClient.Name = "MaintainClient";
             MaintainClient.SelectedIndex = 0;
-            MaintainClient.Size = new Size(1178, 729);
+            MaintainClient.Size = new Size(1027, 584);
+            MaintainClient.SizeMode = TabSizeMode.FillToRight;
             MaintainClient.TabIndex = 10;
             // 
             // AddClient
             // 
-            AddClient.BackgroundImage = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
+            AddClient.BackColor = Color.FromArgb(188, 170, 146);
+            AddClient.Controls.Add(label3);
+            AddClient.Controls.Add(pictureBox1);
+            AddClient.Controls.Add(label1);
+            AddClient.Controls.Add(txtSearch_Add);
             AddClient.Controls.Add(chkbYes_HasDriversLicense_AddClient);
             AddClient.Controls.Add(btnBack_AddClients);
             AddClient.Controls.Add(btnClear_AddClients);
@@ -196,42 +211,80 @@
             AddClient.Controls.Add(lblEmail_AddClient);
             AddClient.Controls.Add(lblLast_Name_AddClient);
             AddClient.Controls.Add(lblCell_Number_AddClient);
-            AddClient.Location = new Point(4, 34);
+            AddClient.Location = new Point(4, 29);
             AddClient.Margin = new Padding(2);
             AddClient.Name = "AddClient";
             AddClient.Padding = new Padding(2);
-            AddClient.Size = new Size(1170, 691);
+            AddClient.Size = new Size(1019, 551);
             AddClient.TabIndex = 0;
             AddClient.Text = "Add";
-            AddClient.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(0, 2);
+            label3.Name = "label3";
+            label3.Size = new Size(203, 46);
+            label3.TabIndex = 41;
+            label3.Text = "Add Clients";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
+            pictureBox1.Location = new Point(8, 440);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(125, 103);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 40;
+            pictureBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            label1.Location = new Point(585, 37);
+            label1.Name = "label1";
+            label1.Size = new Size(317, 41);
+            label1.TabIndex = 39;
+            label1.Text = "Search By Last Name:";
+            // 
+            // txtSearch_Add
+            // 
+            txtSearch_Add.Location = new Point(646, 81);
+            txtSearch_Add.MaxLength = 15;
+            txtSearch_Add.Name = "txtSearch_Add";
+            txtSearch_Add.Size = new Size(206, 27);
+            txtSearch_Add.TabIndex = 38;
+            txtSearch_Add.TextChanged += txtSearch_Add_TextChanged;
             // 
             // chkbYes_HasDriversLicense_AddClient
             // 
             chkbYes_HasDriversLicense_AddClient.AutoSize = true;
-            chkbYes_HasDriversLicense_AddClient.Location = new Point(344, 376);
+            chkbYes_HasDriversLicense_AddClient.Location = new Point(296, 355);
             chkbYes_HasDriversLicense_AddClient.Margin = new Padding(2);
             chkbYes_HasDriversLicense_AddClient.Name = "chkbYes_HasDriversLicense_AddClient";
-            chkbYes_HasDriversLicense_AddClient.Size = new Size(63, 29);
+            chkbYes_HasDriversLicense_AddClient.Size = new Size(52, 24);
             chkbYes_HasDriversLicense_AddClient.TabIndex = 19;
             chkbYes_HasDriversLicense_AddClient.Text = "Yes";
             chkbYes_HasDriversLicense_AddClient.UseVisualStyleBackColor = true;
             // 
             // btnBack_AddClients
             // 
-            btnBack_AddClients.Location = new Point(1049, 619);
+            btnBack_AddClients.Location = new Point(883, 429);
             btnBack_AddClients.Margin = new Padding(2);
             btnBack_AddClients.Name = "btnBack_AddClients";
-            btnBack_AddClients.Size = new Size(118, 72);
+            btnBack_AddClients.Size = new Size(94, 58);
             btnBack_AddClients.TabIndex = 18;
             btnBack_AddClients.Text = "Back";
             btnBack_AddClients.UseVisualStyleBackColor = true;
             // 
             // btnClear_AddClients
             // 
-            btnClear_AddClients.Location = new Point(926, 545);
+            btnClear_AddClients.Location = new Point(689, 429);
             btnClear_AddClients.Margin = new Padding(2);
             btnClear_AddClients.Name = "btnClear_AddClients";
-            btnClear_AddClients.Size = new Size(118, 72);
+            btnClear_AddClients.Size = new Size(94, 58);
             btnClear_AddClients.TabIndex = 17;
             btnClear_AddClients.Text = "Clear";
             btnClear_AddClients.UseVisualStyleBackColor = true;
@@ -239,57 +292,59 @@
             // 
             // txtEmail_AddClient
             // 
-            txtEmail_AddClient.Location = new Point(344, 298);
+            txtEmail_AddClient.Location = new Point(296, 293);
             txtEmail_AddClient.Margin = new Padding(2);
             txtEmail_AddClient.Name = "txtEmail_AddClient";
-            txtEmail_AddClient.Size = new Size(198, 31);
+            txtEmail_AddClient.Size = new Size(159, 27);
             txtEmail_AddClient.TabIndex = 15;
             // 
             // txtCellNumber_AddClient
             // 
-            txtCellNumber_AddClient.Location = new Point(344, 232);
+            txtCellNumber_AddClient.Location = new Point(296, 240);
             txtCellNumber_AddClient.Margin = new Padding(2);
             txtCellNumber_AddClient.Name = "txtCellNumber_AddClient";
-            txtCellNumber_AddClient.Size = new Size(198, 31);
+            txtCellNumber_AddClient.Size = new Size(159, 27);
             txtCellNumber_AddClient.TabIndex = 14;
             // 
             // txtLastName_AddClient
             // 
-            txtLastName_AddClient.Location = new Point(344, 162);
+            txtLastName_AddClient.Location = new Point(296, 185);
             txtLastName_AddClient.Margin = new Padding(2);
             txtLastName_AddClient.Name = "txtLastName_AddClient";
-            txtLastName_AddClient.Size = new Size(198, 31);
+            txtLastName_AddClient.Size = new Size(159, 27);
             txtLastName_AddClient.TabIndex = 13;
             // 
             // txtFirstName_AddClient
             // 
-            txtFirstName_AddClient.Location = new Point(344, 98);
+            txtFirstName_AddClient.Location = new Point(296, 131);
             txtFirstName_AddClient.Margin = new Padding(2);
             txtFirstName_AddClient.Name = "txtFirstName_AddClient";
-            txtFirstName_AddClient.Size = new Size(198, 31);
+            txtFirstName_AddClient.Size = new Size(159, 27);
             txtFirstName_AddClient.TabIndex = 12;
             // 
             // txtClient_ID_Number_AddClient
             // 
-            txtClient_ID_Number_AddClient.Location = new Point(344, 31);
+            txtClient_ID_Number_AddClient.Location = new Point(296, 78);
             txtClient_ID_Number_AddClient.Margin = new Padding(2);
             txtClient_ID_Number_AddClient.Name = "txtClient_ID_Number_AddClient";
-            txtClient_ID_Number_AddClient.Size = new Size(198, 31);
+            txtClient_ID_Number_AddClient.Size = new Size(159, 27);
             txtClient_ID_Number_AddClient.TabIndex = 11;
             // 
             // dgvAddClient
             // 
             dgvAddClient.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAddClient.Location = new Point(662, 6);
+            dgvAddClient.Location = new Point(504, 117);
             dgvAddClient.Margin = new Padding(2);
             dgvAddClient.Name = "dgvAddClient";
             dgvAddClient.RowHeadersWidth = 62;
-            dgvAddClient.Size = new Size(490, 298);
+            dgvAddClient.Size = new Size(473, 293);
             dgvAddClient.TabIndex = 10;
+            dgvAddClient.CellClick += dgvAddClient_CellClick;
             // 
             // UpdateClient
             // 
-            UpdateClient.BackgroundImage = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
+            UpdateClient.BackColor = Color.FromArgb(188, 170, 146);
+            UpdateClient.Controls.Add(label2);
             UpdateClient.Controls.Add(txtSearch_UpdateClient);
             UpdateClient.Controls.Add(lblSearch_UpdateClient);
             UpdateClient.Controls.Add(chkbYesHasDriversLicense_UpdateClient);
@@ -310,22 +365,30 @@
             UpdateClient.Controls.Add(lblEmail_UpdateClient);
             UpdateClient.Controls.Add(lblLast_Name_UpdateClient);
             UpdateClient.Controls.Add(lblCell_Number_UpdateClient);
-            UpdateClient.Location = new Point(4, 34);
+            UpdateClient.Location = new Point(4, 29);
             UpdateClient.Margin = new Padding(2);
             UpdateClient.Name = "UpdateClient";
             UpdateClient.Padding = new Padding(2);
-            UpdateClient.Size = new Size(1170, 691);
+            UpdateClient.Size = new Size(1019, 551);
             UpdateClient.TabIndex = 1;
             UpdateClient.Text = "Update";
-            UpdateClient.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(0, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(253, 46);
+            label2.TabIndex = 38;
+            label2.Text = "Update Clients";
             // 
             // txtSearch_UpdateClient
             // 
-            txtSearch_UpdateClient.Location = new Point(818, 40);
-            txtSearch_UpdateClient.Margin = new Padding(4, 4, 4, 4);
+            txtSearch_UpdateClient.Location = new Point(651, 57);
             txtSearch_UpdateClient.MaxLength = 15;
             txtSearch_UpdateClient.Name = "txtSearch_UpdateClient";
-            txtSearch_UpdateClient.Size = new Size(256, 31);
+            txtSearch_UpdateClient.Size = new Size(206, 27);
             txtSearch_UpdateClient.TabIndex = 37;
             txtSearch_UpdateClient.TextChanged += txtSearch_UpdateClient_TextChanged;
             // 
@@ -333,20 +396,19 @@
             // 
             lblSearch_UpdateClient.AutoSize = true;
             lblSearch_UpdateClient.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblSearch_UpdateClient.Location = new Point(652, 20);
-            lblSearch_UpdateClient.Margin = new Padding(4, 0, 4, 0);
+            lblSearch_UpdateClient.Location = new Point(584, 13);
             lblSearch_UpdateClient.Name = "lblSearch_UpdateClient";
-            lblSearch_UpdateClient.Size = new Size(151, 48);
+            lblSearch_UpdateClient.Size = new Size(317, 41);
             lblSearch_UpdateClient.TabIndex = 36;
-            lblSearch_UpdateClient.Text = "Search: ";
+            lblSearch_UpdateClient.Text = "Search By Last Name:";
             // 
             // chkbYesHasDriversLicense_UpdateClient
             // 
             chkbYesHasDriversLicense_UpdateClient.AutoSize = true;
-            chkbYesHasDriversLicense_UpdateClient.Location = new Point(338, 444);
+            chkbYesHasDriversLicense_UpdateClient.Location = new Point(296, 409);
             chkbYesHasDriversLicense_UpdateClient.Margin = new Padding(2);
             chkbYesHasDriversLicense_UpdateClient.Name = "chkbYesHasDriversLicense_UpdateClient";
-            chkbYesHasDriversLicense_UpdateClient.Size = new Size(63, 29);
+            chkbYesHasDriversLicense_UpdateClient.Size = new Size(52, 24);
             chkbYesHasDriversLicense_UpdateClient.TabIndex = 35;
             chkbYesHasDriversLicense_UpdateClient.Text = "Yes";
             chkbYesHasDriversLicense_UpdateClient.UseVisualStyleBackColor = true;
@@ -354,28 +416,28 @@
             // txtClient_ID_UpdateClient
             // 
             txtClient_ID_UpdateClient.Enabled = false;
-            txtClient_ID_UpdateClient.Location = new Point(338, 36);
+            txtClient_ID_UpdateClient.Location = new Point(296, 91);
             txtClient_ID_UpdateClient.Margin = new Padding(2);
             txtClient_ID_UpdateClient.Name = "txtClient_ID_UpdateClient";
-            txtClient_ID_UpdateClient.Size = new Size(198, 31);
+            txtClient_ID_UpdateClient.Size = new Size(159, 27);
             txtClient_ID_UpdateClient.TabIndex = 34;
             // 
             // btnBack_UpdateClient
             // 
-            btnBack_UpdateClient.Location = new Point(1052, 616);
+            btnBack_UpdateClient.Location = new Point(901, 407);
             btnBack_UpdateClient.Margin = new Padding(2);
             btnBack_UpdateClient.Name = "btnBack_UpdateClient";
-            btnBack_UpdateClient.Size = new Size(118, 72);
+            btnBack_UpdateClient.Size = new Size(94, 58);
             btnBack_UpdateClient.TabIndex = 33;
             btnBack_UpdateClient.Text = "Back";
             btnBack_UpdateClient.UseVisualStyleBackColor = true;
             // 
             // btnClear_UpdateClient
             // 
-            btnClear_UpdateClient.Location = new Point(936, 538);
+            btnClear_UpdateClient.Location = new Point(714, 407);
             btnClear_UpdateClient.Margin = new Padding(2);
             btnClear_UpdateClient.Name = "btnClear_UpdateClient";
-            btnClear_UpdateClient.Size = new Size(118, 72);
+            btnClear_UpdateClient.Size = new Size(94, 58);
             btnClear_UpdateClient.TabIndex = 32;
             btnClear_UpdateClient.Text = "Clear";
             btnClear_UpdateClient.UseVisualStyleBackColor = true;
@@ -383,10 +445,10 @@
             // 
             // btnUpdate_UpdateClient
             // 
-            btnUpdate_UpdateClient.Location = new Point(794, 538);
+            btnUpdate_UpdateClient.Location = new Point(522, 407);
             btnUpdate_UpdateClient.Margin = new Padding(2);
             btnUpdate_UpdateClient.Name = "btnUpdate_UpdateClient";
-            btnUpdate_UpdateClient.Size = new Size(118, 72);
+            btnUpdate_UpdateClient.Size = new Size(94, 58);
             btnUpdate_UpdateClient.TabIndex = 31;
             btnUpdate_UpdateClient.Text = "Update";
             btnUpdate_UpdateClient.UseVisualStyleBackColor = true;
@@ -396,61 +458,61 @@
             // 
             lblClient_ID_UpdateClient.AutoSize = true;
             lblClient_ID_UpdateClient.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblClient_ID_UpdateClient.Location = new Point(8, 19);
+            lblClient_ID_UpdateClient.Location = new Point(18, 76);
             lblClient_ID_UpdateClient.Margin = new Padding(2, 0, 2, 0);
             lblClient_ID_UpdateClient.Name = "lblClient_ID_UpdateClient";
-            lblClient_ID_UpdateClient.Size = new Size(175, 48);
+            lblClient_ID_UpdateClient.Size = new Size(149, 41);
             lblClient_ID_UpdateClient.TabIndex = 30;
             lblClient_ID_UpdateClient.Text = "Client ID:";
             // 
             // txtEmail_UpdateClient
             // 
-            txtEmail_UpdateClient.Location = new Point(338, 366);
+            txtEmail_UpdateClient.Location = new Point(296, 355);
             txtEmail_UpdateClient.Margin = new Padding(2);
             txtEmail_UpdateClient.Name = "txtEmail_UpdateClient";
-            txtEmail_UpdateClient.Size = new Size(198, 31);
+            txtEmail_UpdateClient.Size = new Size(159, 27);
             txtEmail_UpdateClient.TabIndex = 28;
             // 
             // txtCellNumber_UpdateClient
             // 
-            txtCellNumber_UpdateClient.Location = new Point(338, 300);
+            txtCellNumber_UpdateClient.Location = new Point(296, 302);
             txtCellNumber_UpdateClient.Margin = new Padding(2);
             txtCellNumber_UpdateClient.Name = "txtCellNumber_UpdateClient";
-            txtCellNumber_UpdateClient.Size = new Size(198, 31);
+            txtCellNumber_UpdateClient.Size = new Size(159, 27);
             txtCellNumber_UpdateClient.TabIndex = 27;
             // 
             // txtLastName_UpdateClient
             // 
-            txtLastName_UpdateClient.Location = new Point(338, 231);
+            txtLastName_UpdateClient.Location = new Point(296, 247);
             txtLastName_UpdateClient.Margin = new Padding(2);
             txtLastName_UpdateClient.Name = "txtLastName_UpdateClient";
-            txtLastName_UpdateClient.Size = new Size(198, 31);
+            txtLastName_UpdateClient.Size = new Size(159, 27);
             txtLastName_UpdateClient.TabIndex = 26;
             // 
             // txtFirstName_UpdateClient
             // 
-            txtFirstName_UpdateClient.Location = new Point(338, 165);
+            txtFirstName_UpdateClient.Location = new Point(296, 194);
             txtFirstName_UpdateClient.Margin = new Padding(2);
             txtFirstName_UpdateClient.Name = "txtFirstName_UpdateClient";
-            txtFirstName_UpdateClient.Size = new Size(198, 31);
+            txtFirstName_UpdateClient.Size = new Size(159, 27);
             txtFirstName_UpdateClient.TabIndex = 25;
             // 
             // txtClient_ID_Number_UpdateClient
             // 
-            txtClient_ID_Number_UpdateClient.Location = new Point(338, 99);
+            txtClient_ID_Number_UpdateClient.Location = new Point(296, 140);
             txtClient_ID_Number_UpdateClient.Margin = new Padding(2);
             txtClient_ID_Number_UpdateClient.Name = "txtClient_ID_Number_UpdateClient";
-            txtClient_ID_Number_UpdateClient.Size = new Size(198, 31);
+            txtClient_ID_Number_UpdateClient.Size = new Size(159, 27);
             txtClient_ID_Number_UpdateClient.TabIndex = 24;
             // 
             // dgvUpdateClient
             // 
             dgvUpdateClient.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUpdateClient.Location = new Point(652, 99);
+            dgvUpdateClient.Location = new Point(522, 89);
             dgvUpdateClient.Margin = new Padding(2);
             dgvUpdateClient.Name = "dgvUpdateClient";
             dgvUpdateClient.RowHeadersWidth = 62;
-            dgvUpdateClient.Size = new Size(490, 298);
+            dgvUpdateClient.Size = new Size(473, 293);
             dgvUpdateClient.TabIndex = 23;
             dgvUpdateClient.CellClick += dgvUpdateClient_CellClick;
             // 
@@ -458,10 +520,10 @@
             // 
             lblClient_ID_Number_UpdateClient.AutoSize = true;
             lblClient_ID_Number_UpdateClient.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblClient_ID_Number_UpdateClient.Location = new Point(8, 82);
+            lblClient_ID_Number_UpdateClient.Location = new Point(18, 127);
             lblClient_ID_Number_UpdateClient.Margin = new Padding(2, 0, 2, 0);
             lblClient_ID_Number_UpdateClient.Name = "lblClient_ID_Number_UpdateClient";
-            lblClient_ID_Number_UpdateClient.Size = new Size(324, 48);
+            lblClient_ID_Number_UpdateClient.Size = new Size(274, 41);
             lblClient_ID_Number_UpdateClient.TabIndex = 17;
             lblClient_ID_Number_UpdateClient.Text = "Client ID Number:";
             // 
@@ -469,10 +531,10 @@
             // 
             lblHasDriversLicense_UpdateClient.AutoSize = true;
             lblHasDriversLicense_UpdateClient.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblHasDriversLicense_UpdateClient.Location = new Point(8, 426);
+            lblHasDriversLicense_UpdateClient.Location = new Point(18, 402);
             lblHasDriversLicense_UpdateClient.Margin = new Padding(2, 0, 2, 0);
             lblHasDriversLicense_UpdateClient.Name = "lblHasDriversLicense_UpdateClient";
-            lblHasDriversLicense_UpdateClient.Size = new Size(281, 48);
+            lblHasDriversLicense_UpdateClient.Size = new Size(235, 41);
             lblHasDriversLicense_UpdateClient.TabIndex = 22;
             lblHasDriversLicense_UpdateClient.Text = "Drivers License:";
             // 
@@ -480,10 +542,10 @@
             // 
             lblFirst_Name_UpdateClient.AutoSize = true;
             lblFirst_Name_UpdateClient.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblFirst_Name_UpdateClient.Location = new Point(8, 149);
+            lblFirst_Name_UpdateClient.Location = new Point(18, 180);
             lblFirst_Name_UpdateClient.Margin = new Padding(2, 0, 2, 0);
             lblFirst_Name_UpdateClient.Name = "lblFirst_Name_UpdateClient";
-            lblFirst_Name_UpdateClient.Size = new Size(212, 48);
+            lblFirst_Name_UpdateClient.Size = new Size(179, 41);
             lblFirst_Name_UpdateClient.TabIndex = 18;
             lblFirst_Name_UpdateClient.Text = "First Name:";
             // 
@@ -491,10 +553,10 @@
             // 
             lblEmail_UpdateClient.AutoSize = true;
             lblEmail_UpdateClient.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblEmail_UpdateClient.Location = new Point(8, 350);
+            lblEmail_UpdateClient.Location = new Point(18, 341);
             lblEmail_UpdateClient.Margin = new Padding(2, 0, 2, 0);
             lblEmail_UpdateClient.Name = "lblEmail_UpdateClient";
-            lblEmail_UpdateClient.Size = new Size(121, 48);
+            lblEmail_UpdateClient.Size = new Size(103, 41);
             lblEmail_UpdateClient.TabIndex = 21;
             lblEmail_UpdateClient.Text = "Email:";
             // 
@@ -502,10 +564,10 @@
             // 
             lblLast_Name_UpdateClient.AutoSize = true;
             lblLast_Name_UpdateClient.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblLast_Name_UpdateClient.Location = new Point(8, 215);
+            lblLast_Name_UpdateClient.Location = new Point(18, 233);
             lblLast_Name_UpdateClient.Margin = new Padding(2, 0, 2, 0);
             lblLast_Name_UpdateClient.Name = "lblLast_Name_UpdateClient";
-            lblLast_Name_UpdateClient.Size = new Size(206, 48);
+            lblLast_Name_UpdateClient.Size = new Size(173, 41);
             lblLast_Name_UpdateClient.TabIndex = 19;
             lblLast_Name_UpdateClient.Text = "Last Name:";
             // 
@@ -513,16 +575,18 @@
             // 
             lblCell_Number_UpdateClient.AutoSize = true;
             lblCell_Number_UpdateClient.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblCell_Number_UpdateClient.Location = new Point(8, 284);
+            lblCell_Number_UpdateClient.Location = new Point(18, 288);
             lblCell_Number_UpdateClient.Margin = new Padding(2, 0, 2, 0);
             lblCell_Number_UpdateClient.Name = "lblCell_Number_UpdateClient";
-            lblCell_Number_UpdateClient.Size = new Size(240, 48);
+            lblCell_Number_UpdateClient.Size = new Size(204, 41);
             lblCell_Number_UpdateClient.TabIndex = 20;
             lblCell_Number_UpdateClient.Text = "Cell Number:";
             // 
             // DeleteClient
             // 
-            DeleteClient.BackgroundImage = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
+            DeleteClient.BackColor = Color.FromArgb(188, 170, 146);
+            DeleteClient.Controls.Add(label4);
+            DeleteClient.Controls.Add(pictureBox2);
             DeleteClient.Controls.Add(txtSearch_DeleteClient);
             DeleteClient.Controls.Add(lblSearch_DeleteClient);
             DeleteClient.Controls.Add(txtClient_ID_DeleteClient);
@@ -531,22 +595,40 @@
             DeleteClient.Controls.Add(btnBack_DeleteClient);
             DeleteClient.Controls.Add(dgvDeleteClient);
             DeleteClient.Controls.Add(lblClient_ID_DeleteClient);
-            DeleteClient.Location = new Point(4, 34);
+            DeleteClient.Location = new Point(4, 29);
             DeleteClient.Margin = new Padding(2);
             DeleteClient.Name = "DeleteClient";
             DeleteClient.Padding = new Padding(2);
-            DeleteClient.Size = new Size(1170, 691);
+            DeleteClient.Size = new Size(1019, 551);
             DeleteClient.TabIndex = 2;
             DeleteClient.Text = "Delete";
-            DeleteClient.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(0, 2);
+            label4.Name = "label4";
+            label4.Size = new Size(239, 46);
+            label4.TabIndex = 37;
+            label4.Text = "Delete Clients";
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
+            pictureBox2.Location = new Point(8, 440);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(125, 103);
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.TabIndex = 36;
+            pictureBox2.TabStop = false;
             // 
             // txtSearch_DeleteClient
             // 
-            txtSearch_DeleteClient.Location = new Point(714, 56);
-            txtSearch_DeleteClient.Margin = new Padding(4, 4, 4, 4);
+            txtSearch_DeleteClient.Location = new Point(353, 88);
             txtSearch_DeleteClient.MaxLength = 15;
             txtSearch_DeleteClient.Name = "txtSearch_DeleteClient";
-            txtSearch_DeleteClient.Size = new Size(256, 31);
+            txtSearch_DeleteClient.Size = new Size(206, 27);
             txtSearch_DeleteClient.TabIndex = 35;
             txtSearch_DeleteClient.TextChanged += txtSearch_DeleteClient_TextChanged;
             // 
@@ -554,29 +636,26 @@
             // 
             lblSearch_DeleteClient.AutoSize = true;
             lblSearch_DeleteClient.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblSearch_DeleteClient.Location = new Point(548, 36);
-            lblSearch_DeleteClient.Margin = new Padding(4, 0, 4, 0);
+            lblSearch_DeleteClient.Location = new Point(319, 44);
             lblSearch_DeleteClient.Name = "lblSearch_DeleteClient";
-            lblSearch_DeleteClient.Size = new Size(151, 48);
+            lblSearch_DeleteClient.Size = new Size(317, 41);
             lblSearch_DeleteClient.TabIndex = 34;
-            lblSearch_DeleteClient.Text = "Search: ";
+            lblSearch_DeleteClient.Text = "Search By Last Name:";
             // 
             // txtClient_ID_DeleteClient
             // 
             txtClient_ID_DeleteClient.Enabled = false;
-            txtClient_ID_DeleteClient.Location = new Point(208, 71);
-            txtClient_ID_DeleteClient.Margin = new Padding(4, 4, 4, 4);
+            txtClient_ID_DeleteClient.Location = new Point(430, 438);
             txtClient_ID_DeleteClient.MaxLength = 15;
             txtClient_ID_DeleteClient.Name = "txtClient_ID_DeleteClient";
-            txtClient_ID_DeleteClient.Size = new Size(256, 31);
+            txtClient_ID_DeleteClient.Size = new Size(206, 27);
             txtClient_ID_DeleteClient.TabIndex = 33;
             // 
             // btnClear_DeleteClient
             // 
-            btnClear_DeleteClient.Location = new Point(928, 548);
-            btnClear_DeleteClient.Margin = new Padding(4, 4, 4, 4);
+            btnClear_DeleteClient.Location = new Point(430, 485);
             btnClear_DeleteClient.Name = "btnClear_DeleteClient";
-            btnClear_DeleteClient.Size = new Size(118, 72);
+            btnClear_DeleteClient.Size = new Size(94, 58);
             btnClear_DeleteClient.TabIndex = 32;
             btnClear_DeleteClient.Text = "Clear";
             btnClear_DeleteClient.UseVisualStyleBackColor = true;
@@ -584,10 +663,9 @@
             // 
             // btnDelete_DeleteClient
             // 
-            btnDelete_DeleteClient.Location = new Point(789, 548);
-            btnDelete_DeleteClient.Margin = new Padding(4, 4, 4, 4);
+            btnDelete_DeleteClient.Location = new Point(232, 485);
             btnDelete_DeleteClient.Name = "btnDelete_DeleteClient";
-            btnDelete_DeleteClient.Size = new Size(118, 72);
+            btnDelete_DeleteClient.Size = new Size(94, 58);
             btnDelete_DeleteClient.TabIndex = 31;
             btnDelete_DeleteClient.Text = "Delete";
             btnDelete_DeleteClient.UseVisualStyleBackColor = true;
@@ -595,10 +673,9 @@
             // 
             // btnBack_DeleteClient
             // 
-            btnBack_DeleteClient.Location = new Point(1052, 619);
-            btnBack_DeleteClient.Margin = new Padding(4, 4, 4, 4);
+            btnBack_DeleteClient.Location = new Point(611, 485);
             btnBack_DeleteClient.Name = "btnBack_DeleteClient";
-            btnBack_DeleteClient.Size = new Size(118, 72);
+            btnBack_DeleteClient.Size = new Size(94, 58);
             btnBack_DeleteClient.TabIndex = 30;
             btnBack_DeleteClient.Text = "Back";
             btnBack_DeleteClient.UseVisualStyleBackColor = true;
@@ -606,11 +683,10 @@
             // dgvDeleteClient
             // 
             dgvDeleteClient.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDeleteClient.Location = new Point(548, 112);
-            dgvDeleteClient.Margin = new Padding(4, 4, 4, 4);
+            dgvDeleteClient.Location = new Point(232, 131);
             dgvDeleteClient.Name = "dgvDeleteClient";
             dgvDeleteClient.RowHeadersWidth = 51;
-            dgvDeleteClient.Size = new Size(591, 366);
+            dgvDeleteClient.Size = new Size(473, 293);
             dgvDeleteClient.TabIndex = 29;
             dgvDeleteClient.CellClick += dgvDeleteClient_CellClick;
             // 
@@ -619,10 +695,9 @@
             lblClient_ID_DeleteClient.AutoSize = true;
             lblClient_ID_DeleteClient.BackColor = Color.Transparent;
             lblClient_ID_DeleteClient.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblClient_ID_DeleteClient.Location = new Point(19, 58);
-            lblClient_ID_DeleteClient.Margin = new Padding(4, 0, 4, 0);
+            lblClient_ID_DeleteClient.Location = new Point(293, 427);
             lblClient_ID_DeleteClient.Name = "lblClient_ID_DeleteClient";
-            lblClient_ID_DeleteClient.Size = new Size(171, 45);
+            lblClient_ID_DeleteClient.Size = new Size(147, 38);
             lblClient_ID_DeleteClient.TabIndex = 28;
             lblClient_ID_DeleteClient.Text = "Client ID: ";
             // 
@@ -632,9 +707,9 @@
             // 
             // frmClients
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1180, 728);
+            ClientSize = new Size(1027, 584);
             Controls.Add(MaintainClient);
             Margin = new Padding(2);
             Name = "frmClients";
@@ -643,12 +718,14 @@
             MaintainClient.ResumeLayout(false);
             AddClient.ResumeLayout(false);
             AddClient.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvAddClient).EndInit();
             UpdateClient.ResumeLayout(false);
             UpdateClient.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUpdateClient).EndInit();
             DeleteClient.ResumeLayout(false);
             DeleteClient.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvDeleteClient).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
@@ -705,5 +782,12 @@
         private Label lblSearch_UpdateClient;
         private TextBox txtSearch_DeleteClient;
         private Label lblSearch_DeleteClient;
+        private Label label1;
+        private TextBox txtSearch_Add;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
+        private Label label3;
+        private Label label2;
+        private Label label4;
     }
 }
