@@ -13,7 +13,7 @@ namespace CMPG223_Project
 {
     public partial class frmRequestReports : Form
     {
-        String connectionString = @"Data Source=MOMO;Initial Catalog=\""Roadrunner Rentals\"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        String connectionString = @"Data Source=MOMO;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
         public frmRequestReports()
         {
             InitializeComponent();
@@ -367,11 +367,6 @@ namespace CMPG223_Project
 
             pbRequestReports.BringToFront();
 
-        }
-
-        private void btnBack_RequestReport_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }
