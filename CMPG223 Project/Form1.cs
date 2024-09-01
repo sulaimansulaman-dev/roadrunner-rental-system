@@ -27,5 +27,18 @@ namespace CMPG223_Project
         {
             this.Close();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@"C:\Users\muham\OneDrive\Documents\GitHub\CMPG223-Project-WinForm\CMPG223 Project\Resources");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
     }
 }
