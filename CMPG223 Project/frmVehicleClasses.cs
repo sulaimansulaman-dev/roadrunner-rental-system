@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace CMPG223_Project
 {
@@ -174,6 +175,12 @@ namespace CMPG223_Project
             // Regular expression pattern for validation
             string alphaPattern = @"^[a-zA-Z\s.,'-]*$";  // Allows letters, spaces, and some punctuation
 
+            // Check if all fields are empty
+            if (string.IsNullOrWhiteSpace(className))
+            {
+                MessageBox.Show("Please click on the Data Grid View.");
+                return;
+            }
             // Validation using ErrorProvider
             if (string.IsNullOrWhiteSpace(className))
             {
@@ -262,6 +269,15 @@ namespace CMPG223_Project
 
             // Regular expression pattern for validation
             string alphaPattern = @"^[a-zA-Z\s.,'-]*$";  // Allows letters, spaces, and some punctuation
+
+            // Check if all fields are empty
+            if (string.IsNullOrWhiteSpace(classID) &&
+                string.IsNullOrWhiteSpace(className) &&
+                string.IsNullOrWhiteSpace(description))
+            {
+                MessageBox.Show("Please click on the Data Grid View.");
+                return;
+            }
 
             // Validation using ErrorProvider
             if (string.IsNullOrWhiteSpace(classID))
