@@ -68,13 +68,15 @@
             btnUpdate_Update = new Button();
             btnBack_Update = new Button();
             tabDelete = new TabPage();
+            cmbVehicleID_Delete = new ComboBox();
             btnClear_Delete = new Button();
             btnDelete_Delete = new Button();
             btnBack_Delete = new Button();
             dgvVehicles_Delete = new DataGridView();
-            cmbVehicleID_Delete = new ComboBox();
             lblClassID_Delete = new Label();
             errorProvider1 = new ErrorProvider(components);
+            errorProvider2 = new ErrorProvider(components);
+            errorProvider3 = new ErrorProvider(components);
             tabControlVehicleClasses.SuspendLayout();
             tabAdd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvVehicles_Add).BeginInit();
@@ -83,6 +85,8 @@
             tabDelete.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvVehicles_Delete).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider3).BeginInit();
             SuspendLayout();
             // 
             // tabControlVehicleClasses
@@ -483,17 +487,26 @@
             tabDelete.BackColor = Color.FromArgb(188, 170, 146);
             tabDelete.BackgroundImage = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
             tabDelete.BackgroundImageLayout = ImageLayout.Zoom;
+            tabDelete.Controls.Add(cmbVehicleID_Delete);
             tabDelete.Controls.Add(btnClear_Delete);
             tabDelete.Controls.Add(btnDelete_Delete);
             tabDelete.Controls.Add(btnBack_Delete);
             tabDelete.Controls.Add(dgvVehicles_Delete);
-            tabDelete.Controls.Add(cmbVehicleID_Delete);
             tabDelete.Controls.Add(lblClassID_Delete);
             tabDelete.Location = new Point(4, 29);
             tabDelete.Name = "tabDelete";
             tabDelete.Size = new Size(1094, 728);
             tabDelete.TabIndex = 2;
             tabDelete.Text = "Delete";
+            // 
+            // cmbVehicleID_Delete
+            // 
+            cmbVehicleID_Delete.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbVehicleID_Delete.FormattingEnabled = true;
+            cmbVehicleID_Delete.Location = new Point(506, 481);
+            cmbVehicleID_Delete.Name = "cmbVehicleID_Delete";
+            cmbVehicleID_Delete.Size = new Size(123, 28);
+            cmbVehicleID_Delete.TabIndex = 23;
             // 
             // btnClear_Delete
             // 
@@ -531,14 +544,7 @@
             dgvVehicles_Delete.RowHeadersWidth = 51;
             dgvVehicles_Delete.Size = new Size(529, 363);
             dgvVehicles_Delete.TabIndex = 19;
-            // 
-            // cmbVehicleID_Delete
-            // 
-            cmbVehicleID_Delete.FormattingEnabled = true;
-            cmbVehicleID_Delete.Location = new Point(485, 480);
-            cmbVehicleID_Delete.Name = "cmbVehicleID_Delete";
-            cmbVehicleID_Delete.Size = new Size(209, 28);
-            cmbVehicleID_Delete.TabIndex = 18;
+            dgvVehicles_Delete.CellClick += dgvVehicles_Delete_CellClick;
             // 
             // lblClassID_Delete
             // 
@@ -554,6 +560,14 @@
             // errorProvider1
             // 
             errorProvider1.ContainerControl = this;
+            // 
+            // errorProvider2
+            // 
+            errorProvider2.ContainerControl = this;
+            // 
+            // errorProvider3
+            // 
+            errorProvider3.ContainerControl = this;
             // 
             // frmVehicles
             // 
@@ -578,6 +592,8 @@
             tabDelete.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvVehicles_Delete).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider3).EndInit();
             ResumeLayout(false);
         }
 
@@ -601,7 +617,6 @@
         private Button btnDelete_Delete;
         private Button btnBack_Delete;
         private DataGridView dgvVehicles_Delete;
-        private ComboBox cmbVehicleID_Delete;
         private Label lblClassID_Delete;
         private ComboBox cmbClassSelect;
         private Label lblYear;
@@ -628,5 +643,8 @@
         private Label label1;
         private ErrorProvider errorProvider1;
         private TextBox txtVehicleID_Update;
+        private ComboBox cmbVehicleID_Delete;
+        private ErrorProvider errorProvider2;
+        private ErrorProvider errorProvider3;
     }
 }

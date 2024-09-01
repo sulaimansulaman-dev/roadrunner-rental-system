@@ -127,7 +127,7 @@ namespace CMPG223_Project
             string year1 = txtYear.Text;
             DateTime year = DateTime.ParseExact(year1, "yyyy", null);
             int numOfSeats = int.Parse(cmbNoOfSeats.Text);
-            decimal costPerDay = int.Parse(txtCostPerDay.Text); // Assuming the TrackBar's Value property is used for the cost
+            decimal costPerDay = decimal.Parse(txtCostPerDay.Text); // Assuming the TrackBar's Value property is used for the cost
             char[] licenseNo = txtLicenseNo.Text.ToCharArray();
 
 
@@ -152,6 +152,9 @@ namespace CMPG223_Project
 
             MessageBox.Show("Vehicle added successfully!");
             displayData();
+            LoadComboBox();
+            LoadComboBoxUpdateClass();
+            LoadComboBox_VehicleName();
 
         }
 
@@ -198,7 +201,8 @@ namespace CMPG223_Project
             }
         }
 
-        private void LoadComboBoxUpdateClass() {
+        private void LoadComboBoxUpdateClass()
+        {
             try
             {
                 cnn.Open();
@@ -250,107 +254,15 @@ namespace CMPG223_Project
             string vehicleID = txtVehicleID_Update.Text.Trim();
             string vehicleName = txtVehicleName_Update.Text.Trim();
             string class1 = cmbClass_Update.Text.Trim();
+
             string year = txtYear_Update.Text.Trim();
-            string numSeats = cmbNoOfSeats_Update.Text.Trim();
-            string costPDay = txtCostPerDay_Update.Text.Trim();
+            DateTime year1 = DateTime.Parse(year);
+
+            int numSeats = int.Parse(cmbNoOfSeats_Update.Text.Trim());
+            decimal costPDay = decimal.Parse(txtCostPerDay_Update.Text.Trim());
             string license = txtLicenseNo_Update.Text.Trim();
 
-            bool isValid = true;
-            string namePattern = @"^[a-zA-Z0-9\s.'-]+$";
 
-            // Validation Block
-            if (string.IsNullOrWhiteSpace(vehicleID))
-            {
-                errorProvider1.SetError(txtVehicleID_Update, "Select a Vehicle.");
-                return;
-            }
-            else
-            {
-                errorProvider1.SetError(txtVehicleID_Update, "");
-            }
-
-            // Validation Block
-            if (string.IsNullOrWhiteSpace(vehicleName))
-            {
-                errorProvider1.SetError(txtVehicleName_Update, "Please enter Vehicle Name.");
-                return;
-            }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(vehicleName, namePattern))
-            {
-                errorProvider1.SetError(txtVehicleName_Update, "Car Name must contain only letters, numbers, spaces, and allowed punctuation.");
-                isValid = false;
-            }
-            else
-            {
-                errorProvider1.SetError(txtVehicleName_Update, "");
-            }
-
-            // cmb validation
-            if (cmbClass_Update.SelectedIndex == -1)
-            {
-                errorProvider1.SetError(cmbClass_Update, "Please select a class.");
-                return;
-            }
-            else
-            {
-                errorProvider1.SetError(cmbClass_Update, "");
-            }
-
-            // Year validation
-            string yearPattern = @"^\d{4}$";
-            if (string.IsNullOrWhiteSpace(year))
-            {
-                errorProvider1.SetError(txtYear_Update, "Please enter the year.");
-                return;
-            }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(year, yearPattern))
-            {
-                errorProvider1.SetError(txtYear_Update, "Year must be a four-digit number.");
-                isValid = false;
-            }
-            else
-            {
-                errorProvider1.SetError(txtYear_Update, "");
-            }
-
-            // Num SEATS validation
-            if (cmbNoOfSeats_Update.SelectedIndex == -1)
-            {
-                errorProvider1.SetError(cmbNoOfSeats_Update, "Please select a number.");
-                return;
-            }
-            else
-            {
-                errorProvider1.SetError(cmbNoOfSeats_Update, "");
-            }
-
-            // Cost per day validation
-            string pricePattern = @"^\d+(\.\d{1,2})?$";
-            if (string.IsNullOrWhiteSpace(costPDay))
-            {
-                errorProvider1.SetError(txtCostPerDay_Update, "Please enter the Price.");
-                return;
-            }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(costPDay, pricePattern))
-            {
-                errorProvider1.SetError(txtCostPerDay_Update, "Price must be a valid number with up to two decimal places.");
-                isValid = false;
-            }
-            else
-            {
-                errorProvider1.SetError(txtCostPerDay_Update, "");
-            }
-
-            // License validation
-            if (string.IsNullOrWhiteSpace(license))
-            {
-                errorProvider1.SetError(txtLicenseNo_Update, "Please enter the License Number.");
-                return;
-            }
-            else
-            {
-                errorProvider1.SetError(txtLicenseNo_Update, "");
-            }
 
             // Preparing the SQL update query
             string updateQuery = "UPDATE Vehicle SET Vehicle_Name = @VehicleName, Vehicle_Class_ID = @ClassName, Year = @Year, NumberOfSeats = @NumberOfSeats, CostPerDay = @CostPerDay, LicenseNumber = @License WHERE Vehicle_ID = @Vehicle_ID";
@@ -426,6 +338,9 @@ namespace CMPG223_Project
                         {
                             MessageBox.Show("Vehicle deleted successfully!");
                             displayData();
+                            LoadComboBox();
+                            LoadComboBoxUpdateClass();
+                            LoadComboBox_VehicleName();
                         }
                         else
                         {
@@ -486,6 +401,15 @@ namespace CMPG223_Project
                 txtLicenseNo_Update.Text = license;
 
             }
+        }
+
+        private void dgvVehicles_Delete_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow selectedRow = dgvVehicles_Update.CurrentRow;
+            
+            string vehicleName = selectedRow.Cells["Vehicle_Name"].Value.ToString();
+
+            cmbVehicleID_Delete.Text = vehicleName;
         }
     }
 }
