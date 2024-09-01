@@ -219,7 +219,7 @@ namespace CMPG223_Project
 
         private void frmVehicles_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+           
         }
 
         private void btnClear_Add_Click(object sender, EventArgs e)
