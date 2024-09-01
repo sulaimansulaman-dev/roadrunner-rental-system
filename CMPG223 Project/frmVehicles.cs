@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -32,7 +32,7 @@ namespace CMPG223_Project
             //Display Data
             try
             {
-
+                
                 //Opening Connection to the database
                 cnn.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -55,20 +55,27 @@ namespace CMPG223_Project
                 dgvVehicles_Delete.DataSource = ds;
                 dgvVehicles_Delete.DataMember = "Vehicle";
 
-                cnn.Close();
+
+                cnn.Close(); 
+
+
+
+
             }
 
             //try catch for error handling
             catch
             {
-                MessageBox.Show("Please connect to the database first");
+                MessageBox.Show("Please Connect to database!");
                 cnn.Close();
             }
         }
 
         private void frmVehicles_Load(object sender, EventArgs e)
         {
-            string connectionstring = @"Data Source=MOMO;Initial Catalog=Roadrunner Rentals;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+            //string connectionstring = @"Data Source=DESKTOP-20CLHAU;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+            string connectionstring = @"Data Source=LAPTOP-JHPD709J;Initial Catalog=""Roadrunner Rentals"";Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
+
             cnn = new SqlConnection(connectionstring);
 
             displayData();
@@ -94,7 +101,7 @@ namespace CMPG223_Project
             if (string.IsNullOrWhiteSpace(vehicleName))
             {
                 errorProvider1.SetError(txtName, "Please enter Vehicle Name.");
-                return;
+                isValid = false;
             }
             else if (!System.Text.RegularExpressions.Regex.IsMatch(vehicleName, alphaPattern))
             {
@@ -110,33 +117,53 @@ namespace CMPG223_Project
             //cmb validation
             if (cmbClassSelect.SelectedIndex == -1)
             {
-                errorProvider4.SetError(cmbClassSelect, "Please select a class.");
-                return;
+                errorProvider1.SetError(cmbClassSelect, "Please select a class.");
+                isValid = false;
             }
             else
             {
-                errorProvider4.SetError(cmbClassSelect, "");
+                errorProvider1.SetError(cmbClassSelect, "");
             }
 
             //cmb validation
             if (cmbNoOfSeats.SelectedIndex == -1)
             {
-                errorProvider4.SetError(cmbNoOfSeats, "Please select a number of seats.");
-                return;
+                errorProvider1.SetError(cmbNoOfSeats, "Please select a number of seats.");
+                isValid = false;
             }
             else
             {
-                errorProvider4.SetError(cmbNoOfSeats, "");
+                errorProvider1.SetError(cmbNoOfSeats, "");
             }
 
+
+
+            string costPerDayText = txtCostPerDay.Text.Trim();
+            decimal vCostPerDay;
+            if (string.IsNullOrWhiteSpace(costPerDayText))
+            {
+                errorProvider1.SetError(txtCostPerDay, "Please enter the cost per day.");
+                isValid = false;
+            }
+            else if (!decimal.TryParse(costPerDayText, out vCostPerDay) || vCostPerDay <= 0)
+            {
+                errorProvider1.SetError(txtCostPerDay, "Please enter a valid positive decimal number for the cost per day.");
+                isValid = false;
+            }
+            else
+            {
+                errorProvider1.SetError(txtCostPerDay, "");
+            }
+
+            //Licen
             if (string.IsNullOrWhiteSpace(licNum))
             {
-                errorProvider1.SetError(txtLicenseNo, "Please enter a license number.");
-                return;
+                errorProvider1.SetError(txtLicenseNo, "License number is required.");
+                isValid = false;
             }
             else if (!System.Text.RegularExpressions.Regex.IsMatch(licNum, licensePattern))
             {
-                errorProvider1.SetError(txtLicenseNo, "Use the correct South African License Format");
+                errorProvider1.SetError(txtLicenseNo, "Please Use South African license number format.");
                 isValid = false;
             }
             else
@@ -144,7 +171,10 @@ namespace CMPG223_Project
                 errorProvider1.SetError(txtLicenseNo, "");
             }
 
-
+            if (!isValid)
+            {
+                return;
+            }
 
 
             // Get values from the form
@@ -155,8 +185,8 @@ namespace CMPG223_Project
             }
 
             int numOfSeats = int.Parse(cmbNoOfSeats.Text);
-            decimal costPerDay = decimal.Parse(txtCostPerDay.Text); // Assuming the TrackBar's Value property is used for the cost
-            char[] licenseNo = txtLicenseNo.Text.ToCharArray();
+            //decimal costPerDay = decimal.Parse(txtCostPerDay.Text); // Assuming the TrackBar's Value property is used for the cost
+
 
 
             // Insert query
@@ -168,8 +198,8 @@ namespace CMPG223_Project
 
                 cmd.Parameters.AddWithValue("@Vehicle_Class_ID", classId);
                 cmd.Parameters.AddWithValue("@NumberOfSeats", numOfSeats);
-                cmd.Parameters.AddWithValue("@CostperDay", costPerDay);
-                cmd.Parameters.AddWithValue("@LicenseNumber", licenseNo);
+                cmd.Parameters.AddWithValue("@CostperDay", costPerDayText);
+                cmd.Parameters.AddWithValue("@LicenseNumber", licNum);
                 cmd.Parameters.AddWithValue("@Vehicle_Name", vehicleName);
 
                 cnn.Open();
@@ -189,6 +219,7 @@ namespace CMPG223_Project
 
         private void frmVehicles_FormClosed(object sender, FormClosedEventArgs e)
         {
+            Application.Exit();
         }
 
         private void btnClear_Add_Click(object sender, EventArgs e)
@@ -270,20 +301,122 @@ namespace CMPG223_Project
 
         private void btnBack_Add_Click(object sender, EventArgs e)
         {
-            this.Close();
+
         }
 
         private void btnUpdate_Update_Click(object sender, EventArgs e)
         {
-            // Variables
             string vehicleID = txtVehicleID_Update.Text.Trim();
             string vehicleName = txtVehicleName_Update.Text.Trim();
-            string class1 = cmbClass_Update.Text.Trim();
-            int numSeats = int.Parse(cmbNoOfSeats_Update.Text.Trim());
-            decimal costPDay = decimal.Parse(txtCostPerDay_Update.Text.Trim());
-            string license = txtLicenseNo_Update.Text.Trim();
+            string licNum = txtLicenseNo_Update.Text.Trim();
+
+            bool isValid = true;
+
+            // Regular expression patterns for validation
+            string alphaPattern = @"^[a-zA-Z\s.,'-]*$";  // Allows letters, spaces, and some punctuation
+            string licensePattern = @"[A-Z]{3}\d{3,4}[A-Z]{2}$";
 
 
+            if (string.IsNullOrWhiteSpace(vehicleID))
+            {
+                errorProvider1.SetError(txtVehicleID_Update, "Please Select Vehicle ID From The Data Grid View!");
+                isValid = false;
+            }
+            else
+            {
+                errorProvider1.SetError(txtVehicleID_Update, "");
+                isValid = true;
+            }
+            //Validation Block
+            if (string.IsNullOrWhiteSpace(vehicleName))
+            {
+                errorProvider1.SetError(txtVehicleName_Update, "Please enter Vehicle Name.");
+                isValid = false;
+            }
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(vehicleName, alphaPattern))
+            {
+                errorProvider1.SetError(txtVehicleName_Update, "Class Name must contain only letters and allowed punctuation.");
+                isValid = false;
+            }
+            else
+            {
+                errorProvider1.SetError(txtVehicleName_Update, "");
+                isValid = true;
+            }
+
+
+            //cmb validation
+            if (cmbClass_Update.SelectedIndex == -1)
+            {
+                errorProvider1.SetError(cmbClass_Update, "Please select a class.");
+                isValid = false;
+            }
+            else
+            {
+                errorProvider1.SetError(cmbClass_Update, "");
+                isValid = true;
+            }
+
+
+
+
+            //cmb validation
+            if (cmbNoOfSeats_Update.SelectedIndex == -1)
+            {
+                errorProvider1.SetError(cmbNoOfSeats_Update, "Please select a number of seats.");
+                isValid = false;
+            }
+            else
+            {
+                errorProvider1.SetError(cmbNoOfSeats_Update, "");
+            }
+
+
+
+            string costPerDayText = txtCostPerDay_Update.Text.Trim();
+            decimal vCostPerDay;
+            if (string.IsNullOrWhiteSpace(costPerDayText))
+            {
+                errorProvider1.SetError(txtCostPerDay_Update, "Please enter the cost per day.");
+                isValid = false;
+            }
+            else if (!decimal.TryParse(costPerDayText, out vCostPerDay) || vCostPerDay <= 0)
+            {
+                errorProvider1.SetError(txtCostPerDay_Update, "Please enter a valid positive decimal number for the cost per day.");
+                isValid = false;
+            }
+            else
+            {
+                errorProvider1.SetError(txtCostPerDay_Update, "");
+            }
+
+            //Licen
+            if (string.IsNullOrWhiteSpace(licNum))
+            {
+                errorProvider1.SetError(txtLicenseNo_Update, "License number is required.");
+                isValid = false;
+            }
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(licNum, licensePattern))
+            {
+                errorProvider1.SetError(txtLicenseNo_Update, "Please Use South African license number format.");
+                isValid = false;
+            }
+            else
+            {
+                errorProvider1.SetError(txtLicenseNo_Update, "");
+            }
+
+            if (cmbClass_Update.SelectedValue != null)
+            {
+                classId = (int)cmbClass_Update.SelectedValue;
+            }
+
+            if (!isValid)
+            {
+                return;
+            }
+
+            int numOfSeats = int.Parse(cmbNoOfSeats_Update.Text);
 
             // Preparing the SQL update query
             string updateQuery = "UPDATE Vehicle SET Vehicle_Name = @VehicleName, Vehicle_Class_ID = @ClassName, NumberOfSeats = @NumberOfSeats, CostPerDay = @CostPerDay, LicenseNumber = @License WHERE Vehicle_ID = @Vehicle_ID";
@@ -299,41 +432,44 @@ namespace CMPG223_Project
                 // Using the existing connection to execute the update command
                 using (SqlCommand cmd = new SqlCommand(updateQuery, cnn))
                 {
+
+
                     cmd.Parameters.AddWithValue("@VehicleName", vehicleName);
-                    cmd.Parameters.AddWithValue("@ClassName", class1);
-                    cmd.Parameters.AddWithValue("@NumberOfSeats", numSeats);
-                    cmd.Parameters.AddWithValue("@CostPerDay", costPDay);
-                    cmd.Parameters.AddWithValue("@License", license);
+                    cmd.Parameters.AddWithValue("@ClassName", classId);
+                    cmd.Parameters.AddWithValue("@NumberOfSeats", numOfSeats);
+                    cmd.Parameters.AddWithValue("@CostPerDay", costPerDayText);
+                    cmd.Parameters.AddWithValue("@License", licNum);
                     cmd.Parameters.AddWithValue("@Vehicle_ID", vehicleID);
 
                     // Debugging output
                     Console.WriteLine($"Executing Query: {updateQuery}");
-                    Console.WriteLine($"VehicleName: {vehicleName}, ClassName: {class1}, NumberOfSeats: {numSeats}, CostPerDay: {costPDay}, License: {license}, Vehicle_ID: {vehicleID}");
+                    Console.WriteLine($"VehicleName: {vehicleName}, ClassName: {classId}, NumberOfSeats: {numOfSeats}, CostPerDay: {costPerDayText}, License: {licNum}, Vehicle_ID: {vehicleID}");
 
                     int rowsAffected = cmd.ExecuteNonQuery();
                     if (rowsAffected > 0)
                     {
                         MessageBox.Show("Vehicle updated successfully.");
-                        displayData();
+
                     }
                     else
                     {
                         MessageBox.Show("No records were updated. Please check if the Vehicle ID exists.");
                     }
                 }
+                if (cnn.State == ConnectionState.Open)
+                {
+                    cnn.Close();
+                }
+
+                displayData();
+
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-            finally
-            {
-                // Close the connection if it's still open
-                if (cnn.State == ConnectionState.Open)
-                {
-                    cnn.Close();
-                }
-            }
+
         }
 
         private void btnDelete_Delete_Click(object sender, EventArgs e)
@@ -371,11 +507,13 @@ namespace CMPG223_Project
                     {
                         MessageBox.Show($"An error occurred: {ex.Message}");
                     }
+                    errorProvider1.SetError(cmbVehicleID_Delete, "");
+
                 }
             }
             else
             {
-                MessageBox.Show("Please select a vehicle to delete.");
+                errorProvider1.SetError(cmbVehicleID_Delete, "Please select a vehicle to delete.");
             }
         }
 
@@ -430,14 +568,68 @@ namespace CMPG223_Project
             cmbVehicleID_Delete.Text = vehicleName;
         }
 
-        private void btnBack_Update_Click(object sender, EventArgs e)
+        private bool isValid()
         {
-            this.Close();
+            bool isValid = true;
+            string vehicleID = txtVehicleID_Update.Text.Trim();
+            string vehicleName = txtVehicleName_Update.Text.Trim();
+            string licNum = txtLicenseNo_Update.Text.Trim();
+
+            // Regular expression patterns for validation
+            string alphaPattern = @"^[a-zA-Z\s.,'-]*$";  // Allows letters, spaces, and some punctuation
+            string licensePattern = @"[A-Z]{3}\d{3,4}[A-Z]{2}$";
+
+
+
+            //Validation Block
+            if (string.IsNullOrWhiteSpace(vehicleName))
+            {
+                errorProvider1.SetError(txtVehicleName_Update, "Please enter Vehicle Name.");
+                isValid = false;
+            }
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(vehicleName, alphaPattern))
+            {
+                errorProvider1.SetError(txtVehicleName_Update, "Class Name must contain only letters and allowed punctuation.");
+                isValid = false;
+            }
+            else
+            {
+                errorProvider1.SetError(txtVehicleName_Update, "");
+                isValid = true;
+            }
+
+
+            //cmb validation
+            if (cmbClass_Update.SelectedIndex == -1)
+            {
+                errorProvider1.SetError(cmbClass_Update, "Please select a class.");
+                isValid = false;
+            }
+            else
+            {
+                errorProvider1.SetError(cmbClass_Update, "");
+                isValid = true;
+            }
+
+
+            return isValid;
         }
 
-        private void btnBack_Delete_Click(object sender, EventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            this.Close();
+
+        }
+
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+            
+        }
+
+
+        private void textBox1_TextChanged_2(object sender, EventArgs e)
+        {
+  
         }
     }
 }
