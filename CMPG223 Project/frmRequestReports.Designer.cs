@@ -145,7 +145,7 @@
             // 
             // btnBack_RequestReport
             // 
-            btnBack_RequestReport.Location = new Point(361, 323);
+            btnBack_RequestReport.Location = new Point(291, 397);
             btnBack_RequestReport.Name = "btnBack_RequestReport";
             btnBack_RequestReport.Size = new Size(104, 52);
             btnBack_RequestReport.TabIndex = 8;
@@ -345,7 +345,7 @@
             // 
             // btnClear_RequestReports
             // 
-            btnClear_RequestReports.Location = new Point(294, 403);
+            btnClear_RequestReports.Location = new Point(363, 323);
             btnClear_RequestReports.Name = "btnClear_RequestReports";
             btnClear_RequestReports.Size = new Size(104, 52);
             btnClear_RequestReports.TabIndex = 26;
