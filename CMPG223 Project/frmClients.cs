@@ -590,7 +590,7 @@ namespace CMPG223_Project
                 else
                 {
                     // Use parameterized filtering to prevent issues with special characters
-                    dataTable.DefaultView.RowFilter = $"Client_ID LIKE '%{searchTerm}%'";
+                    dataTable.DefaultView.RowFilter = $"LastName LIKE '%{searchTerm}%'";
                 }
             }
             else
@@ -625,7 +625,7 @@ namespace CMPG223_Project
                 else
                 {
                     // Apply the filter with the search term
-                    dataTable.DefaultView.RowFilter = $"Client_ID LIKE '%{searchTerm}%'";
+                    dataTable.DefaultView.RowFilter = $"LastName LIKE '%{searchTerm}%'";
                 }
             }
             else
