@@ -73,5 +73,10 @@ namespace CMPG223_Project
                 userID = (int)comboBoxUsers.SelectedValue;
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -42,7 +42,7 @@ namespace CMPG223_Project
         private void button5_Click(object sender, EventArgs e)
         {
             this.Hide();
-            rentalOrder rentalOrder = new rentalOrder(this,1);
+            rentalOrder rentalOrder = new rentalOrder(this, 1);
             rentalOrder.Closed += (s, args) => this.Show();
             rentalOrder.ShowDialog();
         }
@@ -58,6 +58,11 @@ namespace CMPG223_Project
         private void Admin_Menu_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

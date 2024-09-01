@@ -175,9 +175,9 @@ namespace CMPG223_Project
             lblLicenseNo.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblLicenseNo.Location = new Point(7, 179);
             lblLicenseNo.Name = "lblLicenseNo";
-            lblLicenseNo.Size = new Size(225, 32);
+            lblLicenseNo.Size = new Size(213, 32);
             lblLicenseNo.TabIndex = 17;
-            lblLicenseNo.Text = "Licencse Number: ";
+            lblLicenseNo.Text = "License Number: ";
             // 
             // lblCostPerDay
             // 

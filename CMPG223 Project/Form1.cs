@@ -11,7 +11,7 @@ namespace CMPG223_Project
         {
             this.Hide();
             Assistant_Menu assistant_Menu = new Assistant_Menu(this);
-            assistant_Menu.Closed += (s, args) => Application.Exit();
+            assistant_Menu.Closed += (s, args) => this.Show();
             assistant_Menu.ShowDialog();
         }
 
@@ -19,8 +19,13 @@ namespace CMPG223_Project
         {
             this.Hide();
             Admin_Menu admin_Menu = new Admin_Menu();
-            admin_Menu.Closed += (s, args) => Application.Exit();
-            admin_Menu.ShowDialog();   
+            admin_Menu.Closed += (s, args) => this.Show();
+            admin_Menu.ShowDialog();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

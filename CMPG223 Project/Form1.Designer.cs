@@ -34,6 +34,7 @@
             label1 = new Label();
             label2 = new Label();
             button1 = new Button();
+            button2 = new Button();
             SuspendLayout();
             // 
             // buttonAdmin
@@ -94,6 +95,16 @@
             button1.Text = "Help";
             button1.UseVisualStyleBackColor = true;
             // 
+            // button2
+            // 
+            button2.Location = new Point(846, 507);
+            button2.Name = "button2";
+            button2.Size = new Size(106, 52);
+            button2.TabIndex = 5;
+            button2.Text = "Close";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click_1;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -102,6 +113,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(964, 571);
+            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -120,5 +132,6 @@
         private Label label1;
         private Label label2;
         private Button button1;
+        private Button button2;
     }
 }

@@ -368,5 +368,10 @@ namespace CMPG223_Project
             pbRequestReports.BringToFront();
 
         }
+
+        private void btnBack_RequestReport_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
