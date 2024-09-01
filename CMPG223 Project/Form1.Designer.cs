@@ -33,6 +33,7 @@
             buttonAssistant = new Button();
             label1 = new Label();
             label2 = new Label();
+            button1 = new Button();
             SuspendLayout();
             // 
             // buttonAdmin
@@ -84,6 +85,15 @@
             label2.TabIndex = 3;
             label2.Text = "Please choose your role";
             // 
+            // button1
+            // 
+            button1.Location = new Point(12, 507);
+            button1.Name = "button1";
+            button1.Size = new Size(106, 52);
+            button1.TabIndex = 4;
+            button1.Text = "Help";
+            button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -92,6 +102,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(964, 571);
+            Controls.Add(button1);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(buttonAssistant);
@@ -108,5 +119,6 @@
         private Button buttonAssistant;
         private Label label1;
         private Label label2;
+        private Button button1;
     }
 }
