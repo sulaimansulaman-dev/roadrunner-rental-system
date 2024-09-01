@@ -27,7 +27,8 @@ namespace CMPG223_Project
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            frmUsers frmUsers = new frmUsers();
+            frmUsers.ShowDialog();
         }
 
         private void button5_Click(object sender, EventArgs e)

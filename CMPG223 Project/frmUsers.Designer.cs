@@ -43,7 +43,7 @@
             lblFirstName_Users = new Label();
             lblUsername_AddUsers = new Label();
             UpdateUsers = new TabPage();
-            cmbUserID_UpdateUser = new ComboBox();
+            txtUserID_UpdateUser = new TextBox();
             lblUserID_UpdateUsers = new Label();
             btnBack_UpdateUsers = new Button();
             btnClearUsers_UpdateUsers = new Button();
@@ -244,7 +244,7 @@
             UpdateUsers.BackColor = Color.FromArgb(188, 170, 146);
             UpdateUsers.BackgroundImage = Properties.Resources.e1aab579_d2ed_4896_8ccf_1b708d71abc9;
             UpdateUsers.BackgroundImageLayout = ImageLayout.Zoom;
-            UpdateUsers.Controls.Add(cmbUserID_UpdateUser);
+            UpdateUsers.Controls.Add(txtUserID_UpdateUser);
             UpdateUsers.Controls.Add(lblUserID_UpdateUsers);
             UpdateUsers.Controls.Add(btnBack_UpdateUsers);
             UpdateUsers.Controls.Add(btnClearUsers_UpdateUsers);
@@ -266,14 +266,13 @@
             UpdateUsers.TabIndex = 1;
             UpdateUsers.Text = "Update";
             // 
-            // cmbUserID_UpdateUser
+            // txtUserID_UpdateUser
             // 
-            cmbUserID_UpdateUser.FormattingEnabled = true;
-            cmbUserID_UpdateUser.Location = new Point(225, 28);
-            cmbUserID_UpdateUser.Margin = new Padding(3, 4, 3, 4);
-            cmbUserID_UpdateUser.Name = "cmbUserID_UpdateUser";
-            cmbUserID_UpdateUser.Size = new Size(196, 28);
-            cmbUserID_UpdateUser.TabIndex = 17;
+            txtUserID_UpdateUser.Location = new Point(225, 29);
+            txtUserID_UpdateUser.Name = "txtUserID_UpdateUser";
+            txtUserID_UpdateUser.ReadOnly = true;
+            txtUserID_UpdateUser.Size = new Size(196, 27);
+            txtUserID_UpdateUser.TabIndex = 17;
             // 
             // lblUserID_UpdateUsers
             // 
@@ -282,9 +281,9 @@
             lblUserID_UpdateUsers.ForeColor = SystemColors.ControlText;
             lblUserID_UpdateUsers.Location = new Point(9, 16);
             lblUserID_UpdateUsers.Name = "lblUserID_UpdateUsers";
-            lblUserID_UpdateUsers.Size = new Size(129, 41);
+            lblUserID_UpdateUsers.Size = new Size(121, 41);
             lblUserID_UpdateUsers.TabIndex = 16;
-            lblUserID_UpdateUsers.Text = "User ID:";
+            lblUserID_UpdateUsers.Text = "UserID:";
             // 
             // btnBack_UpdateUsers
             // 
@@ -307,6 +306,7 @@
             btnClearUsers_UpdateUsers.TabIndex = 14;
             btnClearUsers_UpdateUsers.Text = "Clear";
             btnClearUsers_UpdateUsers.UseVisualStyleBackColor = true;
+            btnClearUsers_UpdateUsers.Click += btnClearUsers_UpdateUsers_Click;
             // 
             // btnUpdateUsers_UpdateUsers
             // 
@@ -318,16 +318,17 @@
             btnUpdateUsers_UpdateUsers.TabIndex = 13;
             btnUpdateUsers_UpdateUsers.Text = "Update";
             btnUpdateUsers_UpdateUsers.UseVisualStyleBackColor = true;
+            btnUpdateUsers_UpdateUsers.Click += btnUpdateUsers_UpdateUsers_Click;
             // 
             // dgvUpdateUsers
             // 
             dgvUpdateUsers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvUpdateUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUpdateUsers.Location = new Point(538, 31);
+            dgvUpdateUsers.Location = new Point(538, 29);
             dgvUpdateUsers.Margin = new Padding(3, 4, 3, 4);
             dgvUpdateUsers.Name = "dgvUpdateUsers";
             dgvUpdateUsers.RowHeadersWidth = 51;
-            dgvUpdateUsers.Size = new Size(499, 163);
+            dgvUpdateUsers.Size = new Size(499, 250);
             dgvUpdateUsers.TabIndex = 12;
             // 
             // txtCellNumber_UpdateUsers
@@ -549,11 +550,11 @@
         private Label lblUserID_UpdateUsers;
         private TextBox txtUserID_UpdateUsers;
         private DataGridView dgvDelete_DeleteUsers;
-        private ComboBox cmbUserID_UpdateUser;
         private ComboBox cmbUsername_DeleteUsers;
         private Label lblUserID_DeleteUser;
         private Button btnBack_DeleteUsers;
         private Button btnClear_DeleteUsers;
         private Button btnDelete_DeleteUsers;
+        private TextBox txtUserID_UpdateUser;
     }
 }
