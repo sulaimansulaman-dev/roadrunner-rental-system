@@ -21,7 +21,8 @@ namespace CMPG223_Project
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            frmVehicles frmVehicles = new frmVehicles(); 
+            frmVehicles.ShowDialog();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -47,7 +48,8 @@ namespace CMPG223_Project
 
         private void button8_Click(object sender, EventArgs e)
         {
-
+            frmRequestReports RequestReportsfrm = new frmRequestReports(); 
+            RequestReportsfrm.ShowDialog();
         }
 
         private void Admin_Menu_Load(object sender, EventArgs e)
