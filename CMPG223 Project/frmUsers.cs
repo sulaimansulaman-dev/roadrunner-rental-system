@@ -289,7 +289,7 @@ namespace CMPG223_Project
             {
                 if (cmbUsername_DeleteUsers.SelectedIndex == -1)
                 {
-                    MessageBox.Show("Please select a user to delete.");
+                    MessageBox.Show("Please select a user to delete on the datagridview!");
                     return;
                 }
 
@@ -355,7 +355,7 @@ namespace CMPG223_Project
             // Check if a user is selected to update
             if (string.IsNullOrEmpty(txtUserID_UpdateUser.Text))
             {
-                MessageBox.Show("Please select a user to update.");
+                MessageBox.Show("Please select a user to update on the datagridview!");
                 return;
             }
 
