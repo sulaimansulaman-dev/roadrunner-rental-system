@@ -398,99 +398,34 @@ namespace CMPG223_Project
         //Search Function for the Vehicle Class Field In The Data Grid View
         private void txtSearch_Update_TextChanged(object sender, EventArgs e)
         {
+            string searchTerm = txtSearch_Update.Text.Trim().Replace("'", "''");
+            string[] searchableColumns = { "Vehicle_Class_ID", "ClassName", "Description" };
+            SearchDataGridView(searchTerm, dgvVehicleClasses_Update, searchableColumns);
 
 
-            string searchTerm = txtSearch_Update.Text.Trim();
-
-
-            if (dgvVehicleClasses_Update.DataSource is DataTable dataTable)
-            {
-
-                dataTable.DefaultView.RowFilter = $"ClassName LIKE '%{searchTerm}%'";
-            }
-            else
-            {
-
-                foreach (DataGridViewRow row in dgvVehicleClasses_Update.Rows)
-                {
-
-                    if (row.Cells["ClassName"].Value != null &&
-                        row.Cells["ClassName"].Value.ToString().IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0)
-                    {
-                        row.Visible = true;
-                    }
-                    else
-                    {
-                        row.Visible = false;
-                    }
-                }
-            }
 
 
 
         }
 
-        //Search Function for the Vehicle Class Field In The Data Grid View
+   
         private void txtSearch_Add_TextChanged(object sender, EventArgs e)
         {
 
-            string searchTerm = txtSearch_Add.Text.Trim();
+            string searchTerm = txtSearch_Add.Text.Trim().Replace("'", "''");
+            string[] searchableColumns = { "Vehicle_Class_ID", "ClassName", "Description" };
 
-
-            if (dgvVehicleClasses_Add.DataSource is DataTable dataTable)
-            {
-
-                dataTable.DefaultView.RowFilter = $"ClassName LIKE '%{searchTerm}%'";
-            }
-            else
-            {
-
-                foreach (DataGridViewRow row in dgvVehicleClasses_Add.Rows)
-                {
-
-                    if (row.Cells["ClassName"].Value != null &&
-                        row.Cells["ClassName"].Value.ToString().IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0)
-                    {
-                        row.Visible = true;
-                    }
-                    else
-                    {
-                        row.Visible = false;
-                    }
-                }
-            }
+            SearchDataGridView(searchTerm, dgvVehicleClasses_Add, searchableColumns);
 
         }
 
-        //Search Function for the Vehicle Class Field In The Data Grid View
         private void txtSearch_Delete_TextChanged(object sender, EventArgs e)
         {
 
             string searchTerm = txtSearch_Delete.Text.Trim();
+            string[] searchableColumns = { "Vehicle_Class_ID", "ClassName", "Description" };
 
-
-            if (dgvVehicleClasses_Delete.DataSource is DataTable dataTable)
-            {
-
-                dataTable.DefaultView.RowFilter = $"ClassName LIKE '%{searchTerm}%'";
-            }
-            else
-            {
-
-                foreach (DataGridViewRow row in dgvVehicleClasses_Delete.Rows)
-                {
-
-                    if (row.Cells["ClassName"].Value != null &&
-                        row.Cells["ClassName"].Value.ToString().IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0)
-                    {
-                        row.Visible = true;
-                    }
-                    else
-                    {
-                        row.Visible = false;
-                    }
-                }
-            }
+            SearchDataGridView(searchTerm, dgvVehicleClasses_Delete, searchableColumns); 
 
         }
 
@@ -577,6 +512,44 @@ namespace CMPG223_Project
         private void dgvVehicleClasses_Delete_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        public static void SearchDataGridView(string searchTerm, DataGridView dgv, params string[] searchableColumns)
+        {
+
+            searchTerm = searchTerm.ToLower();
+
+
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+
+                if (row.IsNewRow)
+                {
+                    continue;
+                }
+
+                bool rowVisible = false;
+
+
+                foreach (string columnName in searchableColumns)
+                {
+
+                    if (dgv.Columns.Contains(columnName))
+                    {
+                        string cellValue = row.Cells[columnName].Value?.ToString().ToLower() ?? "";
+
+
+                        if (cellValue.Contains(searchTerm))
+                        {
+                            rowVisible = true;
+                            break;
+                        }
+                    }
+                }
+
+
+                row.Visible = rowVisible;
+            }
         }
 
     }

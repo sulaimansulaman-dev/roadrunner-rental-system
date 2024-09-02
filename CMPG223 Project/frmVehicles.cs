@@ -21,6 +21,7 @@ namespace CMPG223_Project
     {
         int classId;
         SqlConnection cnn;
+        BindingSource bindingSource = new BindingSource();
         public frmVehicles()
         {
             InitializeComponent();
@@ -30,41 +31,27 @@ namespace CMPG223_Project
 
         public void displayData()
         {
-            //Display Data
             try
             {
-
-                //Opening Connection to the database
                 cnn.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 DataSet ds = new DataSet();
 
-                string sql = "SELECT Vehicle.Vehicle_ID, Vehicle.Vehicle_Name, Vehicle_Class.ClassName, Vehicle.NumberOfSeats, Vehicle.CostPerDay, Vehicle.LicenseNumber FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_Class_ID = Vehicle_Class.Vehicle_Class_ID;"; // <- SELECT statement
-                SqlCommand command = new SqlCommand(sql, cnn); // <-Execute an SQL statement against a given datasource
+                string sql = "SELECT Vehicle.Vehicle_ID, Vehicle.Vehicle_Name, Vehicle_Class.ClassName, Vehicle.NumberOfSeats, Vehicle.CostPerDay, Vehicle.LicenseNumber FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_Class_ID = Vehicle_Class.Vehicle_Class_ID;";
+                SqlCommand command = new SqlCommand(sql, cnn);
 
-                //Filling the dataset 
-                adapter.SelectCommand = command; // <- Set the command for the adpater
-                adapter.Fill(ds, "Vehicle"); // <- Fill the DataSet with the results of the SQL command
+                adapter.SelectCommand = command;
+                adapter.Fill(ds, "Vehicle");
 
-                //Adding the data into the Data Grid 
-                dgvVehicles_Add.DataSource = ds;
-                dgvVehicles_Add.DataMember = "Vehicle";
+                bindingSource.DataSource = ds.Tables["Vehicle"]; // Set BindingSource data source
 
-                dgvVehicles_Update.DataSource = ds;
-                dgvVehicles_Update.DataMember = "Vehicle";
-
-                dgvVehicles_Delete.DataSource = ds;
-                dgvVehicles_Delete.DataMember = "Vehicle";
-
+                // Bind the BindingSource to the DataGridView
+                dgvVehicles_Add.DataSource = bindingSource;
+                dgvVehicles_Update.DataSource = bindingSource;
+                dgvVehicles_Delete.DataSource = bindingSource;
 
                 cnn.Close();
-
-
-
-
             }
-
-            //try catch for error handling
             catch
             {
                 MessageBox.Show("Please Connect to database!");
@@ -95,7 +82,7 @@ namespace CMPG223_Project
 
             bool isValid = true;
             // Regular expression patterns for validation
-            string alphaPattern = @"^[a-zA-Z\s.,'-]*$";  // Allows letters, spaces, and some punctuation
+            string alphaPattern = @"^[a-zA-Z0-9\s.,'-]*$";  // Allows letters, spaces, and some punctuation and numbers
             string licensePattern = @"[A-Z]{3}\d{3,4}[A-Z]{2}$";
 
 
@@ -316,7 +303,7 @@ namespace CMPG223_Project
             bool isValid = true;
 
             // Regular expression patterns for validation
-            string alphaPattern = @"^[a-zA-Z\s.,'-]*$";  // Allows letters, spaces, and some punctuation
+            string alphaPattern = @"^[a-zA-Z0-9\s.,'-]*$"; ;  // Allows letters, spaces, and some punctuation and numbers
             string licensePattern = @"[A-Z]{3}\d{3,4}[A-Z]{2}$";
 
 
@@ -468,7 +455,7 @@ namespace CMPG223_Project
                 LoadComboBox();
                 LoadComboBoxUpdateClass();
                 LoadComboBox_VehicleName();
-                btnDelete_Delete_Click(sender, e);
+                btnClear_Update_Click(sender, e);
 
 
             }
@@ -523,6 +510,8 @@ namespace CMPG223_Project
             {
                 errorProvider1.SetError(cmbVehicleID_Delete, "Please select a vehicle to delete.");
             }
+
+            btnClear_Delete_Click(sender, e);
         }
 
         private void cmbVehicleID_Update_Validating(object sender, CancelEventArgs e)
@@ -664,5 +653,76 @@ namespace CMPG223_Project
         {
             cmbVehicleID_Delete.SelectedIndex = -1;
         }
+
+        private void txtSearch_Add_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = txtSearch_Add.Text.Trim().Replace("'", "''"); 
+            string[] searchableColumns = { "Vehicle_Name", "ClassName", "LicenseNumber" }; 
+
+       
+            SearchDataGridView(searchTerm, dgvVehicles_Add, searchableColumns);
+        }
+
+        private void txtSearch_Update_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = txtSearch_Update.Text.Trim().Replace("'", "''"); 
+            string[] searchableColumns = { "Vehicle_Name", "ClassName", "LicenseNumber" }; 
+
+            // Call the search function
+            SearchDataGridView(searchTerm,  dgvVehicles_Update, searchableColumns);
+
+
+        }
+
+        public static void SearchDataGridView(string searchTerm, DataGridView dgv, params string[] searchableColumns)
+        {
+
+            searchTerm = searchTerm.ToLower();
+
+   
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+        
+                if (row.IsNewRow)
+                {
+                    continue;
+                }
+
+                bool rowVisible = false;
+
+              
+                foreach (string columnName in searchableColumns)
+                {
+              
+                    if (dgv.Columns.Contains(columnName))
+                    {
+                        string cellValue = row.Cells[columnName].Value?.ToString().ToLower() ?? "";
+
+                   
+                        if (cellValue.Contains(searchTerm))
+                        {
+                            rowVisible = true;
+                            break;
+                        }
+                    }
+                }
+
+             
+                row.Visible = rowVisible;
+            }
+        }
+
+
+        private void txtSearch_Delete_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = txtSearch_Delete.Text.Trim().Replace("'", "''"); 
+            string[] searchableColumns = { "Vehicle_Name", "ClassName", "LicenseNumber" }; 
+
+          
+            SearchDataGridView(searchTerm, dgvVehicles_Delete, searchableColumns);
+
+
+        }
     }
+
 }

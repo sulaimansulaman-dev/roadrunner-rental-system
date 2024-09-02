@@ -31,6 +31,9 @@ namespace CMPG223_Project
             components = new System.ComponentModel.Container();
             tabControlVehicleClasses = new TabControl();
             tabAdd = new TabPage();
+            label12 = new Label();
+            label4 = new Label();
+            txtSearch_Add = new TextBox();
             pictureBox1 = new PictureBox();
             txtCostPerDay = new TextBox();
             txtName = new TextBox();
@@ -47,6 +50,9 @@ namespace CMPG223_Project
             btnBack_Add = new Button();
             lblClassSelect = new Label();
             tabUpdate = new TabPage();
+            label11 = new Label();
+            txtSearch_Update = new TextBox();
+            label6 = new Label();
             pictureBox3 = new PictureBox();
             txtVehicleID_Update = new TextBox();
             txtCostPerDay_Update = new TextBox();
@@ -65,6 +71,9 @@ namespace CMPG223_Project
             btnUpdate_Update = new Button();
             btnBack_Update = new Button();
             tabDelete = new TabPage();
+            label10 = new Label();
+            label7 = new Label();
+            txtSearch_Delete = new TextBox();
             pictureBox2 = new PictureBox();
             cmbVehicleID_Delete = new ComboBox();
             btnClear_Delete = new Button();
@@ -99,13 +108,16 @@ namespace CMPG223_Project
             tabControlVehicleClasses.Location = new Point(0, 0);
             tabControlVehicleClasses.Name = "tabControlVehicleClasses";
             tabControlVehicleClasses.SelectedIndex = 0;
-            tabControlVehicleClasses.Size = new Size(1102, 631);
+            tabControlVehicleClasses.Size = new Size(1027, 584);
             tabControlVehicleClasses.TabIndex = 1;
             // 
             // tabAdd
             // 
             tabAdd.BackColor = Color.FromArgb(188, 170, 146);
             tabAdd.BackgroundImageLayout = ImageLayout.Zoom;
+            tabAdd.Controls.Add(label12);
+            tabAdd.Controls.Add(label4);
+            tabAdd.Controls.Add(txtSearch_Add);
             tabAdd.Controls.Add(pictureBox1);
             tabAdd.Controls.Add(txtCostPerDay);
             tabAdd.Controls.Add(txtName);
@@ -124,9 +136,38 @@ namespace CMPG223_Project
             tabAdd.Location = new Point(4, 29);
             tabAdd.Name = "tabAdd";
             tabAdd.Padding = new Padding(3);
-            tabAdd.Size = new Size(1094, 598);
+            tabAdd.Size = new Size(1019, 551);
             tabAdd.TabIndex = 0;
             tabAdd.Text = "Add";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label12.Location = new Point(0, 3);
+            label12.Name = "label12";
+            label12.Size = new Size(208, 46);
+            label12.TabIndex = 41;
+            label12.Text = "Add Vehicle";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
+            label4.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(626, 28);
+            label4.Name = "label4";
+            label4.Size = new Size(119, 41);
+            label4.TabIndex = 27;
+            label4.Text = "Search:";
+            // 
+            // txtSearch_Add
+            // 
+            txtSearch_Add.Location = new Point(738, 39);
+            txtSearch_Add.Name = "txtSearch_Add";
+            txtSearch_Add.Size = new Size(206, 27);
+            txtSearch_Add.TabIndex = 26;
+            txtSearch_Add.TextChanged += txtSearch_Add_TextChanged;
             // 
             // pictureBox1
             // 
@@ -140,14 +181,14 @@ namespace CMPG223_Project
             // 
             // txtCostPerDay
             // 
-            txtCostPerDay.Location = new Point(363, 187);
+            txtCostPerDay.Location = new Point(364, 254);
             txtCostPerDay.Name = "txtCostPerDay";
             txtCostPerDay.Size = new Size(125, 27);
             txtCostPerDay.TabIndex = 24;
             // 
             // txtName
             // 
-            txtName.Location = new Point(363, 25);
+            txtName.Location = new Point(364, 92);
             txtName.Name = "txtName";
             txtName.Size = new Size(125, 27);
             txtName.TabIndex = 23;
@@ -157,7 +198,7 @@ namespace CMPG223_Project
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(8, 5);
+            label5.Location = new Point(9, 72);
             label5.Name = "label5";
             label5.Size = new Size(225, 41);
             label5.TabIndex = 22;
@@ -168,7 +209,7 @@ namespace CMPG223_Project
             lblLicenseNo.AutoSize = true;
             lblLicenseNo.BackColor = Color.Transparent;
             lblLicenseNo.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblLicenseNo.Location = new Point(8, 239);
+            lblLicenseNo.Location = new Point(9, 306);
             lblLicenseNo.Name = "lblLicenseNo";
             lblLicenseNo.Size = new Size(260, 41);
             lblLicenseNo.TabIndex = 17;
@@ -179,7 +220,7 @@ namespace CMPG223_Project
             lblCostPerDay.AutoSize = true;
             lblCostPerDay.BackColor = Color.Transparent;
             lblCostPerDay.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblCostPerDay.Location = new Point(8, 179);
+            lblCostPerDay.Location = new Point(9, 246);
             lblCostPerDay.Name = "lblCostPerDay";
             lblCostPerDay.Size = new Size(211, 41);
             lblCostPerDay.TabIndex = 14;
@@ -187,7 +228,7 @@ namespace CMPG223_Project
             // 
             // txtLicenseNo
             // 
-            txtLicenseNo.Location = new Point(363, 247);
+            txtLicenseNo.Location = new Point(364, 314);
             txtLicenseNo.Name = "txtLicenseNo";
             txtLicenseNo.Size = new Size(125, 27);
             txtLicenseNo.TabIndex = 13;
@@ -197,7 +238,7 @@ namespace CMPG223_Project
             cmbNoOfSeats.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbNoOfSeats.FormattingEnabled = true;
             cmbNoOfSeats.Items.AddRange(new object[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" });
-            cmbNoOfSeats.Location = new Point(363, 131);
+            cmbNoOfSeats.Location = new Point(364, 198);
             cmbNoOfSeats.Name = "cmbNoOfSeats";
             cmbNoOfSeats.Size = new Size(125, 28);
             cmbNoOfSeats.TabIndex = 12;
@@ -207,7 +248,7 @@ namespace CMPG223_Project
             lblNoSeats.AutoSize = true;
             lblNoSeats.BackColor = Color.Transparent;
             lblNoSeats.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblNoSeats.Location = new Point(8, 116);
+            lblNoSeats.Location = new Point(9, 183);
             lblNoSeats.Name = "lblNoSeats";
             lblNoSeats.Size = new Size(275, 41);
             lblNoSeats.TabIndex = 11;
@@ -217,7 +258,7 @@ namespace CMPG223_Project
             // 
             cmbClassSelect.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbClassSelect.FormattingEnabled = true;
-            cmbClassSelect.Location = new Point(363, 75);
+            cmbClassSelect.Location = new Point(364, 142);
             cmbClassSelect.Name = "cmbClassSelect";
             cmbClassSelect.Size = new Size(123, 28);
             cmbClassSelect.TabIndex = 8;
@@ -226,7 +267,7 @@ namespace CMPG223_Project
             // dgvVehicles_Add
             // 
             dgvVehicles_Add.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvVehicles_Add.Location = new Point(571, 5);
+            dgvVehicles_Add.Location = new Point(521, 72);
             dgvVehicles_Add.Name = "dgvVehicles_Add";
             dgvVehicles_Add.RowHeadersWidth = 51;
             dgvVehicles_Add.Size = new Size(473, 293);
@@ -234,7 +275,7 @@ namespace CMPG223_Project
             // 
             // btnClear_Add
             // 
-            btnClear_Add.Location = new Point(753, 329);
+            btnClear_Add.Location = new Point(707, 371);
             btnClear_Add.Name = "btnClear_Add";
             btnClear_Add.Size = new Size(107, 51);
             btnClear_Add.TabIndex = 6;
@@ -244,7 +285,7 @@ namespace CMPG223_Project
             // 
             // btnAdd_Add
             // 
-            btnAdd_Add.Location = new Point(571, 329);
+            btnAdd_Add.Location = new Point(521, 371);
             btnAdd_Add.Name = "btnAdd_Add";
             btnAdd_Add.Size = new Size(107, 51);
             btnAdd_Add.TabIndex = 5;
@@ -254,7 +295,7 @@ namespace CMPG223_Project
             // 
             // btnBack_Add
             // 
-            btnBack_Add.Location = new Point(937, 329);
+            btnBack_Add.Location = new Point(887, 371);
             btnBack_Add.Name = "btnBack_Add";
             btnBack_Add.Size = new Size(107, 51);
             btnBack_Add.TabIndex = 4;
@@ -267,7 +308,7 @@ namespace CMPG223_Project
             lblClassSelect.AutoSize = true;
             lblClassSelect.BackColor = Color.Transparent;
             lblClassSelect.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblClassSelect.Location = new Point(6, 61);
+            lblClassSelect.Location = new Point(7, 128);
             lblClassSelect.Name = "lblClassSelect";
             lblClassSelect.Size = new Size(104, 41);
             lblClassSelect.TabIndex = 0;
@@ -277,6 +318,9 @@ namespace CMPG223_Project
             // 
             tabUpdate.BackColor = Color.FromArgb(188, 170, 146);
             tabUpdate.BackgroundImageLayout = ImageLayout.Zoom;
+            tabUpdate.Controls.Add(label11);
+            tabUpdate.Controls.Add(txtSearch_Update);
+            tabUpdate.Controls.Add(label6);
             tabUpdate.Controls.Add(pictureBox3);
             tabUpdate.Controls.Add(txtVehicleID_Update);
             tabUpdate.Controls.Add(txtCostPerDay_Update);
@@ -297,9 +341,38 @@ namespace CMPG223_Project
             tabUpdate.Location = new Point(4, 29);
             tabUpdate.Name = "tabUpdate";
             tabUpdate.Padding = new Padding(3);
-            tabUpdate.Size = new Size(1094, 598);
+            tabUpdate.Size = new Size(1019, 551);
             tabUpdate.TabIndex = 1;
             tabUpdate.Text = "Update";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label11.Location = new Point(3, 3);
+            label11.Name = "label11";
+            label11.Size = new Size(258, 46);
+            label11.TabIndex = 41;
+            label11.Text = "Update Vehicle";
+            // 
+            // txtSearch_Update
+            // 
+            txtSearch_Update.Location = new Point(729, 46);
+            txtSearch_Update.Name = "txtSearch_Update";
+            txtSearch_Update.Size = new Size(206, 27);
+            txtSearch_Update.TabIndex = 39;
+            txtSearch_Update.TextChanged += txtSearch_Update_TextChanged;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.BackColor = Color.Transparent;
+            label6.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.Location = new Point(604, 32);
+            label6.Name = "label6";
+            label6.Size = new Size(119, 41);
+            label6.TabIndex = 38;
+            label6.Text = "Search:";
             // 
             // pictureBox3
             // 
@@ -313,21 +386,22 @@ namespace CMPG223_Project
             // 
             // txtVehicleID_Update
             // 
-            txtVehicleID_Update.Location = new Point(382, 32);
+            txtVehicleID_Update.Enabled = false;
+            txtVehicleID_Update.Location = new Point(356, 92);
             txtVehicleID_Update.Name = "txtVehicleID_Update";
             txtVehicleID_Update.Size = new Size(125, 27);
             txtVehicleID_Update.TabIndex = 36;
             // 
             // txtCostPerDay_Update
             // 
-            txtCostPerDay_Update.Location = new Point(382, 256);
+            txtCostPerDay_Update.Location = new Point(356, 316);
             txtCostPerDay_Update.Name = "txtCostPerDay_Update";
             txtCostPerDay_Update.Size = new Size(125, 27);
             txtCostPerDay_Update.TabIndex = 35;
             // 
             // txtVehicleName_Update
             // 
-            txtVehicleName_Update.Location = new Point(382, 88);
+            txtVehicleName_Update.Location = new Point(356, 148);
             txtVehicleName_Update.Name = "txtVehicleName_Update";
             txtVehicleName_Update.Size = new Size(125, 27);
             txtVehicleName_Update.TabIndex = 34;
@@ -338,7 +412,7 @@ namespace CMPG223_Project
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(26, 68);
+            label1.Location = new Point(0, 128);
             label1.Name = "label1";
             label1.Size = new Size(225, 41);
             label1.TabIndex = 33;
@@ -348,7 +422,7 @@ namespace CMPG223_Project
             // 
             cmbClass_Update.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbClass_Update.FormattingEnabled = true;
-            cmbClass_Update.Location = new Point(382, 133);
+            cmbClass_Update.Location = new Point(356, 193);
             cmbClass_Update.Name = "cmbClass_Update";
             cmbClass_Update.Size = new Size(125, 28);
             cmbClass_Update.TabIndex = 32;
@@ -358,7 +432,7 @@ namespace CMPG223_Project
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(25, 120);
+            label3.Location = new Point(-1, 180);
             label3.Name = "label3";
             label3.Size = new Size(104, 41);
             label3.TabIndex = 31;
@@ -369,7 +443,7 @@ namespace CMPG223_Project
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(26, 301);
+            label2.Location = new Point(0, 361);
             label2.Name = "label2";
             label2.Size = new Size(274, 41);
             label2.TabIndex = 27;
@@ -380,7 +454,7 @@ namespace CMPG223_Project
             label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
             label8.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label8.Location = new Point(26, 243);
+            label8.Location = new Point(0, 303);
             label8.Name = "label8";
             label8.Size = new Size(211, 41);
             label8.TabIndex = 25;
@@ -388,7 +462,7 @@ namespace CMPG223_Project
             // 
             // txtLicenseNo_Update
             // 
-            txtLicenseNo_Update.Location = new Point(382, 309);
+            txtLicenseNo_Update.Location = new Point(356, 369);
             txtLicenseNo_Update.Name = "txtLicenseNo_Update";
             txtLicenseNo_Update.Size = new Size(125, 27);
             txtLicenseNo_Update.TabIndex = 24;
@@ -398,7 +472,7 @@ namespace CMPG223_Project
             cmbNoOfSeats_Update.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbNoOfSeats_Update.FormattingEnabled = true;
             cmbNoOfSeats_Update.Items.AddRange(new object[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13" });
-            cmbNoOfSeats_Update.Location = new Point(382, 195);
+            cmbNoOfSeats_Update.Location = new Point(356, 255);
             cmbNoOfSeats_Update.Name = "cmbNoOfSeats_Update";
             cmbNoOfSeats_Update.Size = new Size(125, 28);
             cmbNoOfSeats_Update.TabIndex = 23;
@@ -408,7 +482,7 @@ namespace CMPG223_Project
             label9.AutoSize = true;
             label9.BackColor = Color.Transparent;
             label9.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.Location = new Point(26, 179);
+            label9.Location = new Point(0, 239);
             label9.Name = "label9";
             label9.Size = new Size(275, 41);
             label9.TabIndex = 22;
@@ -418,7 +492,7 @@ namespace CMPG223_Project
             // 
             lblVehicle.AutoSize = true;
             lblVehicle.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblVehicle.Location = new Point(26, 19);
+            lblVehicle.Location = new Point(0, 79);
             lblVehicle.Name = "lblVehicle";
             lblVehicle.Size = new Size(174, 41);
             lblVehicle.TabIndex = 16;
@@ -427,7 +501,7 @@ namespace CMPG223_Project
             // dgvVehicles_Update
             // 
             dgvVehicles_Update.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvVehicles_Update.Location = new Point(558, 51);
+            dgvVehicles_Update.Location = new Point(505, 76);
             dgvVehicles_Update.Name = "dgvVehicles_Update";
             dgvVehicles_Update.RowHeadersWidth = 51;
             dgvVehicles_Update.Size = new Size(473, 293);
@@ -436,7 +510,7 @@ namespace CMPG223_Project
             // 
             // btnClear_Update
             // 
-            btnClear_Update.Location = new Point(738, 368);
+            btnClear_Update.Location = new Point(686, 389);
             btnClear_Update.Name = "btnClear_Update";
             btnClear_Update.Size = new Size(104, 55);
             btnClear_Update.TabIndex = 14;
@@ -446,7 +520,7 @@ namespace CMPG223_Project
             // 
             // btnUpdate_Update
             // 
-            btnUpdate_Update.Location = new Point(558, 368);
+            btnUpdate_Update.Location = new Point(505, 389);
             btnUpdate_Update.Name = "btnUpdate_Update";
             btnUpdate_Update.Size = new Size(104, 55);
             btnUpdate_Update.TabIndex = 13;
@@ -456,7 +530,7 @@ namespace CMPG223_Project
             // 
             // btnBack_Update
             // 
-            btnBack_Update.Location = new Point(927, 368);
+            btnBack_Update.Location = new Point(874, 389);
             btnBack_Update.Name = "btnBack_Update";
             btnBack_Update.Size = new Size(104, 55);
             btnBack_Update.TabIndex = 12;
@@ -468,6 +542,9 @@ namespace CMPG223_Project
             // 
             tabDelete.BackColor = Color.FromArgb(188, 170, 146);
             tabDelete.BackgroundImageLayout = ImageLayout.Zoom;
+            tabDelete.Controls.Add(label10);
+            tabDelete.Controls.Add(label7);
+            tabDelete.Controls.Add(txtSearch_Delete);
             tabDelete.Controls.Add(pictureBox2);
             tabDelete.Controls.Add(cmbVehicleID_Delete);
             tabDelete.Controls.Add(btnClear_Delete);
@@ -477,9 +554,38 @@ namespace CMPG223_Project
             tabDelete.Controls.Add(lblClassID_Delete);
             tabDelete.Location = new Point(4, 29);
             tabDelete.Name = "tabDelete";
-            tabDelete.Size = new Size(1094, 598);
+            tabDelete.Size = new Size(1019, 551);
             tabDelete.TabIndex = 2;
             tabDelete.Text = "Delete";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label10.Location = new Point(0, 0);
+            label10.Name = "label10";
+            label10.Size = new Size(244, 46);
+            label10.TabIndex = 40;
+            label10.Text = "Delete Vehicle";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.BackColor = Color.Transparent;
+            label7.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.Location = new Point(415, 42);
+            label7.Name = "label7";
+            label7.Size = new Size(119, 41);
+            label7.TabIndex = 39;
+            label7.Text = "Search:";
+            // 
+            // txtSearch_Delete
+            // 
+            txtSearch_Delete.Location = new Point(537, 56);
+            txtSearch_Delete.Name = "txtSearch_Delete";
+            txtSearch_Delete.Size = new Size(168, 27);
+            txtSearch_Delete.TabIndex = 27;
+            txtSearch_Delete.TextChanged += txtSearch_Delete_TextChanged;
             // 
             // pictureBox2
             // 
@@ -495,14 +601,14 @@ namespace CMPG223_Project
             // 
             cmbVehicleID_Delete.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbVehicleID_Delete.FormattingEnabled = true;
-            cmbVehicleID_Delete.Location = new Point(582, 445);
+            cmbVehicleID_Delete.Location = new Point(582, 468);
             cmbVehicleID_Delete.Name = "cmbVehicleID_Delete";
             cmbVehicleID_Delete.Size = new Size(123, 28);
             cmbVehicleID_Delete.TabIndex = 23;
             // 
             // btnClear_Delete
             // 
-            btnClear_Delete.Location = new Point(487, 493);
+            btnClear_Delete.Location = new Point(486, 502);
             btnClear_Delete.Name = "btnClear_Delete";
             btnClear_Delete.Size = new Size(104, 53);
             btnClear_Delete.TabIndex = 22;
@@ -512,7 +618,7 @@ namespace CMPG223_Project
             // 
             // btnDelete_Delete
             // 
-            btnDelete_Delete.Location = new Point(288, 493);
+            btnDelete_Delete.Location = new Point(288, 502);
             btnDelete_Delete.Name = "btnDelete_Delete";
             btnDelete_Delete.Size = new Size(104, 53);
             btnDelete_Delete.TabIndex = 21;
@@ -522,7 +628,7 @@ namespace CMPG223_Project
             // 
             // btnBack_Delete
             // 
-            btnBack_Delete.Location = new Point(690, 493);
+            btnBack_Delete.Location = new Point(690, 502);
             btnBack_Delete.Name = "btnBack_Delete";
             btnBack_Delete.Size = new Size(104, 53);
             btnBack_Delete.TabIndex = 20;
@@ -533,7 +639,7 @@ namespace CMPG223_Project
             // dgvVehicles_Delete
             // 
             dgvVehicles_Delete.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvVehicles_Delete.Location = new Point(288, 57);
+            dgvVehicles_Delete.Location = new Point(288, 99);
             dgvVehicles_Delete.Name = "dgvVehicles_Delete";
             dgvVehicles_Delete.RowHeadersWidth = 51;
             dgvVehicles_Delete.Size = new Size(506, 355);
@@ -545,7 +651,7 @@ namespace CMPG223_Project
             lblClassID_Delete.AutoSize = true;
             lblClassID_Delete.BackColor = Color.Transparent;
             lblClassID_Delete.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblClassID_Delete.Location = new Point(363, 433);
+            lblClassID_Delete.Location = new Point(364, 457);
             lblClassID_Delete.Name = "lblClassID_Delete";
             lblClassID_Delete.Size = new Size(212, 38);
             lblClassID_Delete.TabIndex = 17;
@@ -569,7 +675,7 @@ namespace CMPG223_Project
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(188, 170, 148);
             BackgroundImageLayout = ImageLayout.Zoom;
-            ClientSize = new Size(1102, 631);
+            ClientSize = new Size(1027, 584);
             Controls.Add(tabControlVehicleClasses);
             Name = "frmVehicles";
             Text = "Vehicles";
@@ -642,5 +748,14 @@ namespace CMPG223_Project
         private PictureBox pictureBox1;
         private PictureBox pictureBox3;
         private PictureBox pictureBox2;
+        private TextBox txtSearch_Add;
+        private Label label4;
+        private TextBox txtSearch_Update;
+        private Label label6;
+        private Label label7;
+        private TextBox txtSearch_Delete;
+        private Label label12;
+        private Label label11;
+        private Label label10;
     }
 }
