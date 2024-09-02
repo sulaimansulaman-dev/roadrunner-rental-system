@@ -573,7 +573,7 @@ namespace CMPG223_Project
             label7.AutoSize = true;
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label7.Location = new Point(415, 42);
+            label7.Location = new Point(412, 29);
             label7.Name = "label7";
             label7.Size = new Size(119, 41);
             label7.TabIndex = 39;
@@ -581,7 +581,7 @@ namespace CMPG223_Project
             // 
             // txtSearch_Delete
             // 
-            txtSearch_Delete.Location = new Point(537, 56);
+            txtSearch_Delete.Location = new Point(537, 43);
             txtSearch_Delete.Name = "txtSearch_Delete";
             txtSearch_Delete.Size = new Size(168, 27);
             txtSearch_Delete.TabIndex = 27;
@@ -601,14 +601,14 @@ namespace CMPG223_Project
             // 
             cmbVehicleID_Delete.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbVehicleID_Delete.FormattingEnabled = true;
-            cmbVehicleID_Delete.Location = new Point(582, 468);
+            cmbVehicleID_Delete.Location = new Point(582, 445);
             cmbVehicleID_Delete.Name = "cmbVehicleID_Delete";
             cmbVehicleID_Delete.Size = new Size(123, 28);
             cmbVehicleID_Delete.TabIndex = 23;
             // 
             // btnClear_Delete
             // 
-            btnClear_Delete.Location = new Point(486, 502);
+            btnClear_Delete.Location = new Point(485, 490);
             btnClear_Delete.Name = "btnClear_Delete";
             btnClear_Delete.Size = new Size(104, 53);
             btnClear_Delete.TabIndex = 22;
@@ -618,7 +618,7 @@ namespace CMPG223_Project
             // 
             // btnDelete_Delete
             // 
-            btnDelete_Delete.Location = new Point(288, 502);
+            btnDelete_Delete.Location = new Point(288, 490);
             btnDelete_Delete.Name = "btnDelete_Delete";
             btnDelete_Delete.Size = new Size(104, 53);
             btnDelete_Delete.TabIndex = 21;
@@ -628,7 +628,7 @@ namespace CMPG223_Project
             // 
             // btnBack_Delete
             // 
-            btnBack_Delete.Location = new Point(690, 502);
+            btnBack_Delete.Location = new Point(690, 490);
             btnBack_Delete.Name = "btnBack_Delete";
             btnBack_Delete.Size = new Size(104, 53);
             btnBack_Delete.TabIndex = 20;
@@ -639,7 +639,7 @@ namespace CMPG223_Project
             // dgvVehicles_Delete
             // 
             dgvVehicles_Delete.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvVehicles_Delete.Location = new Point(288, 99);
+            dgvVehicles_Delete.Location = new Point(288, 76);
             dgvVehicles_Delete.Name = "dgvVehicles_Delete";
             dgvVehicles_Delete.RowHeadersWidth = 51;
             dgvVehicles_Delete.Size = new Size(506, 355);
@@ -651,7 +651,7 @@ namespace CMPG223_Project
             lblClassID_Delete.AutoSize = true;
             lblClassID_Delete.BackColor = Color.Transparent;
             lblClassID_Delete.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblClassID_Delete.Location = new Point(364, 457);
+            lblClassID_Delete.Location = new Point(364, 434);
             lblClassID_Delete.Name = "lblClassID_Delete";
             lblClassID_Delete.Size = new Size(212, 38);
             lblClassID_Delete.TabIndex = 17;

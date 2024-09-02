@@ -657,7 +657,7 @@ namespace CMPG223_Project
         private void txtSearch_Add_TextChanged(object sender, EventArgs e)
         {
             string searchTerm = txtSearch_Add.Text.Trim().Replace("'", "''"); 
-            string[] searchableColumns = { "Vehicle_Name", "ClassName", "LicenseNumber" }; 
+            string[] searchableColumns = { "Vehicle_ID", "Vehicle_Name", "ClassName", "LicenseNumber" }; 
 
        
             SearchDataGridView(searchTerm, dgvVehicles_Add, searchableColumns);
@@ -666,63 +666,64 @@ namespace CMPG223_Project
         private void txtSearch_Update_TextChanged(object sender, EventArgs e)
         {
             string searchTerm = txtSearch_Update.Text.Trim().Replace("'", "''"); 
-            string[] searchableColumns = { "Vehicle_Name", "ClassName", "LicenseNumber" }; 
+            string[] searchableColumns = { "Vehicle_ID","Vehicle_Name", "ClassName", "LicenseNumber" }; 
 
             // Call the search function
             SearchDataGridView(searchTerm,  dgvVehicles_Update, searchableColumns);
 
 
         }
-
-        public static void SearchDataGridView(string searchTerm, DataGridView dgv, params string[] searchableColumns)
-        {
-
-            searchTerm = searchTerm.ToLower();
-
-   
-            foreach (DataGridViewRow row in dgv.Rows)
-            {
-        
-                if (row.IsNewRow)
-                {
-                    continue;
-                }
-
-                bool rowVisible = false;
-
-              
-                foreach (string columnName in searchableColumns)
-                {
-              
-                    if (dgv.Columns.Contains(columnName))
-                    {
-                        string cellValue = row.Cells[columnName].Value?.ToString().ToLower() ?? "";
-
-                   
-                        if (cellValue.Contains(searchTerm))
-                        {
-                            rowVisible = true;
-                            break;
-                        }
-                    }
-                }
-
-             
-                row.Visible = rowVisible;
-            }
-        }
-
-
         private void txtSearch_Delete_TextChanged(object sender, EventArgs e)
         {
-            string searchTerm = txtSearch_Delete.Text.Trim().Replace("'", "''"); 
-            string[] searchableColumns = { "Vehicle_Name", "ClassName", "LicenseNumber" }; 
+            string searchTerm = txtSearch_Delete.Text.Trim().Replace("'", "''");
+            string[] searchableColumns = { "Vehicle_ID", "Vehicle_Name", "ClassName", "LicenseNumber" };
 
-          
+
             SearchDataGridView(searchTerm, dgvVehicles_Delete, searchableColumns);
 
 
         }
+
+        public static void SearchDataGridView(string searchTerm, DataGridView dgv, params string[] searchableColumns)
+        {
+            searchTerm = searchTerm.ToLower();
+
+            if (dgv.BindingContext != null && dgv.DataSource != null)
+            {
+                CurrencyManager currencyManager = (CurrencyManager)dgv.BindingContext[dgv.DataSource];
+                currencyManager.SuspendBinding();
+
+                foreach (DataGridViewRow row in dgv.Rows)
+                {
+                    if (row.IsNewRow) continue;
+
+                    bool rowVisible = false;
+
+                    foreach (string columnName in searchableColumns)
+                    {
+                        if (dgv.Columns.Contains(columnName))
+                        {
+                            string cellValue = row.Cells[columnName].Value?.ToString().ToLower() ?? "";
+
+                            if (cellValue.Contains(searchTerm))
+                            {
+                                rowVisible = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    row.Visible = rowVisible;
+                }
+
+                currencyManager.ResumeBinding();
+            }
+        }
+
+
+
+
+
     }
 
 }

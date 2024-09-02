@@ -81,12 +81,12 @@ namespace CMPG223_Project
 
             if (!isValid)
             {
-                
+
                 return;
             }
 
-            
-            
+
+
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -108,7 +108,7 @@ namespace CMPG223_Project
                     if (count > 0)
                     {
                         errorProvider1.SetError(txtClassName_Add, "Class Name already exists.");
-                        
+
                         return;
                     }
                     else
@@ -184,7 +184,7 @@ namespace CMPG223_Project
             if (string.IsNullOrWhiteSpace(className))
             {
                 errorProvider1.SetError(txtClassName_Delete, "Class Name is required.");
-                
+
                 isValid = false;
             }
             else if (!System.Text.RegularExpressions.Regex.IsMatch(className, alphaPattern))
@@ -408,7 +408,7 @@ namespace CMPG223_Project
 
         }
 
-   
+
         private void txtSearch_Add_TextChanged(object sender, EventArgs e)
         {
 
@@ -425,7 +425,7 @@ namespace CMPG223_Project
             string searchTerm = txtSearch_Delete.Text.Trim();
             string[] searchableColumns = { "Vehicle_Class_ID", "ClassName", "Description" };
 
-            SearchDataGridView(searchTerm, dgvVehicleClasses_Delete, searchableColumns); 
+            SearchDataGridView(searchTerm, dgvVehicleClasses_Delete, searchableColumns);
 
         }
 
@@ -516,41 +516,44 @@ namespace CMPG223_Project
 
         public static void SearchDataGridView(string searchTerm, DataGridView dgv, params string[] searchableColumns)
         {
-
             searchTerm = searchTerm.ToLower();
 
-
-            foreach (DataGridViewRow row in dgv.Rows)
+            if (dgv.BindingContext != null && dgv.DataSource != null)
             {
+                CurrencyManager currencyManager = (CurrencyManager)dgv.BindingContext[dgv.DataSource];
+                currencyManager.Position = -1;  // Move the currency manager position away from the current row
+                currencyManager.SuspendBinding();
 
-                if (row.IsNewRow)
+                foreach (DataGridViewRow row in dgv.Rows)
                 {
-                    continue;
-                }
+                    if (row.IsNewRow) continue;
 
-                bool rowVisible = false;
+                    bool rowVisible = false;
 
-
-                foreach (string columnName in searchableColumns)
-                {
-
-                    if (dgv.Columns.Contains(columnName))
+                    foreach (string columnName in searchableColumns)
                     {
-                        string cellValue = row.Cells[columnName].Value?.ToString().ToLower() ?? "";
-
-
-                        if (cellValue.Contains(searchTerm))
+                        if (dgv.Columns.Contains(columnName))
                         {
-                            rowVisible = true;
-                            break;
+                            string cellValue = row.Cells[columnName].Value?.ToString().ToLower() ?? "";
+
+                            if (cellValue.Contains(searchTerm))
+                            {
+                                rowVisible = true;
+                                break;
+                            }
                         }
                     }
+
+                    row.Visible = rowVisible;
                 }
 
-
-                row.Visible = rowVisible;
+                currencyManager.ResumeBinding();
             }
         }
 
+        private void dgvVehicleClasses_Add_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

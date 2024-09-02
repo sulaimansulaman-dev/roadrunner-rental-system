@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using System.Configuration;
+using System.Text.RegularExpressions;
 
 namespace CMPG223_Project
 {
@@ -47,18 +49,62 @@ namespace CMPG223_Project
 
         private void dgvUpdateUsers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Check if a valid row is clicked (not the header row)
-            if (e.RowIndex >= 0)
+
+            if (dgvUpdateUsers.CurrentRow != null)
             {
-                // Retrieve the selected User ID from the clicked row and set it to the update TextBox
-                string selectedUserID = dgvUpdateUsers.Rows[e.RowIndex].Cells[0].Value.ToString();
-                txtUserID_UpdateUser.Text = selectedUserID;
+
+                DataGridViewRow selectedRow = dgvUpdateUsers.CurrentRow;
+
+
+                string userID = selectedRow.Cells["User_ID"].Value.ToString();
+                string userName = selectedRow.Cells["Username"].Value.ToString();
+                string FirstName = selectedRow.Cells["Firstname"].Value.ToString();
+                string LastName = selectedRow.Cells["Lastname"].Value.ToString();
+                string Cellnumber = selectedRow.Cells["Cellnumber"].Value.ToString();
+
+                txtUserID_UpdateUser.Text = userID;
+                txtUsername_UpdateUsers.Text = userName;
+                txtFirstName_UpdateUsers.Text = FirstName;
+                txtLastName_UpdateUsers.Text = LastName;
+                txtCellNumber_UpdateUsers.Text = Cellnumber;
+
             }
+
+
         }
 
-        public void refreshCombobox()
+        private void PopulateComboBox()
         {
-            ////////////////
+            cmbUsername_DeleteUsers.Items.Clear();
+
+            conn.Open();
+            string sqlSelect = "SELECT Username FROM Users";
+            command = new SqlCommand(sqlSelect, conn);
+            reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                cmbUsername_DeleteUsers.Items.Add(reader["Username"]);
+            }
+            reader.Close();
+            conn.Close();
+        }
+
+        private void RefreshDataGrids()
+        {
+            conn.Open();
+            string sqlDisplay = "SELECT * FROM Users";
+            command = new SqlCommand(sqlDisplay, conn);
+            adapter = new SqlDataAdapter(command);
+            ds = new DataSet();
+            adapter.Fill(ds, "Users");
+
+            // Repopulate all DataGridViews with the same DataSet
+            dgvAddUsers.DataSource = ds.Tables["Users"];
+            dgvDelete_DeleteUsers.DataSource = ds.Tables["Users"];
+            dgvUpdateUsers.DataSource = ds.Tables["Users"];
+
+            conn.Close();
         }
 
         private void btnAdd_AddUsers_Click(object sender, EventArgs e)
@@ -154,35 +200,15 @@ namespace CMPG223_Project
                 insertCommand.Parameters.AddWithValue("@FirstName", firstName_Add);
                 insertCommand.Parameters.AddWithValue("@CellNumber", cellNumber_Add);
                 insertCommand.ExecuteNonQuery();
+                MessageBox.Show("Vehicle class added successfully");
                 conn.Close();
 
-                // Repopulating DataGridView to show the added user
-                conn.Open();
-                string sqlDisplay = "SELECT * FROM Users";
-                SqlCommand command = new SqlCommand(sqlDisplay, conn);
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
-                DataSet ds = new DataSet();
-                adapter.Fill(ds, "Users");
-                dgvAddUsers.DataSource = ds;
-                dgvAddUsers.DataMember = "Users";
-                dgvDelete_DeleteUsers.DataSource = ds;
-                dgvDelete_DeleteUsers.DataMember = "Users";
-                dgvUpdateUsers.DataSource = ds;
-                dgvUpdateUsers.DataMember = "Users";
-                conn.Close();
+                // Refresh DataGridViews
+                RefreshDataGrids();
+                // Refresh ComboBox
+                PopulateComboBox();
 
-                // Clear ComboBox for usernames and repopulate it
-                cmbUsername_DeleteUsers.Items.Clear();
-                conn.Open();
-                string sqlSelect = "SELECT Username FROM Users";
-                command = new SqlCommand(sqlSelect, conn);
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    cmbUsername_DeleteUsers.Items.Add(reader["Username"]);
-                }
-                reader.Close();
-                conn.Close();
+
 
                 // Clear textboxes for adding new users
                 txtUsername_AddUsers.Clear();
@@ -228,33 +254,10 @@ namespace CMPG223_Project
             conn = new SqlConnection(connectionString);
 
             // Populate the DataGridViews with the list of users
-            conn.Open();
-            string sqlDisplay = $"SELECT * FROM Users";
-            command = new SqlCommand(sqlDisplay, conn);
-            adapter = new SqlDataAdapter();
-            adapter.SelectCommand = command;
-            DataSet ds = new DataSet();
-            adapter.Fill(ds, "Users");
-            dgvAddUsers.DataSource = ds;
-            dgvAddUsers.DataMember = "Users";
-            dgvDelete_DeleteUsers.DataSource = ds;
-            dgvDelete_DeleteUsers.DataMember = "Users";
-            dgvUpdateUsers.DataSource = ds;
-            dgvUpdateUsers.DataMember = "Users";
-            conn.Close();
+            RefreshDataGrids();
 
             // Populate ComboBox with the list of usernames from the Users table
-            conn.Open();
-            string sqlSelect = $"SELECT Username FROM Users";
-            command = new SqlCommand(sqlSelect, conn);
-            reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                cmbUsername_DeleteUsers.Items.Add(reader["Username"]);
-            }
-            reader.Close();
-            conn.Close();
+            PopulateComboBox();
         }
 
         private void dgvUpdateUsers_SelectionChanged(object sender, EventArgs e)
@@ -283,58 +286,43 @@ namespace CMPG223_Project
 
         private void btnDelete_DeleteUsers_Click(object sender, EventArgs e)
         {
-            // SQL statement to delete a user based on the selected username from the ComboBox
-            string sqlDelete = "DELETE FROM Users WHERE Username ='" + cmbUsername_DeleteUsers.Text + "'";
-
-            // Open database connection
-            conn.Open();
-            command = new SqlCommand(sqlDelete, conn);
-            adapter = new SqlDataAdapter();
-
-            // Execute the delete command
-            adapter.DeleteCommand = command;
-            adapter.DeleteCommand.ExecuteNonQuery();
-
-            // Close the database connection
-            conn.Close();
-
-            // Clear the ComboBox items for refreshing
-            cmbUsername_DeleteUsers.Items.Clear();
-
-            // Repopulate the ComboBox with the updated list of usernames
-            conn.Open();
-            string sqlSelect = $"SELECT Username FROM Users";
-            command = new SqlCommand(sqlSelect, conn);
-            reader = command.ExecuteReader();
-
-            while (reader.Read())
             {
-                cmbUsername_DeleteUsers.Items.Add(reader["Username"]);
+                if (cmbUsername_DeleteUsers.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Please select a user to delete.");
+                    return;
+                }
+
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this user in the database?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.No)
+                {
+                    return;
+                }
+
+
+                // SQL statement to delete a user based on the selected username from the ComboBox
+                string sqlDelete = "DELETE FROM Users WHERE Username ='" + cmbUsername_DeleteUsers.Text + "'";
+
+                // Open database connection
+                conn.Open();
+                command = new SqlCommand(sqlDelete, conn);
+                adapter = new SqlDataAdapter();
+
+                // Execute the delete command
+                adapter.DeleteCommand = command;
+                adapter.DeleteCommand.ExecuteNonQuery();
+
+                // Close the database connection
+                conn.Close();
+
+                // Refresh ComboBox and DataGridViews
+                PopulateComboBox();
+                RefreshDataGrids();
+
+                // Clear the selected value in ComboBox
+                cmbUsername_DeleteUsers.SelectedIndex = -1;
             }
-            reader.Close();
-            conn.Close();
-
-            // Clear the selected value in ComboBox
-            cmbUsername_DeleteUsers.Text = "";
-
-            // Update the DataGridView to reflect the changes after deletion
-            conn = new SqlConnection(connectionString);
-            conn.Open();
-            string sqlDisplay = $"SELECT * FROM Users";
-            command = new SqlCommand(sqlDisplay, conn);
-            adapter = new SqlDataAdapter();
-            adapter.SelectCommand = command;
-            ds = new DataSet();
-            adapter.Fill(ds, "Users");
-
-            // Update all DataGridViews to show current data
-            dgvAddUsers.DataSource = ds;
-            dgvAddUsers.DataMember = "Users";
-            dgvDelete_DeleteUsers.DataSource = ds;
-            dgvDelete_DeleteUsers.DataMember = "Users";
-            dgvUpdateUsers.DataSource = ds;
-            dgvUpdateUsers.DataMember = "Users";
-            conn.Close();
 
         }
 
@@ -383,176 +371,118 @@ namespace CMPG223_Project
 
             // Username validation
             string usernamePattern = @"^[a-zA-Z0-9]{1,25}$"; // Letters and numbers only, up to 25 characters
-            if (!string.IsNullOrWhiteSpace(txtUsername_UpdateUsers.Text))
+            if (!string.IsNullOrWhiteSpace(txtUsername_UpdateUsers.Text) && !Regex.IsMatch(txtUsername_UpdateUsers.Text, usernamePattern))
             {
-                if (!System.Text.RegularExpressions.Regex.IsMatch(txtUsername_UpdateUsers.Text, usernamePattern))
-                {
-                    usernameErrorProvider.SetError(txtUsername_UpdateUsers, "Username must be 1-25 characters long and contain only letters and numbers.");
-                    isValid = false;
-                }
-                else
-                {
-                    // Check if username already exists in the database
-                    using (SqlConnection conn = new SqlConnection(connectionString))
-                    {
-                        conn.Open();
-                        string checkUsername = "SELECT COUNT(*) FROM Users WHERE Username = @Username AND User_ID <> @User_ID"; // Exclude current user by User_ID
-                        SqlCommand checkCmd = new SqlCommand(checkUsername, conn);
-                        checkCmd.Parameters.AddWithValue("@Username", txtUsername_UpdateUsers.Text);
-                        checkCmd.Parameters.AddWithValue("@User_ID", userID);
-                        int userCount = (int)checkCmd.ExecuteScalar();
-                        conn.Close();
-
-                        if (userCount > 0)
-                        {
-                            usernameErrorProvider.SetError(txtUsername_UpdateUsers, "This username already exists. Please choose a different one.");
-                            isValid = false;
-                        }
-                    }
-                }
+                usernameErrorProvider.SetError(txtUsername_UpdateUsers, "Username must be 1-25 characters long and contain only letters and numbers.");
+                isValid = false;
             }
 
             // First name validation
-            string namePattern = @"^[a-zA-Z]{1,25}$"; // Letters only, up to 25 characters
-            if (!string.IsNullOrWhiteSpace(txtFirstName_UpdateUsers.Text))
+            string firstNamePattern = @"^[a-zA-Z]{1,25}$"; // Letters only, up to 25 characters
+            if (!string.IsNullOrWhiteSpace(txtFirstName_UpdateUsers.Text) && !Regex.IsMatch(txtFirstName_UpdateUsers.Text, firstNamePattern))
             {
-                if (!System.Text.RegularExpressions.Regex.IsMatch(txtFirstName_UpdateUsers.Text, namePattern))
-                {
-                    firstNameErrorProvider.SetError(txtFirstName_UpdateUsers, "First name must be 1-25 characters long and contain only letters.");
-                    isValid = false;
-                }
+                firstNameErrorProvider.SetError(txtFirstName_UpdateUsers, "First name must be 1-25 characters long and contain only letters.");
+                isValid = false;
             }
 
-            // Last name validation
-            string lastNamePattern = @"^[a-zA-Z\s]{1,25}$"; // Letters and spaces, up to 25 characters
-            if (!string.IsNullOrWhiteSpace(txtLastName_UpdateUsers.Text))
+            // Last name validation: allow letters and spaces
+            string lastNamePattern = @"^[a-zA-Z\s]{1,25}$";
+            if (!string.IsNullOrWhiteSpace(txtLastName_UpdateUsers.Text) && !Regex.IsMatch(txtLastName_UpdateUsers.Text.Trim(), lastNamePattern))
             {
-                if (!System.Text.RegularExpressions.Regex.IsMatch(txtLastName_UpdateUsers.Text.Trim(), lastNamePattern))
-                {
-                    lastNameErrorProvider.SetError(txtLastName_UpdateUsers, "Last name must be 1-25 characters long and contain only letters and spaces.");
-                    isValid = false;
-                }
-                else
-                {
-                    txtLastName_UpdateUsers.Text = txtLastName_UpdateUsers.Text.Trim(); // Trim to remove leading or trailing spaces
-                }
+                lastNameErrorProvider.SetError(txtLastName_UpdateUsers, "Last name must be 1-25 characters long and contain only letters and spaces.");
+                isValid = false;
             }
 
-            // Cell number validation
-            string phonePattern = @"^0\d{9}$"; // Must be 10 digits, starting with a zero
-            if (!string.IsNullOrWhiteSpace(txtCellNumber_UpdateUsers.Text))
+            // Phone number validation
+            string phonePattern = @"^0\d{9}$"; // Must be a 10-digit number starting with 0
+            if (!string.IsNullOrWhiteSpace(txtCellNumber_UpdateUsers.Text) && !Regex.IsMatch(txtCellNumber_UpdateUsers.Text, phonePattern))
             {
-                string phoneInput = txtCellNumber_UpdateUsers.Text.Replace(" ", ""); // Remove spaces
-                if (!System.Text.RegularExpressions.Regex.IsMatch(phoneInput, phonePattern))
-                {
-                    cellNumberErrorProvider.SetError(txtCellNumber_UpdateUsers, "Invalid phone number. It must be 10 digits long, start with 0, and contain no spaces.");
-                    isValid = false;
-                }
-                else
-                {
-                    txtCellNumber_UpdateUsers.Text = phoneInput; // Update the textbox without spaces if valid
-                }
+                cellNumberErrorProvider.SetError(txtCellNumber_UpdateUsers, "Invalid phone number. It must be 10 digits long and start with 0.");
+                isValid = false;
             }
 
-            // If any validation failed, return early
+            // If validation failed, return early
             if (!isValid)
             {
                 return;
             }
 
-            // Proceed with updating the user if all validations pass
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            // Proceed with the update if validations pass
+            string updateQuery = "UPDATE Users SET ";
+
+            List<string> updateFields = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(txtUsername_UpdateUsers.Text))
             {
-                try
-                {
-                    connection.Open();
-
-                    // Start building the UPDATE query
-                    List<string> updateFields = new List<string>();
-                    SqlCommand command = new SqlCommand();
-                    command.Connection = connection;
-
-                    if (!string.IsNullOrWhiteSpace(txtUsername_UpdateUsers.Text))
-                    {
-                        updateFields.Add("Username = @Username");
-                        command.Parameters.AddWithValue("@Username", txtUsername_UpdateUsers.Text);
-                    }
-                    if (!string.IsNullOrWhiteSpace(txtFirstName_UpdateUsers.Text))
-                    {
-                        updateFields.Add("FirstName = @FirstName");
-                        command.Parameters.AddWithValue("@FirstName", txtFirstName_UpdateUsers.Text);
-                    }
-                    if (!string.IsNullOrWhiteSpace(txtLastName_UpdateUsers.Text))
-                    {
-                        updateFields.Add("Lastname = @Lastname");
-                        command.Parameters.AddWithValue("@Lastname", txtLastName_UpdateUsers.Text);
-                    }
-                    if (!string.IsNullOrWhiteSpace(txtCellNumber_UpdateUsers.Text))
-                    {
-                        updateFields.Add("Cellnumber = @Cellnumber");
-                        command.Parameters.AddWithValue("@Cellnumber", txtCellNumber_UpdateUsers.Text);
-                    }
-
-                    if (updateFields.Count == 0)
-                    {
-                        MessageBox.Show("No fields to update.");
-                        return;
-                    }
-
-                    string updateQuery = $"UPDATE Users SET {string.Join(", ", updateFields)} WHERE User_ID = @User_ID";
-                    command.CommandText = updateQuery;
-                    command.Parameters.AddWithValue("@User_ID", userID);
-
-                    int rowsAffected = command.ExecuteNonQuery();
-
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("User information updated successfully!");
-
-                        // Refresh the DataGridView
-                        string selectQuery = "SELECT User_ID, Username, FirstName, Lastname, Cellnumber FROM Users";
-                        using (SqlDataAdapter adapter1 = new SqlDataAdapter(selectQuery, connection))
-                        {
-                            DataTable usersTable = new DataTable();
-                            adapter1.Fill(usersTable);
-                            dgvUpdateUsers.DataSource = usersTable;
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Update failed. User not found.");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occurred: " + ex.Message);
-                }
-
-                // Repopulate DataGridView
-                SqlConnection conn = new SqlConnection(connectionString);
-                conn.Open();
-                string sqlDisplay = "SELECT * FROM Users";
-                SqlCommand repopulateCommand = new SqlCommand(sqlDisplay, conn);
-                SqlDataAdapter adapter = new SqlDataAdapter(repopulateCommand);
-                DataSet ds = new DataSet();
-                adapter.Fill(ds, "Users");
-                dgvAddUsers.DataSource = ds;
-                dgvAddUsers.DataMember = "Users";
-                dgvDelete_DeleteUsers.DataSource = ds;
-                dgvDelete_DeleteUsers.DataMember = "Users";
-                dgvUpdateUsers.DataSource = ds;
-                dgvUpdateUsers.DataMember = "Users";
-                conn.Close();
-
-                //clears all textboxes
-                txtUserID_UpdateUser.Clear();
-                txtFirstName_UpdateUsers.Clear();
-                txtLastName_UpdateUsers.Clear();
-                txtCellNumber_UpdateUsers.Clear();
-                dgvUpdateUsers.Focus();
+                updateFields.Add("Username = @Username");
             }
 
+            if (!string.IsNullOrWhiteSpace(txtFirstName_UpdateUsers.Text))
+            {
+                updateFields.Add("FirstName = @FirstName");
+            }
+
+            if (!string.IsNullOrWhiteSpace(txtLastName_UpdateUsers.Text))
+            {
+                updateFields.Add("Lastname = @LastName");
+            }
+
+            if (!string.IsNullOrWhiteSpace(txtCellNumber_UpdateUsers.Text))
+            {
+                updateFields.Add("Cellnumber = @CellNumber");
+            }
+
+            if (updateFields.Count == 0)
+            {
+                MessageBox.Show("Please fill in at least one field to update.");
+                return;
+            }
+
+            updateQuery += string.Join(", ", updateFields) + " WHERE User_ID = @UserID";
+
+            // Open database connection and execute the update command
+            conn.Open();
+            SqlCommand command = new SqlCommand(updateQuery, conn);
+            command.Parameters.AddWithValue("@UserID", userID);
+
+            if (!string.IsNullOrWhiteSpace(txtUsername_UpdateUsers.Text))
+            {
+                command.Parameters.AddWithValue("@Username", txtUsername_UpdateUsers.Text);
+            }
+
+            if (!string.IsNullOrWhiteSpace(txtFirstName_UpdateUsers.Text))
+            {
+                command.Parameters.AddWithValue("@FirstName", txtFirstName_UpdateUsers.Text);
+            }
+
+            if (!string.IsNullOrWhiteSpace(txtLastName_UpdateUsers.Text))
+            {
+                command.Parameters.AddWithValue("@LastName", txtLastName_UpdateUsers.Text);
+            }
+
+            if (!string.IsNullOrWhiteSpace(txtCellNumber_UpdateUsers.Text))
+            {
+                command.Parameters.AddWithValue("@CellNumber", txtCellNumber_UpdateUsers.Text);
+            }
+
+            command.ExecuteNonQuery();
+            MessageBox.Show("Vehicle class updated successfully.");
+            conn.Close();
+
+            // Clear selection to avoid conflicts with the CurrencyManager
+            dgvUpdateUsers.ClearSelection();
+
+            // Refresh DataGridViews
+            RefreshDataGrids();
+
+            // Clear update input fields
+            txtUsername_UpdateUsers.Clear();
+            txtFirstName_UpdateUsers.Clear();
+            txtLastName_UpdateUsers.Clear();
+            txtCellNumber_UpdateUsers.Clear();
+            txtUserID_UpdateUser.Clear();
         }
+
 
         private void btnClearUsers_UpdateUsers_Click(object sender, EventArgs e)
         {
@@ -584,5 +514,122 @@ namespace CMPG223_Project
         {
             this.Close();
         }
+
+
+
+
+        private void txtSearch_Update_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = txtSearch_Update.Text.Trim().Replace("'", "''");
+            string[] searchableColumns = { "User_ID", "Username", "Lastname", "Firstname", "Cellnumber" };
+            SearchDataGridView(searchTerm, dgvUpdateUsers, searchableColumns);
+
+        }
+
+        private void txtSearch_Add_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = txtSearch_Add.Text.Trim().Replace("'", "''");
+            string[] searchableColumns = { "User_ID", "Username", "Lastname", "Firstname", "Cellnumber" };
+            SearchDataGridView(searchTerm, dgvAddUsers, searchableColumns);
+
+        }
+
+        private void txtSearch_Delete_TextChanged(object sender, EventArgs e)
+        {
+            string searchTerm = txtSearch_Delete.Text.Trim().Replace("'", "''");
+            string[] searchableColumns = { "User_ID", "Username", "Lastname", "Firstname", "Cellnumber" };
+            SearchDataGridView(searchTerm, dgvDelete_DeleteUsers, searchableColumns);
+
+        }
+
+        public static void SearchDataGridView(string searchTerm, DataGridView dgv, params string[] searchableColumns)
+        {
+            searchTerm = searchTerm.ToLower();
+
+            if (dgv.BindingContext != null && dgv.DataSource != null)
+            {
+                CurrencyManager currencyManager = (CurrencyManager)dgv.BindingContext[dgv.DataSource];
+                currencyManager.SuspendBinding();
+
+                foreach (DataGridViewRow row in dgv.Rows)
+                {
+                    if (row.IsNewRow) continue;
+
+                    bool rowVisible = false;
+
+                    foreach (string columnName in searchableColumns)
+                    {
+                        if (dgv.Columns.Contains(columnName))
+                        {
+                            string cellValue = row.Cells[columnName].Value?.ToString().ToLower() ?? "";
+
+                            if (cellValue.Contains(searchTerm))
+                            {
+                                rowVisible = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (rowVisible)
+                    {
+                        row.Visible = true;
+                    }
+                    else
+                    {
+                        if (currencyManager.Position != row.Index)
+                        {
+                            row.Visible = false;
+                        }
+                    }
+                }
+
+                currencyManager.ResumeBinding();
+            }
+        }
+
+        private void dgvUpdateUsers_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvDelete_DeleteUsers_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (dgvDelete_DeleteUsers.CurrentRow != null)
+            {
+
+                DataGridViewRow selectedRow = dgvUpdateUsers.CurrentRow;
+
+
+                string userID = selectedRow.Cells["Username"].Value.ToString();
+
+
+
+
+
+                cmbUsername_DeleteUsers.Text = userID;
+
+
+            }
+        }
+
+        private void btnBack_AddUsers_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnBack_UpdateUsers_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnBack_DeleteUsers_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
+
+
+
