@@ -85,7 +85,7 @@ namespace CMPG223_Project
                     if (affectedRows > 0)
                     {
                         MessageBox.Show("Added successfully");
-                        populateDataGridView(dataGridViewAdd, "SELECT Vehicle.Vehicle_ID, Vehicle.Vehicle_Name, Vehicle.CostPerDay, Vehicle.NumberOfSeats, Vehicle_Class.ClassName FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_CLass_ID=Vehicle_Class.Vehicle_Class_ID WHERE Vehicle.InUse = 'false'");
+                        populateDataGridView(dataGridViewAdd, "SELECT Vehicle.Vehicle_ID, Vehicle.Vehicle_Name, Vehicle.CostPerDay, Vehicle.NumberOfSeats, Vehicle_Class.ClassName FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_Class_ID=Vehicle_Class.Vehicle_Class_ID WHERE Vehicle.InUse = 'false'");
                         buttonClear_Click(sender, e);
                     }
                     con.Close();
@@ -106,7 +106,7 @@ namespace CMPG223_Project
         private void rentalOrder_Load(object sender, EventArgs e)
         {
             populateClients(comboBox1);
-            populateDataGridView(dataGridViewAdd, "SELECT Vehicle.Vehicle_ID, Vehicle.Vehicle_Name, Vehicle.CostPerDay, Vehicle.NumberOfSeats, Vehicle_Class.ClassName FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_CLass_ID=Vehicle_Class.Vehicle_Class_ID WHERE Vehicle.InUse = 'false'");
+            populateDataGridView(dataGridViewAdd, "SELECT Vehicle.Vehicle_ID, Vehicle.Vehicle_Name, Vehicle.CostPerDay, Vehicle.NumberOfSeats, Vehicle_Class.ClassName FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_Class_ID=Vehicle_Class.Vehicle_Class_ID WHERE Vehicle.InUse = 'false'");
             populateDataGridView(dataGridViewUpdate, "SELECT RentalOrder.Order_ID, Client.FirstName, Client.LastName, Client.Email, Client.CellNumber, Vehicle.Vehicle_Name, RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
             populateDataGridView(dataGridViewReturn, "SELECT RentalOrder.Order_ID, Client.FirstName, Client.LastName, Client.Email, Client.CellNumber, Vehicle.Vehicle_Name, RentalOrder.Date, RentalOrder.Paid, RentalOrder.VehicleReturned FROM RentalOrder INNER JOIN Vehicle ON Vehicle.Vehicle_ID = RentalOrder.Vehicle_ID INNER JOIN Client ON Client.Client_ID = RentalOrder.Client_ID");
             dateTimePicker1.MinDate = DateTime.Today;
@@ -368,7 +368,7 @@ namespace CMPG223_Project
             if (tabControl1.SelectedTab == tabPage1)
             {
                 buttonClear_Click(sender, e);
-                populateDataGridView(dataGridViewAdd, "SELECT Vehicle.Vehicle_ID, Vehicle.Vehicle_Name, Vehicle.CostPerDay, Vehicle.NumberOfSeats, Vehicle_Class.ClassName FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_CLass_ID=Vehicle_Class.Vehicle_Class_ID WHERE Vehicle.InUse = 'false'");
+                populateDataGridView(dataGridViewAdd, "SELECT Vehicle.Vehicle_ID, Vehicle.Vehicle_Name, Vehicle.CostPerDay, Vehicle.NumberOfSeats, Vehicle_Class.ClassName FROM Vehicle INNER JOIN Vehicle_Class ON Vehicle.Vehicle_Class_ID=Vehicle_Class.Vehicle_Class_ID WHERE Vehicle.InUse = 'false'");
 
             }
             else if (tabControl1.SelectedTab == tabPage2)

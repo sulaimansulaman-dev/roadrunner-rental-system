@@ -678,6 +678,7 @@ namespace CMPG223_Project
             ClientSize = new Size(1027, 584);
             Controls.Add(tabControlVehicleClasses);
             Name = "frmVehicles";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Vehicles";
             FormClosed += frmVehicles_FormClosed;
             Load += frmVehicles_Load;

@@ -171,7 +171,6 @@
             // 
             // dgvAddUsers
             // 
-            dgvAddUsers.Anchor = AnchorStyles.None;
             dgvAddUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvAddUsers.Location = new Point(476, 72);
             dgvAddUsers.Margin = new Padding(3, 4, 3, 4);
@@ -182,7 +181,6 @@
             // 
             // btnBack_AddUsers
             // 
-            btnBack_AddUsers.Anchor = AnchorStyles.None;
             btnBack_AddUsers.Location = new Point(877, 435);
             btnBack_AddUsers.Margin = new Padding(3, 4, 3, 4);
             btnBack_AddUsers.Name = "btnBack_AddUsers";
@@ -194,7 +192,6 @@
             // 
             // btnClear_AddUsers
             // 
-            btnClear_AddUsers.Anchor = AnchorStyles.None;
             btnClear_AddUsers.Location = new Point(679, 435);
             btnClear_AddUsers.Margin = new Padding(3, 4, 3, 4);
             btnClear_AddUsers.Name = "btnClear_AddUsers";
@@ -206,7 +203,6 @@
             // 
             // btnAdd_AddUsers
             // 
-            btnAdd_AddUsers.Anchor = AnchorStyles.None;
             btnAdd_AddUsers.Location = new Point(476, 435);
             btnAdd_AddUsers.Margin = new Padding(3, 4, 3, 4);
             btnAdd_AddUsers.Name = "btnAdd_AddUsers";
@@ -218,7 +214,6 @@
             // 
             // txtCellNumber_AddUsers
             // 
-            txtCellNumber_AddUsers.Anchor = AnchorStyles.None;
             txtCellNumber_AddUsers.Location = new Point(261, 256);
             txtCellNumber_AddUsers.Margin = new Padding(3, 4, 3, 4);
             txtCellNumber_AddUsers.Name = "txtCellNumber_AddUsers";
@@ -227,7 +222,6 @@
             // 
             // txtLastName_AddUsers
             // 
-            txtLastName_AddUsers.Anchor = AnchorStyles.None;
             txtLastName_AddUsers.Location = new Point(261, 198);
             txtLastName_AddUsers.Margin = new Padding(3, 4, 3, 4);
             txtLastName_AddUsers.Name = "txtLastName_AddUsers";
@@ -236,7 +230,6 @@
             // 
             // txtFirstName_AddUsers
             // 
-            txtFirstName_AddUsers.Anchor = AnchorStyles.None;
             txtFirstName_AddUsers.Location = new Point(261, 144);
             txtFirstName_AddUsers.Margin = new Padding(3, 4, 3, 4);
             txtFirstName_AddUsers.Name = "txtFirstName_AddUsers";
@@ -245,7 +238,6 @@
             // 
             // txtUsername_AddUsers
             // 
-            txtUsername_AddUsers.Anchor = AnchorStyles.None;
             txtUsername_AddUsers.Location = new Point(261, 84);
             txtUsername_AddUsers.Margin = new Padding(3, 4, 3, 4);
             txtUsername_AddUsers.Name = "txtUsername_AddUsers";
@@ -254,7 +246,6 @@
             // 
             // lblCellNumber_Users
             // 
-            lblCellNumber_Users.Anchor = AnchorStyles.None;
             lblCellNumber_Users.AutoSize = true;
             lblCellNumber_Users.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblCellNumber_Users.Location = new Point(3, 241);
@@ -265,7 +256,6 @@
             // 
             // lblLastName_Users
             // 
-            lblLastName_Users.Anchor = AnchorStyles.None;
             lblLastName_Users.AutoSize = true;
             lblLastName_Users.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             lblLastName_Users.Location = new Point(3, 184);
@@ -276,7 +266,6 @@
             // 
             // lblFirstName_Users
             // 
-            lblFirstName_Users.Anchor = AnchorStyles.None;
             lblFirstName_Users.AutoSize = true;
             lblFirstName_Users.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             lblFirstName_Users.Location = new Point(3, 129);
@@ -287,7 +276,6 @@
             // 
             // lblUsername_AddUsers
             // 
-            lblUsername_AddUsers.Anchor = AnchorStyles.None;
             lblUsername_AddUsers.AutoSize = true;
             lblUsername_AddUsers.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             lblUsername_AddUsers.Location = new Point(3, 72);
@@ -386,7 +374,6 @@
             // 
             // btnBack_UpdateUsers
             // 
-            btnBack_UpdateUsers.Anchor = AnchorStyles.None;
             btnBack_UpdateUsers.Location = new Point(879, 454);
             btnBack_UpdateUsers.Margin = new Padding(3, 4, 3, 4);
             btnBack_UpdateUsers.Name = "btnBack_UpdateUsers";
@@ -398,7 +385,6 @@
             // 
             // btnClearUsers_UpdateUsers
             // 
-            btnClearUsers_UpdateUsers.Anchor = AnchorStyles.None;
             btnClearUsers_UpdateUsers.Location = new Point(676, 454);
             btnClearUsers_UpdateUsers.Margin = new Padding(3, 4, 3, 4);
             btnClearUsers_UpdateUsers.Name = "btnClearUsers_UpdateUsers";
@@ -409,7 +395,6 @@
             // 
             // btnUpdateUsers_UpdateUsers
             // 
-            btnUpdateUsers_UpdateUsers.Anchor = AnchorStyles.None;
             btnUpdateUsers_UpdateUsers.Location = new Point(476, 454);
             btnUpdateUsers_UpdateUsers.Margin = new Padding(3, 4, 3, 4);
             btnUpdateUsers_UpdateUsers.Name = "btnUpdateUsers_UpdateUsers";
@@ -421,7 +406,6 @@
             // 
             // dgvUpdateUsers
             // 
-            dgvUpdateUsers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvUpdateUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvUpdateUsers.Location = new Point(476, 72);
             dgvUpdateUsers.Margin = new Padding(3, 4, 3, 4);
@@ -571,7 +555,6 @@
             // 
             // btnBack_DeleteUsers
             // 
-            btnBack_DeleteUsers.Anchor = AnchorStyles.None;
             btnBack_DeleteUsers.Location = new Point(689, 489);
             btnBack_DeleteUsers.Margin = new Padding(3, 4, 3, 4);
             btnBack_DeleteUsers.Name = "btnBack_DeleteUsers";
@@ -583,7 +566,6 @@
             // 
             // btnClear_DeleteUsers
             // 
-            btnClear_DeleteUsers.Anchor = AnchorStyles.None;
             btnClear_DeleteUsers.Location = new Point(492, 490);
             btnClear_DeleteUsers.Margin = new Padding(3, 4, 3, 4);
             btnClear_DeleteUsers.Name = "btnClear_DeleteUsers";
@@ -591,10 +573,10 @@
             btnClear_DeleteUsers.TabIndex = 20;
             btnClear_DeleteUsers.Text = "Clear";
             btnClear_DeleteUsers.UseVisualStyleBackColor = true;
+            btnClear_DeleteUsers.Click += btnClear_DeleteUsers_Click;
             // 
             // btnDelete_DeleteUsers
             // 
-            btnDelete_DeleteUsers.Anchor = AnchorStyles.None;
             btnDelete_DeleteUsers.Location = new Point(288, 489);
             btnDelete_DeleteUsers.Margin = new Padding(3, 4, 3, 4);
             btnDelete_DeleteUsers.Name = "btnDelete_DeleteUsers";
@@ -606,7 +588,6 @@
             // 
             // cmbUsername_DeleteUsers
             // 
-            cmbUsername_DeleteUsers.Anchor = AnchorStyles.None;
             cmbUsername_DeleteUsers.FormattingEnabled = true;
             cmbUsername_DeleteUsers.Location = new Point(492, 448);
             cmbUsername_DeleteUsers.Margin = new Padding(3, 4, 3, 4);
@@ -616,7 +597,6 @@
             // 
             // dgvDelete_DeleteUsers
             // 
-            dgvDelete_DeleteUsers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvDelete_DeleteUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDelete_DeleteUsers.Location = new Point(288, 76);
             dgvDelete_DeleteUsers.Margin = new Padding(3, 4, 3, 4);
@@ -628,7 +608,6 @@
             // 
             // lblUserID_DeleteUser
             // 
-            lblUserID_DeleteUser.Anchor = AnchorStyles.None;
             lblUserID_DeleteUser.AutoSize = true;
             lblUserID_DeleteUser.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             lblUserID_DeleteUser.Location = new Point(396, 435);
@@ -645,6 +624,7 @@
             Controls.Add(MaintainUsers);
             Margin = new Padding(3, 4, 3, 4);
             Name = "frmUsers";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "frmUsers";
             Load += frmUsers_Load;
             MaintainUsers.ResumeLayout(false);

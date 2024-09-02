@@ -528,6 +528,7 @@
             ClientSize = new Size(1027, 584);
             Controls.Add(tabControlVehicleClasses);
             Name = "frmVehicleClasses";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "frmVehicleClasses";
             Load += frmVehicleClasses_Load;
             tabControlVehicleClasses.ResumeLayout(false);

@@ -200,7 +200,7 @@ namespace CMPG223_Project
                 insertCommand.Parameters.AddWithValue("@FirstName", firstName_Add);
                 insertCommand.Parameters.AddWithValue("@CellNumber", cellNumber_Add);
                 insertCommand.ExecuteNonQuery();
-                MessageBox.Show("Vehicle class added successfully");
+                MessageBox.Show("User added successfully");
                 conn.Close();
 
                 // Refresh DataGridViews
@@ -627,6 +627,11 @@ namespace CMPG223_Project
         private void btnBack_DeleteUsers_Click_1(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnClear_DeleteUsers_Click(object sender, EventArgs e)
+        {
+            cmbUsername_DeleteUsers.SelectedIndex = -1; 
         }
     }
 }

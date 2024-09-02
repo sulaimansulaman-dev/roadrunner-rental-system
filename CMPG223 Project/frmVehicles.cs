@@ -128,7 +128,7 @@ namespace CMPG223_Project
 
 
             string costPerDayText = txtCostPerDay.Text.Trim();
-            decimal vCostPerDay;
+            decimal vCostPerDay = 0;
             if (string.IsNullOrWhiteSpace(costPerDayText))
             {
                 errorProvider1.SetError(txtCostPerDay, "Please enter the cost per day.");
@@ -187,7 +187,7 @@ namespace CMPG223_Project
 
                 cmd.Parameters.AddWithValue("@Vehicle_Class_ID", classId);
                 cmd.Parameters.AddWithValue("@NumberOfSeats", numOfSeats);
-                cmd.Parameters.AddWithValue("@CostperDay", costPerDayText);
+                cmd.Parameters.AddWithValue("@CostperDay", vCostPerDay);
                 cmd.Parameters.AddWithValue("@LicenseNumber", licNum);
                 cmd.Parameters.AddWithValue("@Vehicle_Name", vehicleName);
 
@@ -364,7 +364,7 @@ namespace CMPG223_Project
 
 
             string costPerDayText = txtCostPerDay_Update.Text.Trim();
-            decimal vCostPerDay;
+            decimal vCostPerDay = 0;
             if (string.IsNullOrWhiteSpace(costPerDayText))
             {
                 errorProvider1.SetError(txtCostPerDay_Update, "Please enter the cost per day.");
@@ -427,7 +427,7 @@ namespace CMPG223_Project
                     cmd.Parameters.AddWithValue("@VehicleName", vehicleName);
                     cmd.Parameters.AddWithValue("@ClassName", classId);
                     cmd.Parameters.AddWithValue("@NumberOfSeats", numOfSeats);
-                    cmd.Parameters.AddWithValue("@CostPerDay", costPerDayText);
+                    cmd.Parameters.AddWithValue("@CostPerDay", vCostPerDay);
                     cmd.Parameters.AddWithValue("@License", licNum);
                     cmd.Parameters.AddWithValue("@Vehicle_ID", vehicleID);
 
