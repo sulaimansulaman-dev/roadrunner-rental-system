@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace CMPG223_Project
 {
     public partial class Form1 : Form
@@ -32,7 +34,12 @@ namespace CMPG223_Project
         {
             try
             {
-                System.Diagnostics.Process.Start(@"C:\Users\muham\OneDrive\Documents\GitHub\CMPG223-Project-WinForm\CMPG223 Project\Resources");
+                string path2 = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName, "Resources\\Help Functionality.pdf");
+                var psi = new ProcessStartInfo(path2) { 
+                    UseShellExecute = true
+                };
+
+                Process.Start(psi);
             }
             catch (Exception ex)
             {

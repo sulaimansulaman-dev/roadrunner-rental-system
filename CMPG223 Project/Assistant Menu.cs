@@ -2,6 +2,7 @@
 using System.Data;
 using System.Drawing;
 using System.Configuration;
+using System.Diagnostics;
 
 namespace CMPG223_Project
 {
@@ -78,6 +79,24 @@ namespace CMPG223_Project
         private void button2_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string path2 = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName, "Resources\\Help Functionality.pdf");
+                var psi = new ProcessStartInfo(path2)
+                {
+                    UseShellExecute = true
+                };
+
+                Process.Start(psi);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
