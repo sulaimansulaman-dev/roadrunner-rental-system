@@ -573,7 +573,7 @@ namespace CMPG223_Project
             string licNum = txtLicenseNo_Update.Text.Trim();
 
             // Regular expression patterns for validation
-            string alphaPattern = @"^[a-zA-Z\s.,'-]*$";  // Allows letters, spaces, and some punctuation
+            string alphaPattern = @"^[a-zA-Z0-9\s.,'-]*$";  // Allows letters, spaces, and some punctuation
             string licensePattern = @"[A-Z]{3}\d{3,4}[A-Z]{2}$";
 
 
@@ -719,9 +719,6 @@ namespace CMPG223_Project
                 currencyManager.ResumeBinding();
             }
         }
-
-
-
 
 
     }
