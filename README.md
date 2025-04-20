@@ -1,7 +1,7 @@
 # Road Runner Rentals - Vehicle Rental Management System
 
 ## Overview
-**Road Runner Rentals** is a Windows Forms application developed in C# that allows businesses to manage vehicle rentals. It interacts with a SQL Server database to store and retrieve information related to vehicles, clients, and rental orders. The app offers an intuitive interface with features for admin-side management, including CRUD operations, reporting, and validation.
+**Road Runner Rentals** is a Windows Forms application developed in C# that allows businesses to manage vehicle rentals. It interacts with a SQL Server database to store and retrieve information related to vehicles, clients, payments, and rental orders. The app offers an intuitive interface with features for admin-side management, including CRUD operations, reporting, and validation.
 
 ## Features
 - **Vehicle Management**: Add, edit, and remove vehicles from the inventory.
