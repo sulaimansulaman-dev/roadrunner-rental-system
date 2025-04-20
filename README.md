@@ -5,8 +5,9 @@
 
 ## Features
 - **Vehicle Management**: Add, edit, and remove vehicles from the inventory.
-- **Client Management**: Add, update, and view client details.
+- **User Management**: Add, update, and view user details.
 - **Rental Order Management**: Manage and track rental orders, including rental duration and vehicle allocation.
+- **Payments**: Manage payments recieved from users. 
 - **Form Validation**: Ensures that all inputs are correctly validated before submitting forms.
 - **Reporting**: Generate rental reports based on various criteria such as total income or rental frequency.
 - **Admin Access**: Admin functionality for managing users and viewing system activity.
