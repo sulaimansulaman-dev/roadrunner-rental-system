@@ -29,5 +29,5 @@
 ## Contributing
 Feel free to fork this repository, create a branch, and submit a pull request for any improvements or bug fixes.
 
-## Contributing
+## Licence
 This project is open-source and available under the [MIT License](https://opensource.org/licenses/MIT).
